@@ -1,19 +1,18 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   colors = import ./colors.nix;
   fonts = import ./fonts.nix;
+  sysconfig = (import <nixpkgs/nixos> {}).config;
+  ws1 = "1:web";
+  ws2 = "2:term";
+  ws3 = "3:code";
+  ws4 = "4:chat";
+  ws5 = "5:mail";
+  ws6 = "6:game";
+  ws7 = "7:other";
 in {
   wayland.windowManager.sway =
     let
-      ws1 = "1:web";
-      ws2 = "2:term";
-      ws3 = "3:code";
-      ws4 = "4:msg";
-      ws5 = "5:util";
-      ws6 = "6";
-      ws7 = "7";
-      ws8 = "8";
-      ws9 = "9";
       terminalCmd = "${pkgs.alacritty}/bin/alacritty";
     in {
       enable = true;
@@ -26,38 +25,7 @@ in {
         };
         terminal = terminalCmd;
         modifier = "Mod4";
-        bars = [{
-          statusCommand = "${pkgs.i3status}/bin/i3status";
-          command = "${pkgs.sway}/bin/swaybar";
-          position = "bottom";
-          fonts = fonts.fontConfig;
-          trayOutput = "*";
-          colors = {
-            background = "#${colors.bg1}";
-            statusline = "#${colors.fg}";
-            separator = "#${colors.fg}";
-            focusedWorkspace = {
-              border = "#${colors.bg2}";
-              background = "#${colors.br_yellow}";
-              text = "#${colors.bg}";
-            };
-            activeWorkspace = {
-              border = "#${colors.bg2}";
-              background = "#${colors.bg1}";
-              text = "#${colors.fg}";
-            };
-            inactiveWorkspace = {
-              border = "#${colors.bg2}";
-              background = "#${colors.bg1}";
-              text = "#${colors.fg}";
-            };
-            urgentWorkspace = {
-              border = "#${colors.bg2}";
-              background = "#${colors.red}";
-              text = "#${colors.fg}";
-            };
-          };
-        }];
+        bars = [];
         colors = {
           focused = {
             border = "#${colors.blue}";
@@ -81,15 +49,15 @@ in {
             childBorder = "#${colors.bg1}";
           };
           urgent = {
-            border = "#${colors.red}";
-            background = "#${colors.red}";
+            border = "#${colors.br_red}";
+            background = "#${colors.br_red}";
             text = "#${colors.fg}";
-            indicator = "#${colors.red}";
-            childBorder = "#${colors.red}";
+            indicator = "#${colors.br_red}";
+            childBorder = "#${colors.br_red}";
           };
         };
         menu = ''
-          ${pkgs.bemenu}/bin/bemenu-run -m all --fn '${builtins.head fonts.fontConfig.names}' --tf '#${colors.green}' \
+          ${pkgs.bemenu}/bin/bemenu-run -m all -H 25 --fn '${builtins.head fonts.fontConfig.names}' --tf '#${colors.green}' \
           --ff '#${colors.fg}' --nf '#${colors.fg}' --hf '#${colors.blue}' --no-exec | xargs swaymsg exec --
         '';
         startup = [
@@ -106,20 +74,40 @@ in {
           }
           { command = ''exec swaymsg "workspace ${ws2}; exec ${terminalCmd};"''; }
           { command = ''exec swaymsg "workspace ${ws3}; exec ${terminalCmd};"''; }
-          { command = ''exec swaymsg "workspace ${ws1}; exec ${pkgs.google-chrome}/bin/google-chrome-stable;"''; }
+          { command = ''exec swaymsg "workspace ${ws1}; exec ${pkgs.firefox}/bin/firefox;"''; }
           { command = "${pkgs.tdesktop}/bin/telegram-desktop"; }
-          { command = "${pkgs.thunderbird}/bin/thunderbird"; }
+          { command = "${pkgs.discord}/bin/discord"; }
           { command = "${pkgs.slack}/bin/slack"; }
-          { command = "${pkgs.keepassxc}/bin/keepassxc"; }
+          { command = "${pkgs.bitwarden}/bin/bitwarden"; }
+          { command = "${pkgs.thunderbird}/bin/thunderbird"; }
+          { command = "systemctl --user restart waybar.service"; }
+          { command = "systemctl --user restart openrazer-daemon.service"; }
         ];
         input = {
           "type:keyboard" = {
             xkb_layout = "us,ru";
-            xkb_options = "grp:alt_shift_toggle,ctrl:nocaps";
+            xkb_options = "grp:lctrl_toggle,caps:ctrl_modifier";
           };
           "type:touchpad" = { tap = "enabled"; };
+          "type:pointer" = {
+            accel_profile = "flat";
+            pointer_accel = "0";
+            scroll_method = "on_button_down";
+            scroll_button = "274";
+          };
         };
-        output = { "*".bg = "~/Downloads/gruvbox.png fill"; };
+        output = { "*".bg = "~/Downloads/gruvbox.png fill"; }
+        // lib.optionalAttrs (sysconfig.networking.hostName == "roz-pc") {
+          "DP-3" = {
+            pos = "1080 320";
+            mode = "2560x1440@144Hz";
+          };
+          "HDMI-A-1" = {
+            pos = "0 0";
+            mode = "1920x1080@75Hz";
+            transform = "270";
+          };
+        };
         keybindings =
           let
             mod = config.wayland.windowManager.sway.config.modifier;
@@ -149,8 +137,6 @@ in {
             "${mod}+5" = "workspace ${ws5}";
             "${mod}+6" = "workspace ${ws6}";
             "${mod}+7" = "workspace ${ws7}";
-            "${mod}+8" = "workspace ${ws8}";
-            "${mod}+9" = "workspace ${ws9}";
 
             "${mod}+Shift+1" = "move container to workspace ${ws1}";
             "${mod}+Shift+2" = "move container to workspace ${ws2}";
@@ -159,8 +145,6 @@ in {
             "${mod}+Shift+5" = "move container to workspace ${ws5}";
             "${mod}+Shift+6" = "move container to workspace ${ws6}";
             "${mod}+Shift+7" = "move container to workspace ${ws7}";
-            "${mod}+Shift+8" = "move container to workspace ${ws8}";
-            "${mod}+Shift+9" = "move container to workspace ${ws9}";
 
             "${mod}+h" = "split h";
             "${mod}+v" = "split v";
@@ -208,16 +192,23 @@ in {
           };
         };
         assigns = {
-          "${ws1}" = [{ class = "^Google-chrome$"; }];
+          "${ws1}"= [{ class = "^Firefox$"; }];
           "${ws4}" = [
             { app_id = "^telegramdesktop$"; }
             { class  = "^Slack$"; }
+            { class  = "^discord$"; }
           ];
           "${ws5}" = [
+            { class = "^Bitwarden$"; }
             { class = "^Thunderbird$"; }
-            { app_id = "^org.keepassxc.KeePassXC$"; }
           ];
         };
+        workspaceOutputAssign = lib.mkIf (sysconfig.networking.hostName == "roz-pc") [
+          { workspace = ws2; output = "DP-3"; }
+          { workspace = ws3; output = "DP-3"; }
+          { workspace = ws4; output = "HDMI-A-1"; }
+          { workspace = ws5; output = "HDMI-A-1"; }
+        ];
       };
     };
-}
+ }

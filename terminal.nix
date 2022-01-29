@@ -15,7 +15,7 @@ in {
     };
     oh-my-zsh = {
       enable  = true;
-      theme   = "agnoster";
+      theme   = "bira";
     };
   };
   programs.tmux = {
@@ -28,7 +28,7 @@ in {
   in {
     enable = true;
     settings = {
-      background_opacity = 0.97;
+      background_opacity = 0.95;
       colors = {
         primary = {
           background = "0x${colors.bg}";

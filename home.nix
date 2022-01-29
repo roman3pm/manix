@@ -1,18 +1,30 @@
 { config, pkgs, lib, ... }:
 let
   colors = import ./colors.nix;
+  gruvbox-material-gtk = pkgs.callPackage ./packages/gruvbox-material-gtk.nix {};
+  gruvbox-material-gtk-icons = pkgs.callPackage ./packages/gruvbox-material-gtk-icons.nix {};
 in {
   imports = [
     ./sway.nix
     ./terminal.nix
     ./mako.nix
     ./neovim.nix
+    ./waybar.nix
   ];
 
   programs.home-manager.enable = true;
 
   home.username = "roz";
   home.homeDirectory = "/home/roz";
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-original"
+      "steam-runtime"
+    ];
+  };
 
   home.packages = with pkgs; [
     slurp
@@ -26,23 +38,25 @@ in {
     fd
     fzf
     jq
-    nix-prefetch-github
 
     jdk8
     (sbt.override { jre = jdk8; })
     coursier
     bloop
     metals
-    nodejs
+    nodejs-12_x
     yarn
 
-    google-chrome
+    via
+    razergenie
     firefox
     tdesktop
     slack
+    discord
     thunderbird-wayland
-    keepassxc
-    libreoffice
+    bitwarden
+    steam
+    libreoffice-fresh
 
     swaylock
     swayidle
@@ -51,7 +65,33 @@ in {
     pavucontrol
     bemenu
     nerdfonts
+    xdg_utils
+    gruvbox-material-gtk
+    gruvbox-material-gtk-icons
   ];
+
+  gtk = {
+    enable = true;
+    iconTheme.name = "Gruvbox-Material-Dark";
+    theme.name = "Gruvbox-Material-Dark";
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "x-scheme-handler/http" = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop";
+      "application/xhtml+xml" = "firefox.desktop";
+      "text/html" = "firefox.desktop";
+    };
+  };
+  xdg.dataFile."applications/mimeapps.list".force = true;
+  xdg.configFile."mimeapps.list".force = true;
+
+  home.sessionVariables = {
+    BROWSER = "${pkgs.firefox}/bin/firefox";
+    EDITOR  = "${pkgs.neovim}/bin/nvim";
+  };
 
   fonts.fontconfig.enable = true;
   services.mpd.enable = true;
