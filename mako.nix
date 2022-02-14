@@ -8,6 +8,7 @@ in {
     enable = true;
     anchor = "bottom-right";
     font = "${fontName} 9";
+    output = "HDMI-A-1";
     backgroundColor = "#${colors.bg1}";
     borderColor = "#${colors.bg2}";
     textColor = "#${colors.fg}";

@@ -1,3 +1,46 @@
+local teleopts = { noremap = true }
+vim.api.nvim_set_keymap('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", teleopts)
+vim.api.nvim_set_keymap('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", teleopts)
+vim.api.nvim_set_keymap('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>", teleopts)
+vim.api.nvim_set_keymap('n', '<leader>ol', "<cmd>lua require('telescope.builtin').oldfiles()<cr>", teleopts)
+vim.api.nvim_set_keymap('n', '<leader>gd', "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", teleopts)
+vim.api.nvim_set_keymap('n', '<leader>gr', "<cmd>lua require('telescope.builtin').lsp_references()<cr>", teleopts)
+vim.api.nvim_set_keymap('n', '<leader>gi', "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>", teleopts)
+vim.api.nvim_set_keymap('n', '<leader>ds', "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", teleopts)
+vim.api.nvim_set_keymap('n', '<leader>ws', "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>", teleopts)
+
+require('telescope').setup {
+  defaults = {
+    path_display = {"smart"},
+    -- Default configuration for telescope goes here:
+    -- config_key = value,
+    mappings = {
+      i = {
+        -- map actions.which_key to <C-h> (default: <C-/>)
+        -- actions.which_key shows the mappings for your picker,
+        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+        ["<C-h>"] = "which_key"
+      }
+    }
+  },
+  pickers = {
+    -- Default configuration for builtin pickers goes here:
+    -- picker_name = {
+    --   picker_config_key = value,
+    --   ...
+    -- }
+    -- Now the picker_config_key will be applied every time you call this
+    -- builtin picker
+  },
+  extensions = {
+    -- Your extension configuration goes here:
+    -- extension_name = {
+    --   extension_config_key = value,
+    -- }
+    -- please take a look at the readme of the extension you want to configure
+  }
+}
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }

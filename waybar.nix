@@ -110,17 +110,11 @@ let
     };
 
     "pulseaudio" = {
-      scroll-step = 1;
-      format = "{icon} {volume}%";
-      format-bluetooth = "{icon} {volume}%";
-      format-muted = " ";
+      scroll-step = 5;
+      format = "{icon}{volume}%";
+      format-bluetooth = "{icon}{volume}%";
+      format-muted = " mute";
       format-icons = {
-        headphones = " ";
-        handsfree = " ";
-        headset = " ";
-        phone = " ";
-        portable = " ";
-        car = " ";
         default = [" " " "];
       };
       on-click = "pavucontrol";
@@ -137,16 +131,6 @@ let
       interval = 1;
       hwmon-path = "/sys/class/hwmon/hwmon0/temp2_input";
       format = " {temperatureC}°C";
-      tooltip = false;
-    };
-
-    "custom/alsa" = {
-      exec = "amixer get Master | sed -nre 's/.*\\[off\\].*/ muted/p; s/.*\\[(.*%)\\].*/ \\1/p'";
-      on-click = "amixer set Master toggle; pkill -x -RTMIN+11 waybar";
-      on-scroll-up = "amixer set Master 1+; pkill -x -RTMIN+11 waybar";
-      on-scroll-down = "amixer set Master 1-; pkill -x -RTMIN+11 waybar";
-      signal = 11;
-      interval = 10;
       tooltip = false;
     };
 
@@ -168,7 +152,7 @@ in {
     settings = [
       (modules // {
         position = "top";
-        output = "DP-3";
+        output = "DP-1";
         modules-left = [
           "sway/mode"
           "sway/workspaces"
@@ -188,8 +172,7 @@ in {
           "custom/arrow_br_green"
           "network"
           "custom/arrow_green"
-          "custom/alsa"
-          #"pulseaudio"
+          "pulseaudio"
           "custom/arrow_yellow"
           "battery"
           "custom/arrow_br_yellow"

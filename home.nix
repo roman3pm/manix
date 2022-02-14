@@ -1,8 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   colors = import ./colors.nix;
-  gruvbox-material-gtk = pkgs.callPackage ./packages/gruvbox-material-gtk.nix {};
-  gruvbox-material-gtk-icons = pkgs.callPackage ./packages/gruvbox-material-gtk-icons.nix {};
+  oomox-theme = pkgs.callPackage ./packages/theme.nix {};
 in {
   imports = [
     ./sway.nix
@@ -10,6 +9,7 @@ in {
     ./mako.nix
     ./neovim.nix
     ./waybar.nix
+    ./mangohud.nix
   ];
 
   programs.home-manager.enable = true;
@@ -34,10 +34,13 @@ in {
     htop
     neofetch
     git
+    thefuck
     ripgrep
     fd
     fzf
     jq
+    wget
+    steam-run
 
     jdk8
     (sbt.override { jre = jdk8; })
@@ -49,13 +52,14 @@ in {
 
     via
     razergenie
-    firefox
+    firefox-wayland
+    thunderbird-wayland
     tdesktop
     slack
     discord
-    thunderbird-wayland
     bitwarden
     steam
+    lutris
     libreoffice-fresh
 
     swaylock
@@ -65,16 +69,23 @@ in {
     pavucontrol
     bemenu
     nerdfonts
+    glib
+    quintom-cursor-theme
     xdg_utils
-    gruvbox-material-gtk
-    gruvbox-material-gtk-icons
+    qt5.qtwayland
+    libsForQt5.qtstyleplugins
+    oomox-theme
   ];
+
+  fonts.fontconfig.enable = true;
 
   gtk = {
     enable = true;
-    iconTheme.name = "Gruvbox-Material-Dark";
-    theme.name = "Gruvbox-Material-Dark";
+    iconTheme.name = "suruplus_aspromauros";
+    theme.name = "oomox";
   };
+  
+  home.file.".icons/default".source = "${pkgs.quintom-cursor-theme}/share/icons/Quintom_Snow";
 
   xdg.mimeApps = {
     enable = true;
@@ -93,7 +104,6 @@ in {
     EDITOR  = "${pkgs.neovim}/bin/nvim";
   };
 
-  fonts.fontconfig.enable = true;
   services.mpd.enable = true;
 
   home.stateVersion = "21.05";

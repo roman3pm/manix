@@ -17,6 +17,17 @@ in {
     in {
       enable = true;
       wrapperFeatures.gtk = true;
+      extraSessionCommands = ''
+        export BEMENU_BACKEND=wayland
+        export SDL_VIDEODRIVER=wayland
+        # needs qt5.qtwayland in systemPackages
+        export QT_QPA_PLATFORM=wayland
+        export QT_QPA_PLATFORMTHEME=gtk2
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+        # Fix for some Java AWT applications (e.g. Android Studio),
+        # use this if they aren't displayed properly:
+        export _JAVA_AWT_WM_NONREPARENTING=1
+      '';
       config = {
         fonts = fonts.fontConfig;
         gaps = {
@@ -25,13 +36,17 @@ in {
         };
         terminal = terminalCmd;
         modifier = "Mod4";
+        focus = {
+          followMouse = "no";
+          mouseWarping = false;
+        };
         bars = [];
         colors = {
           focused = {
             border = "#${colors.blue}";
             background = "#${colors.blue}";
             text = "#${colors.fg}";
-            indicator = "#${colors.blue}";
+            indicator = "#${colors.green}";
             childBorder = "#${colors.blue}";
           };
           focusedInactive = {
@@ -51,7 +66,7 @@ in {
           urgent = {
             border = "#${colors.br_red}";
             background = "#${colors.br_red}";
-            text = "#${colors.fg}";
+            text = "#${colors.bg}";
             indicator = "#${colors.br_red}";
             childBorder = "#${colors.br_red}";
           };
@@ -61,6 +76,7 @@ in {
           --ff '#${colors.fg}' --nf '#${colors.fg}' --hf '#${colors.blue}' --no-exec | xargs swaymsg exec --
         '';
         startup = [
+          { always = true; command = "${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-theme 'Quintom_Snow'"; }
           { command = "${pkgs.mako}/bin/mako"; }
           { command =
             let lockCmd = "'${pkgs.swaylock}/bin/swaylock -f -i ~/Downloads/gruvbox.png'";
@@ -72,8 +88,8 @@ in {
                 before-sleep ${lockCmd}
             '';
           }
-          { command = ''exec swaymsg "workspace ${ws2}; exec ${terminalCmd};"''; }
-          { command = ''exec swaymsg "workspace ${ws3}; exec ${terminalCmd};"''; }
+          { command = ''exec swaymsg "workspace ${ws2}; exec ${terminalCmd} -e ${pkgs.tmux}/bin/tmux;"''; }
+          { command = ''exec swaymsg "workspace ${ws3}; exec ${terminalCmd} -e ${pkgs.neovim}/bin/nvim;"''; }
           { command = ''exec swaymsg "workspace ${ws1}; exec ${pkgs.firefox}/bin/firefox;"''; }
           { command = "${pkgs.tdesktop}/bin/telegram-desktop"; }
           { command = "${pkgs.discord}/bin/discord"; }
@@ -96,11 +112,15 @@ in {
             scroll_button = "274";
           };
         };
-        output = { "*".bg = "~/Downloads/gruvbox.png fill"; }
-        // lib.optionalAttrs (sysconfig.networking.hostName == "roz-pc") {
-          "DP-3" = {
-            pos = "1080 320";
+        output = {
+          "*" = {
+            bg = "~/Downloads/anime.jpg fill";
+          };
+        } // lib.optionalAttrs (sysconfig.networking.hostName == "roz-pc") {
+          "DP-1" = {
+            pos = "1080 270";
             mode = "2560x1440@144Hz";
+            adaptive_sync = "on";
           };
           "HDMI-A-1" = {
             pos = "0 0";
@@ -202,13 +222,17 @@ in {
             { class = "^Bitwarden$"; }
             { class = "^Thunderbird$"; }
           ];
+          "${ws6}" = [{ class = "^Steam$"; }];
         };
         workspaceOutputAssign = lib.mkIf (sysconfig.networking.hostName == "roz-pc") [
-          { workspace = ws2; output = "DP-3"; }
-          { workspace = ws3; output = "DP-3"; }
+          { workspace = ws1; output = "DP-1"; }
           { workspace = ws4; output = "HDMI-A-1"; }
           { workspace = ws5; output = "HDMI-A-1"; }
+          { workspace = ws6; output = "DP-1"; }
         ];
       };
+      extraConfig = ''
+        for_window [class="^install4j.*"] floating enable
+      '';
     };
  }

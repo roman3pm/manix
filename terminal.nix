@@ -3,6 +3,12 @@ let
   colors = import ./colors.nix;
   fonts = import ./fonts.nix;
 in {
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "gruvbox-dark";
+    };
+  };
   programs.zsh = {
     enable = true;
     shellAliases = {
@@ -15,6 +21,7 @@ in {
     };
     oh-my-zsh = {
       enable  = true;
+      plugins = [ "git" "thefuck" ];
       theme   = "bira";
     };
   };
@@ -28,7 +35,7 @@ in {
   in {
     enable = true;
     settings = {
-      background_opacity = 0.95;
+      window.opacity = 0.90;
       colors = {
         primary = {
           background = "0x${colors.bg}";

@@ -105,11 +105,13 @@
   color:      @gb_fg;
 }
 
-#custom-alsa,
-#pulseaudio,
-#sndio {
+#pulseaudio {
   background: @gb_green;
-  color:      @gb_fg;
+  color:      @gb_bg;
+}
+
+#pulseaudio.muted {
+  color:      @gb_red;
 }
 
 #network {
@@ -163,10 +165,6 @@
 #clock.time {
   background: @gb_fg;
   color:      @gb_bg;
-}
-
-#pulseaudio.muted {
-  /* No styles */
 }
 
 #custom-arrow_start {

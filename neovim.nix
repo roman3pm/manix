@@ -28,13 +28,22 @@
       set path+=**
       set number
       set signcolumn=yes
-      filetype plugin indent on
-      set expandtab
-      set tabstop=2
-      set softtabstop=2
-      set shiftwidth=2
+      set listchars=eol:↵
+      set list
+      set updatetime=100
 
+      autocmd VimEnter * hi Normal ctermbg=none
       colorscheme gruvbox
+      let g:gruvbox_transparent_bg=1
+      let g:gruvbox_italic=1
+
+      nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+      nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+      nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+
+      nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+      nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+      nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
       let g:airline_powerline_fonts = 1
       let g:airline#extensions#tabline#enabled = 1
