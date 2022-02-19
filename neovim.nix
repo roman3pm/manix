@@ -5,6 +5,7 @@
     plugins = with pkgs.vimPlugins; [
       gruvbox
       indentLine
+      auto-pairs
       suda-vim
       vim-fugitive
       vim-unimpaired
@@ -25,14 +26,16 @@
       telescope-fzy-native-nvim
     ];
     extraConfig = ''
-      set path+=**
-      set number
+      autocmd VimEnter * hi Normal ctermbg=none
+
+      set mouse=a
+      set number relativenumber
+      set cursorline
       set signcolumn=yes
       set listchars=eol:↵
       set list
       set updatetime=100
 
-      autocmd VimEnter * hi Normal ctermbg=none
       colorscheme gruvbox
       let g:gruvbox_transparent_bg=1
       let g:gruvbox_italic=1

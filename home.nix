@@ -64,6 +64,7 @@ in {
 
     swaylock
     swayidle
+    libnotify
     wl-clipboard
     brightnessctl
     pavucontrol

@@ -1,17 +1,18 @@
+{ pkgs, ... }:
 let
   colors = import ./colors.nix;
-  fonts = import ./fonts.nix;
-  fontName = builtins.head fonts.fontConfig.names;
-#  fontSize = builtins.toString(builtins.floor fonts.fontConfig.size);
+  oomox-theme = pkgs.callPackage ./packages/theme.nix {};
 in {
   programs.mako = {
     enable = true;
     anchor = "bottom-right";
-    font = "${fontName} 9";
+    font = "DejaVu Sans 9";
     output = "HDMI-A-1";
-    backgroundColor = "#${colors.bg1}";
-    borderColor = "#${colors.bg2}";
+    backgroundColor = "#${colors.bg}";
+    borderColor = "#${colors.bg1}";
     textColor = "#${colors.fg}";
     borderRadius = 5;
+    maxIconSize = 48;
+    iconPath = "${oomox-theme}/share/icons/suruplus_aspromauros";
   };
 }

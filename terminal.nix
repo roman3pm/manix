@@ -29,6 +29,12 @@ in {
     enable  = true;
     shell   = "${pkgs.zsh}/bin/zsh";
     keyMode = "vi";
+    extraConfig = ''
+      set -g mouse on
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+      bind-key -n WheelUpPane copy-mode
+    '';
   };
   programs.alacritty = let
     fontName = builtins.head fonts.fontConfig.names;
@@ -36,6 +42,12 @@ in {
     enable = true;
     settings = {
       window.opacity = 0.90;
+      cursor = {
+        style = {
+          blinking = "Always";
+          blink_interval = 500;
+        };
+      };
       colors = {
         primary = {
           background = "0x${colors.bg}";
