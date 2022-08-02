@@ -1,7 +1,6 @@
 { pkgs, ... }:
 let
   colors = import ./colors.nix;
-  oomox-theme = pkgs.callPackage ./packages/theme.nix {};
 in {
   programs.mako = {
     enable = true;
@@ -13,6 +12,5 @@ in {
     textColor = "#${colors.fg}";
     borderRadius = 5;
     maxIconSize = 48;
-    iconPath = "${oomox-theme}/share/icons/suruplus_aspromauros";
   };
 }

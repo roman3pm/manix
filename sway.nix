@@ -2,7 +2,7 @@
 let
   colors = import ./colors.nix;
   fonts = import ./fonts.nix;
-  sysconfig = (import <nixpkgs/nixos> {}).config;
+  hostName = "roz-pc";
   ws1 = "1:web";
   ws2 = "2:term";
   ws3 = "3:code";
@@ -18,8 +18,10 @@ in {
       enable = true;
       wrapperFeatures.gtk = true;
       extraSessionCommands = ''
+        export MOZ_ENABLE_WAYLAND=1
+        export XDG_CURRENT_DESKTOP=sway
         export BEMENU_BACKEND=wayland
-        export SDL_VIDEODRIVER=wayland
+        export SDL_VEDEODRIVER=wayland
         # needs qt5.qtwayland in systemPackages
         export QT_QPA_PLATFORM=wayland
         export QT_QPA_PLATFORMTHEME=gtk2
@@ -79,7 +81,7 @@ in {
           { always = true; command = "${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-theme 'Quintom_Snow'"; }
           { command = "${pkgs.mako}/bin/mako"; }
           { command =
-            let lockCmd = "'${pkgs.swaylock}/bin/swaylock -f -i ~/Downloads/gruvbox.png'";
+            let lockCmd = "'${pkgs.swaylock}/bin/swaylock -f -i ~/.config/nixpkgs/wallpapers/1.png'";
             in ''
                 ${pkgs.swayidle}/bin/swayidle -w \
                 timeout 600 ${lockCmd} \
@@ -88,21 +90,22 @@ in {
                 before-sleep ${lockCmd}
             '';
           }
-          { command = ''exec swaymsg "workspace ${ws2}; exec ${terminalCmd} -e ${pkgs.tmux}/bin/tmux;"''; }
+          { command = "${pkgs.gammastep}/bin/gammastep -l 55.75:37.80 -b 1.0:0.85 -t 6500:5000"; }
+          { command = ''exec swaymsg "workspace ${ws2}; exec ${terminalCmd};"''; }
           { command = ''exec swaymsg "workspace ${ws3}; exec ${terminalCmd} -e ${pkgs.neovim}/bin/nvim;"''; }
-          { command = ''exec swaymsg "workspace ${ws1}; exec ${pkgs.firefox}/bin/firefox;"''; }
-          { command = "${pkgs.tdesktop}/bin/telegram-desktop"; }
+          { command = ''exec swaymsg "workspace ${ws1}; exec ${pkgs.firefox-wayland}/bin/firefox;"''; }
           { command = "${pkgs.discord}/bin/discord"; }
+          { command = "${pkgs.tdesktop}/bin/telegram-desktop"; }
           { command = "${pkgs.slack}/bin/slack"; }
           { command = "${pkgs.bitwarden}/bin/bitwarden"; }
           { command = "${pkgs.thunderbird}/bin/thunderbird"; }
+          { command = "${pkgs.steam}/bin/steam"; }
           { command = "systemctl --user restart waybar.service"; }
-          { command = "systemctl --user restart openrazer-daemon.service"; }
         ];
         input = {
           "type:keyboard" = {
             xkb_layout = "us,ru";
-            xkb_options = "grp:lctrl_toggle,caps:ctrl_modifier";
+            xkb_options = "grp:shift_caps_toggle";
           };
           "type:touchpad" = { tap = "enabled"; };
           "type:pointer" = {
@@ -114,16 +117,15 @@ in {
         };
         output = {
           "*" = {
-            bg = "~/Downloads/anime.jpg fill";
+            bg = "~/.config/nixpkgs/wallpapers/1.png fill";
           };
-        } // lib.optionalAttrs (sysconfig.networking.hostName == "roz-pc") {
           "DP-1" = {
-            pos = "1080 270";
+            pos = "0 0";
             mode = "2560x1440@144Hz";
             adaptive_sync = "on";
           };
           "HDMI-A-1" = {
-            pos = "0 0";
+            pos = "2560 0";
             mode = "1920x1080@75Hz";
             transform = "270";
           };
@@ -133,22 +135,22 @@ in {
             mod = config.wayland.windowManager.sway.config.modifier;
             inherit (config.wayland.windowManager.sway.config) menu terminal;
           in {
-            "${mod}+d" = "exec ${menu}";
-            "${mod}+Return" = "exec ${terminal}";
+            "${mod}+d"       = "exec ${menu}";
+            "${mod}+Return"  = "exec ${terminal}";
             "${mod}+Shift+q" = "kill";
 
-            "${mod}+Left" = "focus left";
-            "${mod}+Down" = "focus down";
-            "${mod}+Up" = "focus up";
+            "${mod}+Left"  = "focus left";
+            "${mod}+Down"  = "focus down";
+            "${mod}+Up"    = "focus up";
             "${mod}+Right" = "focus right";
 
-            "${mod}+Shift+Left" = "move left";
-            "${mod}+Shift+Down" = "move down";
-            "${mod}+Shift+Up" = "move up";
+            "${mod}+Shift+Left"  = "move left";
+            "${mod}+Shift+Down"  = "move down";
+            "${mod}+Shift+Up"    = "move up";
             "${mod}+Shift+Right" = "move right";
 
             "${mod}+Shift+Space" = "floating toggle";
-            "${mod}+Space" = "focus mode_toggle";
+            "${mod}+Space"       = "focus mode_toggle";
 
             "${mod}+1" = "workspace ${ws1}";
             "${mod}+2" = "workspace ${ws2}";
@@ -166,14 +168,14 @@ in {
             "${mod}+Shift+6" = "move container to workspace ${ws6}";
             "${mod}+Shift+7" = "move container to workspace ${ws7}";
 
-            "${mod}+h" = "split h";
-            "${mod}+v" = "split v";
-            "${mod}+f" = "fullscreen toggle";
-            "${mod}+comma" = "layout stacking";
+            "${mod}+h"      = "split h";
+            "${mod}+v"      = "split v";
+            "${mod}+f"      = "fullscreen toggle";
+            "${mod}+comma"  = "layout stacking";
             "${mod}+period" = "layout tabbed";
-            "${mod}+slash" = "layout toggle split";
-            "${mod}+a" = "focus parent";
-            "${mod}+s" = "focus child";
+            "${mod}+slash"  = "layout toggle split";
+            "${mod}+a"      = "focus parent";
+            "${mod}+s"      = "focus child";
 
             "${mod}+Shift+c" = "reload";
             "${mod}+Shift+r" = "restart";
@@ -181,38 +183,41 @@ in {
 
             "${mod}+r" = "mode resize";
 
-            "${mod}+p" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g- ~/Pictures/screenshot-$(date +%Y%m%d-%H%M).png";
-            "${mod}+l" = "exec ${pkgs.swaylock}/bin/swaylock -i ~/Downloads/gruvbox.png";
-            "${mod}+k" = "exec ${pkgs.mako}/bin/makoctl invoke";
+            "${mod}+p"       = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g- ~/Pictures/screenshot-$(date +%Y%m%d-%H%M).png";
+            "${mod}+Shift+p" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | wl-copy";
+            "${mod}+l"       = "exec ${pkgs.swaylock}/bin/swaylock -i ~/.config/nixpkgs/wallpapers/1.png";
+            "${mod}+k"       = "exec ${pkgs.mako}/bin/makoctl invoke";
             "${mod}+Shift+k" = "exec ${pkgs.mako}/bin/makoctl dismiss -a";
 
-            "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
+            "XF86AudioMute"        = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
             "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
             "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
-            "XF86AudioMicMute" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+            "XF86AudioMicMute"     = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
 
-            "XF86MonBrightnessUp" = "exec brightnessctl s +10%";
+            "XF86MonBrightnessUp"   = "exec brightnessctl s +10%";
             "XF86MonBrightnessDown" = "exec brightnessctl s 10%-";
           };
         modes = {
           "system:  [r]eboot  [p]oweroff  [l]ogout" = {
-            r = "exec reboot";
-            p = "exec poweroff";
-            l = "exit";
+            r      = "exec reboot";
+            p      = "exec poweroff";
+            l      = "exit";
             Return = "mode default";
             Escape = "mode default";
           };
           resize = {
-            Left = "resize shrink width";
-            Right = "resize grow width";
-            Down = "resize shrink height";
-            Up = "resize grow height";
+            Left   = "resize shrink width";
+            Right  = "resize grow width";
+            Down   = "resize shrink height";
+            Up     = "resize grow height";
             Return = "mode default";
             Escape = "mode default";
           };
         };
         assigns = {
-          "${ws1}"= [{ class = "^Firefox$"; }];
+          "${ws1}"= [
+            { app_id = "^firefox$"; }
+          ];
           "${ws4}" = [
             { app_id = "^telegramdesktop$"; }
             { class  = "^Slack$"; }
@@ -220,11 +225,13 @@ in {
           ];
           "${ws5}" = [
             { class = "^Bitwarden$"; }
-            { class = "^Thunderbird$"; }
+            { app_id = "^thunderbird$"; }
           ];
-          "${ws6}" = [{ class = "^Steam$"; }];
+          "${ws6}" = [
+            { class = "^Steam$"; }
+          ];
         };
-        workspaceOutputAssign = lib.mkIf (sysconfig.networking.hostName == "roz-pc") [
+        workspaceOutputAssign = lib.mkIf (hostName == "roz-pc") [
           { workspace = ws1; output = "DP-1"; }
           { workspace = ws4; output = "HDMI-A-1"; }
           { workspace = ws5; output = "HDMI-A-1"; }
@@ -232,7 +239,8 @@ in {
         ];
       };
       extraConfig = ''
-        for_window [class="^install4j.*"] floating enable
+        for_window [class="install4j.*"] floating enable
+        for_window [class="Steam"] floating enable
       '';
     };
  }

@@ -1,11 +1,11 @@
 { config, pkgs, lib, ... }:
 let
   colors = import ./colors.nix;
-  oomox-theme = pkgs.callPackage ./packages/theme.nix {};
 in {
   imports = [
     ./sway.nix
     ./terminal.nix
+    ./git.nix
     ./mako.nix
     ./neovim.nix
     ./waybar.nix
@@ -17,15 +17,6 @@ in {
   home.username = "roz";
   home.homeDirectory = "/home/roz";
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "steam"
-      "steam-original"
-      "steam-runtime"
-    ];
-  };
-
   home.packages = with pkgs; [
     slurp
     grim
@@ -33,22 +24,27 @@ in {
     mpv
     htop
     neofetch
-    git
     thefuck
     ripgrep
     fd
     fzf
     jq
+    wireguard-tools
     wget
     steam-run
 
+    jre8
     jdk8
-    (sbt.override { jre = jdk8; })
-    coursier
-    bloop
-    metals
-    nodejs-12_x
+    gcc 
     yarn
+    nodejs-14_x
+    rust-analyzer
+    sumneko-lua-language-server
+    (sbt.override { jre = jre8; })
+    (maven.override { jdk = jdk8; })
+    (bloop.override { jre = jre8; })
+    (metals.override { jre = jre8; })
+    (coursier.override { jre = jre8; })
 
     via
     razergenie
@@ -57,9 +53,16 @@ in {
     tdesktop
     slack
     discord
+#    (discord.overrideAttrs (old: rec {
+#      version = "0.0.18";
+#      src = fetchurl {
+#        url = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
+#        sha256 = "BBc4n6Q3xuBE13JS3gz/6EcwdOWW57NLp2saOlwOgMI=";
+#      };
+#    }))
     bitwarden
-    steam
     lutris
+    gamemode
     libreoffice-fresh
 
     swaylock
@@ -67,6 +70,7 @@ in {
     libnotify
     wl-clipboard
     brightnessctl
+    gammastep
     pavucontrol
     bemenu
     nerdfonts
@@ -75,37 +79,34 @@ in {
     xdg_utils
     qt5.qtwayland
     libsForQt5.qtstyleplugins
-    oomox-theme
+    gruvbox-dark-gtk
+    gruvbox-dark-icons-gtk
   ];
 
   fonts.fontconfig.enable = true;
 
-  gtk = {
-    enable = true;
-    iconTheme.name = "suruplus_aspromauros";
-    theme.name = "oomox";
-  };
-  
   home.file.".icons/default".source = "${pkgs.quintom-cursor-theme}/share/icons/Quintom_Snow";
 
-  xdg.mimeApps = {
+  gtk = {
     enable = true;
-    defaultApplications = {
-      "x-scheme-handler/http" = "firefox.desktop";
-      "x-scheme-handler/https" = "firefox.desktop";
-      "application/xhtml+xml" = "firefox.desktop";
-      "text/html" = "firefox.desktop";
+    iconTheme.name = "oomox-gruvbox-dark";
+    theme.name = "gruvbox-dark";
+  };
+
+  xdg = {
+    dataFile."applications/mimeapps.list".force = true;
+    configFile."mimeapps.list".force = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "x-scheme-handler/http" = "firefox.desktop";
+        "x-scheme-handler/https" = "firefox.desktop";
+        "application/xhtml+xml" = "firefox.desktop";
+        "application/vnd.mozilla.xul+xml" = "firefox.desktop";
+        "text/html" = "firefox.desktop";
+      };
     };
   };
-  xdg.dataFile."applications/mimeapps.list".force = true;
-  xdg.configFile."mimeapps.list".force = true;
 
-  home.sessionVariables = {
-    BROWSER = "${pkgs.firefox}/bin/firefox";
-    EDITOR  = "${pkgs.neovim}/bin/nvim";
-  };
-
-  services.mpd.enable = true;
-
-  home.stateVersion = "21.05";
+  home.stateVersion = "22.05";
 }

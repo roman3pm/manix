@@ -3,17 +3,31 @@ let
   colors = import ./colors.nix;
   fonts = import ./fonts.nix;
 in {
+
+  programs.bash = {
+    enable = true;
+    profileExtra = ''
+      if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+        exec sway
+      fi
+    '';
+  };
+
   programs.bat = {
     enable = true;
     config = {
       theme = "gruvbox-dark";
     };
   };
+
   programs.zsh = {
     enable = true;
+    initExtraBeforeCompInit = "fpath+=(${pkgs.bloop}/share/zsh/site-functions)";
     shellAliases = {
-      update  = "home-manager switch";
-      upgrade = "sudo nixos-rebuild switch";
+      nh  = "cd ~/.config/nixpkgs";
+      nfu = "nix flake update";
+      nrs = "nixos-rebuild switch --use-remote-sudo --flake '.#'";
+      ngc = "sudo nix-collect-garbage -d";
     };
     history = {
       size = 10000;
@@ -24,24 +38,17 @@ in {
       plugins = [ "git" "thefuck" ];
       theme   = "bira";
     };
-  };
-  programs.tmux = {
-    enable  = true;
-    shell   = "${pkgs.zsh}/bin/zsh";
-    keyMode = "vi";
-    extraConfig = ''
-      set -g mouse on
-      bind-key -T copy-mode-vi v send-keys -X begin-selection
-      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-      bind-key -n WheelUpPane copy-mode
+    initExtra = ''
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
     '';
   };
+
   programs.alacritty = let
     fontName = builtins.head fonts.fontConfig.names;
   in {
     enable = true;
     settings = {
-      window.opacity = 0.90;
+      window.opacity = 0.80;
       cursor = {
         style = {
           blinking = "Always";
@@ -75,11 +82,13 @@ in {
         };
       };
       font = {
-        normal = { family = fontName; };
-        bold   = { family = fontName; style = "Bold"; };
-        italic = { family = fontName; stype = "Italic"; };
+        normal      = { family = fontName; };
+#        bold        = { family = fontName; };
+#        italic      = { family = fontName; };
+#        bold_italic = { family = fontName; };
       };
       shell.program = "${pkgs.zsh}/bin/zsh";
     };
   };
+
 }
