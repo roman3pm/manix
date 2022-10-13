@@ -9,7 +9,7 @@ local function map(mode, lhs, rhs, opts)
 end
 
 vim.opt_global.completeopt = { "menu", "menuone", "noselect" }
-vim.opt_global.shortmess:remove("F"):append("c")
+-- vim.opt_global.shortmess:remove("F"):append("c")
 
 map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")

@@ -78,6 +78,8 @@ in {
           --ff '#${colors.fg}' --nf '#${colors.fg}' --hf '#${colors.blue}' --no-exec | xargs swaymsg exec --
         '';
         startup = [
+          { always = true; command = "dbus-sway-environment"; }
+          { always = true; command = "configure-gtk"; }
           { always = true; command = "${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-theme 'Quintom_Snow'"; }
           { command = "${pkgs.mako}/bin/mako"; }
           { command =
@@ -91,16 +93,12 @@ in {
             '';
           }
           { command = "${pkgs.gammastep}/bin/gammastep -l 55.75:37.80 -b 1.0:0.85 -t 6500:5000"; }
-          { command = ''exec swaymsg "workspace ${ws2}; exec ${terminalCmd};"''; }
-          { command = ''exec swaymsg "workspace ${ws3}; exec ${terminalCmd} -e ${pkgs.neovim}/bin/nvim;"''; }
-          { command = ''exec swaymsg "workspace ${ws1}; exec ${pkgs.firefox-wayland}/bin/firefox;"''; }
+          { command = "${pkgs.firefox-wayland}/bin/firefox"; }
           { command = "${pkgs.discord}/bin/discord"; }
-          { command = "${pkgs.tdesktop}/bin/telegram-desktop"; }
           { command = "${pkgs.slack}/bin/slack"; }
           { command = "${pkgs.bitwarden}/bin/bitwarden"; }
           { command = "${pkgs.thunderbird}/bin/thunderbird"; }
-          { command = "${pkgs.steam}/bin/steam"; }
-          { command = "systemctl --user restart waybar.service"; }
+          { command = "sleep 2 && ${pkgs.tdesktop}/bin/telegram-desktop"; }
         ];
         input = {
           "type:keyboard" = {
@@ -130,6 +128,7 @@ in {
             transform = "270";
           };
         };
+        bindkeysToCode = true;
         keybindings =
           let
             mod = config.wayland.windowManager.sway.config.modifier;
@@ -229,6 +228,7 @@ in {
           ];
           "${ws6}" = [
             { class = "^Steam$"; }
+            { app_id = "^lutris$"; }
           ];
         };
         workspaceOutputAssign = lib.mkIf (hostName == "roz-pc") [
@@ -241,6 +241,8 @@ in {
       extraConfig = ''
         for_window [class="install4j.*"] floating enable
         for_window [class="Steam"] floating enable
+        for_window [app_id="lutris"] floating enable
+        for_window [class=".*\.exe"] floating enable
       '';
     };
  }

@@ -2,7 +2,10 @@ local opt = vim.opt
 local api = vim.api
 local cmd = vim.cmd
 
+vim.g.mapleader = " "
 cmd([[set noswapfile]])
+cmd([[set splitbelow]])
+cmd([[set splitright]])
 opt.mouse = "a"
 
 opt.number = true
@@ -25,7 +28,6 @@ vim.g.gruvbox_transparent_bg = 1
 vim.g.gruvbox_italic = 1
 cmd([[colorscheme gruvbox]])
 cmd([[highlight Normal ctermbg=NONE guibg=NONE]])
-api.nvim_set_keymap('n', '<ESC>', ':noh<CR>', { noremap = true, silent = true })
 
 api.nvim_set_keymap('n', '<leader>ff', [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true })
 api.nvim_set_keymap('n', '<leader>fg', [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true })
@@ -99,7 +101,9 @@ require('nvim-autopairs').setup {
 }
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = "all",
+  parser_install_dir = "~/.local/share/nvim/site",
+  ensure_installed = { "nix", "lua", "scala", "java", "javascript" },
+  auto_install = true,
   sync_install = false,
   highlight = {
     enable = true

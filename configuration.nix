@@ -7,17 +7,15 @@
   boot = {
     loader = {
       systemd-boot.enable = true;
-      grub = {
-        device = "/dev/nvme0n1";
-        useOSProber = true;
-      };
+      efi.canTouchEfiVariables = true;
     };
     initrd.kernelModules = [ "amdgpu" "wl" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_5_19;
   };
   
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
+    settings.auto-optimise-store = true;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -37,7 +35,7 @@
     wireless = {
       enable = true;
       networks = {
-        MGTS-GPON5-366B = { psk = ""; };
+        MGTS-GPON5-366B = { psk = "DPRT4669"; };
       };
     };
   };
@@ -62,7 +60,7 @@
     groups.plugdev = {};
     users.roz = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "plugdev" "audio" ];
+      extraGroups = [ "wheel" "plugdev" "video" "audio" ];
     };
   };
 
@@ -87,15 +85,13 @@
     xpadneo.enable = true;
   };
 
-  xdg = {
-    portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-wlr
-        xdg-desktop-portal-gtk
-      ];
-      gtkUsePortal = true;
-    };
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+    ];
+    gtkUsePortal = true;
   };
 
   time.timeZone = "Europe/Moscow";
@@ -106,6 +102,7 @@
         auth include login
     '';
   };
+  security.polkit.enable = true;
 
   programs = {
     dconf.enable = true;
@@ -118,6 +115,7 @@
   };
 
   services = {
+    dbus.enable = true;
     pipewire = {
       enable = true;
       alsa = {

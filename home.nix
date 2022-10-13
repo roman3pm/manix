@@ -1,6 +1,33 @@
 { config, pkgs, lib, ... }:
 let
   colors = import ./colors.nix;
+
+  dbus-sway-environment = pkgs.writeTextFile {
+    name = "dbus-sway-environment";
+    destination = "/bin/dbus-sway-environment";
+    executable = true;
+
+    text = ''
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+      systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+      systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+    '';
+  };
+
+  configure-gtk = pkgs.writeTextFile {
+    name = "configure-gtk";
+    destination = "/bin/configure-gtk";
+    executable = true;
+    text = let
+      schema = pkgs.gsettings-desktop-schemas;
+      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+    in ''
+      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+      gnome_schema=org.gnome.desktop.interface
+      gsettings set $gnome_schema gtk-theme 'gruvbox-dark'
+    '';
+  };
+
 in {
   imports = [
     ./sway.nix
@@ -31,12 +58,14 @@ in {
     jq
     wireguard-tools
     wget
+    unzip
+    p7zip
     steam-run
 
     jre8
     jdk8
     gcc 
-    yarn
+    (yarn.override { nodejs = nodejs-14_x; })
     nodejs-14_x
     rust-analyzer
     sumneko-lua-language-server
@@ -53,18 +82,12 @@ in {
     tdesktop
     slack
     discord
-#    (discord.overrideAttrs (old: rec {
-#      version = "0.0.18";
-#      src = fetchurl {
-#        url = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
-#        sha256 = "BBc4n6Q3xuBE13JS3gz/6EcwdOWW57NLp2saOlwOgMI=";
-#      };
-#    }))
     bitwarden
     lutris
     gamemode
     libreoffice-fresh
 
+    dbus-sway-environment
     swaylock
     swayidle
     libnotify
@@ -74,13 +97,17 @@ in {
     pavucontrol
     bemenu
     nerdfonts
+
+    configure-gtk
     glib
-    quintom-cursor-theme
-    xdg_utils
+    xdg-utils
     qt5.qtwayland
     libsForQt5.qtstyleplugins
+    quintom-cursor-theme
     gruvbox-dark-gtk
     gruvbox-dark-icons-gtk
+    gtk-engine-murrine
+    gtk_engines
   ];
 
   fonts.fontconfig.enable = true;
@@ -104,6 +131,7 @@ in {
         "application/xhtml+xml" = "firefox.desktop";
         "application/vnd.mozilla.xul+xml" = "firefox.desktop";
         "text/html" = "firefox.desktop";
+        "application/pdf" = "firefox.desktop";
       };
     };
   };
