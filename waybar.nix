@@ -4,7 +4,6 @@ let
   inherit (builtins) concatLists attrNames listToAttrs;
 
   sysconfig = (import <nixpkgs/nixos> {}).config;
-  colors = import ./colors.nix;
 
   ws1 = "1:web";
   ws2 = "2:term";
@@ -14,17 +13,7 @@ let
   ws6 = "6:game";
   ws7 = "7:other";
 
-  arrowNames = (attrNames colors) ++ [ "start" "end" "time"];
-  getArrowModule = (p: n:
-    let name = p + n;
-    in nameValuePair "${name}" {
-      format = "";
-      tooltip = false;
-    }
-  );
-  arrowModules = map (getArrowModule "custom/arrow_") arrowNames;
-
-  modules = listToAttrs arrowModules // {
+  modules = {
     "battery" = {
       states = {
         critical = 15;
@@ -35,34 +24,40 @@ let
       format-plugged = " {capacity}%";
       format-icons = [ " " " " " " " " " " ];
       format-alt = "{icon} {time}";
+      on-click = "";
     };
 
     "clock#time" = {
       interval = 1;
       format = "{:%H:%M:%S}";
       tooltip = false;
+      on-click = "";
     };
 
     "clock#date" = {
       format = " {:%e %b %Y}";
       tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+      on-click = "";
     };
 
     "cpu" = {
       interval = 1;
       tooltip = false;
       format = " {usage}%";
+      on-click = "";
     };
 
     "sway/language" = {
       format = " {long}";
       min-length = 14;
       tooltip = false;
+      on-click = "";
     };
 
     "memory" = {
       interval = 1;
       format = " {used:0.1f}GiB";
+      on-click = "";
     };
 
     "network" = {
@@ -72,11 +67,13 @@ let
       format-ethernet = " {ifname}";
       format-disconnected = " ";
       tooltip = false;
+      on-click = "";
     };
 
     "sway/mode" = {
       format = " {}";
       tooltip = false;
+      on-click = "";
     };
 
     "sway/window" = {
@@ -84,6 +81,7 @@ let
       max-length = 50;
       all-outputs = true;
       tooltip = false;
+      on-click = "";
     };
 
     "sway/workspaces" = {
@@ -99,6 +97,7 @@ let
         "${ws6}" = " ";
         "${ws7}" = " ";
       };
+      on-click = "";
     };
 
     "idle_inhibitor" = {
@@ -107,6 +106,7 @@ let
         activated = "";
         deactivated = "";
       };
+      on-click = "";
     };
 
     "pulseaudio" = {
@@ -125,6 +125,7 @@ let
       hwmon-path = "/sys/class/hwmon/hwmon2/temp3_input";
       format = " {temperatureC}°C";
       tooltip = false;
+      on-click = "";
     };
 
     "temperature#gpu" = {
@@ -132,17 +133,15 @@ let
       hwmon-path = "/sys/class/hwmon/hwmon0/temp2_input";
       format = " {temperatureC}°C";
       tooltip = false;
+      on-click = "";
     };
 
     "tray" = {
       icon-size = 20;
       spacing =   5;
+      on-click = "";
     };
 
-    "custom/arrow_workspaces" = {
-      format = "";
-      tooltip = false;
-    };
   };
 in {
   programs.waybar = {
@@ -156,32 +155,20 @@ in {
         modules-left = [
           "sway/mode"
           "sway/workspaces"
-          "custom/arrow_workspaces"
           "sway/window"
         ];
         modules-right = [
           "idle_inhibitor"
-          "custom/arrow_start"
           "temperature#cpu"
-          "custom/arrow_purple"
           "temperature#gpu"
-          "custom/arrow_aqua"
           "memory"
-          "custom/arrow_br_aqua"
           "cpu"
-          "custom/arrow_br_green"
           "network"
-          "custom/arrow_green"
           "pulseaudio"
-          "custom/arrow_yellow"
           "battery"
-          "custom/arrow_br_yellow"
           "sway/language"
-          "custom/arrow_br_orange"
-          "custom/arrow_end"
           "tray"
           "clock#date"
-          "custom/arrow_time"
           "clock#time"
         ];
       })
@@ -190,25 +177,13 @@ in {
         output = "HDMI-A-1";
         modules-left = [
           "sway/workspaces"
-          "custom/arrow_workspaces"
           "sway/window"
         ];
         modules-right = [
-          "custom/arrow_start"
           "temperature#cpu"
-          "custom/arrow_purple"
           "temperature#gpu"
-          "custom/arrow_aqua"
-          "custom/arrow_br_aqua"
           "cpu"
-          "custom/arrow_br_green"
-          "custom/arrow_green"
-          "custom/arrow_yellow"
-          "custom/arrow_br_yellow"
-          "custom/arrow_br_orange"
-          "custom/arrow_end"
           "clock#date"
-          "custom/arrow_time"
           "clock#time"
         ];
       })

@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 let
-  colors = import ./colors.nix;
   fonts = import ./fonts.nix;
 in {
 
@@ -16,7 +15,7 @@ in {
   programs.bat = {
     enable = true;
     config = {
-      theme = "gruvbox-dark";
+      theme = "Coldark-Dark";
     };
   };
 
@@ -28,6 +27,7 @@ in {
       nfu = "nix flake update";
       nrs = "nixos-rebuild switch --use-remote-sudo --flake '.#'";
       ngc = "sudo nix-collect-garbage -d";
+      ns  = "nix search nixpkgs";
     };
     history = {
       size = 10000;
@@ -48,7 +48,7 @@ in {
   in {
     enable = true;
     settings = {
-      window.opacity = 0.80;
+      window.opacity = 0.90;
       cursor = {
         style = {
           blinking = "Always";
@@ -57,35 +57,33 @@ in {
       };
       colors = {
         primary = {
-          background = "0x${colors.bg}";
-          foreground = "0x${colors.fg}";
+          background = "0x1a1b26";
+          foreground = "0xa9b1d6";
         };
         normal = {
-          black   = "0x${colors.bg1}";
-          red     = "0x${colors.red}";
-          green   = "0x${colors.green}";
-          yellow  = "0x${colors.yellow}";
-          blue    = "0x${colors.blue}";
-          magneta = "0x${colors.purple}";
-          cyan    = "0x${colors.aqua}";
-          white   = "0x${colors.fg}";
+          black   = "0x32344a";
+          red     = "0xf7768e";
+          green   = "0x9ece6a";
+          yellow  = "0xe0af68";
+          blue    = "0x7aa2f7";
+          magneta = "0xad8ee6";
+          cyan    = "0x449dab";
+          white   = "0x787c99";
         };
         bright = {
-          black   = "0x${colors.bg2}";
-          red     = "0x${colors.br_red}";
-          green   = "0x${colors.br_green}";
-          yellow  = "0x${colors.br_yellow}";
-          blue    = "0x${colors.br_blue}";
-          magenta = "0x${colors.br_purple}";
-          cyan    = "0x${colors.br_aqua}";
-          white   = "0x${colors.fg0}";
+          black   = "0x444b6a";
+          red     = "0xff7a93";
+          green   = "0xb9f27c";
+          yellow  = "0xff9e64";
+          blue    = "0x7da6ff";
+          magenta = "0xbb9af7";
+          cyan    = "0x0db9d7";
+          white   = "0xacb0d0";
         };
       };
       font = {
-        normal      = { family = fontName; };
-#        bold        = { family = fontName; };
-#        italic      = { family = fontName; };
-#        bold_italic = { family = fontName; };
+        normal = { family = fontName; };
+        size = 12;
       };
       shell.program = "${pkgs.zsh}/bin/zsh";
     };

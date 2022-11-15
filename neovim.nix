@@ -12,7 +12,7 @@
       gitsigns-nvim
       diffview-nvim
 
-      gruvbox-nvim
+      tokyonight-nvim
       nvim-treesitter
       indent-blankline-nvim
       nvim-autopairs

@@ -14,7 +14,7 @@
       gpu_core_clock = true;
       vsync = 0;
       gl_vsync = -1;
-      fps_limit = "140,0";
+      fps_limit = "143";
     };
   };
 }

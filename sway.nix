@@ -1,6 +1,5 @@
 { config, pkgs, lib, ... }:
 let
-  colors = import ./colors.nix;
   fonts = import ./fonts.nix;
   hostName = "roz-pc";
   ws1 = "1:web";
@@ -33,8 +32,8 @@ in {
       config = {
         fonts = fonts.fontConfig;
         gaps = {
-          inner = 10;
-          outer = 5;
+          inner = 6;
+          outer = 3;
         };
         terminal = terminalCmd;
         modifier = "Mod4";
@@ -43,47 +42,15 @@ in {
           mouseWarping = false;
         };
         bars = [];
-        colors = {
-          focused = {
-            border = "#${colors.blue}";
-            background = "#${colors.blue}";
-            text = "#${colors.fg}";
-            indicator = "#${colors.green}";
-            childBorder = "#${colors.blue}";
-          };
-          focusedInactive = {
-            border = "#${colors.bg2}";
-            background = "#${colors.bg2}";
-            text = "#${colors.fg}";
-            indicator = "#${colors.bg2}";
-            childBorder = "#${colors.bg2}";
-          };
-          unfocused = {
-            border = "#${colors.bg1}";
-            background = "#${colors.bg1}";
-            text = "#${colors.fg}";
-            indicator = "#${colors.bg1}";
-            childBorder = "#${colors.bg1}";
-          };
-          urgent = {
-            border = "#${colors.br_red}";
-            background = "#${colors.br_red}";
-            text = "#${colors.bg}";
-            indicator = "#${colors.br_red}";
-            childBorder = "#${colors.br_red}";
-          };
-        };
         menu = ''
-          ${pkgs.bemenu}/bin/bemenu-run -m all -H 25 --fn '${builtins.head fonts.fontConfig.names}' --tf '#${colors.green}' \
-          --ff '#${colors.fg}' --nf '#${colors.fg}' --hf '#${colors.blue}' --no-exec | xargs swaymsg exec --
+          ${pkgs.bemenu}/bin/bemenu-run -m all -H 30 --fn '${builtins.head fonts.fontConfig.names}' --no-exec | xargs swaymsg exec --
         '';
         startup = [
-          { always = true; command = "dbus-sway-environment"; }
-          { always = true; command = "configure-gtk"; }
+          { always = true; command = "${pkgs.corectrl}/bin/corectrl --minimize-systray"; }
           { always = true; command = "${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-theme 'Quintom_Snow'"; }
           { command = "${pkgs.mako}/bin/mako"; }
           { command =
-            let lockCmd = "'${pkgs.swaylock}/bin/swaylock -f -i ~/.config/nixpkgs/wallpapers/1.png'";
+            let lockCmd = "'${pkgs.swaylock}/bin/swaylock -f -i ~/.config/nixpkgs/wallpapers/2.jpg'";
             in ''
                 ${pkgs.swayidle}/bin/swayidle -w \
                 timeout 600 ${lockCmd} \
@@ -92,13 +59,13 @@ in {
                 before-sleep ${lockCmd}
             '';
           }
-          { command = "${pkgs.gammastep}/bin/gammastep -l 55.75:37.80 -b 1.0:0.85 -t 6500:5000"; }
-          { command = "${pkgs.firefox-wayland}/bin/firefox"; }
-          { command = "${pkgs.discord}/bin/discord"; }
-          { command = "${pkgs.slack}/bin/slack"; }
-          { command = "${pkgs.bitwarden}/bin/bitwarden"; }
-          { command = "${pkgs.thunderbird}/bin/thunderbird"; }
+          { command = "${pkgs.gammastep}/bin/gammastep -l 55.75:37.80"; }
+          { command = "sleep 2 && ${pkgs.discord}/bin/discord"; }
+          { command = "sleep 2 && ${pkgs.slack}/bin/slack"; }
           { command = "sleep 2 && ${pkgs.tdesktop}/bin/telegram-desktop"; }
+          { command = "${pkgs.bitwarden}/bin/bitwarden"; }
+          { command = "sleep 2 && ${pkgs.thunderbird}/bin/thunderbird"; }
+          { command = "sleep 2 && ${pkgs.firefox-wayland}/bin/firefox"; }
         ];
         input = {
           "type:keyboard" = {
@@ -115,7 +82,7 @@ in {
         };
         output = {
           "*" = {
-            bg = "~/.config/nixpkgs/wallpapers/1.png fill";
+            bg = "~/.config/nixpkgs/wallpapers/2.jpg fill";
           };
           "DP-1" = {
             pos = "0 0";
@@ -184,7 +151,7 @@ in {
 
             "${mod}+p"       = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g- ~/Pictures/screenshot-$(date +%Y%m%d-%H%M).png";
             "${mod}+Shift+p" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | wl-copy";
-            "${mod}+l"       = "exec ${pkgs.swaylock}/bin/swaylock -i ~/.config/nixpkgs/wallpapers/1.png";
+            "${mod}+l"       = "exec ${pkgs.swaylock}/bin/swaylock -i ~/.config/nixpkgs/wallpapers/2.jpg";
             "${mod}+k"       = "exec ${pkgs.mako}/bin/makoctl invoke";
             "${mod}+Shift+k" = "exec ${pkgs.mako}/bin/makoctl dismiss -a";
 
@@ -233,6 +200,8 @@ in {
         };
         workspaceOutputAssign = lib.mkIf (hostName == "roz-pc") [
           { workspace = ws1; output = "DP-1"; }
+          { workspace = ws2; output = "DP-1"; }
+          { workspace = ws3; output = "DP-1"; }
           { workspace = ws4; output = "HDMI-A-1"; }
           { workspace = ws5; output = "HDMI-A-1"; }
           { workspace = ws6; output = "DP-1"; }

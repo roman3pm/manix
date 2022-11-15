@@ -10,7 +10,7 @@
       efi.canTouchEfiVariables = true;
     };
     initrd.kernelModules = [ "amdgpu" "wl" ];
-    kernelPackages = pkgs.linuxPackages_5_19;
+    kernelPackages = pkgs.linuxPackages_zen;
   };
   
   nix = {
@@ -42,6 +42,7 @@
 
   networking.wg-quick.interfaces = {
     wg0 = {
+      autostart = false;
       address = [ "10.0.0.2/24" "fdc9:281f:04d7:9ee9::2/64" ];
       dns = [ "10.0.0.1" "fdc9:281f:04d7:9ee9::1" ];
       privateKeyFile = "/home/roz/.secret/wireguard-keys/private";
@@ -60,7 +61,7 @@
     groups.plugdev = {};
     users.roz = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "plugdev" "video" "audio" ];
+      extraGroups = [ "corectrl" "wheel" "plugdev" "video" "audio" ];
     };
   };
 
@@ -74,6 +75,7 @@
       driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
+        amdvlk
         rocm-opencl-icd
         rocm-opencl-runtime
       ];
@@ -85,13 +87,15 @@
     xpadneo.enable = true;
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal-gtk
-    ];
-    gtkUsePortal = true;
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+      gtkUsePortal = true;
+    };
   };
 
   time.timeZone = "Europe/Moscow";
@@ -105,6 +109,7 @@
   security.polkit.enable = true;
 
   programs = {
+    corectrl.enable = true;
     dconf.enable = true;
     ssh.startAgent = true;
     steam = {
@@ -163,6 +168,10 @@
       };
     });
   in listToAttrs (map getVpnService hosts);
+
+  environment.sessionVariables = rec {
+    AMD_VULKAN_ICD = "RADV";
+  };
 
   system.stateVersion = "22.05";
 

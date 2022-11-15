@@ -1,241 +1,75 @@
-@define-color gb_bg        #282828;
-@define-color gb_fg        #ebdbb2;
-@define-color gb_red       #cc241d;
-@define-color gb_green     #98971a;
-@define-color gb_yellow    #d79921;
-@define-color gb_blue      #458588;
-@define-color gb_purple    #b16286;
-@define-color gb_aqua      #689d6a;
-@define-color gb_orande    #d65d0e;
-@define-color gb_br_red    #fb4934;
-@define-color gb_br_green  #b8bb26;
-@define-color gb_br_yellow #fabd2f;
-@define-color gb_br_blue   #83a598;
-@define-color gb_br_purple #d3869b;
-@define-color gb_br_aqua   #8ec07c;
-@define-color gb_br_orange #fe8019;
-
-@keyframes bg-warn {
-  70% {}
-  to  {background-color: @gb_br_red;}
-}
-
 * {
-  border:        none;
+  border: none;
   border-radius: 0;
-  min-height:    0;
-  margin:        0;
-  padding:       0;
-}
-
-#waybar {
-  background:  transparent;
-  color:       @gb_fg;
   font-family: "Hack Nerd Font";
-  font-size:   12pt;
-}
-
-#battery,
-#clock,
-#cpu,
-#language,
-#memory,
-#mode,
-#network,
-#pulseaudio,
-#temperature,
-#custom-alsa,
-#workspaces button {
-  padding-left:  5px;
-  padding-right: 5px;
-}
-
-#tray {
-  padding-left:  15px;
-  padding-right: 15px;
-}
-
-#mode {
-  color:      @gb_bg;
-  background: @gb_br_red;
-}
-
-#workspaces button {
-  color:         @gb_bg;
-  background:    @gb_blue;
-}
-
-#workspaces button:hover {
-  background: @gb_blue;
-  box-shadow: inset 0 -2px;
-}
-
-#workspaces button.focused {
-  background: @gb_br_blue;
-  box-shadow: inset 0 -2px;
-}
-
-#workspaces button.urgent {
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction:       alternate;
-  animation-name:            bg-warn;
-  animation-duration:        1s;
+  font-size: 16px;
+  min-height: 0;
 }
 
 #window {
-  margin-right: 40px;
-  margin-left:  40px;
+  padding: 0 6px;
 }
 
-#idle_inhibitor {
-  padding-left:  5px;
-  padding-right: 11px;
-  margin-right:  10px;
-  border-radius: 20px;
+window#waybar {
+  background: rgba(43, 48, 59, 0.5);
+  border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+  color: white;
 }
 
-#idle_inhibitor.activated {
-  background: @gb_fg;
-  color:      @gb_bg;
+tooltip {
+  background: rgba(43, 48, 59, 0.5);
+  border: 1px solid rgba(100, 114, 125, 0.5);
 }
-
-#idle_inhibitor.deactivated {
-  background: transparent;
-  color:      @gb_fg;
-}
-
-#pulseaudio {
-  background: @gb_green;
-  color:      @gb_bg;
-}
-
-#pulseaudio.muted {
-  color:      @gb_red;
-}
-
-#network {
-  background: @gb_br_green;
-  color:      @gb_bg;
-}
-
-#memory {
-  background: @gb_aqua;
-  color:      @gb_fg;
-}
-
-#cpu {
-  background: @gb_br_aqua;
-  color:      @gb_bg;
-}
-
-#temperature.cpu {
-  background: @gb_br_purple;
-  color:      @gb_bg;
-}
-
-#temperature.gpu {
-  background: @gb_purple;
-  color:      @gb_fg;
-}
-
-#language {
-  background: @gb_br_yellow;
-  color:      @gb_bg;
-}
-
-#battery {
-  background: @gb_yellow;
-  color:      @gb_bg;
-}
-
-#battery.critical {
-  color:      @gb_br_red;
+tooltip label {
+  color: white;
 }
 
 #tray {
-  background: @gb_bg;
+  padding: 0 6px;
 }
 
-#clock.date {
-  background: @gb_bg;
-  color:      @gb_fg;
-}
-
-#clock.time {
-  background: @gb_fg;
-  color:      @gb_bg;
-}
-
-#custom-arrow_start {
-  font-size:  20px;
-  color:      @gb_br_purple;
+#workspaces button {
   background: transparent;
+  border-bottom: 3px solid transparent;
 }
 
-#custom-arrow_purple {
-  font-size:  20px;
-  color:      @gb_purple;
-  background: @gb_br_purple;
+#workspaces button.focused {
+  background: #64727D;
+  border-bottom: 3px solid white;
 }
 
-#custom-arrow_aqua {
-  font-size:  20px;
-  color:      @gb_aqua;
-  background: @gb_purple;
+#mode {
+  background: #64727D;
+  border-bottom: 3px solid white;
 }
 
-#custom-arrow_br_aqua {
-  font-size:  20px;
-  color:      @gb_br_aqua;
-  background: @gb_aqua;
+#clock {
+  background-color: #64727D;
 }
 
-#custom-arrow_br_green {
-  font-size:  20px;
-  color:      @gb_br_green;
-  background: @gb_br_aqua;
+#battery {
+  background-color: #ffffff;
+  color: black;
 }
 
-#custom-arrow_green {
-  font-size:  20px;
-  color:      @gb_green;
-  background: @gb_br_green;
+#battery.charging {
+  color: white;
+  background-color: #26A65B;
 }
 
-#custom-arrow_yellow {
-  font-size:  20px;
-  color:      @gb_yellow;
-  background: @gb_green;
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: black;
+  }
 }
 
-#custom-arrow_br_yellow {
-  font-size:  20px;
-  color:      @gb_br_yellow;
-  background: @gb_yellow;
+#battery.warning:not(.charging) {
+  background: #f53c3c;
+  color: white;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
-
-#custom-arrow_br_orange {
-  font-size:  20px;
-  color:      @gb_br_orange;
-  background: @gb_br_yellow;
-}
-
-#custom-arrow_end {
-  font-size:  20px;
-  color:      @gb_bg;
-  background: @gb_br_orange;
-}
-
-#custom-arrow_time {
-  font-size:  20px;
-  color:      @gb_fg;
-  background: @gb_bg;
-}
-
-#custom-arrow_workspaces {
-  font-size:  20px;
-  color:      @gb_blue;
-  background: transparent;
-}
-
