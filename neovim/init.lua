@@ -84,7 +84,7 @@ require('gitsigns').setup {
 require('nvim-cursorline').setup {
   cursorline = {
     enable = true,
-    timeout = 1000,
+    timeout = 300,
     number = false,
   },
   cursorword = {
@@ -104,9 +104,6 @@ require('nvim-autopairs').setup {
 
 require('nvim-treesitter.configs').setup {
   parser_install_dir = "~/.local/share/nvim/site",
-  ensure_installed = { "nix", "lua", "scala", "java", "javascript" },
-  auto_install = true,
-  sync_install = false,
   highlight = {
     enable = true
   }
@@ -129,7 +126,7 @@ require('lualine').setup {
     theme = 'tokyonight'
   },
   sections = {
-    lualine_c = { 'filename', 'g:metals_status', 'lsp-progress' }
+    lualine_c = { 'filename', 'g:metals_status' }
   }
 }
 

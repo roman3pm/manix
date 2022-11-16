@@ -101,9 +101,10 @@ in {
             mod = config.wayland.windowManager.sway.config.modifier;
             inherit (config.wayland.windowManager.sway.config) menu terminal;
           in {
-            "${mod}+d"       = "exec ${menu}";
-            "${mod}+Return"  = "exec ${terminal}";
-            "${mod}+Shift+q" = "kill";
+            "${mod}+d"            = "exec ${menu}";
+            "${mod}+Return"       = "exec ${terminal}";
+            "${mod}+Shift+Return" = "exec ${terminal} --class Alacritty_floating";
+            "${mod}+Shift+q"      = "kill";
 
             "${mod}+Left"  = "focus left";
             "${mod}+Down"  = "focus down";
@@ -208,6 +209,7 @@ in {
         ];
       };
       extraConfig = ''
+        for_window [app_id="Alacritty_floating"] floating enable
         for_window [class="install4j.*"] floating enable
         for_window [class="Steam"] floating enable
         for_window [app_id="lutris"] floating enable

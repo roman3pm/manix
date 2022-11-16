@@ -43,7 +43,7 @@ let
     "cpu" = {
       interval = 1;
       tooltip = false;
-      format = " {usage}%";
+      format = " {usage}%";
       on-click = "";
     };
 
@@ -56,7 +56,7 @@ let
 
     "memory" = {
       interval = 1;
-      format = " {used:0.1f}GiB";
+      format = " {used:0.1f}GiB";
       on-click = "";
     };
 
@@ -103,8 +103,8 @@ let
     "idle_inhibitor" = {
       format = "{icon}";
       format-icons = {
-        activated = "";
-        deactivated = "";
+        activated = " ";
+        deactivated = " ";
       };
       on-click = "";
     };
@@ -117,7 +117,7 @@ let
       format-icons = {
         default = [" " " "];
       };
-      on-click = "pavucontrol";
+      on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
     };
 
     "temperature#cpu" = {
@@ -158,16 +158,16 @@ in {
           "sway/window"
         ];
         modules-right = [
-          "idle_inhibitor"
-          "temperature#cpu"
           "temperature#gpu"
-          "memory"
+          "temperature#cpu"
           "cpu"
+          "memory"
           "network"
           "pulseaudio"
           "battery"
           "sway/language"
           "tray"
+          "idle_inhibitor"
           "clock#date"
           "clock#time"
         ];
@@ -180,8 +180,8 @@ in {
           "sway/window"
         ];
         modules-right = [
-          "temperature#cpu"
           "temperature#gpu"
+          "temperature#cpu"
           "cpu"
           "clock#date"
           "clock#time"

@@ -12,6 +12,8 @@
       gpu_power = true;
       gpu_stats = true;
       gpu_core_clock = true;
+      engine_version = true;
+      vulkan_driver = true;
       vsync = 0;
       gl_vsync = -1;
       fps_limit = "143";

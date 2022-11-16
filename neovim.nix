@@ -13,18 +13,17 @@
       diffview-nvim
 
       tokyonight-nvim
-      nvim-treesitter
       indent-blankline-nvim
       nvim-autopairs
       nvim-cursorline
       lualine-nvim
       tabline-nvim
-      lualine-lsp-progress
       nvim-web-devicons
       nvim-bqf
       nvim-tree-lua
       telescope-nvim
       telescope-fzy-native-nvim
+      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
 
       nvim-lspconfig
       nvim-metals
