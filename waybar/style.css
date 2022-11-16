@@ -13,7 +13,6 @@
 window#waybar {
   background: rgba(43, 48, 59, 0.5);
   border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-  color: white;
 }
 
 tooltip {
@@ -34,16 +33,19 @@ tooltip label {
 }
 
 #workspaces button.focused {
+  color: white;
   background: #64727D;
   border-bottom: 3px solid white;
 }
 
 #mode {
+  color: white;
   background: #64727D;
   border-bottom: 3px solid white;
 }
 
 #clock {
+  color: white;
   background-color: #64727D;
 }
 
