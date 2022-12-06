@@ -48,7 +48,13 @@ in {
   in {
     enable = true;
     settings = {
-      window.opacity = 0.90;
+      window = {
+        opacity = 0.90;
+        dimensions = {
+          columns = 106;
+          lines = 33;
+        };
+      };
       cursor = {
         style = {
           blinking = "Always";

@@ -11,10 +11,17 @@
     };
     initrd.kernelModules = [ "amdgpu" "wl" ];
     kernelPackages = pkgs.linuxPackages_zen;
+    kernelParams = [
+      "amdgpu.ppfeaturemask=0xffffffff"
+    ];
   };
   
   nix = {
     package = pkgs.nixVersions.stable;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 7d";
+    };
     settings.auto-optimise-store = true;
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -90,11 +97,10 @@
   xdg = {
     portal = {
       enable = true;
+      wlr.enable = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-wlr
         xdg-desktop-portal-gtk
       ];
-      gtkUsePortal = true;
     };
   };
 
@@ -107,6 +113,7 @@
     '';
   };
   security.polkit.enable = true;
+  security.rtkit.enable = true;
 
   programs = {
     corectrl.enable = true;
@@ -154,7 +161,7 @@
     getVpnService = with pkgs; (host: nameValuePair "openvpn-${host}" {
       description = "OpenVPN instance ‘${host}’";
       after = [ "network.target" ];
-      wantedBy = [ "network-online.target" ];
+      wantedBy = [ "multi-user.target" ];
       path = [ bash openvpn oathToolkit ];
       serviceConfig = {
         Type = "notify";
@@ -173,7 +180,7 @@
     AMD_VULKAN_ICD = "RADV";
   };
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "22.11";
 
 }
 

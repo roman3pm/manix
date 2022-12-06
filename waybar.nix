@@ -5,14 +5,6 @@ let
 
   sysconfig = (import <nixpkgs/nixos> {}).config;
 
-  ws1 = "1:web";
-  ws2 = "2:term";
-  ws3 = "3:code";
-  ws4 = "4:chat";
-  ws5 = "5:mail";
-  ws6 = "6:game";
-  ws7 = "7:other";
-
   modules = {
     "battery" = {
       states = {
@@ -24,40 +16,34 @@ let
       format-plugged = " {capacity}%";
       format-icons = [ " " " " " " " " " " ];
       format-alt = "{icon} {time}";
-      on-click = "";
     };
 
     "clock#time" = {
       interval = 1;
       format = "{:%H:%M:%S}";
       tooltip = false;
-      on-click = "";
     };
 
     "clock#date" = {
       format = " {:%e %b %Y}";
       tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-      on-click = "";
     };
 
     "cpu" = {
       interval = 1;
       tooltip = false;
-      format = " {usage}%";
-      on-click = "";
+      format = " {usage}%";
     };
 
     "sway/language" = {
       format = " {long}";
       min-length = 14;
       tooltip = false;
-      on-click = "";
     };
 
     "memory" = {
       interval = 1;
       format = " {used:0.1f}GiB";
-      on-click = "";
     };
 
     "network" = {
@@ -67,13 +53,11 @@ let
       format-ethernet = " {ifname}";
       format-disconnected = " ";
       tooltip = false;
-      on-click = "";
     };
 
     "sway/mode" = {
       format = " {}";
       tooltip = false;
-      on-click = "";
     };
 
     "sway/window" = {
@@ -81,7 +65,6 @@ let
       max-length = 50;
       all-outputs = true;
       tooltip = false;
-      on-click = "";
     };
 
     "sway/workspaces" = {
@@ -89,24 +72,25 @@ let
       disable-scroll = false;
       format = ''{icon}:{name}'';
       format-icons = {
-        "${ws1}" = " ";
-        "${ws2}" = " ";
-        "${ws3}" = " ";
-        "${ws4}" = " ";
-        "${ws5}" = " ";
-        "${ws6}" = " ";
-        "${ws7}" = " ";
+        "1:http" = " ";
+        "2:chat" = " ";
+        "3:code" = " ";
+        "4:mail" = " ";
+        "5:game" = " ";
+        "6"      = " ";
+        "7"      = " ";
+        "8"      = " ";
+        "9"      = " ";
+        "10"     = " ";
       };
-      on-click = "";
     };
 
     "idle_inhibitor" = {
       format = "{icon}";
       format-icons = {
-        activated = " ";
-        deactivated = " ";
+        activated   = "(;0_0)";
+        deactivated = "(;=_=)";
       };
-      on-click = "";
     };
 
     "pulseaudio" = {
@@ -125,28 +109,34 @@ let
       hwmon-path = "/sys/class/hwmon/hwmon2/temp3_input";
       format = " {temperatureC}°C";
       tooltip = false;
-      on-click = "";
     };
 
     "temperature#gpu" = {
       interval = 1;
       hwmon-path = "/sys/class/hwmon/hwmon0/temp2_input";
-      format = " {temperatureC}°C";
+      format = " {temperatureC}°C";
       tooltip = false;
-      on-click = "";
     };
 
     "tray" = {
       icon-size = 20;
-      spacing =   5;
-      on-click = "";
+      spacing = 5;
     };
 
+    "custom/openrazer" = {
+      exec = pkgs.writeShellScript "openrazer" ''
+        SERIAL=$(polychromatic-cli -l | grep -o -E '[A-Z0-9]{15}')
+        if [[ $SERIAL == UNKWN* ]]; then echo ""; else echo " Razer"; fi
+      '';
+      on-click = "${pkgs.polychromatic}/bin/polychromatic-controller";
+      on-click-right = "systemctl --user restart openrazer-daemon.service";
+      restart-interval = 3;
+      tooltip = false;
+    };
   };
 in {
   programs.waybar = {
     enable = true;
-    systemd.enable = true;
     style = ./waybar/style.css;
     settings = [
       (modules // {
@@ -165,6 +155,7 @@ in {
           "network"
           "pulseaudio"
           "battery"
+          "custom/openrazer"
           "sway/language"
           "tray"
           "idle_inhibitor"

@@ -23,7 +23,7 @@
       nvim-tree-lua
       telescope-nvim
       telescope-fzy-native-nvim
-      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
+      (nvim-treesitter.withPlugins (plugins: with plugins; [ nix lua scala javascript ]))
 
       nvim-lspconfig
       nvim-metals

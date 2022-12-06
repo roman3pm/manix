@@ -13,21 +13,19 @@
 
   home.username = "roz";
 
-
   home.packages = with pkgs; [
-    slurp
-    grim
-    imv
-    mpv
-    htop
-    neofetch
-    thefuck
-    ripgrep
     fd
     fzf
     jq
+    imv
+    mpv
+    htop-vim
+    neofetch
+    thefuck
+    ripgrep
     wireguard-tools
     wget
+    unar
     unzip
     p7zip
     ranger
@@ -49,36 +47,38 @@
     (coursier.override { jre = jre8; })
 
     via
-    razergenie
-    firefox-wayland
-    thunderbird-wayland
+    polychromatic
+    firefox
+    thunderbird
     tdesktop
     slack
-    discord
+    (discord.override { withOpenASAR = true; })
     bitwarden
     lutris
     libreoffice-fresh
 
+    slurp
+    grim
+    wf-recorder
+    wl-clipboard
     swaylock
     swayidle
     libnotify
-    wl-clipboard
     brightnessctl
     gammastep
     pavucontrol
     bemenu
-    nerdfonts
 
-    glib
-    xdg-utils
-    qt5.qtwayland
-    libsForQt5.qtstyleplugins
+    nerdfonts
     quintom-cursor-theme
     materia-theme
     vimix-icon-theme
   ];
   
-  home.sessionVariables = { EDITOR = "vim"; };
+  home.sessionVariables = {
+    EDITOR = "vim";
+    SSH_ASKPASS = pkgs.writeShellScript "ssh_askpass" "cat $HOME/.secret/sshpass/ssh_pass";
+  };
 
   fonts.fontconfig.enable = true;
 
@@ -86,8 +86,14 @@
 
   gtk = {
     enable = true;
+    cursorTheme.name = "Quintom_Snow";
     iconTheme.name = "Vimix-Doder-dark";
     theme.name = "Materia-dark-compact";
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
   };
 
   xdg = {
@@ -106,5 +112,5 @@
     };
   };
 
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
 }

@@ -103,7 +103,7 @@ require('nvim-autopairs').setup {
 }
 
 require('nvim-treesitter.configs').setup {
-  parser_install_dir = "~/.local/share/nvim/site",
+  parser_install_dir = "$HOME/.local/share/nvim/site",
   highlight = {
     enable = true
   }

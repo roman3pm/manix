@@ -2,13 +2,11 @@
 let
   fonts = import ./fonts.nix;
   hostName = "roz-pc";
-  ws1 = "1:web";
-  ws2 = "2:term";
+  ws1 = "1:http";
+  ws2 = "2:chat";
   ws3 = "3:code";
-  ws4 = "4:chat";
-  ws5 = "5:mail";
-  ws6 = "6:game";
-  ws7 = "7:other";
+  ws4 = "4:mail";
+  ws5 = "5:game";
 in {
   wayland.windowManager.sway =
     let
@@ -19,15 +17,16 @@ in {
       extraSessionCommands = ''
         export MOZ_ENABLE_WAYLAND=1
         export XDG_CURRENT_DESKTOP=sway
+        export XDG_SESSION_TYPE=wayland
         export BEMENU_BACKEND=wayland
         export SDL_VEDEODRIVER=wayland
         # needs qt5.qtwayland in systemPackages
         export QT_QPA_PLATFORM=wayland
-        export QT_QPA_PLATFORMTHEME=gtk2
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
         # Fix for some Java AWT applications (e.g. Android Studio),
         # use this if they aren't displayed properly:
         export _JAVA_AWT_WM_NONREPARENTING=1
+        export NIXOS_OZONE_WL=1
       '';
       config = {
         fonts = fonts.fontConfig;
@@ -43,12 +42,14 @@ in {
         };
         bars = [];
         menu = ''
-          ${pkgs.bemenu}/bin/bemenu-run -m all -H 30 --fn '${builtins.head fonts.fontConfig.names}' --no-exec | xargs swaymsg exec --
+          ${pkgs.bemenu}/bin/bemenu-run -m all -H 30 --fn '${builtins.head fonts.fontConfig.names} 12' --no-exec | xargs swaymsg exec --
         '';
         startup = [
           { always = true; command = "${pkgs.corectrl}/bin/corectrl --minimize-systray"; }
-          { always = true; command = "${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-theme 'Quintom_Snow'"; }
+          { command = "ssh-add < /dev/null"; }
+          { command = "${pkgs.waybar}/bin/waybar"; }
           { command = "${pkgs.mako}/bin/mako"; }
+          { command = "${pkgs.gammastep}/bin/gammastep -l 55.75:37.80"; }
           { command =
             let lockCmd = "'${pkgs.swaylock}/bin/swaylock -f -i ~/.config/nixpkgs/wallpapers/2.jpg'";
             in ''
@@ -59,13 +60,12 @@ in {
                 before-sleep ${lockCmd}
             '';
           }
-          { command = "${pkgs.gammastep}/bin/gammastep -l 55.75:37.80"; }
-          { command = "sleep 2 && ${pkgs.discord}/bin/discord"; }
-          { command = "sleep 2 && ${pkgs.slack}/bin/slack"; }
-          { command = "sleep 2 && ${pkgs.tdesktop}/bin/telegram-desktop"; }
-          { command = "${pkgs.bitwarden}/bin/bitwarden"; }
-          { command = "sleep 2 && ${pkgs.thunderbird}/bin/thunderbird"; }
-          { command = "sleep 2 && ${pkgs.firefox-wayland}/bin/firefox"; }
+          { command = "sleep 1 && ${pkgs.bitwarden}/bin/bitwarden"; }
+          { command = "sleep 1 && ${pkgs.discord}/bin/discord"; }
+          { command = "sleep 1 && ${pkgs.slack}/bin/slack"; }
+          { command = "sleep 1 && QT_QPA_PLATFORMTHEME=gtk3 ${pkgs.tdesktop}/bin/telegram-desktop"; }
+          { command = "sleep 1 && ${pkgs.thunderbird}/bin/thunderbird"; }
+          { command = "sleep 1 && ${pkgs.firefox}/bin/firefox"; }
         ];
         input = {
           "type:keyboard" = {
@@ -118,22 +118,30 @@ in {
 
             "${mod}+Shift+Space" = "floating toggle";
             "${mod}+Space"       = "focus mode_toggle";
+            "${mod}+Tab"         = "focus next";
+            "${mod}+Shift+Tab"   = "focus prev";
 
             "${mod}+1" = "workspace ${ws1}";
             "${mod}+2" = "workspace ${ws2}";
             "${mod}+3" = "workspace ${ws3}";
             "${mod}+4" = "workspace ${ws4}";
             "${mod}+5" = "workspace ${ws5}";
-            "${mod}+6" = "workspace ${ws6}";
-            "${mod}+7" = "workspace ${ws7}";
+            "${mod}+6" = "workspace number 6";
+            "${mod}+7" = "workspace number 7";
+            "${mod}+8" = "workspace number 8";
+            "${mod}+9" = "workspace number 9";
+            "${mod}+0" = "workspace number 10";
 
             "${mod}+Shift+1" = "move container to workspace ${ws1}";
             "${mod}+Shift+2" = "move container to workspace ${ws2}";
             "${mod}+Shift+3" = "move container to workspace ${ws3}";
             "${mod}+Shift+4" = "move container to workspace ${ws4}";
             "${mod}+Shift+5" = "move container to workspace ${ws5}";
-            "${mod}+Shift+6" = "move container to workspace ${ws6}";
-            "${mod}+Shift+7" = "move container to workspace ${ws7}";
+            "${mod}+Shift+6" = "move container to workspace number 6";
+            "${mod}+Shift+7" = "move container to workspace number 7";
+            "${mod}+Shift+8" = "move container to workspace number 8";
+            "${mod}+Shift+9" = "move container to workspace number 9";
+            "${mod}+Shift+0" = "move container to workspace number 10";
 
             "${mod}+h"      = "split h";
             "${mod}+v"      = "split v";
@@ -145,10 +153,10 @@ in {
             "${mod}+s"      = "focus child";
 
             "${mod}+Shift+c" = "reload";
-            "${mod}+Shift+r" = "restart";
-            "${mod}+Shift+v" = ''mode "system:  [r]eboot  [p]oweroff  [l]ogout"'';
+            "${mod}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
 
-            "${mod}+r" = "mode resize";
+            "${mod}+Shift+v" = ''mode "system: [s]uspend [r]eboot [p]oweroff"'';
+            "${mod}+r"       = "mode resize";
 
             "${mod}+p"       = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g- ~/Pictures/screenshot-$(date +%Y%m%d-%H%M).png";
             "${mod}+Shift+p" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | wl-copy";
@@ -165,10 +173,10 @@ in {
             "XF86MonBrightnessDown" = "exec brightnessctl s 10%-";
           };
         modes = {
-          "system:  [r]eboot  [p]oweroff  [l]ogout" = {
-            r      = "exec reboot";
-            p      = "exec poweroff";
-            l      = "exit";
+          "system: [s]uspend [r]eboot [p]oweroff" = {
+            s      = "exec systemctl suspend";
+            r      = "exec systemctl reboot";
+            p      = "exec systemctl poweroff";
             Return = "mode default";
             Escape = "mode default";
           };
@@ -181,39 +189,45 @@ in {
             Escape = "mode default";
           };
         };
+        floating = {
+          criteria = [
+            { app_id = "Alacritty_floating"; }
+            { class  = "install4j"; }
+            { class  = "Steam"; }
+            { app_id = "lutris"; }
+            { class  = "\.exe"; }
+            { title  = "Choose Files"; }
+          ];
+        };
         assigns = {
           "${ws1}"= [
-            { app_id = "^firefox$"; }
+            { app_id = "firefox"; }
+          ];
+          "${ws2}" = [
+            { app_id = "org.telegram.desktop"; }
+            { app_id  = "Slack"; }
+            { class  = "discord"; }
           ];
           "${ws4}" = [
-            { app_id = "^telegramdesktop$"; }
-            { class  = "^Slack$"; }
-            { class  = "^discord$"; }
+            { class = "Bitwarden"; }
+            { app_id = "thunderbird"; }
           ];
           "${ws5}" = [
-            { class = "^Bitwarden$"; }
-            { app_id = "^thunderbird$"; }
-          ];
-          "${ws6}" = [
-            { class = "^Steam$"; }
-            { app_id = "^lutris$"; }
+            { class = "Steam"; }
+            { app_id = "lutris"; }
           ];
         };
         workspaceOutputAssign = lib.mkIf (hostName == "roz-pc") [
           { workspace = ws1; output = "DP-1"; }
-          { workspace = ws2; output = "DP-1"; }
+          { workspace = ws2; output = "HDMI-A-1"; }
           { workspace = ws3; output = "DP-1"; }
           { workspace = ws4; output = "HDMI-A-1"; }
-          { workspace = ws5; output = "HDMI-A-1"; }
-          { workspace = ws6; output = "DP-1"; }
+          { workspace = ws5; output = "DP-1"; }
         ];
       };
       extraConfig = ''
-        for_window [app_id="Alacritty_floating"] floating enable
-        for_window [class="install4j.*"] floating enable
-        for_window [class="Steam"] floating enable
-        for_window [app_id="lutris"] floating enable
-        for_window [class=".*\.exe"] floating enable
+        for_window [title=" - Sharing Indicator$"] kill
+        for_window [title="^Wine System Tray$"] kill 
       '';
     };
  }
