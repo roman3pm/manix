@@ -161,14 +161,20 @@ api.nvim_create_autocmd("FileType", {
   group = nvim_metals_group,
 })
 
-require('lspconfig').gopls.setup {}
+require('lspconfig').gopls.setup {
+  capabilities = capabilities
+}
 
 require('lspconfig').rust_analyzer.setup {
   capabilities = capabilities
 }
 require('lspconfig').tsserver.setup {
-  cmd = { "npx", "--package", "typescript", "--package", "typescript-language-server", "--", "typescript-language-server",
-    "--stdio" },
+  cmd = {
+    "npx",
+    "--package", "typescript",
+    "--package", "typescript-language-server",
+    "--", "typescript-language-server", "--stdio"
+  },
   capabilities = capabilities
 }
 require('lspconfig').sumneko_lua.setup {
