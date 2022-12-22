@@ -1,7 +1,8 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, home-manager, ... }: {
 
   imports = [
     ./hardware-configuration.nix
+    home-manager.nixosModule
   ];
 
   boot = {
@@ -9,11 +10,9 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.kernelModules = [ "amdgpu" "wl" ];
-    kernelPackages = pkgs.linuxPackages_zen;
-    kernelParams = [
-      "amdgpu.ppfeaturemask=0xffffffff"
-    ];
+    initrd.kernelModules = [ "amdgpu" ];
+    kernelPackages = pkgs.master.linuxPackages_zen;
+    kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
   };
   
   nix = {
@@ -26,6 +25,12 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.roz = import ./home.nix;
   };
 
   nixpkgs.config = {
@@ -107,13 +112,13 @@
   time.timeZone = "Europe/Moscow";
   fonts.enableDefaultFonts = true;
 
-  security.pam.services.swaylock = {
-    text = ''
-        auth include login
-    '';
+  security = {
+    pam.services = {
+      swaylock.text = "auth include login";
+    };
+    polkit.enable = true;
+    rtkit.enable = true;
   };
-  security.polkit.enable = true;
-  security.rtkit.enable = true;
 
   programs = {
     corectrl.enable = true;
@@ -130,10 +135,6 @@
     dbus.enable = true;
     pipewire = {
       enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
       pulse.enable = true;
       jack.enable = true;
     };
@@ -180,7 +181,7 @@
     AMD_VULKAN_ICD = "RADV";
   };
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 
 }
 

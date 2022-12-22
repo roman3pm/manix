@@ -3,11 +3,14 @@ local api = vim.api
 local cmd = vim.cmd
 
 vim.g.mapleader = " "
+cmd([[set nowrap]])
 cmd([[set noswapfile]])
+cmd([[set cursorline]])
 cmd([[set splitbelow]])
 cmd([[set splitright]])
 opt.background = "dark"
 opt.mouse = "a"
+opt.clipboard = "unnamedplus"
 
 opt.number = true
 opt.relativenumber = true
@@ -33,10 +36,6 @@ api.nvim_set_keymap('n', '<leader>ff', [[<Cmd>lua require('telescope.builtin').f
 api.nvim_set_keymap('n', '<leader>fg', [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true })
 api.nvim_set_keymap('n', '<leader>fb', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true })
 api.nvim_set_keymap('n', '<leader>fh', [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true })
-
-require("diffview").setup {
-  enhanced_diff_hl = true
-}
 
 require('gitsigns').setup {
   attach_to_untracked = false,
@@ -81,19 +80,6 @@ require('gitsigns').setup {
   end
 }
 
-require('nvim-cursorline').setup {
-  cursorline = {
-    enable = true,
-    timeout = 300,
-    number = false,
-  },
-  cursorword = {
-    enable = true,
-    min_length = 3,
-    hl = { underline = true },
-  }
-}
-
 require("indent_blankline").setup {
   show_end_of_line = true,
 }
@@ -130,7 +116,39 @@ require('lualine').setup {
   }
 }
 
-require('nvim-tree').setup {}
+require('nvim-tree').setup {
+  sync_root_with_cwd = true,
+  view = {
+    preserve_window_proportions = true
+  },
+  renderer = {
+    full_name = true,
+    highlight_git = true,
+    group_empty = true,
+    special_files = {},
+    symlink_destination = false,
+    indent_markers = {
+      enable = true
+    },
+    icons = {
+      show = {
+        folder = false,
+        folder_arrow = false,
+        git = false
+      },
+    },
+  },
+  update_focused_file = {
+    enable = true
+  },
+  filters = {
+    custom = {
+      "^.git$",
+      "^.bloop$",
+      "^.metals$"
+    }
+  }
+}
 
 local fn = vim.fn
 

@@ -15,7 +15,7 @@ in {
   programs.bat = {
     enable = true;
     config = {
-      theme = "Coldark-Dark";
+      theme = "DarkNeon";
     };
   };
 
@@ -23,7 +23,8 @@ in {
     enable = true;
     initExtraBeforeCompInit = "fpath+=(${pkgs.bloop}/share/zsh/site-functions)";
     shellAliases = {
-      nh  = "cd ~/.config/nixpkgs";
+      ll  = "LC_COLLATE=C ls -la --group-directories-first";
+      nh  = "cd $HOME/Projects/manix";
       nfu = "nix flake update";
       nrs = "nixos-rebuild switch --use-remote-sudo --flake '.#'";
       ngc = "sudo nix-collect-garbage -d";

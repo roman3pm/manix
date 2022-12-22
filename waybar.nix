@@ -31,8 +31,9 @@ let
 
     "cpu" = {
       interval = 1;
-      tooltip = false;
       format = " {usage}%";
+      min-length = 5;
+      tooltip = false;
     };
 
     "sway/language" = {
@@ -56,13 +57,13 @@ let
     };
 
     "sway/mode" = {
-      format = " {}";
+      format = "{}";
       tooltip = false;
     };
 
     "sway/window" = {
       format = "{}";
-      max-length = 50;
+      max-length = 80;
       all-outputs = true;
       tooltip = false;
     };
@@ -96,12 +97,15 @@ let
     "pulseaudio" = {
       scroll-step = 5;
       format = "{icon}{volume}%";
+      min-length = 6;
       format-bluetooth = "{icon}{volume}%";
       format-muted = " mute";
       format-icons = {
         default = [" " " "];
       };
       on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+      on-click-right = "${pkgs.easyeffects}/bin/easyeffects";
+      ignored-sinks = ["Easy Effects Sink"];
     };
 
     "temperature#cpu" = {
@@ -123,16 +127,6 @@ let
       spacing = 5;
     };
 
-    "custom/openrazer" = {
-      exec = pkgs.writeShellScript "openrazer" ''
-        SERIAL=$(polychromatic-cli -l | grep -o -E '[A-Z0-9]{15}')
-        if [[ $SERIAL == UNKWN* ]]; then echo ""; else echo " Razer"; fi
-      '';
-      on-click = "${pkgs.polychromatic}/bin/polychromatic-controller";
-      on-click-right = "systemctl --user restart openrazer-daemon.service";
-      restart-interval = 3;
-      tooltip = false;
-    };
   };
 in {
   programs.waybar = {
@@ -155,7 +149,6 @@ in {
           "network"
           "pulseaudio"
           "battery"
-          "custom/openrazer"
           "sway/language"
           "tray"
           "idle_inhibitor"

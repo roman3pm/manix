@@ -32,12 +32,15 @@
     zathura
     steam-run
     gamemode
+    vkbasalt
 
     jre8
     jdk8
     gcc 
+    go
     nodejs-14_x
     (yarn.override { nodejs = nodejs-14_x; })
+    gopls
     rust-analyzer
     sumneko-lua-language-server
     (sbt.override { jre = jre8; })
@@ -47,7 +50,6 @@
     (coursier.override { jre = jre8; })
 
     via
-    polychromatic
     firefox
     thunderbird
     tdesktop
@@ -61,13 +63,16 @@
     grim
     wf-recorder
     wl-clipboard
-    swaylock
+    swaylock-effects
     swayidle
     libnotify
     brightnessctl
+    playerctl
     gammastep
     pavucontrol
+    pamixer
     bemenu
+    xdg-utils
 
     nerdfonts
     quintom-cursor-theme
@@ -75,8 +80,11 @@
     vimix-icon-theme
   ];
   
-  home.sessionVariables = {
+  home.sessionVariables = rec {
     EDITOR = "vim";
+    VISUAL = "vim";
+    BROWSER = "firefox";
+    TERMINAL = "alacritty";
     SSH_ASKPASS = pkgs.writeShellScript "ssh_askpass" "cat $HOME/.secret/sshpass/ssh_pass";
   };
 
@@ -97,20 +105,11 @@
   };
 
   xdg = {
-    dataFile."applications/mimeapps.list".force = true;
-    configFile."mimeapps.list".force = true;
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "x-scheme-handler/http" = "firefox.desktop";
-        "x-scheme-handler/https" = "firefox.desktop";
-        "application/xhtml+xml" = "firefox.desktop";
-        "application/vnd.mozilla.xul+xml" = "firefox.desktop";
-        "text/html" = "firefox.desktop";
-        "application/pdf" = "firefox.desktop";
-      };
-    };
+    enable = true;
+    userDirs.enable = true;
   };
 
-  home.stateVersion = "22.11";
+  services.easyeffects.enable = true;
+
+  home.stateVersion = "23.05";
 }

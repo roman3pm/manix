@@ -1,12 +1,21 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: "Hack Nerd Font";
+  font-family: "DejaVuSansMono Nerd Font";
   font-size: 16px;
   min-height: 0;
 }
 
-#temperature, #cpu, #memory, #network, #pulseaudio, #battery, #language, #custom-openrazer, #idle_inhibitor, #clock {
+#mode,
+#temperature,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#battery,
+#language,
+#idle_inhibitor,
+#clock {
   color: darkgray;
   padding: 5px 8px 4px;
   margin-bottom: 2px;
@@ -43,9 +52,7 @@ tooltip label {
 
 #mode {
   color: white;
-  padding: 5px 8px 4px;
   background: rgba(100, 114, 125, 0.5);
-  border-bottom: 2px solid white;
 }
 
 #idle_inhibitor.activated {
@@ -55,31 +62,4 @@ tooltip label {
 #clock {
   color: white;
   background: rgba(100, 114, 125, 0.5);
-}
-
-#battery {
-  background: #ffffff;
-  color: black;
-}
-
-#battery.charging {
-  color: white;
-  background: #26A65B;
-}
-
-@keyframes blink {
-  to {
-    background: #ffffff;
-    color: black;
-  }
-}
-
-#battery.warning:not(.charging) {
-  background: #f53c3c;
-  color: white;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
 }

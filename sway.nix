@@ -11,6 +11,27 @@ in {
   wayland.windowManager.sway =
     let
       terminalCmd = "${pkgs.alacritty}/bin/alacritty";
+      lockCmd = ''
+        ${pkgs.swaylock-effects}/bin/swaylock -f \
+        --screenshots \
+        --clock \
+        --indicator \
+        --indicator-radius 100 \
+        --indicator-thickness 7 \
+        --effect-blur 7x5 \
+        --effect-vignette 0.8:0.8 \
+        --text-color a9a9a9 \
+        --ring-color bb00cc \
+        --line-color 00000000 \
+        --inside-color 00000088 \
+        --separator-color 00000000 \
+        --layout-bg-color 00000088 \
+        --layout-text-color a9a9a9 \
+        --grace 5 \
+        --fade-in 0.2 \
+      '';
+      modeSystem = " system: [s]uspend [r]eboot [p]oweroff";
+      modeResize = " resize";
     in {
       enable = true;
       wrapperFeatures.gtk = true;
@@ -26,7 +47,6 @@ in {
         # Fix for some Java AWT applications (e.g. Android Studio),
         # use this if they aren't displayed properly:
         export _JAVA_AWT_WM_NONREPARENTING=1
-        export NIXOS_OZONE_WL=1
       '';
       config = {
         fonts = fonts.fontConfig;
@@ -49,15 +69,13 @@ in {
           { command = "ssh-add < /dev/null"; }
           { command = "${pkgs.waybar}/bin/waybar"; }
           { command = "${pkgs.mako}/bin/mako"; }
-          { command = "${pkgs.gammastep}/bin/gammastep -l 55.75:37.80"; }
-          { command =
-            let lockCmd = "'${pkgs.swaylock}/bin/swaylock -f -i ~/.config/nixpkgs/wallpapers/2.jpg'";
-            in ''
-                ${pkgs.swayidle}/bin/swayidle -w \
-                timeout 600 ${lockCmd} \
-                timeout 1200 'swaymsg "output * dpms off"' \
-                resume 'swaymsg "output * dpms on"' \
-                before-sleep ${lockCmd}
+          { command = "${pkgs.gammastep}/bin/gammastep -l 55.75:37.80 -b 1:0.8"; }
+          { command = ''
+              ${pkgs.swayidle}/bin/swayidle -w \
+              timeout 600 '${lockCmd}' \
+              timeout 1200 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+              before-sleep '${lockCmd}'
             '';
           }
           { command = "sleep 1 && ${pkgs.bitwarden}/bin/bitwarden"; }
@@ -82,7 +100,7 @@ in {
         };
         output = {
           "*" = {
-            bg = "~/.config/nixpkgs/wallpapers/2.jpg fill";
+            bg = "${./wallpapers/2.jpg} fill";
           };
           "DP-1" = {
             pos = "0 0";
@@ -149,38 +167,41 @@ in {
             "${mod}+comma"  = "layout stacking";
             "${mod}+period" = "layout tabbed";
             "${mod}+slash"  = "layout toggle split";
-            "${mod}+a"      = "focus parent";
-            "${mod}+s"      = "focus child";
 
             "${mod}+Shift+c" = "reload";
             "${mod}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
+            "${mod}+p"       = "exec swaymsg output 'HDMI-A-1' toggle";
 
-            "${mod}+Shift+v" = ''mode "system: [s]uspend [r]eboot [p]oweroff"'';
-            "${mod}+r"       = "mode resize";
+            "${mod}+Shift+v" = "mode '${modeSystem}'";
+            "${mod}+r"       = "mode '${modeResize}'";
 
-            "${mod}+p"       = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g- ~/Pictures/screenshot-$(date +%Y%m%d-%H%M).png";
-            "${mod}+Shift+p" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | wl-copy";
-            "${mod}+l"       = "exec ${pkgs.swaylock}/bin/swaylock -i ~/.config/nixpkgs/wallpapers/2.jpg";
+            "${mod}+s"       = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png";
+            "${mod}+Shift+s" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | wl-copy -t image/png";
+            "${mod}+l"       = "exec '${lockCmd}'";
             "${mod}+k"       = "exec ${pkgs.mako}/bin/makoctl invoke";
             "${mod}+Shift+k" = "exec ${pkgs.mako}/bin/makoctl dismiss -a";
 
-            "XF86AudioMute"        = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
-            "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
-            "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
-            "XF86AudioMicMute"     = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+            "XF86AudioPlay" = "exec playerctl play-pause";
+            "XF86AudioNext" = "exec playerctl next";
+            "XF86AudioPrev" = "exec playerctl previous";
+
+            "XF86AudioMute"        = "exec pamixer -t";
+            "XF86AudioRaiseVolume" = "exec pamixer -i 5";
+            "XF86AudioLowerVolume" = "exec pamixer -d 5";
+            "XF86AudioMicMute"     = "exec pamixer --default-source -t";
 
             "XF86MonBrightnessUp"   = "exec brightnessctl s +10%";
             "XF86MonBrightnessDown" = "exec brightnessctl s 10%-";
           };
         modes = {
-          "system: [s]uspend [r]eboot [p]oweroff" = {
+          "${modeSystem}" = {
             s      = "exec systemctl suspend";
             r      = "exec systemctl reboot";
             p      = "exec systemctl poweroff";
             Return = "mode default";
             Escape = "mode default";
           };
-          resize = {
+          "${modeResize}" = {
             Left   = "resize shrink width";
             Right  = "resize grow width";
             Down   = "resize shrink height";
@@ -192,11 +213,15 @@ in {
         floating = {
           criteria = [
             { app_id = "Alacritty_floating"; }
-            { class  = "install4j"; }
-            { class  = "Steam"; }
             { app_id = "lutris"; }
+            { app_id = "pavucontrol"; }
+            { app_id = "com.github.wwmm.easyeffects"; }
+            { app_id = "imv"; }
+            { app_id = "mpv"; }
+            { class  = "Steam"; }
             { class  = "\.exe"; }
-            { title  = "Choose Files"; }
+            { class  = "install4j"; }
+            { title  = "^Choose Files$"; }
           ];
         };
         assigns = {
@@ -205,7 +230,7 @@ in {
           ];
           "${ws2}" = [
             { app_id = "org.telegram.desktop"; }
-            { app_id  = "Slack"; }
+            { class  = "Slack"; }
             { class  = "discord"; }
           ];
           "${ws4}" = [
@@ -226,8 +251,8 @@ in {
         ];
       };
       extraConfig = ''
-        for_window [title=" - Sharing Indicator$"] kill
+        for_window [title=" — Sharing Indicator$"] kill
         for_window [title="^Wine System Tray$"] kill 
       '';
     };
- }
+}
