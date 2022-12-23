@@ -24,11 +24,12 @@
     thefuck
     ripgrep
     wireguard-tools
+    hurl
     wget
     unar
     unzip
     p7zip
-    ranger
+    lf
     zathura
     steam-run
     gamemode

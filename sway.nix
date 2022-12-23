@@ -94,8 +94,6 @@ in {
           "type:pointer" = {
             accel_profile = "flat";
             pointer_accel = "0";
-            scroll_method = "on_button_down";
-            scroll_button = "274";
           };
         };
         output = {
