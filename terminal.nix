@@ -19,6 +19,22 @@ in {
     };
   };
 
+  programs.lf = {
+    enable = true;
+    settings = {
+      hidden = true;
+      icons = true;
+      preview = true;
+    };
+    previewer.source = pkgs.writeShellScript "pv.sh" ''
+      #!/bin/sh
+      case "$1" in
+          *) bat --color always "$1";;
+      esac
+    '';
+  };
+  xdg.configFile."lf/icons".source = "${pkgs.lf}/etc/icons.example";
+
   programs.zsh = {
     enable = true;
     initExtraBeforeCompInit = "fpath+=(${pkgs.bloop}/share/zsh/site-functions)";

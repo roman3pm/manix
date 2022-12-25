@@ -29,7 +29,6 @@
     unar
     unzip
     p7zip
-    lf
     zathura
     steam-run
     gamemode
@@ -108,6 +107,13 @@
   xdg = {
     enable = true;
     userDirs.enable = true;
+    mime.enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "application/pdf" = "zathura.desktop";
+      };
+    };
   };
 
   services.easyeffects.enable = true;
