@@ -17,7 +17,7 @@
       enable = true;
       options = {
         side-by-side = true;
-        syntax-theme = "DarkNeon";
+        syntax-theme = "tokyonight";
         dark = true;
         paging = "never";
       };

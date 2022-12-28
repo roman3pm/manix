@@ -13,14 +13,15 @@
   outputs = inputs@{ nixpkgs, nixpkgs-master, ... }:
     let
       system = "x86_64-linux";
+      overlays = import ./overlays.nix inputs system;
     in {
     nixosConfigurations = {
       "roz-pc" = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = inputs;
-        modules = [ 
-          (import ./overlay.nix { inherit inputs system; })
+        modules = [
           ./configuration.nix
+          { nixpkgs.overlays = [ overlays ]; }
         ];
       };
     };

@@ -214,11 +214,8 @@ in {
             { app_id = "lutris"; }
             { app_id = "pavucontrol"; }
             { app_id = "com.github.wwmm.easyeffects"; }
-            { app_id = "imv"; }
-            { app_id = "mpv"; }
             { class  = "Steam"; }
             { class  = "\.exe"; }
-            { class  = "install4j"; }
             { title  = "^Choose Files$"; }
           ];
         };

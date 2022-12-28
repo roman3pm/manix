@@ -108,10 +108,23 @@
     enable = true;
     userDirs.enable = true;
     mime.enable = true;
+    dataFile."applications/mimeapps.list".force = true;
+    configFile."mimeapps.list".force = true;
+    desktopEntries = {
+      nvim-alacritty = {
+        name = "Neovim";
+        genericName = "Text Editor";
+        exec = "alacritty --title Neovim --class nvim -e nvim %F";
+        icon = "nvim";
+        terminal = false;
+        mimeType = [ "text/plain" ];
+      };
+    };
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "application/pdf" = "zathura.desktop";
+        "text/plain" = "nvim-alacritty.desktop";
+        "application/pdf" = "org.pwmt.zathura.desktop";
       };
     };
   };
