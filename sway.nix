@@ -12,14 +12,10 @@ in {
     let
       terminalCmd = "${pkgs.alacritty}/bin/alacritty";
       lockCmd = ''
-        ${pkgs.swaylock-effects}/bin/swaylock -f \
-        --screenshots \
-        --clock \
-        --indicator \
-        --indicator-radius 100 \
-        --indicator-thickness 7 \
-        --effect-blur 7x5 \
-        --effect-vignette 0.8:0.8 \
+        ${pkgs.swaylock}/bin/swaylock -f \
+        -i ${./wallpapers/mox.jpg} \
+        --indicator-idle-visible \
+        --indicator-thickness 6 \
         --text-color a9a9a9 \
         --ring-color bb00cc \
         --line-color 00000000 \
@@ -27,8 +23,6 @@ in {
         --separator-color 00000000 \
         --layout-bg-color 00000088 \
         --layout-text-color a9a9a9 \
-        --grace 5 \
-        --fade-in 0.2 \
       '';
       modeSystem = " system: [s]uspend [r]eboot [p]oweroff";
       modeResize = " resize";
@@ -98,7 +92,7 @@ in {
         };
         output = {
           "*" = {
-            bg = "${./wallpapers/2.jpg} fill";
+            bg = "${./wallpapers/mox.jpg} fill";
           };
           "DP-1" = {
             pos = "0 0";

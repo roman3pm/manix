@@ -1,5 +1,4 @@
 { config, lib, pkgs, home-manager, ... }: {
-
   imports = [
     ./hardware-configuration.nix
     home-manager.nixosModule
@@ -11,8 +10,7 @@
       efi.canTouchEfiVariables = true;
     };
     initrd.kernelModules = [ "amdgpu" ];
-    kernelPackages = pkgs.master.linuxPackages_zen;
-    kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
+    kernelPackages = pkgs.linuxPackages_zen;
   };
   
   nix = {
@@ -35,11 +33,6 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "steam"
-      "steam-original"
-      "steam-runtime"
-    ];
   };
 
   networking = {
@@ -92,10 +85,6 @@
         rocm-opencl-runtime
       ];
     };
-    openrazer = { 
-      enable = true;
-      users = [ "roz" ];
-    };
     xpadneo.enable = true;
   };
 
@@ -124,11 +113,6 @@
     corectrl.enable = true;
     dconf.enable = true;
     ssh.startAgent = true;
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-    };
   };
 
   services = {
@@ -182,6 +166,5 @@
   };
 
   system.stateVersion = "23.05";
-
 }
 

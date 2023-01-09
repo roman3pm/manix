@@ -38,16 +38,17 @@
     jdk8
     gcc 
     go
+    rustup
     nodejs-14_x
     (yarn.override { nodejs = nodejs-14_x; })
-    gopls
-    rust-analyzer
-    sumneko-lua-language-server
     (sbt.override { jre = jre8; })
     (maven.override { jdk = jdk8; })
     (bloop.override { jre = jre8; })
-    (metals.override { jre = jre8; })
     (coursier.override { jre = jre8; })
+    (metals.override { jre = jre8; })
+    gopls
+    rust-analyzer
+    sumneko-lua-language-server
 
     via
     firefox
@@ -56,6 +57,7 @@
     slack
     (discord.override { withOpenASAR = true; })
     bitwarden
+    steam
     lutris
     libreoffice-fresh
 
@@ -63,7 +65,7 @@
     grim
     wf-recorder
     wl-clipboard
-    swaylock-effects
+    swaylock
     swayidle
     libnotify
     brightnessctl

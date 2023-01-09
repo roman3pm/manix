@@ -168,6 +168,7 @@ require('lspconfig').gopls.setup {
 require('lspconfig').rust_analyzer.setup {
   capabilities = capabilities
 }
+
 require('lspconfig').tsserver.setup {
   cmd = {
     "npx",
@@ -177,6 +178,7 @@ require('lspconfig').tsserver.setup {
   },
   capabilities = capabilities
 }
+
 require('lspconfig').sumneko_lua.setup {
   capabilities = capabilities,
   settings = {
