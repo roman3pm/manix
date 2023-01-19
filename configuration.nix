@@ -37,11 +37,7 @@
 
   networking = {
     hostName = "roz-pc";
-    useDHCP = true;
-    wireless = {
-      enable = true;
-      userControlled.enable = true;
-    };
+    networkmanager.enable = true;
   };
 
   networking.wg-quick.interfaces = {
@@ -65,7 +61,7 @@
     groups.plugdev = {};
     users.roz = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "video" "audio" "plugdev" "corectrl" ];
+      extraGroups = [ "wheel" "networkmanager" "video" "audio" "plugdev" "corectrl" ];
     };
   };
 
