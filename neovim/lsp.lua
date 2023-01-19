@@ -44,6 +44,7 @@ end
 
 local luasnip = require("luasnip")
 local cmp = require('cmp')
+local lspkind = require('lspkind')
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -85,7 +86,27 @@ cmp.setup({
     { name = 'path' }
   }, {
     { name = 'buffer' },
-  })
+  }),
+  window = {
+    completion = {
+      border = 'rounded',
+      scrollbar = '║',
+    },
+    documentation = {
+      border = nil,
+      scrollbar = '',
+    },
+  },
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = 'symbol_text',
+      maxwidth = 80,
+      ellipsis_char = '...',
+      before = function(entry, vim_item)
+        return vim_item
+      end
+    })
+  }
 })
 
 cmp.setup.filetype('gitcommit', {
@@ -117,9 +138,8 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 require("lsp_signature").setup({
   bind = true,
   handler_opts = {
-    border = "none"
-  },
-  padding = ' '
+    border = "rounded"
+  }
 })
 
 local dap = require("dap")

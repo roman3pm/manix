@@ -46,7 +46,7 @@ in {
         fonts = fonts.fontConfig;
         gaps = {
           inner = 6;
-          outer = 3;
+          outer = 2;
         };
         terminal = terminalCmd;
         modifier = "Mod4";
@@ -88,6 +88,7 @@ in {
           "type:pointer" = {
             accel_profile = "flat";
             pointer_accel = "0";
+            scroll_factor = "2";
           };
         };
         output = {
@@ -201,6 +202,9 @@ in {
             Return = "mode default";
             Escape = "mode default";
           };
+        };
+        window = {
+          titlebar = false;
         };
         floating = {
           criteria = [

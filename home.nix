@@ -76,7 +76,7 @@
     bemenu
     xdg-utils
 
-    nerdfonts
+    (nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
     quintom-cursor-theme
     materia-theme
     vimix-icon-theme

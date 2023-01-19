@@ -20,6 +20,13 @@
         syntax-theme = "tokyonight";
         dark = true;
         paging = "never";
+        features = "decorations";
+        decorations = {
+          file-style = "omit";
+          hunk-header-decoration-style = "blue box";
+          hunk-header-file-style = "red";
+          hunk-header-style = "file line-number syntax";
+        };
       };
     };
   };

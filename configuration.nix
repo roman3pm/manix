@@ -37,11 +37,10 @@
 
   networking = {
     hostName = "roz-pc";
+    useDHCP = true;
     wireless = {
       enable = true;
-      networks = {
-        MGTS-GPON5-366B = { psk = "DPRT4669"; };
-      };
+      userControlled.enable = true;
     };
   };
 
@@ -66,7 +65,7 @@
     groups.plugdev = {};
     users.roz = {
       isNormalUser = true;
-      extraGroups = [ "corectrl" "wheel" "plugdev" "video" "audio" ];
+      extraGroups = [ "wheel" "video" "audio" "plugdev" "corectrl" ];
     };
   };
 

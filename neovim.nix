@@ -34,6 +34,7 @@
       cmp-treesitter
       cmp-nvim-lua
       cmp-nvim-lsp
+      lspkind-nvim
       lsp_signature-nvim
     ];
     extraConfig = ''

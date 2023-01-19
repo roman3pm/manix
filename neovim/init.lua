@@ -30,8 +30,14 @@ opt.smartcase = true
 require("tokyonight").setup {
   transparent = true
 }
+vim.o.termguicolors = true
 cmd("colorscheme tokyonight")
 
+require('telescope').setup {
+  defaults = {
+    path_display = { "smart" }
+  }
+}
 api.nvim_set_keymap('n', '<leader>ff', [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true })
 api.nvim_set_keymap('n', '<leader>fg', [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true })
 api.nvim_set_keymap('n', '<leader>fb', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true })
@@ -40,6 +46,9 @@ api.nvim_set_keymap('n', '<leader>fh', [[<Cmd>lua require('telescope.builtin').h
 require('gitsigns').setup {
   attach_to_untracked = false,
   current_line_blame = true,
+  preview_config = {
+    border = "rounded"
+  },
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 

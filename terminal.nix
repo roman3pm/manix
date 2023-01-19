@@ -27,6 +27,34 @@ in {
     };
   };
 
+  programs.zellij.enable = true;
+  xdg.configFile."zellij/config.kdl".text = ''
+    default_shell "zsh"
+    keybinds {
+      unbind "Ctrl b" "Ctrl o"
+      normal {
+        bind "Alt f" { ToggleFocusFullscreen; }
+        bind "Alt x" { CloseFocus; }
+      }
+    }
+    theme "tokyo-night"
+    themes {
+      tokyo-night {
+        fg 169 177 214
+        bg 26 27 38
+        black 56 62 90
+        red 249 51 87
+        green 158 206 106
+        yellow 224 175 104
+        blue 122 162 247
+        magenta 187 154 247
+        cyan 42 195 222
+        white 192 202 245
+        orange 255 158 100
+      }
+    }
+  '';
+
   programs.lf = {
     enable = true;
     settings = {
@@ -73,6 +101,9 @@ in {
   in {
     enable = true;
     settings = {
+      env = {
+        TERM = "xterm-256color";
+      };
       window = {
         opacity = 0.90;
         dimensions = {
