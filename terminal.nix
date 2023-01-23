@@ -3,13 +3,40 @@ let
   fonts = import ./fonts.nix;
 in {
 
-  programs.bash = {
+  programs.nix-index.enable = true;
+
+  programs.fish = {
     enable = true;
-    profileExtra = ''
-      if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+    loginShellInit = ''
+      if test -z "$DISPLAY"
+        and test "$XDG_VTNR" -eq 1
         exec sway
-      fi
+      end
     '';
+    shellInit = ''
+      set fish_greeting
+      fish_vi_key_bindings
+    '';
+    shellAbbrs = {
+      ll  = "LC_COLLATE=C ls -la --group-directories-first";
+      nh  = "cd $HOME/Projects/manix";
+      nfu = "nix flake update";
+      nrs = "nixos-rebuild switch --use-remote-sudo --flake '.#'";
+      ngc = "sudo nix-collect-garbage -d";
+      ns  = "nix search nixpkgs";
+    };
+    functions = {
+      prompt_hostname = {
+        body = ''
+          set -l my_hostname $hostname
+          if string match -rq '/nix/store' "$PATH"
+            set my_hostname "nix-shell"
+          end
+
+          string replace -r "\..*" "" $my_hostname
+        '';
+      };
+    };
   };
 
   programs.bat = {
@@ -29,7 +56,7 @@ in {
 
   programs.zellij.enable = true;
   xdg.configFile."zellij/config.kdl".text = ''
-    default_shell "zsh"
+    default_shell "fish"
     keybinds {
       unbind "Ctrl b" "Ctrl o"
       normal {
@@ -70,31 +97,6 @@ in {
     '';
   };
   xdg.configFile."lf/icons".source = "${pkgs.lf}/etc/icons.example";
-
-  programs.zsh = {
-    enable = true;
-    initExtraBeforeCompInit = "fpath+=(${pkgs.bloop}/share/zsh/site-functions)";
-    shellAliases = {
-      ll  = "LC_COLLATE=C ls -la --group-directories-first";
-      nh  = "cd $HOME/Projects/manix";
-      nfu = "nix flake update";
-      nrs = "nixos-rebuild switch --use-remote-sudo --flake '.#'";
-      ngc = "sudo nix-collect-garbage -d";
-      ns  = "nix search nixpkgs";
-    };
-    history = {
-      size = 10000;
-      path = "${config.xdg.dataHome}/zsh/history";
-    };
-    oh-my-zsh = {
-      enable  = true;
-      plugins = [ "git" "thefuck" ];
-      theme   = "bira";
-    };
-    initExtra = ''
-      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-    '';
-  };
 
   programs.alacritty = let
     fontName = builtins.head fonts.fontConfig.names;
@@ -147,7 +149,7 @@ in {
         normal = { family = fontName; };
         size = 12;
       };
-      shell.program = "${pkgs.zsh}/bin/zsh";
+      shell.program = "${pkgs.fish}/bin/fish";
     };
   };
 

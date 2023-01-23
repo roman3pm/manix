@@ -34,8 +34,6 @@
     gamemode
     vkbasalt
 
-    jre8
-    jdk8
     gcc 
     go
     rustup
@@ -77,10 +75,13 @@
     xdg-utils
 
     (nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
-    quintom-cursor-theme
-    materia-theme
-    vimix-icon-theme
+    yaru-theme
   ];
+
+  programs.java = {
+    enable = true;
+    package = pkgs.jdk11;
+  };
   
   home.sessionVariables = rec {
     EDITOR = "vim";
@@ -92,13 +93,13 @@
 
   fonts.fontconfig.enable = true;
 
-  home.file.".icons/default".source = "${pkgs.quintom-cursor-theme}/share/icons/Quintom_Snow";
+  home.file.".icons/default".source = "${pkgs.yaru-theme}/share/icons/Yaru";
 
   gtk = {
     enable = true;
-    cursorTheme.name = "Quintom_Snow";
-    iconTheme.name = "Vimix-Doder-dark";
-    theme.name = "Materia-dark-compact";
+    cursorTheme.name = "Yaru";
+    iconTheme.name = "Yaru-blue-dark";
+    theme.name = "Yaru-blue-dark";
   };
 
   qt = {

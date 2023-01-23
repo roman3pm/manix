@@ -8,9 +8,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-master, ... }:
+  outputs = inputs@{ nixpkgs, nixpkgs-master, home-manager, nix-index-database, ... }:
     let
       system = "x86_64-linux";
       overlays = import ./overlays.nix inputs system;
@@ -21,7 +25,23 @@
         specialArgs = inputs;
         modules = [
           ./configuration.nix
-          { nixpkgs.overlays = [ overlays ]; }
+          {
+            nixpkgs = {
+              overlays = [ overlays ];
+              config.allowUnfree = true;
+            };
+          }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.roz = import ./home.nix;
+              sharedModules = [
+                nix-index-database.hmModules.nix-index
+              ];
+            };
+          }
         ];
       };
     };

@@ -1,7 +1,6 @@
-{ config, lib, pkgs, home-manager, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
-    home-manager.nixosModule
   ];
 
   boot = {
@@ -23,16 +22,6 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-  };
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.roz = import ./home.nix;
-  };
-
-  nixpkgs.config = {
-    allowUnfree = true;
   };
 
   networking = {
@@ -62,6 +51,7 @@
     users.roz = {
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" "video" "audio" "plugdev" "corectrl" ];
+      shell = pkgs.fish;
     };
   };
 
@@ -105,6 +95,7 @@
   };
 
   programs = {
+    fish.enable = true;
     corectrl.enable = true;
     dconf.enable = true;
     ssh.startAgent = true;
