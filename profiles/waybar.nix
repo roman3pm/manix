@@ -154,7 +154,7 @@ in {
           "clock#date"
           "clock#time"
         ];
-      } // lib.opionalAttrs(config.device == "roz-pc") {
+      } // lib.optionalAttrs(config.device == "roz-pc") {
         output = "DP-1";
       })
       (modules // {
