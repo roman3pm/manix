@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  programs.mako = {
+  home-manager.users.roz.programs.mako = {
     enable = true;
     anchor = "bottom-right";
     font = "DejaVu Sans 9";

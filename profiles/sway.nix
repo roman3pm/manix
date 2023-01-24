@@ -1,16 +1,19 @@
 { config, pkgs, lib, ... }:
 let
   fonts = import ./fonts.nix;
-  hostName = "roz-pc";
   ws1 = "1:http";
   ws2 = "2:chat";
   ws3 = "3:code";
   ws4 = "4:mail";
   ws5 = "5:game";
 in {
-  wayland.windowManager.sway =
+  home-manager.users.roz.wayland.windowManager.sway =
     let
-      terminalCmd = "${pkgs.alacritty}/bin/alacritty";
+      terminal = "${pkgs.alacritty}/bin/alacritty";
+      modifier = "Mod4";
+      menu = ''
+        ${pkgs.bemenu}/bin/bemenu-run -m all -H 30 --fn '${builtins.head fonts.fontConfig.names} 12' --no-exec | xargs swaymsg exec --
+      '';
       lockCmd = ''
         ${pkgs.swaylock}/bin/swaylock -f \
         -i ${./wallpapers/mox.jpg} \
@@ -43,21 +46,17 @@ in {
         export _JAVA_AWT_WM_NONREPARENTING=1
       '';
       config = {
+        inherit terminal modifier menu;
         fonts = fonts.fontConfig;
         gaps = {
           inner = 6;
           outer = 2;
         };
-        terminal = terminalCmd;
-        modifier = "Mod4";
         focus = {
           followMouse = "no";
           mouseWarping = false;
         };
         bars = [];
-        menu = ''
-          ${pkgs.bemenu}/bin/bemenu-run -m all -H 30 --fn '${builtins.head fonts.fontConfig.names} 12' --no-exec | xargs swaymsg exec --
-        '';
         startup = [
           { always = true; command = "${pkgs.corectrl}/bin/corectrl --minimize-systray"; }
           { command = "ssh-add < /dev/null"; }
@@ -82,7 +81,7 @@ in {
         input = {
           "type:keyboard" = {
             xkb_layout = "us,ru";
-            xkb_options = "grp:shift_caps_toggle";
+            xkb_options = if config.device == "roz-pc" then "grp:shift_caps_toggle" else "grp:lctrl_toggle,ctrl:nocaps";
           };
           "type:touchpad" = { tap = "enabled"; };
           "type:pointer" = {
@@ -95,6 +94,7 @@ in {
           "*" = {
             bg = "${./wallpapers/mox.jpg} fill";
           };
+        } // lib.optionalAttrs (config.device == "roz-pc") {
           "DP-1" = {
             pos = "0 0";
             mode = "2560x1440@144Hz";
@@ -107,85 +107,81 @@ in {
           };
         };
         bindkeysToCode = true;
-        keybindings =
-          let
-            mod = config.wayland.windowManager.sway.config.modifier;
-            inherit (config.wayland.windowManager.sway.config) menu terminal;
-          in {
-            "${mod}+d"            = "exec ${menu}";
-            "${mod}+Return"       = "exec ${terminal}";
-            "${mod}+Shift+Return" = "exec ${terminal} --class Alacritty_floating";
-            "${mod}+Shift+q"      = "kill";
+        keybindings = {
+          "${modifier}+d"            = "exec ${menu}";
+          "${modifier}+Return"       = "exec ${terminal}";
+          "${modifier}+Shift+Return" = "exec ${terminal} --class Alacritty_floating";
+          "${modifier}+Shift+q"      = "kill";
 
-            "${mod}+Left"  = "focus left";
-            "${mod}+Down"  = "focus down";
-            "${mod}+Up"    = "focus up";
-            "${mod}+Right" = "focus right";
+          "${modifier}+Left"  = "focus left";
+          "${modifier}+Down"  = "focus down";
+          "${modifier}+Up"    = "focus up";
+          "${modifier}+Right" = "focus right";
 
-            "${mod}+Shift+Left"  = "move left";
-            "${mod}+Shift+Down"  = "move down";
-            "${mod}+Shift+Up"    = "move up";
-            "${mod}+Shift+Right" = "move right";
+          "${modifier}+Shift+Left"  = "move left";
+          "${modifier}+Shift+Down"  = "move down";
+          "${modifier}+Shift+Up"    = "move up";
+          "${modifier}+Shift+Right" = "move right";
 
-            "${mod}+Shift+Space" = "floating toggle";
-            "${mod}+Space"       = "focus mode_toggle";
-            "${mod}+Tab"         = "focus next";
-            "${mod}+Shift+Tab"   = "focus prev";
+          "${modifier}+Shift+Space" = "floating toggle";
+          "${modifier}+Space"       = "focus mode_toggle";
+          "${modifier}+Tab"         = "focus next";
+          "${modifier}+Shift+Tab"   = "focus prev";
 
-            "${mod}+1" = "workspace ${ws1}";
-            "${mod}+2" = "workspace ${ws2}";
-            "${mod}+3" = "workspace ${ws3}";
-            "${mod}+4" = "workspace ${ws4}";
-            "${mod}+5" = "workspace ${ws5}";
-            "${mod}+6" = "workspace number 6";
-            "${mod}+7" = "workspace number 7";
-            "${mod}+8" = "workspace number 8";
-            "${mod}+9" = "workspace number 9";
-            "${mod}+0" = "workspace number 10";
+          "${modifier}+1" = "workspace ${ws1}";
+          "${modifier}+2" = "workspace ${ws2}";
+          "${modifier}+3" = "workspace ${ws3}";
+          "${modifier}+4" = "workspace ${ws4}";
+          "${modifier}+5" = "workspace ${ws5}";
+          "${modifier}+6" = "workspace number 6";
+          "${modifier}+7" = "workspace number 7";
+          "${modifier}+8" = "workspace number 8";
+          "${modifier}+9" = "workspace number 9";
+          "${modifier}+0" = "workspace number 10";
 
-            "${mod}+Shift+1" = "move container to workspace ${ws1}";
-            "${mod}+Shift+2" = "move container to workspace ${ws2}";
-            "${mod}+Shift+3" = "move container to workspace ${ws3}";
-            "${mod}+Shift+4" = "move container to workspace ${ws4}";
-            "${mod}+Shift+5" = "move container to workspace ${ws5}";
-            "${mod}+Shift+6" = "move container to workspace number 6";
-            "${mod}+Shift+7" = "move container to workspace number 7";
-            "${mod}+Shift+8" = "move container to workspace number 8";
-            "${mod}+Shift+9" = "move container to workspace number 9";
-            "${mod}+Shift+0" = "move container to workspace number 10";
+          "${modifier}+Shift+1" = "move container to workspace ${ws1}";
+          "${modifier}+Shift+2" = "move container to workspace ${ws2}";
+          "${modifier}+Shift+3" = "move container to workspace ${ws3}";
+          "${modifier}+Shift+4" = "move container to workspace ${ws4}";
+          "${modifier}+Shift+5" = "move container to workspace ${ws5}";
+          "${modifier}+Shift+6" = "move container to workspace number 6";
+          "${modifier}+Shift+7" = "move container to workspace number 7";
+          "${modifier}+Shift+8" = "move container to workspace number 8";
+          "${modifier}+Shift+9" = "move container to workspace number 9";
+          "${modifier}+Shift+0" = "move container to workspace number 10";
 
-            "${mod}+h"      = "split h";
-            "${mod}+v"      = "split v";
-            "${mod}+f"      = "fullscreen toggle";
-            "${mod}+comma"  = "layout stacking";
-            "${mod}+period" = "layout tabbed";
-            "${mod}+slash"  = "layout toggle split";
+          "${modifier}+h"      = "split h";
+          "${modifier}+v"      = "split v";
+          "${modifier}+f"      = "fullscreen toggle";
+          "${modifier}+comma"  = "layout stacking";
+          "${modifier}+period" = "layout tabbed";
+          "${modifier}+slash"  = "layout toggle split";
 
-            "${mod}+Shift+c" = "reload";
-            "${mod}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
-            "${mod}+p"       = "exec swaymsg output 'HDMI-A-1' toggle";
+          "${modifier}+Shift+c" = "reload";
+          "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
+          "${modifier}+p"       = "exec swaymsg output 'HDMI-A-1' toggle";
 
-            "${mod}+Shift+v" = "mode '${modeSystem}'";
-            "${mod}+r"       = "mode '${modeResize}'";
+          "${modifier}+Shift+v" = "mode '${modeSystem}'";
+          "${modifier}+r"       = "mode '${modeResize}'";
 
-            "${mod}+s"       = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png";
-            "${mod}+Shift+s" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | wl-copy -t image/png";
-            "${mod}+l"       = "exec '${lockCmd}'";
-            "${mod}+k"       = "exec ${pkgs.mako}/bin/makoctl invoke";
-            "${mod}+Shift+k" = "exec ${pkgs.mako}/bin/makoctl dismiss -a";
+          "${modifier}+s"       = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png";
+          "${modifier}+Shift+s" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | wl-copy -t image/png";
+          "${modifier}+l"       = "exec '${lockCmd}'";
+          "${modifier}+k"       = "exec ${pkgs.mako}/bin/makoctl invoke";
+          "${modifier}+Shift+k" = "exec ${pkgs.mako}/bin/makoctl dismiss -a";
 
-            "XF86AudioPlay" = "exec playerctl play-pause";
-            "XF86AudioNext" = "exec playerctl next";
-            "XF86AudioPrev" = "exec playerctl previous";
+          "XF86AudioPlay" = "exec playerctl play-pause";
+          "XF86AudioNext" = "exec playerctl next";
+          "XF86AudioPrev" = "exec playerctl previous";
 
-            "XF86AudioMute"        = "exec pamixer -t";
-            "XF86AudioRaiseVolume" = "exec pamixer -i 5";
-            "XF86AudioLowerVolume" = "exec pamixer -d 5";
-            "XF86AudioMicMute"     = "exec pamixer --default-source -t";
+          "XF86AudioMute"        = "exec pamixer --sink '${config.deviceSpecific.audio.sink}' -t";
+          "XF86AudioRaiseVolume" = "exec pamixer --sink '${config.deviceSpecific.audio.sink}' -i 5";
+          "XF86AudioLowerVolume" = "exec pamixer --sink '${config.deviceSpecific.audio.sink}' -d 5";
+          "XF86AudioMicMute"     = "exec pamixer --source '${config.deviceSpecific.audio.source}' -t";
 
-            "XF86MonBrightnessUp"   = "exec brightnessctl s +10%";
-            "XF86MonBrightnessDown" = "exec brightnessctl s 10%-";
-          };
+          "XF86MonBrightnessUp"   = "exec brightnessctl s +10%";
+          "XF86MonBrightnessDown" = "exec brightnessctl s 10%-";
+        };
         modes = {
           "${modeSystem}" = {
             s      = "exec systemctl suspend";
@@ -235,7 +231,8 @@ in {
             { app_id = "lutris"; }
           ];
         };
-        workspaceOutputAssign = lib.mkIf (hostName == "roz-pc") [
+      } // lib.optionalAttrs (config.device == "roz-pc") {
+        workspaceOutputAssign = [
           { workspace = ws1; output = "DP-1"; }
           { workspace = ws2; output = "HDMI-A-1"; }
           { workspace = ws3; output = "DP-1"; }

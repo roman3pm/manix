@@ -1,5 +1,5 @@
 { pkgs, lib, ... }: {
-  programs.neovim = {
+  home-manager.users.roz.programs.neovim = {
     enable = true;
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [

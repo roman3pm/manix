@@ -1,17 +1,12 @@
 { config, lib, pkgs, ... }: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
   boot = {
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.kernelModules = [ "amdgpu" ];
     kernelPackages = pkgs.linuxPackages_zen;
   };
-  
+
   nix = {
     package = pkgs.nixVersions.stable;
     gc = {
@@ -25,25 +20,8 @@
   };
 
   networking = {
-    hostName = "roz-pc";
+    hostName = config.device;
     networkmanager.enable = true;
-  };
-
-  networking.wg-quick.interfaces = {
-    wg0 = {
-      autostart = false;
-      address = [ "10.0.0.2/24" "fdc9:281f:04d7:9ee9::2/64" ];
-      dns = [ "10.0.0.1" "fdc9:281f:04d7:9ee9::1" ];
-      privateKeyFile = "/home/roz/.secret/wireguard-keys/private";
-      peers = [
-        {
-          publicKey = "Z53ZnS7k8/k2hFIe6FWfaWrX6d/og1VdAvTIIpcvsyY=";
-          allowedIPs = [ "0.0.0.0/0" "::/0" ];
-          endpoint = "172.104.156.229:51820";
-          persistentKeepalive = 25;
-        }
-      ];
-    };
   };
 
   users = {
@@ -66,6 +44,7 @@
       driSupport32Bit = true;
       extraPackages = with pkgs; [
         amdvlk
+        intel-media-driver
         rocm-opencl-icd
         rocm-opencl-runtime
       ];
@@ -110,15 +89,6 @@
     };
     mpd.enable = true;
     printing.enable = true;
-    udev.packages = [
-      (pkgs.writeTextFile {
-        name = "via_udev";
-        text = ''
-          KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0666", TAG+="uaccess", TAG+="udev-acl"
-        '';
-        destination = "/etc/udev/rules.d/92-viia.rules";
-      })
-    ];
   };
 
   systemd.services = let
@@ -146,10 +116,6 @@
       };
     });
   in listToAttrs (map getVpnService hosts);
-
-  environment.sessionVariables = rec {
-    AMD_VULKAN_ICD = "RADV";
-  };
 
   system.stateVersion = "23.05";
 }

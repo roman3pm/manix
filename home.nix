@@ -1,14 +1,4 @@
 { config, pkgs, lib, ... }: {
-  imports = [
-    ./sway.nix
-    ./terminal.nix
-    ./git.nix
-    ./mako.nix
-    ./neovim.nix
-    ./waybar.nix
-    ./mangohud.nix
-  ];
-
   programs.home-manager.enable = true;
 
   home.username = "roz";

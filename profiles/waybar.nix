@@ -13,8 +13,8 @@ let
       full-at = 90;
       format = "{icon} {capacity}%";
       format-charging = " {capacity}%";
-      format-plugged = " {capacity}%";
-      format-icons = [ " " " " " " " " " " ];
+      format-full = " {capacity}%";
+      format-icons = [ " " " " " " " " " " ];
       format-alt = "{icon} {time}";
     };
 
@@ -49,10 +49,10 @@ let
 
     "network" = {
       interval = 5;
-      interface = "enp34s0";
+      interface = if config.device == "roz-pc" then "enp34s0" else "wlp2s0";
       format-wifi = "直 {essid} ({signalStrength}%)";
       format-ethernet = " {ifname}";
-      format-disconnected = " ";
+      format-disconnected = "";
       tooltip = false;
     };
 
@@ -129,13 +129,12 @@ let
 
   };
 in {
-  programs.waybar = {
+  home-manager.users.roz.programs.waybar = {
     enable = true;
     style = ./waybar/style.css;
     settings = [
       (modules // {
         position = "top";
-        output = "DP-1";
         modules-left = [
           "sway/mode"
           "sway/workspaces"
@@ -155,6 +154,8 @@ in {
           "clock#date"
           "clock#time"
         ];
+      } // lib.opionalAttrs(config.device == "roz-pc") {
+        output = "DP-1";
       })
       (modules // {
         position = "top";

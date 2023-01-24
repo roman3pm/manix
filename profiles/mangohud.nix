@@ -1,5 +1,5 @@
 { pkgs, lib, ... }: {
-  programs.mangohud = {
+  home-manager.users.roz.programs.mangohud = {
     enable = true;
     enableSessionWide = true;
     settings = {
