@@ -77,6 +77,7 @@ in {
           { command = "sleep 1 && QT_QPA_PLATFORMTHEME=gtk3 ${pkgs.tdesktop}/bin/telegram-desktop"; }
           { command = "sleep 1 && ${pkgs.thunderbird}/bin/thunderbird"; }
           { command = "sleep 1 && ${pkgs.firefox}/bin/firefox"; }
+          { command = "sleep 1 && ${terminal} --class Alacritty_zellij -e zellij"; }
         ];
         input = {
           "type:keyboard" = {
@@ -87,7 +88,7 @@ in {
           "type:pointer" = {
             accel_profile = "flat";
             pointer_accel = "0";
-            scroll_factor = "2";
+            scroll_factor = if (config.device == "roz-pc") then "2" else "1";
           };
         };
         output = {
@@ -137,7 +138,6 @@ in {
           "${modifier}+7" = "workspace number 7";
           "${modifier}+8" = "workspace number 8";
           "${modifier}+9" = "workspace number 9";
-          "${modifier}+0" = "workspace number 10";
 
           "${modifier}+Shift+1" = "move container to workspace ${ws1}";
           "${modifier}+Shift+2" = "move container to workspace ${ws2}";
@@ -148,7 +148,6 @@ in {
           "${modifier}+Shift+7" = "move container to workspace number 7";
           "${modifier}+Shift+8" = "move container to workspace number 8";
           "${modifier}+Shift+9" = "move container to workspace number 9";
-          "${modifier}+Shift+0" = "move container to workspace number 10";
 
           "${modifier}+h"      = "split h";
           "${modifier}+v"      = "split v";
@@ -221,6 +220,9 @@ in {
             { app_id = "org.telegram.desktop"; }
             { class  = "Slack"; }
             { class  = "discord"; }
+          ];
+          "${ws3}" = [
+            { app_id = "Alacritty_zellij"; }
           ];
           "${ws4}" = [
             { class = "Bitwarden"; }
