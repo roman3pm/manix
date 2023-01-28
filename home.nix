@@ -63,6 +63,7 @@
     pamixer
     bemenu
     xdg-utils
+    polkit_gnome
 
     (nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
     yaru-theme
@@ -71,6 +72,13 @@
   programs.java = {
     enable = true;
     package = pkgs.jdk11;
+  };
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+    ];
   };
   
   home.sessionVariables = rec {

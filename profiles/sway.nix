@@ -58,6 +58,7 @@ in {
         };
         bars = [];
         startup = [
+          { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
           { command = "${pkgs.corectrl}/bin/corectrl --minimize-systray"; }
           { command = "ssh-add < /dev/null"; }
           { command = "${pkgs.waybar}/bin/waybar"; }
