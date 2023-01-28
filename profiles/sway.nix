@@ -58,7 +58,7 @@ in {
         };
         bars = [];
         startup = [
-          { always = true; command = "${pkgs.corectrl}/bin/corectrl --minimize-systray"; }
+          { command = "${pkgs.corectrl}/bin/corectrl --minimize-systray"; }
           { command = "ssh-add < /dev/null"; }
           { command = "${pkgs.waybar}/bin/waybar"; }
           { command = "${pkgs.mako}/bin/mako"; }
@@ -114,15 +114,15 @@ in {
           "${modifier}+Shift+Return" = "exec ${terminal} --class Alacritty_floating";
           "${modifier}+Shift+q"      = "kill";
 
-          "${modifier}+Left"  = "focus left";
-          "${modifier}+Down"  = "focus down";
-          "${modifier}+Up"    = "focus up";
-          "${modifier}+Right" = "focus right";
+          "${modifier}+h" = "focus left";
+          "${modifier}+j" = "focus down";
+          "${modifier}+k" = "focus up";
+          "${modifier}+l" = "focus right";
 
-          "${modifier}+Shift+Left"  = "move left";
-          "${modifier}+Shift+Down"  = "move down";
-          "${modifier}+Shift+Up"    = "move up";
-          "${modifier}+Shift+Right" = "move right";
+          "${modifier}+Shift+h" = "move left";
+          "${modifier}+Shift+j" = "move down";
+          "${modifier}+Shift+k" = "move up";
+          "${modifier}+Shift+l" = "move right";
 
           "${modifier}+Shift+Space" = "floating toggle";
           "${modifier}+Space"       = "focus mode_toggle";
@@ -149,7 +149,7 @@ in {
           "${modifier}+Shift+8" = "move container to workspace number 8";
           "${modifier}+Shift+9" = "move container to workspace number 9";
 
-          "${modifier}+h"      = "split h";
+          "${modifier}+b"      = "split h";
           "${modifier}+v"      = "split v";
           "${modifier}+f"      = "fullscreen toggle";
           "${modifier}+comma"  = "layout stacking";
@@ -165,9 +165,9 @@ in {
 
           "${modifier}+s"       = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png";
           "${modifier}+Shift+s" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | wl-copy -t image/png";
-          "${modifier}+l"       = "exec '${lockCmd}'";
-          "${modifier}+k"       = "exec ${pkgs.mako}/bin/makoctl invoke";
-          "${modifier}+Shift+k" = "exec ${pkgs.mako}/bin/makoctl dismiss -a";
+          "${modifier}+g"       = "exec '${lockCmd}'";
+          "${modifier}+i"       = "exec ${pkgs.mako}/bin/makoctl invoke";
+          "${modifier}+Shift+i" = "exec ${pkgs.mako}/bin/makoctl dismiss -a";
 
           "XF86AudioPlay" = "exec playerctl play-pause";
           "XF86AudioNext" = "exec playerctl next";
@@ -190,10 +190,10 @@ in {
             Escape = "mode default";
           };
           "${modeResize}" = {
-            Left   = "resize shrink width";
-            Right  = "resize grow width";
-            Down   = "resize shrink height";
-            Up     = "resize grow height";
+            h = "resize shrink width";
+            j = "resize grow width";
+            k = "resize shrink height";
+            l = "resize grow height";
             Return = "mode default";
             Escape = "mode default";
           };
