@@ -1,6 +1,6 @@
 inputs: system: final: prev: rec {
 
-  master = import inputs.nixpkgs-master {
+  stable = import inputs.nixpkgs-stable {
     inherit system;
     config.allowUnfree = true;
   };

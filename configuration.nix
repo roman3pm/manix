@@ -48,8 +48,6 @@
       extraPackages = with pkgs; [
         amdvlk
         intel-media-driver
-        rocm-opencl-icd
-        rocm-opencl-runtime
       ];
     };
     xpadneo.enable = true;

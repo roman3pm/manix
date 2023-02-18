@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,7 +14,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-master, home-manager, nix-index-database, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-stable, home-manager, nix-index-database, ... }:
     let
       system = "x86_64-linux";
       overlays = import ./overlays.nix inputs system;

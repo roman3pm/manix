@@ -36,7 +36,7 @@
     (metals.override { jre = jre8; })
     gopls
     rust-analyzer
-    sumneko-lua-language-server
+    lua-language-server
 
     via
     firefox
