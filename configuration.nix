@@ -23,6 +23,8 @@
     '';
   };
 
+  virtualisation.docker.enable = true;
+
   networking = {
     hostName = config.device;
     networkmanager.enable = true;
@@ -32,7 +34,7 @@
     groups.plugdev = {};
     users.roz = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "video" "audio" "plugdev" "corectrl" ];
+      extraGroups = [ "wheel" "docker" "networkmanager" "video" "audio" "plugdev" "corectrl" ];
       shell = pkgs.fish;
     };
   };
@@ -46,10 +48,6 @@
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
-      extraPackages = with pkgs; [
-        amdvlk
-        intel-media-driver
-      ];
     };
     xpadneo.enable = true;
   };
@@ -83,9 +81,14 @@
   };
 
   services = {
+    openssh = {
+      enable = true;
+      settings.PermitRootLogin = "no";
+    };
     dbus.enable = true;
     pipewire = {
       enable = true;
+      alsa.enable = true;
       pulse.enable = true;
       jack.enable = true;
     };
@@ -103,8 +106,6 @@
 
     getVpnService = with pkgs; (host: nameValuePair "openvpn-${host}" {
       description = "OpenVPN instance ‘${host}’";
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
       path = [ bash openvpn oathToolkit ];
       serviceConfig = {
         Type = "notify";

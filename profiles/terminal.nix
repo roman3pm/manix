@@ -57,7 +57,6 @@ in {
 
     programs.zellij = {
       enable = true;
-      package = pkgs.stable.zellij;
     };
     xdg.configFile."zellij/config.kdl".text = ''
       default_shell "fish"

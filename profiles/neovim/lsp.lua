@@ -181,6 +181,10 @@ api.nvim_create_autocmd("FileType", {
   group = nvim_metals_group,
 })
 
+require('lspconfig').pyright.setup {
+  capabilities = capabilities
+}
+
 require('lspconfig').gopls.setup {
   capabilities = capabilities
 }

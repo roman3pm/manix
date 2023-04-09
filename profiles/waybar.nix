@@ -110,7 +110,7 @@ let
 
     "temperature#cpu" = {
       interval = 1;
-      hwmon-path = "/sys/class/hwmon/hwmon2/temp3_input";
+      hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
       format = " {temperatureC}°C";
       tooltip = false;
     };

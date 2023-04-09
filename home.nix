@@ -4,6 +4,7 @@
   home.username = "roz";
 
   home.packages = with pkgs; [
+    git-crypt
     fd
     fzf
     jq
@@ -23,17 +24,19 @@
     steam-run
     gamemode
     vkbasalt
+    transmission
 
     gcc 
     go
     rustup
     nodejs-14_x
+    nodePackages.pyright
     (yarn.override { nodejs = nodejs-14_x; })
-    (sbt.override { jre = jre8; })
-    (maven.override { jdk = jdk8; })
-    (bloop.override { jre = jre8; })
-    (coursier.override { jre = jre8; })
-    (metals.override { jre = jre8; })
+    (sbt.override { jre = jdk17; })
+    (maven.override { jdk = jdk17; })
+    (bloop.override { jre = jdk17; })
+    (coursier.override { jre = jdk17; })
+    (metals.override { jre = jdk17; })
     gopls
     rust-analyzer
     lua-language-server
@@ -71,7 +74,7 @@
 
   programs.java = {
     enable = true;
-    package = pkgs.jdk11;
+    package = pkgs.jdk17;
   };
 
   programs.obs-studio = {

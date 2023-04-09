@@ -12,9 +12,10 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-stable, home-manager, nix-index-database, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-stable, home-manager, nix-index-database, agenix, ... }:
     let
       system = "x86_64-linux";
       overlays = import ./overlays.nix inputs system;
@@ -59,6 +60,7 @@
                     ];
                   };
                 }
+                agenix.nixosModules.default
               ];
             };
         in genAttrs hosts mkHost;

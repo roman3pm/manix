@@ -18,6 +18,7 @@
       telescope-nvim
       telescope-fzy-native-nvim
       gitsigns-nvim
+      nvim-treesitter-context
       (nvim-treesitter.withPlugins (plugins: with plugins; [
         nix lua scala java javascript yaml python go rust c cpp
       ]))
