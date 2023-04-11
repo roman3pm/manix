@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, config, ... }:
 let
   crypt = import ../../secrets/crypt.nix;
 in {
