@@ -51,7 +51,6 @@ in {
       ];
     };
   };
-  };
 
   services.throttled.enable = true;
 
