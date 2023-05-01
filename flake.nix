@@ -19,7 +19,8 @@
     let
       system = "x86_64-linux";
       overlays = import ./overlays.nix inputs system;
-    in {
+    in
+    {
       nixosModules = {
         devices = import ./modules/devices.nix;
       };
@@ -63,6 +64,7 @@
                 agenix.nixosModules.default
               ];
             };
-        in genAttrs hosts mkHost;
+        in
+        genAttrs hosts mkHost;
     };
 }

@@ -6,13 +6,14 @@ let
   ws3 = "3:code";
   ws4 = "4:mail";
   ws5 = "5:game";
-in {
+in
+{
   home-manager.users.roz.wayland.windowManager.sway =
     let
       terminal = "${pkgs.alacritty}/bin/alacritty";
       modifier = "Mod4";
       menu = ''
-        ${pkgs.bemenu}/bin/bemenu-run -m all -H 30 --fn '${builtins.head fonts.fontConfig.names} 12' --no-exec | xargs swaymsg exec --
+        ${pkgs.bemenu}/bin/bemenu-run -m all -H 31 --fn '${builtins.head fonts.fontConfig.names} 12' --no-exec | xargs swaymsg exec --
       '';
       lockCmd = ''
         ${pkgs.swaylock}/bin/swaylock -f \
@@ -29,7 +30,8 @@ in {
       '';
       modeSystem = " system: [s]uspend [r]eboot [p]oweroff";
       modeResize = " resize";
-    in {
+    in
+    {
       enable = true;
       wrapperFeatures.gtk = true;
       extraSessionCommands = ''
@@ -49,14 +51,14 @@ in {
         inherit terminal modifier menu;
         fonts = fonts.fontConfig;
         gaps = {
-          inner = 6;
+          inner = 8;
           outer = 2;
         };
         focus = {
           followMouse = "no";
           mouseWarping = false;
         };
-        bars = [];
+        bars = [ ];
         startup = [
           { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
           { command = "${pkgs.corectrl}/bin/corectrl --minimize-systray"; }
@@ -64,7 +66,8 @@ in {
           { command = "${pkgs.waybar}/bin/waybar"; }
           { command = "${pkgs.mako}/bin/mako"; }
           { command = "${pkgs.gammastep}/bin/gammastep -l 55.75:37.80 -b 1:0.8"; }
-          { command = ''
+          {
+            command = ''
               ${pkgs.swayidle}/bin/swayidle -w \
               timeout 600 '${lockCmd}' \
               timeout 1200 'swaymsg "output * dpms off"' \
@@ -75,7 +78,7 @@ in {
           { command = "sleep 1 && ${pkgs.bitwarden}/bin/bitwarden"; }
           { command = "sleep 1 && ${pkgs.discord}/bin/discord"; }
           { command = "sleep 1 && ${pkgs.slack}/bin/slack"; }
-          { command = "sleep 1 && QT_QPA_PLATFORMTHEME=gtk3 ${pkgs.tdesktop}/bin/telegram-desktop"; }
+          { command = "sleep 1 && QT_QPA_PLATFORMTHEME=gtk3 ${pkgs.telegram-desktop}/bin/telegram-desktop"; }
           { command = "sleep 1 && ${pkgs.thunderbird}/bin/thunderbird"; }
           { command = "sleep 1 && ${pkgs.firefox}/bin/firefox"; }
           { command = "sleep 1 && ${terminal} --class Alacritty_zellij -e zellij"; }
@@ -83,7 +86,7 @@ in {
         input = {
           "type:keyboard" = {
             xkb_layout = "us,ru";
-            xkb_options = if config.device == "roz-pc" then "grp:shift_caps_toggle" else "grp:lctrl_toggle,ctrl:nocaps";
+            xkb_options = "grp:lctrl_toggle,ctrl:nocaps";
           };
           "type:touchpad" = { tap = "enabled"; };
           "type:pointer" = {
@@ -110,10 +113,10 @@ in {
         };
         bindkeysToCode = true;
         keybindings = {
-          "${modifier}+d"            = "exec ${menu}";
-          "${modifier}+Return"       = "exec ${terminal}";
+          "${modifier}+d" = "exec ${menu}";
+          "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+Shift+Return" = "exec ${terminal} --class Alacritty_floating";
-          "${modifier}+Shift+q"      = "kill";
+          "${modifier}+Shift+q" = "kill";
 
           "${modifier}+h" = "focus left";
           "${modifier}+j" = "focus down";
@@ -126,9 +129,9 @@ in {
           "${modifier}+Shift+l" = "move right";
 
           "${modifier}+Shift+Space" = "floating toggle";
-          "${modifier}+Space"       = "focus mode_toggle";
-          "${modifier}+Tab"         = "focus next";
-          "${modifier}+Shift+Tab"   = "focus prev";
+          "${modifier}+Space" = "focus mode_toggle";
+          "${modifier}+Tab" = "focus next";
+          "${modifier}+Shift+Tab" = "focus prev";
 
           "${modifier}+1" = "workspace ${ws1}";
           "${modifier}+2" = "workspace ${ws2}";
@@ -150,43 +153,43 @@ in {
           "${modifier}+Shift+8" = "move container to workspace number 8";
           "${modifier}+Shift+9" = "move container to workspace number 9";
 
-          "${modifier}+b"      = "split h";
-          "${modifier}+v"      = "split v";
-          "${modifier}+f"      = "fullscreen toggle";
-          "${modifier}+comma"  = "layout stacking";
+          "${modifier}+b" = "split h";
+          "${modifier}+v" = "split v";
+          "${modifier}+f" = "fullscreen toggle";
+          "${modifier}+comma" = "layout stacking";
           "${modifier}+period" = "layout tabbed";
-          "${modifier}+slash"  = "layout toggle split";
+          "${modifier}+slash" = "layout toggle split";
 
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
-          "${modifier}+p"       = "exec swaymsg output 'HDMI-A-1' toggle";
+          "${modifier}+p" = "exec swaymsg output 'HDMI-A-1' toggle";
 
           "${modifier}+Shift+v" = "mode '${modeSystem}'";
-          "${modifier}+r"       = "mode '${modeResize}'";
+          "${modifier}+r" = "mode '${modeResize}'";
 
-          "${modifier}+s"       = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png";
+          "${modifier}+s" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png";
           "${modifier}+Shift+s" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | wl-copy -t image/png";
-          "${modifier}+g"       = "exec '${lockCmd}'";
-          "${modifier}+i"       = "exec ${pkgs.mako}/bin/makoctl invoke";
+          "${modifier}+g" = "exec '${lockCmd}'";
+          "${modifier}+i" = "exec ${pkgs.mako}/bin/makoctl invoke";
           "${modifier}+Shift+i" = "exec ${pkgs.mako}/bin/makoctl dismiss -a";
 
           "XF86AudioPlay" = "exec playerctl play-pause";
           "XF86AudioNext" = "exec playerctl next";
           "XF86AudioPrev" = "exec playerctl previous";
 
-          "XF86AudioMute"        = "exec pamixer --sink '${config.deviceSpecific.audio.sink}' -t";
+          "XF86AudioMute" = "exec pamixer --sink '${config.deviceSpecific.audio.sink}' -t";
           "XF86AudioRaiseVolume" = "exec pamixer --sink '${config.deviceSpecific.audio.sink}' -i 5";
           "XF86AudioLowerVolume" = "exec pamixer --sink '${config.deviceSpecific.audio.sink}' -d 5";
-          "XF86AudioMicMute"     = "exec pamixer --source '${config.deviceSpecific.audio.source}' -t";
+          "XF86AudioMicMute" = "exec pamixer --source '${config.deviceSpecific.audio.source}' -t";
 
-          "XF86MonBrightnessUp"   = "exec brightnessctl s +10%";
+          "XF86MonBrightnessUp" = "exec brightnessctl s +10%";
           "XF86MonBrightnessDown" = "exec brightnessctl s 10%-";
         };
         modes = {
           "${modeSystem}" = {
-            s      = "exec systemctl suspend";
-            r      = "exec systemctl reboot";
-            p      = "exec systemctl poweroff";
+            s = "exec systemctl suspend";
+            r = "exec systemctl reboot";
+            p = "exec systemctl poweroff";
             Return = "mode default";
             Escape = "mode default";
           };
@@ -208,19 +211,19 @@ in {
             { app_id = "lutris"; }
             { app_id = "pavucontrol"; }
             { app_id = "com.github.wwmm.easyeffects"; }
-            { class  = "Steam"; }
-            { class  = "\.exe"; }
-            { title  = "^Choose Files$"; }
+            { class = "Steam"; }
+            { class = "\.exe"; }
+            { title = "^Choose Files$"; }
           ];
         };
         assigns = {
-          "${ws1}"= [
+          "${ws1}" = [
             { app_id = "firefox"; }
           ];
           "${ws2}" = [
             { app_id = "org.telegram.desktop"; }
-            { class  = "Slack"; }
-            { class  = "discord"; }
+            { class = "Slack"; }
+            { class = "discord"; }
           ];
           "${ws3}" = [
             { app_id = "Alacritty_zellij"; }

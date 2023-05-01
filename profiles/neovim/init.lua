@@ -20,6 +20,10 @@ opt.expandtab = true
 opt.smarttab = true
 opt.tabstop = 2
 opt.shiftwidth = 2
+api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  command = "setlocal noexpandtab tabstop=4 shiftwidth=4",
+})
 
 opt.list = true
 opt.listchars:append("eol:↴")
@@ -28,15 +32,15 @@ opt.ignorecase = true
 opt.smartcase = true
 
 require("tokyonight").setup {
-  transparent = true
+  transparent = true,
 }
 vim.o.termguicolors = true
 cmd("colorscheme tokyonight")
 
 require('telescope').setup {
   defaults = {
-    path_display = { "smart" }
-  }
+    path_display = { "smart" },
+  },
 }
 api.nvim_set_keymap('n', '<leader>ff', [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true })
 api.nvim_set_keymap('n', '<leader>fg', [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true })
@@ -47,7 +51,7 @@ require('gitsigns').setup {
   attach_to_untracked = false,
   current_line_blame = true,
   preview_config = {
-    border = "rounded"
+    border = "rounded",
   },
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
@@ -94,7 +98,7 @@ require("indent_blankline").setup {
 }
 
 require('nvim-autopairs').setup {
-  fast_wrap = {}
+  fast_wrap = {},
 }
 local npairs   = require 'nvim-autopairs'
 local Rule     = require 'nvim-autopairs.rule'
@@ -124,16 +128,16 @@ end
 require('nvim-treesitter.configs').setup {
   parser_install_dir = "$HOME/.local/share/nvim/site",
   highlight = {
-    enable = true
-  }
+    enable = true,
+  },
 }
 
 require('tabline').setup {
   enable = true,
   options = {
     show_filename_only = true,
-    show_tabs_always = true
-  }
+    show_tabs_always = true,
+  },
 }
 cmd [[
   set guioptions-=e " Use showtabline in gui vim
@@ -142,17 +146,17 @@ cmd [[
 
 require('lualine').setup {
   options = {
-    theme = 'tokyonight'
+    theme = 'tokyonight',
   },
   sections = {
-    lualine_c = { 'filename', 'g:metals_status' }
-  }
+    lualine_c = { 'filename', 'g:metals_status' },
+  },
 }
 
 require('nvim-tree').setup {
   sync_root_with_cwd = true,
   view = {
-    preserve_window_proportions = true
+    preserve_window_proportions = true,
   },
   renderer = {
     full_name = true,
@@ -161,27 +165,29 @@ require('nvim-tree').setup {
     special_files = {},
     symlink_destination = false,
     indent_markers = {
-      enable = true
+      enable = true,
     },
     icons = {
       show = {
         folder = false,
         folder_arrow = false,
-        git = false
+        git = false,
       },
     },
   },
   update_focused_file = {
-    enable = true
+    enable = true,
   },
   filters = {
     custom = {
       "^.git$",
       "^.bloop$",
-      "^.metals$"
-    }
-  }
+      "^.metals$",
+    },
+  },
 }
+api.nvim_set_keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', { noremap = true })
+api.nvim_set_keymap('n', '<leader>tf', ':NvimTreeFocus<CR>', { noremap = true })
 
 local fn = vim.fn
 
@@ -233,7 +239,7 @@ vim.o.qftf = '{info -> v:lua._G.qftf(info)}'
 require('bqf').setup({
   filter = {
     fzf = {
-      extra_opts = { '--bind', 'ctrl-o:toggle-all', '--delimiter', '│' }
-    }
-  }
+      extra_opts = { '--bind', 'ctrl-o:toggle-all', '--delimiter', '│' },
+    },
+  },
 })

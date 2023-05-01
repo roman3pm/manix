@@ -21,10 +21,10 @@ map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
 map("n", "<leader>f", "<cmd>lua vim.lsp.buf.format { async = true }<CR>")
 map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 map("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
-map("n", "<leader>aa", [[<cmd>lua vim.diagnostic.setqflist()<CR>]]) -- all workspace diagnostics
+map("n", "<leader>aa", [[<cmd>lua vim.diagnostic.setqflist()<CR>]])                 -- all workspace diagnostics
 map("n", "<leader>ae", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
 map("n", "<leader>aw", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
-map("n", "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>") -- buffer diagnostics only
+map("n", "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>")                   -- buffer diagnostics only
 map('n', '<leader>e', "<cmd>lua vim.diagnostic.open_float()<CR>")
 map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
 map("n", "]d", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
@@ -120,16 +120,16 @@ cmp.setup.filetype('gitcommit', {
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'buffer' }
-  }
+    { name = 'buffer' },
+  },
 })
 
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' }
+    { name = 'path' },
   }, {
-    { name = 'cmdline' }
+    { name = 'cmdline' },
   })
 })
 
@@ -138,8 +138,8 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 require("lsp_signature").setup({
   bind = true,
   handler_opts = {
-    border = "rounded"
-  }
+    border = "rounded",
+  },
 })
 
 local dap = require("dap")
@@ -182,15 +182,15 @@ api.nvim_create_autocmd("FileType", {
 })
 
 require('lspconfig').pyright.setup {
-  capabilities = capabilities
+  capabilities = capabilities,
 }
 
 require('lspconfig').gopls.setup {
-  capabilities = capabilities
+  capabilities = capabilities,
 }
 
 require('lspconfig').rust_analyzer.setup {
-  capabilities = capabilities
+  capabilities = capabilities,
 }
 
 require('lspconfig').tsserver.setup {
@@ -200,7 +200,7 @@ require('lspconfig').tsserver.setup {
     "--package", "typescript-language-server",
     "--", "typescript-language-server", "--stdio"
   },
-  capabilities = capabilities
+  capabilities = capabilities,
 }
 
 require('lspconfig').lua_ls.setup {
@@ -218,6 +218,17 @@ require('lspconfig').lua_ls.setup {
       },
       telemetry = {
         enable = false,
+      },
+    },
+  },
+}
+
+require('lspconfig').nil_ls.setup {
+  capabilities = capabilities,
+  settings = {
+    ['nil'] = {
+      formatting = {
+        command = { "nixpkgs-fmt" },
       },
     },
   },

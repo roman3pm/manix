@@ -1,10 +1,5 @@
 { config, pkgs, lib, ... }:
 let
-  inherit (lib.attrsets) nameValuePair;
-  inherit (builtins) concatLists attrNames listToAttrs;
-
-  sysconfig = (import <nixpkgs/nixos> {}).config;
-
   modules = {
     "battery" = {
       states = {
@@ -78,18 +73,18 @@ let
         "3:code" = " ";
         "4:mail" = " ";
         "5:game" = " ";
-        "6"      = " ";
-        "7"      = " ";
-        "8"      = " ";
-        "9"      = " ";
-        "10"     = " ";
+        "6" = " ";
+        "7" = " ";
+        "8" = " ";
+        "9" = " ";
+        "10" = " ";
       };
     };
 
     "idle_inhibitor" = {
       format = "{icon}";
       format-icons = {
-        activated   = "(;0_0)";
+        activated = "(;0_0)";
         deactivated = "(;=_=)";
       };
     };
@@ -101,11 +96,11 @@ let
       format-bluetooth = "{icon}{volume}%";
       format-muted = " mute";
       format-icons = {
-        default = [" " " "];
+        default = [ " " " " ];
       };
       on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
       on-click-right = "${pkgs.easyeffects}/bin/easyeffects";
-      ignored-sinks = ["Easy Effects Sink"];
+      ignored-sinks = [ "Easy Effects Sink" ];
     };
 
     "temperature#cpu" = {
@@ -126,9 +121,9 @@ let
       icon-size = 20;
       spacing = 5;
     };
-
   };
-in {
+in
+{
   home-manager.users.roz.programs.waybar = {
     enable = true;
     style = ./waybar/style.css;
@@ -136,7 +131,6 @@ in {
       (modules // {
         position = "top";
         modules-left = [
-          "sway/mode"
           "sway/workspaces"
           "sway/window"
         ];
@@ -154,7 +148,15 @@ in {
           "clock#date"
           "clock#time"
         ];
-      } // lib.optionalAttrs(config.device == "roz-pc") {
+      } // lib.optionalAttrs (config.device == "roz-pc") {
+        output = "DP-1";
+      })
+      (modules // {
+        position = "bottom";
+        modules-left = [
+          "sway/mode"
+        ];
+      } // lib.optionalAttrs (config.device == "roz-pc") {
         output = "DP-1";
       })
       (modules // {

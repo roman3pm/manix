@@ -1,9 +1,10 @@
 let
   name = "DejaVuSansMono Nerd Font";
   size = 9.0;
-in {
+in
+{
   fontConfig = {
     names = [ name ];
-    size  = size;
+    size = size;
   };
 }

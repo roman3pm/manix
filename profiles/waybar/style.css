@@ -4,30 +4,39 @@
   font-family: "DejaVuSansMono Nerd Font";
   font-size: 16px;
   min-height: 0;
+  margin: 0;
+  padding: 0;
 }
 
-#mode,
-#temperature,
-#cpu,
-#memory,
-#network,
-#pulseaudio,
-#battery,
-#language,
-#idle_inhibitor,
-#clock {
-  color: darkgray;
-  padding: 5px 8px 4px;
-  margin-bottom: 2px;
-}
-
-#window {
-  color: white;
-  padding: 0 8px;
-}
 window#waybar {
   background: rgba(43, 48, 59, 0.5);
-  border-bottom: 2px solid rgba(100, 114, 125, 0.5);
+}
+#window {
+  color: white;
+  padding: 6px 8px;
+}
+
+#temperature, #cpu, #memory, #network, #pulseaudio, #battery, #language, #idle_inhibitor, #workspaces button {
+  color: darkgray;
+  background: transparent;
+  padding: 6px 8px;
+}
+
+#clock, #mode {
+  color: white;
+  background: rgba(100, 114, 125, 0.5);
+  padding: 6px 8px;
+}
+
+#workspaces button.focused {
+  color: white;
+  background: rgba(100, 114, 125, 0.5);
+  border-bottom: 2px solid white;
+  padding: 6px 8px 4px;
+}
+
+#idle_inhibitor.activated {
+  color: white;
 }
 
 tooltip {
@@ -36,30 +45,4 @@ tooltip {
 }
 tooltip label {
   color: white;
-}
-
-#workspaces button {
-  color: darkgray;
-  background: transparent;
-  padding: 5px 8px 4px;
-  border-bottom: 2px solid transparent;
-}
-#workspaces button.focused {
-  color: white;
-  background: rgba(100, 114, 125, 0.5);
-  border-bottom: 2px solid white;
-}
-
-#mode {
-  color: white;
-  background: rgba(100, 114, 125, 0.5);
-}
-
-#idle_inhibitor.activated {
-  color: white;
-}
-
-#clock {
-  color: white;
-  background: rgba(100, 114, 125, 0.5);
 }

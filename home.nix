@@ -1,9 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{ pkgs, ... }: {
   programs.home-manager.enable = true;
 
   home.username = "roz";
 
   home.packages = with pkgs; [
+    gnumake
     git-crypt
     fd
     fzf
@@ -12,9 +13,7 @@
     mpv
     htop-vim
     neofetch
-    thefuck
     ripgrep
-    wireguard-tools
     hurl
     wget
     unar
@@ -26,31 +25,30 @@
     vkbasalt
     transmission
 
-    gcc 
+    gcc
     go
+    golangci-lint
     rustup
-    nodejs-14_x
     nodePackages.pyright
-    (yarn.override { nodejs = nodejs-14_x; })
     (sbt.override { jre = jdk17; })
-    (maven.override { jdk = jdk17; })
-    (bloop.override { jre = jdk17; })
-    (coursier.override { jre = jdk17; })
     (metals.override { jre = jdk17; })
     gopls
     rust-analyzer
     lua-language-server
+    nil
+    nixpkgs-fmt
 
     via
     firefox
     thunderbird
-    tdesktop
+    telegram-desktop
     slack
+    libreoffice-fresh
     (discord.override { withOpenASAR = true; })
     bitwarden
     steam
     lutris
-    libreoffice-fresh
+    wineWowPackages.staging
 
     slurp
     grim
@@ -83,13 +81,12 @@
       wlrobs
     ];
   };
-  
-  home.sessionVariables = rec {
+
+  home.sessionVariables = {
     EDITOR = "vim";
     VISUAL = "vim";
     BROWSER = "firefox";
     TERMINAL = "alacritty";
-    SSH_ASKPASS = pkgs.writeShellScript "ssh_askpass" "cat $HOME/.secret/sshpass/ssh_pass";
   };
 
   fonts.fontconfig.enable = true;

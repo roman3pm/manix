@@ -1,7 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 let
   crypt = import ./secrets/crypt.nix;
-in {
+in
+{
   boot = {
     loader = {
       timeout = 0;
@@ -69,10 +70,10 @@ in {
   virtualisation.docker.enable = true;
 
   users = {
-    groups.plugdev = {};
+    groups.plugdev = { };
     users.roz = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "docker" "networkmanager" "video" "audio" "plugdev" "corectrl" ];
+      extraGroups = [ "wheel" "docker" "networkmanager" "input" "video" "audio" "plugdev" "corectrl" ];
       shell = pkgs.fish;
     };
   };
@@ -134,30 +135,6 @@ in {
     mpd.enable = true;
     printing.enable = true;
   };
-
-  systemd.services = let
-    inherit (lib.attrsets) nameValuePair;
-    inherit (builtins) listToAttrs;
-
-    openvpnDir = "/home/roz/.secret/openvpn";
-    username = "roz@exante.eu";
-    hosts = [ "mickey" "gensec" ];
-
-    getVpnService = with pkgs; (host: nameValuePair "openvpn-${host}" {
-      description = "OpenVPN instance ‘${host}’";
-      path = [ bash openvpn oathToolkit ];
-      serviceConfig = {
-        Type = "notify";
-        Restart = "always";
-        ExecStartPre = ''
-          ${bash}/bin/bash -c 'password="''$(${oathToolkit}/bin/oathtool -b --totp @${openvpnDir}/${host}_totp)"; echo "${username}" > ${openvpnDir}/${host}_oath; echo ''$password >> ${openvpnDir}/${host}_oath'
-        '';
-        ExecStart = ''
-          @${openvpn}/sbin/openvpn openvpn --suppress-timestamps --config ${openvpnDir}/${host}.ovpn --auth-user-pass ${openvpnDir}/${host}_oath
-        '';
-      };
-    });
-  in listToAttrs (map getVpnService hosts);
 
   system.stateVersion = "23.05";
 }
