@@ -42,6 +42,7 @@ in
         export SDL_VEDEODRIVER=wayland
         # needs qt5.qtwayland in systemPackages
         export QT_QPA_PLATFORM=wayland
+        export QT_QPA_PLATFORMTHEME=gtk3
         export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
         # Fix for some Java AWT applications (e.g. Android Studio),
         # use this if they aren't displayed properly:
@@ -65,7 +66,6 @@ in
           { command = "ssh-add < /dev/null"; }
           { command = "${pkgs.waybar}/bin/waybar"; }
           { command = "${pkgs.mako}/bin/mako"; }
-          { command = "${pkgs.gammastep}/bin/gammastep -l 55.75:37.80 -b 1:0.8"; }
           {
             command = ''
               ${pkgs.swayidle}/bin/swayidle -w \
@@ -78,7 +78,7 @@ in
           { command = "sleep 1 && ${pkgs.bitwarden}/bin/bitwarden"; }
           { command = "sleep 1 && ${pkgs.discord}/bin/discord"; }
           { command = "sleep 1 && ${pkgs.slack}/bin/slack"; }
-          { command = "sleep 1 && QT_QPA_PLATFORMTHEME=gtk3 ${pkgs.telegram-desktop}/bin/telegram-desktop"; }
+          { command = "sleep 1 && ${pkgs.telegram-desktop}/bin/telegram-desktop"; }
           { command = "sleep 1 && ${pkgs.thunderbird}/bin/thunderbird"; }
           { command = "sleep 1 && ${pkgs.firefox}/bin/firefox"; }
           { command = "sleep 1 && ${terminal} --class Alacritty_zellij -e zellij"; }
@@ -165,7 +165,7 @@ in
           "${modifier}+p" = "exec swaymsg output 'HDMI-A-1' toggle";
 
           "${modifier}+Shift+v" = "mode '${modeSystem}'";
-          "${modifier}+r" = "mode '${modeResize}'";
+          "${modifier}+Shift+r" = "mode '${modeResize}'";
 
           "${modifier}+s" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png";
           "${modifier}+Shift+s" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | wl-copy -t image/png";
@@ -195,9 +195,9 @@ in
           };
           "${modeResize}" = {
             h = "resize shrink width";
-            j = "resize grow width";
+            l = "resize grow width";
             k = "resize shrink height";
-            l = "resize grow height";
+            j = "resize grow height";
             Return = "mode default";
             Escape = "mode default";
           };

@@ -37,8 +37,14 @@ require("tokyonight").setup {
 vim.o.termguicolors = true
 cmd("colorscheme tokyonight")
 
+local actions = require("telescope.actions")
 require('telescope').setup {
   defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+      },
+    },
     path_display = { "smart" },
   },
 }
@@ -46,6 +52,7 @@ api.nvim_set_keymap('n', '<leader>ff', [[<Cmd>lua require('telescope.builtin').f
 api.nvim_set_keymap('n', '<leader>fg', [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true })
 api.nvim_set_keymap('n', '<leader>fb', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true })
 api.nvim_set_keymap('n', '<leader>fh', [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true })
+api.nvim_set_keymap('n', '<leader>fo', [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true })
 
 require('gitsigns').setup {
   attach_to_untracked = false,
@@ -134,10 +141,6 @@ require('nvim-treesitter.configs').setup {
 
 require('tabline').setup {
   enable = true,
-  options = {
-    show_filename_only = true,
-    show_tabs_always = true,
-  },
 }
 cmd [[
   set guioptions-=e " Use showtabline in gui vim
@@ -147,9 +150,6 @@ cmd [[
 require('lualine').setup {
   options = {
     theme = 'tokyonight',
-  },
-  sections = {
-    lualine_c = { 'filename', 'g:metals_status' },
   },
 }
 

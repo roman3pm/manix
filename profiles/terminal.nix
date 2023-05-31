@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   fonts = import ./fonts.nix;
 in
@@ -66,12 +66,14 @@ in
     };
 
     programs.zellij = {
+      package = pkgs.stable.zellij;
       enable = true;
     };
     xdg.configFile."zellij/config.kdl".text = ''
       default_shell "fish"
+      copy_command "wl-copy"
       keybinds {
-        unbind "Ctrl b" "Ctrl o"
+        unbind "Ctrl b" "Ctrl o" "Ctrl q"
         normal {
           bind "Alt f" { ToggleFocusFullscreen; }
           bind "Alt x" { CloseFocus; }

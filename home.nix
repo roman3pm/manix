@@ -20,23 +20,24 @@
     unzip
     p7zip
     zathura
-    steam-run
+    transmission
     gamemode
     vkbasalt
-    transmission
 
     gcc
     go
+    impl
+    gomodifytags
     golangci-lint
-    rustup
     nodePackages.pyright
     (sbt.override { jre = jdk17; })
     (metals.override { jre = jdk17; })
     gopls
+    rustc
     rust-analyzer
-    lua-language-server
     nil
     nixpkgs-fmt
+    lua-language-server
 
     via
     firefox
@@ -48,7 +49,7 @@
     bitwarden
     steam
     lutris
-    wineWowPackages.staging
+    yuzu
 
     slurp
     grim
@@ -59,21 +60,15 @@
     libnotify
     brightnessctl
     playerctl
-    gammastep
     pavucontrol
     pamixer
     bemenu
     xdg-utils
     polkit_gnome
 
-    (nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
+    (nerdfonts.override { fonts = [ "Hack" ]; })
     yaru-theme
   ];
-
-  programs.java = {
-    enable = true;
-    package = pkgs.jdk17;
-  };
 
   programs.obs-studio = {
     enable = true;
@@ -88,8 +83,6 @@
     BROWSER = "firefox";
     TERMINAL = "alacritty";
   };
-
-  fonts.fontconfig.enable = true;
 
   home.file.".icons/default".source = "${pkgs.yaru-theme}/share/icons/Yaru";
 

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{
   home-manager.users.roz = {
     programs.git = {
       enable = true;
@@ -43,7 +43,6 @@
             selectedLineBgColor = [ "black" ];
             selectedRangeBgColor = [ "black" ];
           };
-          showIcons = true;
         };
         git.paging = {
           colorArg = "always";

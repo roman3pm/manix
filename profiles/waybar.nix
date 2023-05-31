@@ -15,7 +15,7 @@ let
 
     "clock#time" = {
       interval = 1;
-      format = "{:%H:%M:%S}";
+      format = " {:%H:%M:%S}";
       tooltip = false;
     };
 
@@ -26,7 +26,7 @@ let
 
     "cpu" = {
       interval = 1;
-      format = " {usage}%";
+      format = " {usage}%";
       min-length = 5;
       tooltip = false;
     };
@@ -39,14 +39,14 @@ let
 
     "memory" = {
       interval = 1;
-      format = " {used:0.1f}GiB";
+      format = " {used:0.1f}G";
     };
 
     "network" = {
       interval = 5;
       interface = if config.device == "roz-pc" then "enp34s0" else "wlp2s0";
-      format-wifi = "直 {essid} ({signalStrength}%)";
-      format-ethernet = " {ifname}";
+      format-wifi = "󰖩 {essid} ({signalStrength}%)";
+      format-ethernet = "󰈀 {ifname}";
       format-disconnected = "";
       tooltip = false;
     };
@@ -71,7 +71,7 @@ let
         "1:http" = " ";
         "2:chat" = " ";
         "3:code" = " ";
-        "4:mail" = " ";
+        "4:mail" = "󰆎 ";
         "5:game" = " ";
         "6" = " ";
         "7" = " ";
@@ -84,8 +84,8 @@ let
     "idle_inhibitor" = {
       format = "{icon}";
       format-icons = {
-        activated = "(;0_0)";
-        deactivated = "(;=_=)";
+        activated = "ʕ◔ϖ◔ʔ";
+        deactivated = "ʕ-ϖ-ʔ";
       };
     };
 
@@ -106,14 +106,14 @@ let
     "temperature#cpu" = {
       interval = 1;
       hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
-      format = " {temperatureC}°C";
+      format = "CPU {temperatureC}°";
       tooltip = false;
     };
 
     "temperature#gpu" = {
       interval = 1;
       hwmon-path = "/sys/class/hwmon/hwmon0/temp2_input";
-      format = " {temperatureC}°C";
+      format = "GPU {temperatureC}°";
       tooltip = false;
     };
 
@@ -169,7 +169,6 @@ in
         modules-right = [
           "temperature#gpu"
           "temperature#cpu"
-          "cpu"
           "clock#date"
           "clock#time"
         ];

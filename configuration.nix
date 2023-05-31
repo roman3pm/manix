@@ -10,21 +10,26 @@ in
       efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_zen;
+    kernelModules = [ "v4l2loopback" ];
     extraModulePackages = with config.boot.kernelPackages; [
-      v4l2loopback
+      v4l2loopback.out
     ];
+    extraModprobeConfig = ''
+      options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
+    '';
   };
 
+  virtualisation.docker.enable = true;
+
   nix = {
-    package = pkgs.nixVersions.stable;
     gc = {
       automatic = true;
       options = "--delete-older-than 7d";
     };
-    settings.auto-optimise-store = true;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+    };
   };
 
   age.secrets = {
@@ -44,21 +49,21 @@ in
         peers = [
           {
             publicKey = crypt.wg0-publicKey;
-            allowedIPs = [ "0.0.0.0/0" "::/0" ];
+            allowedIPs = crypt.wg0-allowedIPs;
             endpoint = crypt.wg0-endpoint;
             persistentKeepalive = 25;
           }
         ];
       };
       wg1 = {
-        autostart = false;
+        autostart = true;
         address = [ "10.129.0.26/32" ];
         dns = [ "8.8.8.8" ];
         privateKeyFile = config.age.secrets."secrets/wg1-privateKey".path;
         peers = [
           {
             publicKey = crypt.wg1-publicKey;
-            allowedIPs = [ "10.129.0.1/32" "0.0.0.0/0" ];
+            allowedIPs = crypt.wg1-allowedIPs;
             endpoint = crypt.wg1-endpoint;
             persistentKeepalive = 25;
           }
@@ -66,8 +71,6 @@ in
       };
     };
   };
-
-  virtualisation.docker.enable = true;
 
   users = {
     groups.plugdev = { };
@@ -101,8 +104,9 @@ in
     };
   };
 
-  time.timeZone = "Europe/Moscow";
   fonts.enableDefaultFonts = true;
+
+  time.timeZone = "Europe/Moscow";
 
   security = {
     pam.services = {

@@ -34,14 +34,13 @@
       ]))
 
       nvim-lspconfig
-      nvim-metals
-      nvim-dap
       nvim-cmp
       luasnip
       cmp_luasnip
       cmp-path
       cmp-buffer
       cmp-cmdline
+      cmp-tabnine
       cmp-treesitter
       cmp-nvim-lua
       cmp-nvim-lsp

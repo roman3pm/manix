@@ -1,5 +1,5 @@
 let
-  name = "DejaVuSansMono Nerd Font";
+  name = "Hack Nerd Font";
   size = 9.0;
 in
 {
