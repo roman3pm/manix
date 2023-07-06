@@ -27,6 +27,7 @@
     gcc
     go
     impl
+    richgo
     gomodifytags
     golangci-lint
     nodePackages.pyright
@@ -47,9 +48,9 @@
     libreoffice-fresh
     (discord.override { withOpenASAR = true; })
     bitwarden
+    _1password-gui
     steam
     lutris
-    yuzu
 
     slurp
     grim
@@ -95,7 +96,8 @@
 
   qt = {
     enable = true;
-    platformTheme = "gtk";
+    platformTheme = "gnome";
+    style.name = "adwaita-dark";
   };
 
   xdg = {
@@ -104,6 +106,12 @@
     mime.enable = true;
     dataFile."applications/mimeapps.list".force = true;
     configFile."mimeapps.list".force = true;
+    configFile."vkBasalt/vkBasalt.conf".text = ''
+      effects = cas
+      toggleKey = Home
+      enableOnLaunch = True
+      casSharpness = 0.4
+    '';
     desktopEntries = {
       nvim-alacritty = {
         name = "Neovim";

@@ -42,7 +42,6 @@ in
         export SDL_VEDEODRIVER=wayland
         # needs qt5.qtwayland in systemPackages
         export QT_QPA_PLATFORM=wayland
-        export QT_QPA_PLATFORMTHEME=gtk3
         export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
         # Fix for some Java AWT applications (e.g. Android Studio),
         # use this if they aren't displayed properly:
@@ -211,7 +210,7 @@ in
             { app_id = "lutris"; }
             { app_id = "pavucontrol"; }
             { app_id = "com.github.wwmm.easyeffects"; }
-            { class = "Steam"; }
+            { class = "steam"; }
             { class = "\.exe"; }
             { title = "^Choose Files$"; }
           ];
@@ -233,7 +232,7 @@ in
             { app_id = "thunderbird"; }
           ];
           "${ws5}" = [
-            { class = "Steam"; }
+            { class = "steam"; }
             { app_id = "lutris"; }
           ];
         };
