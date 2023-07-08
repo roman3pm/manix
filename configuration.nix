@@ -43,8 +43,8 @@ in
     wg-quick.interfaces = {
       wg0 = {
         autostart = false;
-        address = [ "10.0.0.2/24" "fdc9:281f:04d7:9ee9::2/64" ];
-        dns = [ "10.0.0.1" "fdc9:281f:04d7:9ee9::1" ];
+        address = [ "10.9.52.7/16" "fd42:42:42:42::3407/104" ];
+        dns = [ "10.9.0.1" ];
         privateKeyFile = config.age.secrets."secrets/wg0-privateKey".path;
         peers = [
           {
@@ -91,6 +91,7 @@ in
       driSupport = true;
       driSupport32Bit = true;
     };
+    steam-hardware.enable = true;
     xpadneo.enable = true;
   };
 
