@@ -40,12 +40,12 @@
       cmp-path
       cmp-buffer
       cmp-cmdline
-      cmp-tabnine
       cmp-treesitter
       cmp-nvim-lua
       cmp-nvim-lsp
       lspkind-nvim
       lsp_signature-nvim
+      copilot-lua
     ];
     extraConfig = ''
       lua << EOF

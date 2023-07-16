@@ -39,6 +39,7 @@
     nil
     nixpkgs-fmt
     lua-language-server
+    nodejs-slim
 
     via
     firefox

@@ -160,6 +160,7 @@ in
 
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
+          "${modifier}+p" = "exec swaymsg output 'HDMI-A-1' toggle";
 
           "${modifier}+Shift+v" = "mode '${modeSystem}'";
           "${modifier}+Shift+r" = "mode '${modeResize}'";

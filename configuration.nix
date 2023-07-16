@@ -42,7 +42,6 @@ in
     networkmanager.enable = true;
     wg-quick.interfaces = {
       wg0 = {
-        autostart = false;
         address = [ "10.9.52.7/16" "fd42:42:42:42::3407/104" ];
         dns = [ "10.9.0.1" ];
         privateKeyFile = config.age.secrets."secrets/wg0-privateKey".path;
@@ -56,7 +55,6 @@ in
         ];
       };
       wg1 = {
-        autostart = true;
         address = [ "10.129.0.26/32" ];
         dns = [ "8.8.8.8" ];
         privateKeyFile = config.age.secrets."secrets/wg1-privateKey".path;

@@ -37,11 +37,17 @@ cmp.setup({
     end,
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-d>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-d>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping(function()
+      if cmp.visible() then
+        cmp.close()
+      else
+        cmp.complete()
+      end
+    end, { "i", "s" }),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({ select = false }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -63,7 +69,6 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'cmp_tabnine' },
     { name = 'nvim_lua' },
     { name = 'luasnip' },
     { name = 'treesitter' },
@@ -174,9 +179,20 @@ require('lspconfig').nil_ls.setup {
   },
 }
 
-require("lsp_signature").setup({
+require("lsp_signature").setup {
   bind = true,
   handler_opts = {
     border = "rounded",
   },
-})
+}
+
+require("copilot").setup {
+  suggestion = {
+    auto_trigger = true,
+    keymap = {
+      accept = false,
+      accept_word = "<M-l>",
+      accept_line = "<M-j>",
+    },
+  },
+}
