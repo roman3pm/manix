@@ -12,13 +12,17 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur.url = "github:nix-community/NUR";
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nix-index-database, agenix, ... }:
+  outputs = inputs@{ nixpkgs, ... }:
     let
       system = "x86_64-linux";
-      overlays = import ./overlays.nix inputs system;
+      overlays = [
+        (import ./overlays.nix inputs system)
+        inputs.nur.overlay
+      ];
     in
     {
       nixosModules = {
@@ -31,6 +35,7 @@
         neovim = import ./profiles/neovim.nix;
         git = import ./profiles/git.nix;
         mako = import ./profiles/mako.nix;
+        firefox = import ./profiles/firefox.nix;
         mangohud = import ./profiles/mangohud.nix;
       };
       nixosConfigurations = with nixpkgs.lib;
@@ -46,22 +51,22 @@
                 { device = name; }
                 {
                   nixpkgs = {
-                    overlays = [ overlays ];
+                    overlays = overlays;
                     config.allowUnfree = true;
                   };
                 }
-                home-manager.nixosModules.home-manager
+                inputs.home-manager.nixosModules.home-manager
                 {
                   home-manager = {
                     useGlobalPkgs = true;
                     useUserPackages = true;
                     users.roz = import ./home.nix;
                     sharedModules = [
-                      nix-index-database.hmModules.nix-index
+                      inputs.nix-index-database.hmModules.nix-index
                     ];
                   };
                 }
-                agenix.nixosModules.default
+                inputs.agenix.nixosModules.default
               ];
             };
         in

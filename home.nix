@@ -42,7 +42,6 @@
     nodejs-slim
 
     via
-    firefox
     thunderbird
     telegram-desktop
     slack

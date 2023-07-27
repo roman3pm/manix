@@ -10,6 +10,7 @@
     neovim
     git
     mako
+    firefox
     mangohud
   ];
 
