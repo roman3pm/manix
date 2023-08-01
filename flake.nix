@@ -34,9 +34,8 @@
         terminal = import ./profiles/terminal.nix;
         neovim = import ./profiles/neovim.nix;
         git = import ./profiles/git.nix;
-        mako = import ./profiles/mako.nix;
         firefox = import ./profiles/firefox.nix;
-        mangohud = import ./profiles/mangohud.nix;
+        utils = import ./profiles/utils.nix;
       };
       nixosConfigurations = with nixpkgs.lib;
         let

@@ -21,36 +21,34 @@
     p7zip
     zathura
     transmission
-    gamemode
-    vkbasalt
 
     gcc
     go
+    gopls
     impl
     richgo
     gomodifytags
     golangci-lint
+    nodejs-slim
     nodePackages.pyright
-    (sbt.override { jre = jdk17; })
-    (metals.override { jre = jdk17; })
-    gopls
     rustc
     rust-analyzer
     nil
     nixpkgs-fmt
     lua-language-server
-    nodejs-slim
 
     via
     thunderbird
     telegram-desktop
-    slack
-    libreoffice-fresh
     (discord.override { withOpenASAR = true; })
+    slack
     bitwarden
     _1password-gui
+    libreoffice-fresh
+
     steam
     lutris
+    vkbasalt
 
     slurp
     grim
@@ -112,26 +110,22 @@
       enableOnLaunch = True
       casSharpness = 0.4
     '';
-    desktopEntries = {
-      nvim-alacritty = {
-        name = "Neovim";
-        genericName = "Text Editor";
-        exec = "alacritty --title Neovim --class nvim -e nvim %F";
-        icon = "nvim";
-        terminal = false;
-        mimeType = [ "text/plain" ];
-      };
-    };
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "text/plain" = "nvim-alacritty.desktop";
         "application/pdf" = "org.pwmt.zathura.desktop";
       };
     };
   };
 
+  services.mako = {
+    enable = true;
+    anchor = "top-right";
+    font = "DejaVu Sans 9";
+    maxIconSize = 48;
+  };
+
   services.easyeffects.enable = true;
 
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 }

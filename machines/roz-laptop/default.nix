@@ -9,9 +9,8 @@
     terminal
     neovim
     git
-    mako
     firefox
-    mangohud
+    utils
   ];
 
   services.throttled.enable = true;
