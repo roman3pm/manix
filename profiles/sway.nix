@@ -35,6 +35,7 @@ in
       enable = true;
       wrapperFeatures.gtk = true;
       extraSessionCommands = ''
+        export NIXOS_OZONE_WL=1
         export MOZ_ENABLE_WAYLAND=1
         export XDG_CURRENT_DESKTOP=sway
         export XDG_SESSION_TYPE=wayland
@@ -220,14 +221,14 @@ in
           ];
           "${ws2}" = [
             { app_id = "org.telegram.desktop"; }
-            { class = "Slack"; }
-            { class = "discord"; }
+            { app_id = "Slack"; }
+            { app_id = "discord"; }
           ];
           "${ws3}" = [
             { app_id = "Alacritty_zellij"; }
           ];
           "${ws4}" = [
-            { class = "Bitwarden"; }
+            { app_id = "Bitwarden"; }
             { app_id = "thunderbird"; }
           ];
           "${ws5}" = [

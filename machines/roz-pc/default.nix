@@ -14,6 +14,7 @@
   ];
 
   boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xfff7ffff" ];
 
   services.udev.packages = [
     (pkgs.writeTextFile {

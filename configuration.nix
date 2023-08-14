@@ -42,7 +42,7 @@ in
     networkmanager.enable = true;
     wg-quick.interfaces = {
       wg0 = {
-        address = [ "10.9.18.37/16" "fd42:42:42:42::1225/104" ];
+        address = [ "10.9.52.6/16" "fd42:42:42:42::3406/104" ];
         dns = [ "10.9.0.1" ];
         privateKeyFile = config.age.secrets."secrets/wg0-privateKey".path;
         peers = [
@@ -97,9 +97,6 @@ in
     portal = {
       enable = true;
       wlr.enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-      ];
     };
   };
 

@@ -37,6 +37,7 @@
     nixpkgs-fmt
     lua-language-server
 
+    chromium
     via
     thunderbird
     telegram-desktop

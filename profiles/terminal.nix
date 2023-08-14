@@ -24,7 +24,7 @@ in
         nh = "cd $HOME/Projects/manix";
         nfu = "nix flake update";
         nrs = "nixos-rebuild switch --use-remote-sudo --flake '.#'";
-        ngc = "sudo nix-collect-garbage -d";
+        ngc = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
         ns = "nix search nixpkgs";
         scts = "sudo systemctl status";
         sctt = "sudo systemctl start";
