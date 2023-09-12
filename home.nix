@@ -17,6 +17,7 @@
     hurl
     wget
     unar
+    unrar
     unzip
     p7zip
     zathura
@@ -37,8 +38,9 @@
     nixpkgs-fmt
     lua-language-server
 
-    chromium
     via
+    swappy
+    chromium
     thunderbird
     telegram-desktop
     (discord.override { withOpenASAR = true; })
@@ -48,8 +50,10 @@
     libreoffice-fresh
 
     steam
+    steam-run
     lutris
     vkbasalt
+    gamescope
 
     slurp
     grim
@@ -84,11 +88,11 @@
     TERMINAL = "alacritty";
   };
 
-  home.file.".icons/default".source = "${pkgs.yaru-theme}/share/icons/Yaru";
+  home.file.".icons/default".source = "${pkgs.yaru-theme}/share/icons/Yaru-blue-dark";
 
   gtk = {
     enable = true;
-    cursorTheme.name = "Yaru";
+    cursorTheme.name = "Yaru-blue-dark";
     iconTheme.name = "Yaru-blue-dark";
     theme.name = "Yaru-blue-dark";
   };

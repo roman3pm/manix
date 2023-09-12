@@ -21,7 +21,7 @@ in
       '';
       shellAbbrs = {
         ll = "LC_COLLATE=C ls -la --group-directories-first";
-        nh = "cd $HOME/Projects/manix";
+        nh = "cd $HOME/projects/manix";
         nfu = "nix flake update";
         nrs = "nixos-rebuild switch --use-remote-sudo --flake '.#'";
         ngc = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
@@ -29,11 +29,11 @@ in
         scts = "sudo systemctl status";
         sctt = "sudo systemctl start";
         sctp = "sudo systemctl stop";
-        sctr = "sudo systemctl reload";
+        sctr = "sudo systemctl restart";
         sctus = "systemctl --user status";
         sctut = "systemctl --user start";
         sctup = "systemctl --user stop";
-        sctur = "systemctl --user reload";
+        sctur = "systemctl --user restart";
       };
       functions = {
         prompt_hostname = {

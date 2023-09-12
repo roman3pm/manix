@@ -92,6 +92,8 @@ in
           "type:pointer" = {
             accel_profile = "flat";
             pointer_accel = "0";
+            scroll_method = "on_button_down";
+            scroll_button = "274";
           };
         };
         output = {
@@ -166,7 +168,7 @@ in
           "${modifier}+Shift+v" = "mode '${modeSystem}'";
           "${modifier}+Shift+r" = "mode '${modeResize}'";
 
-          "${modifier}+s" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png";
+          "${modifier}+s" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | ${pkgs.swappy}/bin/swappy -f -";
           "${modifier}+Shift+s" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | wl-copy -t image/png";
           "${modifier}+g" = "exec '${lockCmd}'";
           "${modifier}+i" = "exec ${pkgs.mako}/bin/makoctl invoke";
