@@ -139,6 +139,12 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+require('treesitter-context').setup {
+  enable = true,
+  min_window_height = 40,
+  multiline_threshold = 1,
+}
+
 require('tabline').setup {
   enable = true,
 }

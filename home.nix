@@ -24,7 +24,7 @@
     transmission
 
     gcc
-    go
+    go_1_21
     gopls
     impl
     richgo

@@ -89,6 +89,7 @@ in
             xkb_options = "grp:lctrl_toggle,ctrl:nocaps";
           };
           "type:touchpad" = { tap = "enabled"; };
+        } // lib.optionalAttrs (config.device == "roz-pc") {
           "type:pointer" = {
             accel_profile = "flat";
             pointer_accel = "0";
