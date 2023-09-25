@@ -179,10 +179,10 @@ in
           "XF86AudioNext" = "exec playerctl next";
           "XF86AudioPrev" = "exec playerctl previous";
 
-          "XF86AudioMute" = "exec pamixer --sink '${config.deviceSpecific.audio.sink}' -t";
-          "XF86AudioRaiseVolume" = "exec pamixer --sink '${config.deviceSpecific.audio.sink}' -i 5";
-          "XF86AudioLowerVolume" = "exec pamixer --sink '${config.deviceSpecific.audio.sink}' -d 5";
-          "XF86AudioMicMute" = "exec pamixer --source '${config.deviceSpecific.audio.source}' -t";
+          "XF86AudioMute" = "exec pamixer -t";
+          "XF86AudioRaiseVolume" = "exec pamixer -i 5";
+          "XF86AudioLowerVolume" = "exec pamixer -d 5";
+          "XF86AudioMicMute" = "exec pamixer --default-source -t";
 
           "XF86MonBrightnessUp" = "exec brightnessctl s +10%";
           "XF86MonBrightnessDown" = "exec brightnessctl s 10%-";
