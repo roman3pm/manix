@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 let
   crypt = import ./secrets/crypt.nix;
 in
@@ -30,6 +30,7 @@ in
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
     };
+    registry.n.flake = inputs.nixpkgs;
   };
 
   age.secrets = {

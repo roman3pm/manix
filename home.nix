@@ -1,4 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
+
+  imports = [
+    inputs.nix-index-database.hmModules.nix-index
+  ];
+
   programs.home-manager.enable = true;
 
   home.username = "roz";
@@ -113,7 +118,7 @@
       effects = cas
       toggleKey = Home
       enableOnLaunch = True
-      casSharpness = 0.4
+      casSharpness = 0.2
     '';
     mimeApps = {
       enable = true;

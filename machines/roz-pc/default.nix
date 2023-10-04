@@ -14,7 +14,7 @@
   ];
 
   boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xfff7ffff" ];
+  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xfff7ffff" "amdgpu.freesync_video=1" ];
 
   services.udev.packages = [
     (pkgs.writeTextFile {

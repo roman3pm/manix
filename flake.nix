@@ -41,31 +41,29 @@
         let
           hosts = builtins.attrNames (builtins.readDir ./machines);
           mkHost = name:
-            nixosSystem {
+            nixosSystem rec {
               inherit system;
               specialArgs = { inherit inputs; };
               modules = [
-                (import (./machines + "/${name}"))
-                ./configuration.nix
-                { device = name; }
+                inputs.agenix.nixosModules.default
                 {
                   nixpkgs = {
                     overlays = overlays;
                     config.allowUnfree = true;
                   };
                 }
+                ./configuration.nix
+                { device = name; }
+                (import (./machines + "/${name}"))
                 inputs.home-manager.nixosModules.home-manager
                 {
                   home-manager = {
                     useGlobalPkgs = true;
                     useUserPackages = true;
                     users.roz = import ./home.nix;
-                    sharedModules = [
-                      inputs.nix-index-database.hmModules.nix-index
-                    ];
+                    extraSpecialArgs = specialArgs;
                   };
                 }
-                inputs.agenix.nixosModules.default
               ];
             };
         in

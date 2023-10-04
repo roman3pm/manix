@@ -2,7 +2,6 @@
   home-manager.users.roz = {
     programs.mangohud = {
       enable = true;
-      enableSessionWide = true;
       settings = {
         no_display = true;
         cpu_temp = true;
@@ -17,6 +16,8 @@
         engine_version = true;
         vulkan_driver = true;
         fps_limit = "144,0";
+        vsync = 1;
+        gl_vsync = 0;
       };
     };
   };
