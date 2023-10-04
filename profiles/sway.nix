@@ -81,7 +81,6 @@ in
           { command = "sleep 1 && ${pkgs.telegram-desktop}/bin/telegram-desktop"; }
           { command = "sleep 1 && ${pkgs.thunderbird}/bin/thunderbird"; }
           { command = "sleep 1 && ${pkgs.firefox}/bin/firefox"; }
-          { command = "sleep 1 && ${terminal} --class Alacritty_zellij -e zellij"; }
         ];
         input = {
           "type:keyboard" = {
@@ -226,9 +225,6 @@ in
             { app_id = "org.telegram.desktop"; }
             { app_id = "Slack"; }
             { app_id = "discord"; }
-          ];
-          "${ws3}" = [
-            { app_id = "Alacritty_zellij"; }
           ];
           "${ws4}" = [
             { app_id = "Bitwarden"; }
