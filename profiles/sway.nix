@@ -17,7 +17,7 @@ in
       '';
       lockCmd = ''
         ${pkgs.swaylock}/bin/swaylock -f \
-        -i ${./wallpapers/mox.jpg} \
+        -i ${./wallpapers/1.jpg} \
         --indicator-idle-visible \
         --indicator-thickness 6 \
         --text-color a9a9a9 \
@@ -98,7 +98,7 @@ in
         };
         output = {
           "*" = {
-            bg = "${./wallpapers/mox.jpg} fill";
+            bg = "${./wallpapers/1.jpg} fill";
           };
         } // lib.optionalAttrs (config.device == "roz-pc") {
           "DP-1" = {

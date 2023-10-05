@@ -1,3 +1,11 @@
+@define-color background rgba(26, 27, 38, 0.9);
+@define-color black      #32344a;
+@define-color green      #b9f27c;
+@define-color yellow     #e0af68;
+@define-color blue       #7aa2f7;
+@define-color cyan       #449dab;
+@define-color white      #acb0d0;
+
 * {
   border: none;
   border-radius: 0;
@@ -9,40 +17,40 @@
 }
 
 window#waybar {
-  background: rgba(43, 48, 59, 0.5);
+  background: @background;
 }
 #window {
-  color: white;
+  color: @cyan;
   padding: 6px 8px;
 }
 
 #temperature, #cpu, #memory, #network, #pulseaudio, #battery, #language, #idle_inhibitor, #workspaces button {
-  color: darkgray;
+  color: @white;
   background: transparent;
   padding: 6px 8px;
 }
 
 #clock, #mode {
-  color: white;
-  background: rgba(100, 114, 125, 0.5);
+  color: @green;
+  background: @black;
   padding: 6px 8px;
 }
 
 #workspaces button.focused {
-  color: white;
-  background: rgba(100, 114, 125, 0.5);
-  border-bottom: 2px solid white;
+  color: @white;
+  background: @black;
+  border-bottom: 2px solid @blue;
   padding: 6px 8px 4px;
 }
 
 #idle_inhibitor.activated {
-  color: white;
+  color: @yellow;
 }
 
 tooltip {
-  background: rgba(43, 48, 59, 0.5);
-  border: 1px solid rgba(100, 114, 125, 0.5);
+  background: @background;
+  border: 1px solid @blue;
 }
 tooltip label {
-  color: white;
+  color: @white;
 }
