@@ -1,10 +1,7 @@
 @define-color background rgba(26, 27, 38, 0.9);
+@define-color foreground #a9b1d6;
 @define-color black      #32344a;
-@define-color green      #b9f27c;
-@define-color yellow     #e0af68;
-@define-color blue       #7aa2f7;
-@define-color cyan       #449dab;
-@define-color white      #acb0d0;
+@define-color white      #787c99;
 
 * {
   border: none;
@@ -20,7 +17,7 @@ window#waybar {
   background: @background;
 }
 #window {
-  color: @cyan;
+  color: @foreground;
   padding: 6px 8px;
 }
 
@@ -31,25 +28,25 @@ window#waybar {
 }
 
 #clock, #mode {
-  color: @green;
+  color: @foreground;
   background: @black;
   padding: 6px 8px;
 }
 
 #workspaces button.focused {
-  color: @white;
+  color: @foreground;
   background: @black;
-  border-bottom: 2px solid @blue;
+  border-bottom: 2px solid @white;
   padding: 6px 8px 4px;
 }
 
 #idle_inhibitor.activated {
-  color: @yellow;
+  color: @foreground;
 }
 
 tooltip {
   background: @background;
-  border: 1px solid @blue;
+  border: 1px solid @white;
 }
 tooltip label {
   color: @white;
