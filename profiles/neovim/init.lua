@@ -100,8 +100,12 @@ require('gitsigns').setup {
   end
 }
 
-require("indent_blankline").setup {
-  show_end_of_line = true,
+require("ibl").setup {
+  indent = {
+    char = "▏",
+    tab_char = "▏",
+  },
+  scope = { enabled = false },
 }
 
 require('nvim-autopairs').setup {

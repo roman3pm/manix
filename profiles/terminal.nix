@@ -12,7 +12,7 @@ in
       loginShellInit = ''
         if test -z "$DISPLAY"
           and test "$XDG_VTNR" -eq 1
-          exec sway
+          exec sway -Dnoscanout
         end
       '';
       shellInit = ''
@@ -51,13 +51,15 @@ in
     programs.bat = {
       enable = true;
       themes = {
-        tokyonight = builtins.readFile (pkgs.fetchFromGitHub
-          {
+        tokyonight = {
+          src = pkgs.fetchFromGitHub {
             owner = "enkia";
             repo = "enki-theme";
             rev = "0b629142733a27ba3a6a7d4eac04f81744bc714f";
             sha256 = "Q+sac7xBdLhjfCjmlvfQwGS6KUzt+2fu+crG4NdNr4w=";
-          } + "/scheme/Enki-Tokyo-Night.tmTheme");
+          };
+          file = "/scheme/Enki-Tokyo-Night.tmTheme";
+        };
       };
       config = {
         theme = "tokyonight";
