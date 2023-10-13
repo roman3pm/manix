@@ -13,7 +13,7 @@ in
       terminal = "${pkgs.alacritty}/bin/alacritty";
       modifier = "Mod4";
       menu = ''
-        ${pkgs.bemenu}/bin/bemenu-run -m all -H 31 --fn '${builtins.head fonts.fontConfig.names} 12' --no-exec | xargs swaymsg exec --
+        ${pkgs.bemenu}/bin/bemenu-run -m all -H 35 --fn '${builtins.head fonts.fontConfig.names} 12' --no-exec | xargs swaymsg exec --
       '';
       lockCmd = ''
         ${pkgs.swaylock}/bin/swaylock -f \

@@ -1,53 +1,46 @@
-@define-color background rgba(26, 27, 38, 0.9);
-@define-color foreground #a9b1d6;
-@define-color black      #32344a;
-@define-color white      #787c99;
+@define-color background rgba(43, 48, 59, 0.6);
 
 * {
   border: none;
   border-radius: 0;
   font-family: "Hack Nerd Font";
   font-size: 16px;
+  color: white;
   min-height: 0;
   margin: 0;
   padding: 0;
 }
 
+#window {
+  font-weight: bold;
+  padding: 8px;
+}
+
 window#waybar {
   background: @background;
 }
-#window {
-  color: @foreground;
-  padding: 6px 8px;
-}
-
-#temperature, #cpu, #memory, #network, #pulseaudio, #battery, #language, #idle_inhibitor, #workspaces button {
-  color: @white;
-  background: transparent;
-  padding: 6px 8px;
-}
 
 #clock, #mode {
-  color: @foreground;
-  background: @black;
-  padding: 6px 8px;
+  background: @background;
+  padding: 8px;
+}
+
+#temperature, #cpu, #pulseaudio, #battery, #language, #idle_inhibitor, #workspaces button {
+  background: transparent;
+  padding: 8px;
+}
+
+#idle_inhibitor.deactivated {
+  color: darkgray;
 }
 
 #workspaces button.focused {
-  color: @foreground;
-  background: @black;
-  border-bottom: 2px solid @white;
-  padding: 6px 8px 4px;
-}
-
-#idle_inhibitor.activated {
-  color: @foreground;
+  background: @background;
+  border-top: 2px solid white;
+  margin-bottom: 2px;
+  padding: 6px 8px;
 }
 
 tooltip {
   background: @background;
-  border: 1px solid @white;
-}
-tooltip label {
-  color: @white;
 }

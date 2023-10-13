@@ -1,68 +1,10 @@
 { config, pkgs, lib, ... }:
 let
   modules = {
-    "battery" = {
-      states = {
-        critical = 15;
-      };
-      full-at = 90;
-      format = "{icon} {capacity}%";
-      format-charging = " {capacity}%";
-      format-full = " {capacity}%";
-      format-icons = [ " " " " " " " " " " ];
-      format-alt = "{icon} {time}";
-    };
-
-    "clock#time" = {
-      interval = 1;
-      format = " {:%H:%M:%S}";
-      tooltip = false;
-    };
-
-    "clock#date" = {
-      format = " {:%e %b %Y}";
-      tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-    };
-
-    "cpu" = {
-      interval = 1;
-      format = " {usage}%";
-      min-length = 5;
-      tooltip = false;
-    };
-
-    "sway/language" = {
-      format = " {long}";
-      min-length = 14;
-      tooltip = false;
-    };
-
-    "memory" = {
-      interval = 1;
-      format = " {used:0.1f}G";
-    };
-
-    "network" = {
-      interval = 5;
-      interface = if config.device == "roz-pc" then "enp34s0" else "wlp2s0";
-      format-wifi = "󰖩 {essid} ({signalStrength}%)";
-      format-ethernet = "󰈀 {ifname}";
-      format-disconnected = "";
-      tooltip = false;
-    };
-
     "sway/mode" = {
       format = "{}";
       tooltip = false;
     };
-
-    "sway/window" = {
-      format = "{}";
-      max-length = 80;
-      all-outputs = true;
-      tooltip = false;
-    };
-
     "sway/workspaces" = {
       all-outputs = false;
       disable-scroll = false;
@@ -80,15 +22,46 @@ let
         "10" = " ";
       };
     };
-
+    "sway/window" = {
+      format = "{}";
+      max-length = 80;
+      all-outputs = true;
+      tooltip = false;
+    };
+    "temperature#gpu" = {
+      interval = 1;
+      hwmon-path = "/sys/class/hwmon/hwmon0/temp2_input";
+      format = "GPU {temperatureC}°";
+      tooltip = false;
+    };
+    "temperature#cpu" = {
+      interval = 1;
+      hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+      format = "CPU {temperatureC}°";
+      tooltip = false;
+    };
+    "battery" = {
+      states = {
+        critical = 15;
+      };
+      full-at = 90;
+      format = "{icon} {capacity}%";
+      format-charging = " {capacity}%";
+      format-full = " {capacity}%";
+      format-icons = [ " " " " " " " " " " ];
+      format-alt = "{icon} {time}";
+    };
+    "tray" = {
+      icon-size = 20;
+      spacing = 5;
+    };
     "idle_inhibitor" = {
       format = "{icon}";
       format-icons = {
-        activated = "ʕ◔ϖ◔ʔ";
-        deactivated = "ʕ-ϖ-ʔ";
+        activated = "";
+        deactivated = "";
       };
     };
-
     "pulseaudio" = {
       scroll-step = 5;
       format = "{icon}{volume}%";
@@ -102,24 +75,14 @@ let
       on-click-right = "${pkgs.easyeffects}/bin/easyeffects";
       ignored-sinks = [ "Easy Effects Sink" ];
     };
-
-    "temperature#cpu" = {
-      interval = 1;
-      hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
-      format = "CPU {temperatureC}°";
+    "sway/language" = {
+      format = "{flag}{short}";
       tooltip = false;
     };
-
-    "temperature#gpu" = {
+    "clock" = {
       interval = 1;
-      hwmon-path = "/sys/class/hwmon/hwmon0/temp2_input";
-      format = "GPU {temperatureC}°";
-      tooltip = false;
-    };
-
-    "tray" = {
-      icon-size = 20;
-      spacing = 5;
+      format = " {:%H:%M:%S}";
+      tooltip-format = " {:%e %b %Y}";
     };
   };
 in
@@ -131,30 +94,21 @@ in
       (modules // {
         position = "top";
         modules-left = [
+          "sway/mode"
           "sway/workspaces"
+        ];
+        modules-center = [
           "sway/window"
         ];
         modules-right = [
           "temperature#gpu"
           "temperature#cpu"
-          "cpu"
-          "memory"
-          "network"
-          "pulseaudio"
           "battery"
-          "sway/language"
           "tray"
           "idle_inhibitor"
-          "clock#date"
-          "clock#time"
-        ];
-      } // lib.optionalAttrs (config.device == "roz-pc") {
-        output = "DP-1";
-      })
-      (modules // {
-        position = "bottom";
-        modules-left = [
-          "sway/mode"
+          "pulseaudio"
+          "sway/language"
+          "clock"
         ];
       } // lib.optionalAttrs (config.device == "roz-pc") {
         output = "DP-1";
@@ -164,13 +118,12 @@ in
         output = "HDMI-A-1";
         modules-left = [
           "sway/workspaces"
-          "sway/window"
         ];
         modules-right = [
           "temperature#gpu"
           "temperature#cpu"
-          "clock#date"
-          "clock#time"
+          "sway/language"
+          "clock"
         ];
       })
     ];
