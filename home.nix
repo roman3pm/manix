@@ -25,7 +25,7 @@
     unzip
     p7zip
     zathura
-    transmission
+    transmission_4
 
     nil
     nixpkgs-fmt
