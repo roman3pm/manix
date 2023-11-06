@@ -22,10 +22,6 @@ in
   virtualisation.docker.enable = true;
 
   nix = {
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 7d";
-    };
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];

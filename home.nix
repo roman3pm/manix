@@ -11,37 +11,25 @@
   home.packages = with pkgs; [
     gnumake
     git-crypt
-    fd
     fzf
+    ripgrep
     jq
     imv
     mpv
     htop-vim
     neofetch
-    ripgrep
     hurl
     wget
     unar
-    unrar
     unzip
     p7zip
     zathura
     transmission
 
-    gcc
-    go_1_21
-    gopls
-    impl
-    richgo
-    gomodifytags
-    golangci-lint
-    nodejs-slim
-    nodePackages.pyright
-    rustc
-    rust-analyzer
     nil
     nixpkgs-fmt
     lua-language-server
+    nodejs-slim
 
     via
     swappy

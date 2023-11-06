@@ -17,7 +17,7 @@
         nvim-bqf
         nvim-tree-lua
         telescope-nvim
-        telescope-fzy-native-nvim
+        telescope-fzf-native-nvim
         gitsigns-nvim
         nvim-treesitter-context
         (nvim-treesitter.withPlugins (plugins: with plugins; [
