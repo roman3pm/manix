@@ -11,8 +11,9 @@
   home.packages = with pkgs; [
     gnumake
     git-crypt
-    fzf
     ripgrep
+    fzf
+    fd
     jq
     imv
     mpv
