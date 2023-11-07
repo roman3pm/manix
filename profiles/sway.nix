@@ -75,12 +75,12 @@ in
               before-sleep '${lockCmd}'
             '';
           }
-          { command = "sleep 1 && ${pkgs.bitwarden}/bin/bitwarden"; }
-          { command = "sleep 1 && ${pkgs.discord}/bin/discord"; }
-          { command = "sleep 1 && ${pkgs.slack}/bin/slack"; }
-          { command = "sleep 1 && ${pkgs.telegram-desktop}/bin/telegram-desktop"; }
-          { command = "sleep 1 && ${pkgs.thunderbird}/bin/thunderbird"; }
-          { command = "sleep 1 && ${pkgs.firefox}/bin/firefox"; }
+          { command = "sleep 3 && ${pkgs.bitwarden}/bin/bitwarden"; }
+          { command = "sleep 3 && ${pkgs.discord}/bin/discord"; }
+          { command = "sleep 3 && ${pkgs.slack}/bin/slack"; }
+          { command = "sleep 3 && ${pkgs.telegram-desktop}/bin/telegram-desktop"; }
+          { command = "sleep 3 && ${pkgs.thunderbird}/bin/thunderbird"; }
+          { command = "sleep 3 && ${pkgs.firefox}/bin/firefox"; }
         ];
         input = {
           "type:keyboard" = {
