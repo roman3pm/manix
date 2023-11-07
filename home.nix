@@ -46,6 +46,7 @@
     steam
     steam-run
     lutris
+    wineWowPackages.stagingFull
     vkbasalt
     gamescope
 
