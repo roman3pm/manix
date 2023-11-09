@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }:
 let
+  cpuHwmon = if config.device == "roz-laptop" then "hwmon5" else "hwmon2";
   modules = {
     "sway/mode" = {
       format = "{}";
@@ -36,7 +37,7 @@ let
     };
     "temperature#cpu" = {
       interval = 1;
-      hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+      hwmon-path = "/sys/class/hwmon/${cpuHwmon}/temp1_input";
       format = "CPU {temperatureC}°";
       tooltip = false;
     };
