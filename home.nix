@@ -27,6 +27,11 @@
     zathura
     transmission_4
 
+    gcc
+    go
+    gopls
+    golangci-lint
+    richgo
     nil
     nixpkgs-fmt
     lua-language-server
