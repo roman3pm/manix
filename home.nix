@@ -52,7 +52,6 @@
     steam-run
     lutris
     wineWowPackages.stagingFull
-    vkbasalt
     gamescope
 
     slurp
@@ -73,13 +72,6 @@
     (nerdfonts.override { fonts = [ "Hack" ]; })
     yaru-theme
   ];
-
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      wlrobs
-    ];
-  };
 
   home.sessionVariables = {
     EDITOR = "vim";
@@ -109,12 +101,6 @@
     mime.enable = true;
     dataFile."applications/mimeapps.list".force = true;
     configFile."mimeapps.list".force = true;
-    configFile."vkBasalt/vkBasalt.conf".text = ''
-      effects = cas
-      toggleKey = Home
-      enableOnLaunch = True
-      casSharpness = 0.2
-    '';
     mimeApps = {
       enable = true;
       defaultApplications = {

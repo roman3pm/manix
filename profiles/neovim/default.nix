@@ -50,8 +50,8 @@
       ];
       extraConfig = ''
         lua << EOF
-        ${lib.strings.fileContents ./neovim/init.lua}
-        ${lib.strings.fileContents ./neovim/lsp.lua}
+        ${lib.strings.fileContents ./init.lua}
+        ${lib.strings.fileContents ./lsp.lua}
         EOF
       '';
     };

@@ -1,20 +1,13 @@
 { inputs, pkgs, ... }: {
-  imports = with inputs.self.nixosModules; with inputs.self.nixosProfiles; [
+  imports = [
     ./hardware-configuration.nix
-
-    devices
-
-    sway
-    waybar
-    terminal
-    neovim
-    git
-    firefox
-    utils
+    inputs.self.nixosRoles.desktop
   ];
 
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xfff7ffff" "amdgpu.freesync_video=1" ];
+  boot = {
+    initrd.kernelModules = [ "amdgpu" ];
+    kernelParams = [ "amdgpu.ppfeaturemask=0xfff7ffff" "amdgpu.freesync_video=1" ];
+  };
 
   services.udev.packages = [
     (pkgs.writeTextFile {

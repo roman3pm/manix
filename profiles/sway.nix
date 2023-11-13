@@ -1,6 +1,5 @@
 { config, pkgs, lib, ... }:
 let
-  fonts = import ./fonts.nix;
   ws1 = "1:http";
   ws2 = "2:chat";
   ws3 = "3:code";
@@ -13,11 +12,11 @@ in
       terminal = "${pkgs.alacritty}/bin/alacritty";
       modifier = "Mod4";
       menu = ''
-        ${pkgs.bemenu}/bin/bemenu-run -m all -H 35 --fn '${builtins.head fonts.fontConfig.names} 12' --no-exec | xargs swaymsg exec --
+        ${pkgs.bemenu}/bin/bemenu-run -m all -H 35 --fn 'Hack Nerd Font 12' --no-exec | xargs swaymsg exec --
       '';
       lockCmd = ''
         ${pkgs.swaylock}/bin/swaylock -f \
-        -i ${./wallpapers/1.jpg} \
+        -i ${../wallpapers/1.jpg} \
         --indicator-idle-visible \
         --indicator-thickness 6 \
         --text-color a9a9a9 \
@@ -41,16 +40,15 @@ in
         export XDG_SESSION_TYPE=wayland
         export BEMENU_BACKEND=wayland
         export SDL_VEDEODRIVER=wayland
-        # needs qt5.qtwayland in systemPackages
         export QT_QPA_PLATFORM=wayland
         export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-        # Fix for some Java AWT applications (e.g. Android Studio),
-        # use this if they aren't displayed properly:
-        export _JAVA_AWT_WM_NONREPARENTING=1
       '';
       config = {
         inherit terminal modifier menu;
-        fonts = fonts.fontConfig;
+        fonts = {
+          names = [ "Hack Nerd Font" ];
+          size = 10.0;
+        };
         gaps = {
           inner = 8;
           outer = 2;
@@ -75,12 +73,10 @@ in
               before-sleep '${lockCmd}'
             '';
           }
-          { command = "sleep 3 && ${pkgs.bitwarden}/bin/bitwarden"; }
-          { command = "sleep 3 && ${pkgs.discord}/bin/discord"; }
-          { command = "sleep 3 && ${pkgs.slack}/bin/slack"; }
-          { command = "sleep 3 && ${pkgs.telegram-desktop}/bin/telegram-desktop"; }
-          { command = "sleep 3 && ${pkgs.thunderbird}/bin/thunderbird"; }
-          { command = "sleep 3 && ${pkgs.firefox}/bin/firefox"; }
+          { command = "${pkgs.firefox}/bin/firefox"; }
+          { command = "sleep 2 && ${pkgs.thunderbird}/bin/thunderbird"; }
+          { command = "sleep 2 && ${pkgs.telegram-desktop}/bin/telegram-desktop -startintray"; }
+          { command = "sleep 2 && ${pkgs.slack}/bin/slack -u"; }
         ];
         input = {
           "type:keyboard" = {
@@ -98,7 +94,7 @@ in
         };
         output = {
           "*" = {
-            bg = "${./wallpapers/1.jpg} fill";
+            bg = "${../wallpapers/1.jpg} fill";
           };
         } // lib.optionalAttrs (config.device == "roz-pc") {
           "DP-1" = {
@@ -212,9 +208,9 @@ in
             { app_id = "lutris"; }
             { app_id = "pavucontrol"; }
             { app_id = "com.github.wwmm.easyeffects"; }
+            { app_id = "corectrl"; }
             { class = "steam"; }
             { class = "\.exe"; }
-            { title = "^Choose Files$"; }
           ];
         };
         assigns = {
@@ -227,7 +223,6 @@ in
             { app_id = "discord"; }
           ];
           "${ws4}" = [
-            { app_id = "Bitwarden"; }
             { app_id = "thunderbird"; }
           ];
           "${ws5}" = [

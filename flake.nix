@@ -16,27 +16,33 @@
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = inputs@{ nixpkgs, ... }:
+  outputs = inputs@{ self, nixpkgs, ... }:
     let
       system = "x86_64-linux";
       overlays = [
         (import ./overlays.nix inputs system)
         inputs.nur.overlay
       ];
+      findModules = dir:
+        builtins.concatLists (builtins.attrValues (builtins.mapAttrs
+          (name: type:
+            if type == "regular" then [{
+              name = builtins.elemAt (builtins.match "(.*)\\.nix" name) 0;
+              value = dir + "/${name}";
+            }] else if (builtins.readDir (dir + "/${name}")) ? "default.nix" then [{
+              inherit name;
+              value = dir + "/${name}";
+            }] else findModules (dir + "/${name}"))
+          (builtins.readDir dir)
+        ));
     in
     {
-      nixosModules = {
-        devices = import ./modules/devices.nix;
-      };
-      nixosProfiles = {
-        sway = import ./profiles/sway.nix;
-        waybar = import ./profiles/waybar.nix;
-        terminal = import ./profiles/terminal.nix;
-        neovim = import ./profiles/neovim.nix;
-        git = import ./profiles/git.nix;
-        firefox = import ./profiles/firefox.nix;
-        utils = import ./profiles/utils.nix;
-      };
+      nixosModules = builtins.listToAttrs (findModules ./modules);
+
+      nixosProfiles = builtins.listToAttrs (findModules ./profiles);
+
+      nixosRoles = import ./roles;
+
       nixosConfigurations = with nixpkgs.lib;
         let
           hosts = builtins.attrNames (builtins.readDir ./machines);
@@ -44,7 +50,7 @@
             nixosSystem rec {
               inherit system;
               specialArgs = { inherit inputs; };
-              modules = [
+              modules = __attrValues self.nixosModules ++ [
                 inputs.agenix.nixosModules.default
                 {
                   nixpkgs = {

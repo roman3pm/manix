@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   home-manager.users.roz = {
     programs.mangohud = {
       enable = true;
@@ -19,5 +19,13 @@
         fps_limit = "144,0";
       };
     };
+
+    home.packages = [ pkgs.vkbasalt ];
+    xdg.configFile."vkBasalt/vkBasalt.conf".text = ''
+      effects = cas
+      toggleKey = Home
+      enableOnLaunch = True
+      casSharpness = 0.3
+    '';
   };
 }

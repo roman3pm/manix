@@ -1,16 +1,7 @@
 { inputs, pkgs, lib, ... }: {
-  imports = with inputs.self.nixosModules; with inputs.self.nixosProfiles; [
+  imports = [
     ./hardware-configuration.nix
-
-    devices
-
-    sway
-    waybar
-    terminal
-    neovim
-    git
-    firefox
-    utils
+    inputs.self.nixosRoles.desktop
   ];
 
   hardware = {
@@ -20,5 +11,6 @@
   };
 
   services.throttled.enable = true;
+
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }

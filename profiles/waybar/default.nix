@@ -90,7 +90,7 @@ in
 {
   home-manager.users.roz.programs.waybar = {
     enable = true;
-    style = ./waybar/style.css;
+    style = ./style.css;
     settings = [
       (modules // {
         position = "top";
