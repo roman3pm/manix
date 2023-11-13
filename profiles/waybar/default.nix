@@ -1,6 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 let
   cpuHwmon = if config.device == "roz-laptop" then "hwmon5" else "hwmon2";
+  dp1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
+  hdmia1 = "HDMI-A-1";
   modules = {
     "sway/mode" = {
       format = "{}";
@@ -94,6 +96,7 @@ in
     settings = [
       (modules // {
         position = "top";
+        output = dp1;
         modules-left = [
           "sway/mode"
           "sway/workspaces"
@@ -111,12 +114,10 @@ in
           "sway/language"
           "clock"
         ];
-      } // lib.optionalAttrs (config.device == "roz-pc") {
-        output = "DP-1";
       })
       (modules // {
         position = "top";
-        output = "HDMI-A-1";
+        output = hdmia1;
         modules-left = [
           "sway/workspaces"
         ];

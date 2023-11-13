@@ -5,6 +5,8 @@ let
   ws3 = "3:code";
   ws4 = "4:mail";
   ws5 = "5:game";
+  dp1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
+  hdmia1 = "HDMI-A-1";
 in
 {
   home-manager.users.roz.wayland.windowManager.sway =
@@ -55,7 +57,6 @@ in
         };
         focus = {
           followMouse = "no";
-          mouseWarping = false;
         };
         bars = [ ];
         startup = [
@@ -95,16 +96,13 @@ in
         output = {
           "*" = {
             bg = "${../wallpapers/1.jpg} fill";
-          };
-        } // lib.optionalAttrs (config.device == "roz-pc") {
-          "DP-1" = {
-            pos = "0 0";
-            mode = "2560x1440@144Hz";
             adaptive_sync = "on";
           };
-          "HDMI-A-1" = {
-            pos = "2560 0";
-            mode = "1920x1080@75Hz";
+          "${dp1}" = {
+            pos = "0 0";
+          };
+          "${hdmia1}" = {
+            pos = if config.device == "roz-pc" then "2560 0" else "0 1080";
             transform = "270";
           };
         };
@@ -159,7 +157,7 @@ in
 
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
-          "${modifier}+p" = "exec swaymsg output 'HDMI-A-1' toggle";
+          "${modifier}+p" = "exec swaymsg output '${hdmia1}' toggle";
 
           "${modifier}+Shift+v" = "mode '${modeSystem}'";
           "${modifier}+Shift+r" = "mode '${modeResize}'";
@@ -230,13 +228,12 @@ in
             { app_id = "lutris"; }
           ];
         };
-      } // lib.optionalAttrs (config.device == "roz-pc") {
         workspaceOutputAssign = [
-          { workspace = ws1; output = "DP-1"; }
-          { workspace = ws2; output = "HDMI-A-1"; }
-          { workspace = ws3; output = "DP-1"; }
-          { workspace = ws4; output = "HDMI-A-1"; }
-          { workspace = ws5; output = "DP-1"; }
+          { workspace = ws1; output = dp1; }
+          { workspace = ws2; output = hdmia1; }
+          { workspace = ws3; output = dp1; }
+          { workspace = ws4; output = hdmia1; }
+          { workspace = ws5; output = dp1; }
         ];
       };
       extraConfig = ''
