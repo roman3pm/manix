@@ -20,12 +20,6 @@
       fsType = "ext4";
     };
 
-  fileSystems."/data" =
-    {
-      device = "/dev/disk/by-uuid/93e9eda6-111d-4c65-ac2a-1343afbf7654";
-      fsType = "ext4";
-    };
-
   fileSystems."/boot" =
     {
       device = "/dev/disk/by-uuid/4C1C-F160";
@@ -47,8 +41,6 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.tun0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.tun1.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp37s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
