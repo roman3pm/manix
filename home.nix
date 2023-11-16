@@ -18,6 +18,7 @@
     imv
     mpv
     htop-vim
+    killall
     neofetch
     hurl
     wget

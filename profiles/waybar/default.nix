@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 let
   cpuHwmon = if config.device == "roz-laptop" then "hwmon5" else "hwmon2";
-  dp1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
-  hdmia1 = "HDMI-A-1";
+  mainOutput = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
+  secondOutput = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-2";
   modules = {
     "sway/mode" = {
       format = "{}";
@@ -96,7 +96,7 @@ in
     settings = [
       (modules // {
         position = "top";
-        output = dp1;
+        output = mainOutput;
         modules-left = [
           "sway/mode"
           "sway/workspaces"
@@ -117,7 +117,7 @@ in
       })
       (modules // {
         position = "top";
-        output = hdmia1;
+        output = secondOutput;
         modules-left = [
           "sway/workspaces"
         ];

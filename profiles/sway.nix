@@ -5,8 +5,8 @@ let
   ws3 = "3:code";
   ws4 = "4:mail";
   ws5 = "5:game";
-  dp1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
-  hdmia1 = "HDMI-A-1";
+  mainOutput = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
+  secondOutput = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-2";
 in
 {
   home-manager.users.roz.wayland.windowManager.sway =
@@ -96,14 +96,14 @@ in
         output = {
           "*" = {
             bg = "${../wallpapers/1.jpg} fill";
-            adaptive_sync = "on";
           };
-          "${dp1}" = {
+          "${mainOutput}" = {
             pos = "0 0";
           };
-          "${hdmia1}" = {
+          "${secondOutput}" = {
+            disable = "";
             pos = if config.device == "roz-pc" then "2560 0" else "0 1080";
-            transform = "270";
+            transform = "90";
           };
         };
         bindkeysToCode = true;
@@ -157,7 +157,8 @@ in
 
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
-          "${modifier}+p" = "exec swaymsg output '${hdmia1}' toggle";
+          "${modifier}+p" = "exec swaymsg output '${secondOutput}' toggle";
+          "${modifier}+w" = "exec ${pkgs.killall}/bin/killall -s SIGUSR1 -r waybar";
 
           "${modifier}+Shift+v" = "mode '${modeSystem}'";
           "${modifier}+Shift+r" = "mode '${modeResize}'";
@@ -229,11 +230,11 @@ in
           ];
         };
         workspaceOutputAssign = [
-          { workspace = ws1; output = dp1; }
-          { workspace = ws2; output = hdmia1; }
-          { workspace = ws3; output = dp1; }
-          { workspace = ws4; output = hdmia1; }
-          { workspace = ws5; output = dp1; }
+          { workspace = ws1; output = mainOutput; }
+          { workspace = ws2; output = secondOutput; }
+          { workspace = ws3; output = mainOutput; }
+          { workspace = ws4; output = secondOutput; }
+          { workspace = ws5; output = mainOutput; }
         ];
       };
       extraConfig = ''
