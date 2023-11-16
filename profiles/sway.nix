@@ -102,6 +102,7 @@ in
           };
           "${secondOutput}" = {
             disable = "";
+            mode = "2560x1440@60Hz";
             pos = if config.device == "roz-pc" then "2560 0" else "0 1080";
             transform = "90";
           };
@@ -229,13 +230,6 @@ in
             { app_id = "lutris"; }
           ];
         };
-        workspaceOutputAssign = [
-          { workspace = ws1; output = mainOutput; }
-          { workspace = ws2; output = secondOutput; }
-          { workspace = ws3; output = mainOutput; }
-          { workspace = ws4; output = secondOutput; }
-          { workspace = ws5; output = mainOutput; }
-        ];
       };
       extraConfig = ''
         for_window [title=" — Sharing Indicator$"] kill
