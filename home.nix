@@ -45,8 +45,6 @@
     telegram-desktop
     (discord.override { withOpenASAR = true; })
     slack
-    bitwarden
-    _1password-gui
     libreoffice-fresh
 
     steam

@@ -73,7 +73,7 @@ in
     groups.plugdev = { };
     users.roz = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "docker" "networkmanager" "input" "video" "audio" "plugdev" "corectrl" ];
+      extraGroups = [ "wheel" "storage" "networkmanager" "input" "video" "audio" "docker" "plugdev" "corectrl" ];
       shell = pkgs.fish;
     };
   };

@@ -6,9 +6,12 @@
         id = 0;
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
+          privacy-badger
           darkreader
           tree-style-tab
           vimium
+          bitwarden
+          onepassword-password-manager
         ];
         userChrome = ''
           #TabsToolbar {
