@@ -53,23 +53,9 @@
     wineWowPackages.stagingFull
     gamescope
 
-    slurp
-    grim
-    wf-recorder
-    wl-clipboard
-    swaylock
-    swayidle
-    libnotify
-    brightnessctl
-    playerctl
     pavucontrol
-    pamixer
-    bemenu
-    xdg-utils
-    polkit_gnome
-
+    libnotify
     (nerdfonts.override { fonts = [ "Hack" ]; })
-    yaru-theme
   ];
 
   home.sessionVariables = {
@@ -78,44 +64,6 @@
     BROWSER = "firefox";
     TERMINAL = "alacritty";
   };
-
-  home.file.".icons/default".source = "${pkgs.yaru-theme}/share/icons/Yaru-blue-dark";
-
-  gtk = {
-    enable = true;
-    cursorTheme.name = "Yaru-blue-dark";
-    iconTheme.name = "Yaru-blue-dark";
-    theme.name = "Yaru-blue-dark";
-  };
-
-  qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style.name = "adwaita-dark";
-  };
-
-  xdg = {
-    enable = true;
-    userDirs.enable = true;
-    mime.enable = true;
-    dataFile."applications/mimeapps.list".force = true;
-    configFile."mimeapps.list".force = true;
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "application/pdf" = "org.pwmt.zathura.desktop";
-      };
-    };
-  };
-
-  services.mako = {
-    enable = true;
-    anchor = "top-right";
-    font = "DejaVu Sans 9";
-    maxIconSize = 48;
-  };
-
-  services.easyeffects.enable = true;
 
   home.stateVersion = "23.11";
 }

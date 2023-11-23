@@ -11,19 +11,6 @@ let
     "sway/workspaces" = {
       all-outputs = false;
       disable-scroll = false;
-      format = ''{icon}:{name}'';
-      format-icons = {
-        "1:http" = " ";
-        "2:chat" = " ";
-        "3:code" = " ";
-        "4:mail" = "󰆎 ";
-        "5:game" = " ";
-        "6" = " ";
-        "7" = " ";
-        "8" = " ";
-        "9" = " ";
-        "10" = " ";
-      };
     };
     "sway/window" = {
       format = "{}";
@@ -70,9 +57,9 @@ let
       format = "{icon}{volume}%";
       min-length = 6;
       format-bluetooth = "{icon}{volume}%";
-      format-muted = " mute";
+      format-muted = "󰖁 mute";
       format-icons = {
-        default = [ " " " " ];
+        default = [ "󰕿 " "󰖀 " "󰕾 " ];
       };
       on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
       on-click-right = "${pkgs.easyeffects}/bin/easyeffects";
@@ -84,8 +71,8 @@ let
     };
     "clock" = {
       interval = 1;
-      format = " {:%H:%M:%S}";
-      tooltip-format = " {:%e %b %Y}";
+      format = "{:%H:%M:%S}";
+      tooltip-format = "{:%e %b %Y}";
     };
   };
 in
