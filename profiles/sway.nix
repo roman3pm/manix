@@ -46,9 +46,10 @@ in
         extraSessionCommands = ''
           export XDG_CURRENT_DESKTOP=sway
           export XDG_SESSION_TYPE=wayland
-          export BEMENU_BACKEND=wayland
-          export SDL_VEDEODRIVER=wayland
+          export SDL_VIDEODRIVER=wayland
           export QT_QPA_PLATFORM=wayland
+          export QT_QPA_PLATFORMTHEME=
+          export NIXOS_OZONE_WL=1
           export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
         '';
         config = {
@@ -78,9 +79,7 @@ in
               '';
             }
             { command = "${pkgs.firefox}/bin/firefox"; }
-            { command = "sleep 2 && ${pkgs.thunderbird}/bin/thunderbird"; }
-            { command = "sleep 2 && ${pkgs.telegram-desktop}/bin/telegram-desktop -startintray"; }
-            { command = "sleep 2 && ${pkgs.slack}/bin/slack -u"; }
+            { command = "${pkgs.thunderbird}/bin/thunderbird"; }
           ];
           input = {
             "type:keyboard" = {
