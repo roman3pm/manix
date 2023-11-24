@@ -28,7 +28,6 @@ in
         lockCmd = ''
           ${pkgs.swaylock}/bin/swaylock -f \
           -i ${../wallpapers/1.jpg} \
-          --indicator-idle-visible \
           --indicator-thickness 6 \
           --text-color a9a9a9 \
           --ring-color bb00cc \
@@ -71,8 +70,9 @@ in
             {
               command = ''
                 ${pkgs.swayidle}/bin/swayidle -w \
-                timeout 600 '${lockCmd}' \
-                timeout 1200 'swaymsg "output * dpms off"' \
+                timeout 300 '${lockCmd}' \
+                timeout 600 'swaymsg "output * dpms off"' \
+                timeout 1200 'systemctl suspend' \
                 resume 'swaymsg "output * dpms on"' \
                 before-sleep '${lockCmd}'
               '';
