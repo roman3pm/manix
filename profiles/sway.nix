@@ -11,6 +11,7 @@ in
       grim
       swaylock
       swayidle
+      swaynotificationcenter
       wf-recorder
       wl-clipboard
       brightnessctl
@@ -73,7 +74,6 @@ in
                 ${pkgs.swayidle}/bin/swayidle -w \
                 timeout 300 '${lockCmd}' \
                 timeout 600 'swaymsg "output * dpms off"' \
-                timeout 1200 'systemctl suspend' \
                 resume 'swaymsg "output * dpms on"' \
                 before-sleep '${lockCmd}'
               '';
