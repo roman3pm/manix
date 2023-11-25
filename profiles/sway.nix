@@ -11,7 +11,6 @@ in
       grim
       swaylock
       swayidle
-      swaynotificationcenter
       wf-recorder
       wl-clipboard
       brightnessctl

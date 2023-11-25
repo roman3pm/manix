@@ -3,6 +3,7 @@
     sway
     ui
     waybar
+    swaync
     terminal
     git
     neovim
