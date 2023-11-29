@@ -54,6 +54,19 @@ in
         '';
         config = {
           inherit terminal modifier menu;
+          output = {
+            "*" = {
+              bg = "${../wallpapers/1.jpg} fill";
+            };
+            "${mainOutput}" = {
+              pos = if config.device == "roz-pc" then "1440 540" else "1440 1480";
+            };
+            "${secondOutput}" = {
+              mode = "2560x1440@60Hz";
+              pos = "0 0";
+              transform = "90";
+            };
+          };
           fonts = {
             names = [ "Hack Nerd Font" ];
             size = 10.0;
@@ -92,20 +105,6 @@ in
               pointer_accel = "0";
               scroll_method = "on_button_down";
               scroll_button = "274";
-            };
-          };
-          output = {
-            "*" = {
-              bg = "${../wallpapers/1.jpg} fill";
-            };
-            "${mainOutput}" = {
-              pos = if config.device == "roz-pc" then "1440 540" else "1440 0";
-            };
-            "${secondOutput}" = {
-              disable = "";
-              mode = "2560x1440@60Hz";
-              pos = "0 0";
-              transform = "90";
             };
           };
           bindkeysToCode = true;
