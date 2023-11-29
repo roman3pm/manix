@@ -85,6 +85,10 @@
         };
         window = {
           opacity = 0.95;
+          padding = {
+            x = 8;
+            y = 8;
+          };
           dimensions = {
             columns = 106;
             lines = 33;

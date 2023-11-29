@@ -99,12 +99,12 @@ in
               bg = "${../wallpapers/1.jpg} fill";
             };
             "${mainOutput}" = {
-              pos = "0 0";
+              pos = if config.device == "roz-pc" then "1440 540" else "1440 0";
             };
             "${secondOutput}" = {
               disable = "";
               mode = "2560x1440@60Hz";
-              pos = if config.device == "roz-pc" then "2560 0" else "0 1080";
+              pos = "0 0";
               transform = "90";
             };
           };
