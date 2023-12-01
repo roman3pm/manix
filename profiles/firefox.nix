@@ -11,7 +11,6 @@
           tree-style-tab
           vimium
           bitwarden
-          onepassword-password-manager
         ];
         userChrome = ''
           #TabsToolbar {

@@ -33,6 +33,10 @@
     gopls
     golangci-lint
     richgo
+    rustc
+    cargo
+    rust-analyzer
+    rustfmt
     nil
     nixpkgs-fmt
     lua-language-server
@@ -67,5 +71,5 @@
     TERMINAL = "alacritty";
   };
 
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 }

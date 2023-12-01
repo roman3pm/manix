@@ -219,7 +219,7 @@ in
             "1" = [
               { app_id = "firefox"; }
             ];
-            "2" = [
+            "3" = [
               { app_id = "org.telegram.desktop"; }
               { app_id = "Slack"; }
               { app_id = "discord"; }
