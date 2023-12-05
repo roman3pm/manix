@@ -23,15 +23,14 @@
         (nvim-treesitter.withPlugins (plugins: with plugins; [
           nix
           lua
-          scala
-          java
-          javascript
-          yaml
           python
+          javascript
+          json
+          yaml
+          toml
+          c
           go
           rust
-          c
-          cpp
         ]))
 
         nvim-lspconfig
