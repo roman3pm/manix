@@ -25,7 +25,7 @@
       effects = cas
       toggleKey = Home
       enableOnLaunch = True
-      casSharpness = 0.3
+      casSharpness = 0.2
     '';
   };
 }
