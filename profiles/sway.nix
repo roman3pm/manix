@@ -11,6 +11,7 @@ in
       grim
       swaylock
       swayidle
+      swaycwd
       wf-recorder
       wl-clipboard
       brightnessctl
@@ -20,11 +21,9 @@ in
     ];
     wayland.windowManager.sway =
       let
-        terminal = "${pkgs.alacritty}/bin/alacritty";
+        terminal = ''${pkgs.alacritty}/bin/alacritty --working-directory "''$(${pkgs.swaycwd}/bin/swaycwd)"'';
         modifier = "Mod4";
-        menu = ''
-          ${pkgs.bemenu}/bin/bemenu-run -m all -H 35 --fn 'Hack Nerd Font 12' --no-exec | xargs swaymsg exec --
-        '';
+        menu = ''${pkgs.bemenu}/bin/bemenu-run -m all -H 35 --fn 'Hack Nerd Font 12' --no-exec | xargs swaymsg exec --'';
         lockCmd = ''
           ${pkgs.swaylock}/bin/swaylock -f \
           -i ${../wallpapers/1.jpg} \
