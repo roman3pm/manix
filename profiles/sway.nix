@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
-  mainOutput = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
-  secondOutput = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-2";
+  monitor1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
+  monitor2 = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-2";
 in
 {
   home-manager.users.roz = {
@@ -57,10 +57,10 @@ in
             "*" = {
               bg = "${../wallpapers/1.jpg} fill";
             };
-            "${mainOutput}" = {
+            "${monitor1}" = {
               pos = if config.device == "roz-pc" then "1440 540" else "1440 1480";
             };
-            "${secondOutput}" = {
+            "${monitor2}" = {
               mode = "2560x1440@60Hz";
               pos = "0 0";
               transform = "90";
@@ -157,7 +157,7 @@ in
 
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
-            "${modifier}+p" = "exec swaymsg output '${secondOutput}' toggle";
+            "${modifier}+p" = "exec swaymsg output '${monitor2}' toggle";
             "${modifier}+w" = "exec ${pkgs.killall}/bin/killall -s SIGUSR1 -r waybar";
 
             "${modifier}+Shift+v" = "mode '${modeSystem}'";
@@ -231,6 +231,11 @@ in
               { app_id = "lutris"; }
             ];
           };
+          workspaceOutputAssign = [
+            { workspace = "1"; output = monitor1; }
+            { workspace = "2"; output = monitor1; }
+            { workspace = "3"; output = monitor2; }
+          ];
         };
         extraConfig = ''
           for_window [title=" — Sharing Indicator$"] kill

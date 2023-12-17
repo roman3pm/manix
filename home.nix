@@ -41,6 +41,7 @@
     nixpkgs-fmt
     lua-language-server
     nodejs-slim
+    godot_4
 
     via
     swappy
@@ -49,7 +50,6 @@
     telegram-desktop
     (discord.override { withOpenASAR = true; })
     slack
-    bitwarden
     _1password-gui
     libreoffice-fresh
 
