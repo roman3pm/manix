@@ -74,16 +74,13 @@ in
     groups.plugdev = { };
     users.roz = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "storage" "networkmanager" "input" "video" "audio" "docker" "plugdev" "corectrl" ];
+      extraGroups = [ "wheel" "storage" "networkmanager" "input" "video" "audio" "docker" "plugdev" ];
       shell = pkgs.fish;
     };
   };
 
   hardware = {
-    bluetooth = {
-      enable = true;
-      disabledPlugins = [ "sap" ];
-    };
+    bluetooth.enable = true;
     opengl = {
       enable = true;
       driSupport = true;
@@ -115,7 +112,6 @@ in
 
   programs = {
     fish.enable = true;
-    corectrl.enable = true;
     dconf.enable = true;
     ssh.startAgent = true;
     gnupg.agent.enable = true;

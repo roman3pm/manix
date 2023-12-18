@@ -76,7 +76,6 @@ in
           bars = [ ];
           startup = [
             { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
-            { command = "${pkgs.corectrl}/bin/corectrl --minimize-systray"; }
             { command = "ssh-add < /dev/null"; }
             { command = "${pkgs.waybar}/bin/waybar"; }
             { command = "${pkgs.swaynotificationcenter}/bin/swaync"; }
@@ -209,7 +208,6 @@ in
               { app_id = "org.telegram.desktop"; }
               { app_id = "Slack"; }
               { app_id = "discord"; }
-              { app_id = "corectrl"; }
               { class = "steam"; }
               { class = "\.exe$"; }
             ];
