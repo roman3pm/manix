@@ -97,8 +97,8 @@
         cursor = {
           style = {
             blinking = "Always";
-            blink_interval = 500;
           };
+          blink_timeout = 0;
         };
         colors = {
           primary = {
@@ -111,7 +111,7 @@
             green = "0x9ece6a";
             yellow = "0xe0af68";
             blue = "0x7aa2f7";
-            magneta = "0xad8ee6";
+            magenta = "0xad8ee6";
             cyan = "0x449dab";
             white = "0x787c99";
           };
