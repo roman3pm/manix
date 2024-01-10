@@ -89,10 +89,6 @@
             x = 8;
             y = 8;
           };
-          dimensions = {
-            columns = 106;
-            lines = 33;
-          };
         };
         cursor = {
           style = {

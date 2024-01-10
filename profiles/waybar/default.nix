@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  cpuHwmon = if config.device == "roz-laptop" then "hwmon5" else "hwmon2";
+  cpuHwmon = if config.device == "roz-laptop" then "hwmon8" else "hwmon2";
   monitor1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
   monitor2 = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-2";
   modules = {
