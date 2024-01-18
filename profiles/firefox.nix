@@ -5,12 +5,11 @@
       profiles.default = {
         id = 0;
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          tree-style-tab
+          bitwarden
+          vimium
           ublock-origin
           privacy-badger
-          darkreader
-          tree-style-tab
-          vimium
-          bitwarden
         ];
         userChrome = ''
           #TabsToolbar {

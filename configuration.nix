@@ -11,7 +11,6 @@ in
     };
     kernelPackages = pkgs.linuxPackages_zen;
     kernelModules = [ "v4l2loopback" ];
-    kernelParams = [ "quiet" ];
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback.out
     ];

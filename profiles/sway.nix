@@ -88,8 +88,6 @@ in
                 before-sleep '${lockCmd}'
               '';
             }
-            { command = "${pkgs.firefox}/bin/firefox"; }
-            { command = "${pkgs.thunderbird}/bin/thunderbird"; }
           ];
           input = {
             "type:keyboard" = {
@@ -203,11 +201,6 @@ in
             criteria = [
               { app_id = "Alacritty_floating"; }
               { app_id = "lutris"; }
-              { app_id = "pavucontrol"; }
-              { app_id = "com.github.wwmm.easyeffects"; }
-              { app_id = "org.telegram.desktop"; }
-              { app_id = "Slack"; }
-              { app_id = "discord"; }
               { class = "steam"; }
               { class = "\.exe$"; }
             ];
