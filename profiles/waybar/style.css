@@ -1,12 +1,11 @@
-@define-color background rgba(0, 0, 0, 0.6);
-@define-color grey rgb(48, 48, 48);
+@define-color alpha_black rgba(0, 0, 0, 0.6);
 
 * {
   border: none;
   border-radius: 0;
   font-family: "Hack Nerd Font";
   font-size: 16px;
-  color: white;
+  color: @theme_text_color;
   min-height: 0;
   margin: 0;
   padding: 0;
@@ -18,11 +17,11 @@
 }
 
 window#waybar {
-  background: @background;
+  background: @alpha_black;
 }
 
 #clock, #mode {
-  background: @grey;
+  background: @theme_bg_color;
   padding: 8px;
 }
 
@@ -32,15 +31,15 @@ window#waybar {
 }
 
 #idle_inhibitor.deactivated {
-  color: darkgray;
+  color: @theme_unfocused_fg_color;
 }
 
 #workspaces button.focused {
-  background: @grey;
-  border-top: 2px solid white;
+  background: @theme_bg_color;
+  border-top: 2px solid @theme_fg_color;
   padding: 6px 8px 8px;
 }
 
 tooltip {
-  background: @background;
+  background: @alpha_black;
 }
