@@ -4,10 +4,6 @@
 
     xdg = {
       configFile."swaync/style.css".text = ''
-        @define-color background rgba(0, 0, 0, 0.6);
-        .control-center {
-          background: @background;
-        }
         .blank-window {
           background: transparent;
         }
