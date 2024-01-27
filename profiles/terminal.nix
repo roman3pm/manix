@@ -15,21 +15,22 @@
         fish_vi_key_bindings
       '';
       shellAbbrs = {
+        lg = "lazygit";
         ll = "LC_COLLATE=C ls -la --group-directories-first";
         nh = "cd $HOME/projects/manix";
         nfu = "nix flake update";
         nrs = "nixos-rebuild switch --use-remote-sudo --flake '.#'";
         ngc = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
-        scts = "sudo systemctl status";
-        sctt = "sudo systemctl start";
-        sctp = "sudo systemctl stop";
-        sctr = "sudo systemctl restart";
-        sctus = "systemctl --user status";
-        sctut = "systemctl --user start";
-        sctup = "systemctl --user stop";
-        sctur = "systemctl --user restart";
+        ssc = "sudo systemctl";
+        scu = "systemctl --user";
       };
       functions = {
+        fish_user_key_bindings = {
+          body = ''
+            bind -M insert \el forward-word
+            bind -M insert \ej forward-char
+          '';
+        };
         prompt_hostname = {
           body = ''
             set -l my_hostname $hostname

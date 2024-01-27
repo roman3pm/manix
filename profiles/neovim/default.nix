@@ -2,6 +2,7 @@
   home-manager.users.roz = {
     programs.neovim = {
       enable = true;
+      viAlias = true;
       vimAlias = true;
       plugins = with pkgs.vimPlugins; [
         suda-vim
@@ -23,6 +24,7 @@
         (nvim-treesitter.withPlugins (plugins: with plugins; [
           nix
           lua
+          vimdoc
           python
           javascript
           json
