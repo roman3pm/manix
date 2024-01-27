@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 let
-  cpuHwmon = if config.device == "roz-laptop" then "hwmon8" else "hwmon2";
   monitor1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
   monitor2 = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-2";
   modules = {
@@ -26,10 +25,13 @@ let
     };
     "temperature#cpu" = {
       interval = 1;
-      hwmon-path = "/sys/class/hwmon/${cpuHwmon}/temp1_input";
       format = "CPU {temperatureC}°";
       tooltip = false;
-    };
+    } // (if config.device == "roz-laptop" then {
+      thermal-zone = 3;
+    } else {
+      hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+    });
     "battery" = {
       states = {
         critical = 15;
