@@ -28,7 +28,7 @@ let
       format = "CPU {temperatureC}°";
       tooltip = false;
     } // (if config.device == "roz-laptop" then {
-      thermal-zone = 3;
+      thermal-zone = 5;
     } else {
       hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
     });
