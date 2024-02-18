@@ -10,12 +10,13 @@ in
       efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_zen;
-    kernelModules = [ "v4l2loopback" ];
+    kernelModules = [ "v4l2loopback" "hid-apple" ];
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback.out
     ];
     extraModprobeConfig = ''
       options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
+      options hid_apple fnmode=2
     '';
   };
 
@@ -39,7 +40,6 @@ in
     networkmanager.enable = true;
     wg-quick.interfaces = {
       wg0 = {
-        autostart = if config.device == "roz-pc" then false else true;
         address = [ "10.9.8.91/16" "fd42:42:42:42::85b/104" ];
         dns = [ "10.9.0.1" ];
         privateKeyFile = config.age.secrets."secrets/wg0-privateKey".path;
@@ -53,7 +53,6 @@ in
         ];
       };
       wg1 = {
-        autostart = if config.device == "roz-pc" then false else true;
         address = [ "10.129.0.26/32" ];
         dns = [ "8.8.8.8" ];
         privateKeyFile = config.age.secrets."secrets/wg1-privateKey".path;
@@ -93,11 +92,19 @@ in
     portal = {
       enable = true;
       wlr.enable = true;
+      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
       config.common.default = "*";
     };
   };
 
-  fonts.enableDefaultPackages = true;
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+    ];
+  };
 
   time.timeZone = "Europe/Moscow";
 

@@ -58,10 +58,11 @@ in
               bg = "${../wallpapers/1.jpg} fill";
             };
             "${monitor1}" = {
-              pos = if config.device == "roz-pc" then "1440 540" else "1440 1480";
+              mode = "2560x1440@239.970Hz";
+              pos = if config.device == "roz-pc" then "1440 550" else "1440 1480";
             };
             "${monitor2}" = {
-              mode = "2560x1440@60Hz";
+              mode = "2560x1440@144.000Hz";
               pos = "0 0";
               transform = "90";
             };

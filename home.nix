@@ -58,6 +58,7 @@
     lutris
     wineWowPackages.stagingFull
     gamescope
+    gamemode
 
     pavucontrol
     libnotify
