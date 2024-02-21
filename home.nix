@@ -55,11 +55,7 @@
 
     steam
     steam-run
-    lutris
-    wineWowPackages.stagingFull
-    winetricks
-    gamescope
-    gamemode
+    protontricks
 
     pavucontrol
     libnotify
