@@ -57,6 +57,7 @@
     steam-run
     lutris
     wineWowPackages.stagingFull
+    winetricks
     gamescope
     gamemode
 
