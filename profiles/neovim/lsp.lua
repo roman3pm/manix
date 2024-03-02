@@ -120,17 +120,28 @@ cmp.setup.cmdline(':', {
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local on_attach = function(client, bufnr)
+  client.server_capabilities.semanticTokensProvider = nil
+end
 
 require('lspconfig').pyright.setup {
   capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+require('lspconfig').clangd.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
 }
 
 require('lspconfig').gopls.setup {
   capabilities = capabilities,
+  on_attach = on_attach,
 }
 
 require('lspconfig').rust_analyzer.setup {
   capabilities = capabilities,
+  on_attach = on_attach,
 }
 
 require('lspconfig').tsserver.setup {
@@ -141,10 +152,12 @@ require('lspconfig').tsserver.setup {
     "--", "typescript-language-server", "--stdio"
   },
   capabilities = capabilities,
+  on_attach = on_attach,
 }
 
 require('lspconfig').lua_ls.setup {
   capabilities = capabilities,
+  on_attach = on_attach,
   settings = {
     Lua = {
       runtime = {
@@ -165,6 +178,7 @@ require('lspconfig').lua_ls.setup {
 
 require('lspconfig').nil_ls.setup {
   capabilities = capabilities,
+  on_attach = on_attach,
   settings = {
     ['nil'] = {
       formatting = {
@@ -183,16 +197,5 @@ require("lsp_signature").setup {
   bind = true,
   handler_opts = {
     border = "rounded",
-  },
-}
-
-require("copilot").setup {
-  suggestion = {
-    auto_trigger = true,
-    keymap = {
-      accept = false,
-      accept_word = "<M-l>",
-      accept_line = "<M-j>",
-    },
   },
 }

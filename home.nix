@@ -28,7 +28,10 @@
     zathura
     transmission_4
 
-    gcc
+    clang
+    cmake
+    clang-tools
+    glfw-wayland
     go
     gopls
     golangci-lint

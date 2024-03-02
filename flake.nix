@@ -53,14 +53,19 @@
               modules = __attrValues self.nixosModules ++ [
                 inputs.agenix.nixosModules.default
                 {
+                  environment.systemPackages = [ inputs.agenix.packages.${system}.default ];
+                }
+
+                ./configuration.nix
+                { device = name; }
+                (import (./machines + "/${name}"))
+                {
                   nixpkgs = {
                     overlays = overlays;
                     config.allowUnfree = true;
                   };
                 }
-                ./configuration.nix
-                { device = name; }
-                (import (./machines + "/${name}"))
+
                 inputs.home-manager.nixosModules.home-manager
                 {
                   home-manager = {

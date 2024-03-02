@@ -32,7 +32,6 @@ in
 
   age.secrets = {
     "secrets/wg0-privateKey".file = ./secrets/wg0-privateKey.age;
-    "secrets/wg1-privateKey".file = ./secrets/wg1-privateKey.age;
   };
 
   networking = {
@@ -48,19 +47,6 @@ in
             publicKey = crypt.wg0-publicKey;
             allowedIPs = crypt.wg0-allowedIPs;
             endpoint = crypt.wg0-endpoint;
-            persistentKeepalive = 25;
-          }
-        ];
-      };
-      wg1 = {
-        address = [ "10.129.0.26/32" ];
-        dns = [ "8.8.8.8" ];
-        privateKeyFile = config.age.secrets."secrets/wg1-privateKey".path;
-        peers = [
-          {
-            publicKey = crypt.wg1-publicKey;
-            allowedIPs = crypt.wg1-allowedIPs;
-            endpoint = crypt.wg1-endpoint;
             persistentKeepalive = 25;
           }
         ];

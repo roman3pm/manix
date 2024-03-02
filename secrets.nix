@@ -6,5 +6,4 @@ let
 in
 {
   "secrets/wg0-privateKey.age".publicKeys = all;
-  "secrets/wg1-privateKey.age".publicKeys = all;
 }

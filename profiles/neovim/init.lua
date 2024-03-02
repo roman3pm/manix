@@ -24,6 +24,10 @@ api.nvim_create_autocmd("FileType", {
   pattern = "go",
   command = "setlocal noexpandtab tabstop=4 shiftwidth=4",
 })
+api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp,*.rgen,*.rmiss,*.rchit,*.rahit,*.rint,*.rcall",
+  command = "set filetype=glsl",
+})
 
 opt.list = true
 opt.listchars:append("eol:↴")
@@ -145,9 +149,9 @@ for _, bracket in pairs(brackets) do
 end
 
 require('nvim-treesitter.configs').setup {
-  parser_install_dir = "$HOME/.local/share/nvim/site",
   highlight = {
     enable = true,
+    additional_vim_regex_highlighting = false,
   },
 }
 

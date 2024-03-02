@@ -20,20 +20,26 @@
         telescope-nvim
         telescope-fzf-native-nvim
         gitsigns-nvim
-        nvim-treesitter-context
         (nvim-treesitter.withPlugins (plugins: with plugins; [
-          nix
+          c
           lua
+          vim
           vimdoc
+          query
+          nix
+          cpp
+          glsl
+          go
+          rust
           python
+          html
+          css
           javascript
           json
           yaml
           toml
-          c
-          go
-          rust
         ]))
+        nvim-treesitter-context
 
         nvim-lspconfig
         nvim-cmp
@@ -47,7 +53,6 @@
         cmp-nvim-lsp
         lspkind-nvim
         lsp_signature-nvim
-        copilot-lua
       ];
       extraConfig = ''
         lua << EOF
