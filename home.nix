@@ -31,7 +31,6 @@
     clang
     cmake
     clang-tools
-    glfw-wayland
     go
     gopls
     golangci-lint
@@ -48,7 +47,6 @@
 
     via
     swappy
-    chromium
     thunderbird
     telegram-desktop
     (discord.override { withOpenASAR = true; })

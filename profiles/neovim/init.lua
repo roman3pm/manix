@@ -22,6 +22,10 @@ opt.tabstop = 2
 opt.shiftwidth = 2
 api.nvim_create_autocmd("FileType", {
   pattern = "go",
+  command = "setlocal noexpandtab",
+})
+api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.go,*.c,*.cpp,*.h,*.hpp",
   command = "setlocal noexpandtab tabstop=4 shiftwidth=4",
 })
 api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
@@ -153,12 +157,6 @@ require('nvim-treesitter.configs').setup {
     enable = true,
     additional_vim_regex_highlighting = false,
   },
-}
-
-require('treesitter-context').setup {
-  enable = true,
-  min_window_height = 40,
-  multiline_threshold = 1,
 }
 
 require('tabline').setup {

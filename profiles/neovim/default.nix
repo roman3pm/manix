@@ -39,7 +39,6 @@
           yaml
           toml
         ]))
-        nvim-treesitter-context
 
         nvim-lspconfig
         nvim-cmp
