@@ -2,6 +2,7 @@
 let
   monitor1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
   monitor2 = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-2";
+  xkbExtraOptions = if config.device == "roz-laptop" then ",altwin:swap_lalt_lwin" else "";
 in
 {
   home-manager.users.roz = {
@@ -93,7 +94,7 @@ in
           input = {
             "type:keyboard" = {
               xkb_layout = "us,ru";
-              xkb_options = "grp:lctrl_toggle,ctrl:nocaps";
+              xkb_options = "grp:lctrl_toggle,ctrl:nocaps${xkbExtraOptions}";
             };
             "type:touchpad" = { tap = "enabled"; };
           } // lib.optionalAttrs (config.device == "roz-pc") {
