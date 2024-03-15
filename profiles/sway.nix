@@ -2,7 +2,7 @@
 let
   monitor1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
   monitor2 = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-2";
-  xkbExtraOptions = if config.device == "roz-laptop" then ",altwin:swap_lalt_lwin" else "";
+  xkbExtraOptions = if config.device == "roz-laptop" then ",altwin:swap_alt_win" else "";
 in
 {
   home-manager.users.roz = {
