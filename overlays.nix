@@ -1,12 +1,12 @@
-inputs: system: final: prev: rec {
+inputs: system: final: prev: {
 
   stable = import inputs.nixpkgs-stable {
     inherit system;
     config.allowUnfree = true;
   };
 
-  lf = prev.lf.overrideAttrs (oldAttrs: rec {
-    postInstall = oldAttrs.postInstall + "cp -R etc $out";
+  lf = prev.lf.overrideAttrs (old: {
+    postInstall = old.postInstall + "cp -R etc $out";
   });
 
 }
