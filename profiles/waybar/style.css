@@ -1,6 +1,8 @@
 @define-color alpha_black rgba(0, 0, 0, 0.7);
 
 * {
+  transition: none;
+  background: none;
   border: none;
   border-radius: 0;
   font-family: "Hack Nerd Font";

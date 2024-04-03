@@ -81,6 +81,7 @@ in
 {
   home-manager.users.roz.programs.waybar = {
     enable = true;
+    package = pkgs.stable.waybar;
     style = ./style.css;
     settings = [
       (modules // {

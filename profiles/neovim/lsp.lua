@@ -134,6 +134,11 @@ require('lspconfig').clangd.setup {
   on_attach = on_attach,
 }
 
+require('lspconfig').glsl_analyzer.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 require('lspconfig').gopls.setup {
   capabilities = capabilities,
   on_attach = on_attach,

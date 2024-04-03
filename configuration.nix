@@ -39,6 +39,7 @@ in
     networkmanager.enable = true;
     wg-quick.interfaces = {
       wg0 = {
+        autostart = false;
         address = [ "10.9.8.91/16" "fd42:42:42:42::85b/104" ];
         dns = [ "10.9.0.1" ];
         privateKeyFile = config.age.secrets."secrets/wg0-privateKey".path;

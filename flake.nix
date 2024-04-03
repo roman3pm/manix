@@ -14,14 +14,16 @@
     };
     nur.url = "github:nix-community/NUR";
     agenix.url = "github:ryantm/agenix";
+    zig.url = "github:mitchellh/zig-overlay";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }:
     let
       system = "x86_64-linux";
       overlays = [
-        (import ./overlays.nix inputs system)
+        (import ./overlays inputs system)
         inputs.nur.overlay
+        inputs.zig.overlays.default
       ];
       findModules = dir:
         builtins.concatLists (builtins.attrValues (builtins.mapAttrs

@@ -31,6 +31,7 @@
     clang
     cmake
     clang-tools
+    glsl_analyzer
     go
     gopls
     golangci-lint
@@ -51,7 +52,6 @@
     telegram-desktop
     (discord.override { withOpenASAR = true; })
     slack
-    _1password-gui
     libreoffice-fresh
 
     steam

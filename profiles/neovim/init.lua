@@ -25,13 +25,10 @@ api.nvim_create_autocmd("FileType", {
   command = "setlocal noexpandtab",
 })
 api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = "*.go,*.c,*.cpp,*.h,*.hpp",
-  command = "setlocal noexpandtab tabstop=4 shiftwidth=4",
-})
-api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp,*.rgen,*.rmiss,*.rchit,*.rahit,*.rint,*.rcall",
   command = "set filetype=glsl",
 })
+api.nvim_set_keymap('n', '<CR>', 'o<Esc>', { noremap = true })
 
 opt.list = true
 opt.listchars:append("eol:↴")
