@@ -16,6 +16,7 @@
         gpu_core_clock = true;
         engine_version = true;
         vulkan_driver = true;
+        vsync = 3;
         fps_limit = "240,0";
       };
     };
