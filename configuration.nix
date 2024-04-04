@@ -111,6 +111,7 @@ in
       enable = true;
       gamescopeSession.enable = true;
     };
+    gamescope.args = [ "-O DP-1" ];
     honkers-railway-launcher.enable = true;
   };
 
