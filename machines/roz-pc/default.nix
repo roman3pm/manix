@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     inputs.self.nixosRoles.desktop
+    inputs.self.nixosProfiles.hdr
   ];
 
   boot = {

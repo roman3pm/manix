@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
-  monitor1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
-  monitor2 = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-2";
+  monitor1 = if config.device == "roz-laptop" then "eDP-1" else "DP-2";
+  monitor2 = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-1";
   xkbExtraOptions = if config.device == "roz-laptop" then ",altwin:swap_alt_win" else "";
 in
 {

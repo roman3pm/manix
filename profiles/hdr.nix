@@ -1,0 +1,3 @@
+{
+  chaotic.hdr.enable = true;
+}

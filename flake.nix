@@ -8,6 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,6 +16,10 @@
     nur.url = "github:nix-community/NUR";
     agenix.url = "github:ryantm/agenix";
     zig.url = "github:mitchellh/zig-overlay";
+    aagl = {
+      url = "github:ezKEa/aagl-gtk-on-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, ... }:
@@ -53,19 +58,23 @@
               inherit system;
               specialArgs = { inherit inputs; };
               modules = __attrValues self.nixosModules ++ [
+                inputs.chaotic.nixosModules.default
                 inputs.agenix.nixosModules.default
-                {
-                  environment.systemPackages = [ inputs.agenix.packages.${system}.default ];
-                }
+                inputs.aagl.nixosModules.default
 
                 ./configuration.nix
-                { device = name; }
                 (import (./machines + "/${name}"))
                 {
+                  device = name;
+                  nix = {
+                    settings = inputs.aagl.nixConfig;
+                    registry.n.flake = inputs.nixpkgs;
+                  };
                   nixpkgs = {
                     overlays = overlays;
                     config.allowUnfree = true;
                   };
+                  environment.systemPackages = [ inputs.agenix.packages.${system}.default ];
                 }
 
                 inputs.home-manager.nixosModules.home-manager

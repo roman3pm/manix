@@ -54,7 +54,6 @@
     slack
     libreoffice-fresh
 
-    steam
     steam-run
     protontricks
 

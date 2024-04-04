@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 let
   crypt = import ./secrets/crypt.nix;
 in
@@ -9,7 +9,7 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "v4l2loopback" "hid-apple" ];
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback.out
@@ -27,7 +27,6 @@ in
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
     };
-    registry.n.flake = inputs.nixpkgs;
   };
 
   age.secrets = {
@@ -108,6 +107,11 @@ in
     dconf.enable = true;
     ssh.startAgent = true;
     gnupg.agent.enable = true;
+    steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+    };
+    honkers-railway-launcher.enable = true;
   };
 
   services = {
