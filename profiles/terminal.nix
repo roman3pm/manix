@@ -85,7 +85,6 @@
           TERM = "xterm-256color";
         };
         window = {
-          opacity = 0.95;
           dimensions = {
             columns = 100;
             lines = 30;

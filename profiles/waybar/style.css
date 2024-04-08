@@ -1,4 +1,4 @@
-@define-color alpha_black rgba(0, 0, 0, 0.7);
+@define-color bg_color rgba(46, 46, 46, 0.7);
 
 * {
   border: none;
@@ -11,22 +11,27 @@
   padding: 0;
 }
 
+#temperature, #cpu, #pulseaudio, #battery, #language, #idle_inhibitor, #workspaces button {
+  background: transparent;
+  padding: 8px;
+}
+
 #window {
   font-weight: bold;
   padding: 8px;
 }
 
 window#waybar {
-  background: @alpha_black;
+  background: @bg_color;
 }
 
-#clock, #mode {
+#clock {
   background: @theme_bg_color;
   padding: 8px;
 }
 
-#temperature, #cpu, #pulseaudio, #battery, #language, #idle_inhibitor, #workspaces button {
-  background: transparent;
+#mode {
+  background: @error_color;
   padding: 8px;
 }
 
@@ -45,5 +50,5 @@ window#waybar {
 }
 
 tooltip {
-  background: @alpha_black;
+  background: @bg_color;
 }

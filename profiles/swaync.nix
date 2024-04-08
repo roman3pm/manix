@@ -4,8 +4,8 @@
 
     xdg = {
       configFile."swaync/style.css".text = ''
-        .blank-window {
-          background: transparent;
+        .control-center {
+          border-radius: 0;
         }
       '';
     };
