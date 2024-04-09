@@ -8,6 +8,17 @@
           border-radius: 0;
         }
       '';
+      configFile."swaync/config.json".text = ''
+        {
+          "widgets": [
+            "inhibitors",
+            "title",
+            "dnd",
+            "mpris",
+            "notifications"
+          ]
+        }
+      '';
     };
   };
 }

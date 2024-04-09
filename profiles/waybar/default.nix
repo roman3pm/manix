@@ -38,14 +38,14 @@ let
       };
       full-at = 90;
       format = "{icon} {capacity}%";
-      format-charging = " {capacity}%";
-      format-full = " {capacity}%";
-      format-icons = [ " " " " " " " " " " ];
+      format-charging = "{icon} {capacity}%";
+      format-full = " {capacity}%";
+      format-icons = [ "" "" "" "" "" ];
       format-alt = "{icon} {time}";
     };
     "tray" = {
       icon-size = 20;
-      spacing = 5;
+      spacing = 8;
     };
     "idle_inhibitor" = {
       format = "{icon}";
@@ -56,12 +56,12 @@ let
     };
     "pulseaudio" = {
       scroll-step = 5;
-      format = "{icon}{volume}%";
+      format = "{icon} {volume}%";
       min-length = 6;
-      format-bluetooth = "{icon}{volume}%";
+      format-bluetooth = "{icon} {volume}%";
       format-muted = "󰖁 mute";
       format-icons = {
-        default = [ "󰕿 " "󰖀 " "󰕾 " ];
+        default = [ "󰕿" "󰖀" "󰕾" ];
       };
       on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
       on-click-right = "${pkgs.easyeffects}/bin/easyeffects";
@@ -74,8 +74,28 @@ let
     "clock" = {
       interval = 1;
       format = "{:%H:%M:%S}";
-      tooltip-format = "{:%e %b %Y}";
+      tooltip-format = "{:%A, %e %b %Y}";
     };
+    "custom/notification" =
+      let
+        swayncCmd = "${pkgs.swaynotificationcenter}/bin/swaync-client";
+      in
+      {
+        tooltip = false;
+        format = "{icon}";
+        format-icons = {
+          notification = "";
+          none = "";
+          dnd-notification = "";
+          dnd-none = "";
+        };
+        return-type = "json";
+        exec-if = "which ${swayncCmd}";
+        exec = "${swayncCmd} -swb";
+        on-click = "${swayncCmd} -t -sw";
+        on-click-right = "${swayncCmd} -d -sw";
+        escape = true;
+      };
   };
 in
 {
@@ -102,6 +122,7 @@ in
           "pulseaudio"
           "sway/language"
           "clock"
+          "custom/notification"
         ];
       })
       (modules // {

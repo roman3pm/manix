@@ -27,17 +27,20 @@
           vimdoc
           query
           nix
+          bash
           cpp
+          make
+          cmake
           glsl
           go
           rust
+          toml
           python
+          javascript
           html
           css
-          javascript
           json
           yaml
-          toml
         ]))
 
         nvim-lspconfig

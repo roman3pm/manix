@@ -1,6 +1,7 @@
 @define-color bg_color rgba(46, 46, 46, 0.7);
 
 * {
+  background: transparent;
   border: none;
   border-radius: 0;
   font-family: "Hack Nerd Font";
@@ -11,14 +12,20 @@
   padding: 0;
 }
 
-#temperature, #cpu, #pulseaudio, #battery, #language, #idle_inhibitor, #workspaces button {
-  background: transparent;
+#temperature,
+#cpu,
+#pulseaudio,
+#battery,
+#language,
+#window,
+#mode,
+#clock,
+#workspaces button {
   padding: 8px;
 }
 
 #window {
   font-weight: bold;
-  padding: 8px;
 }
 
 window#waybar {
@@ -27,12 +34,26 @@ window#waybar {
 
 #clock {
   background: @theme_bg_color;
-  padding: 8px;
 }
 
 #mode {
-  background: @error_color;
-  padding: 8px;
+  background: @warning_color;
+  color: black;
+}
+
+#custom-notification {
+  background: transparent;
+  padding: 8px 14px 8px 10px;
+}
+
+#custom-notification.cc-open {
+  background: @theme_bg_color;
+  border-top: 2px solid @theme_fg_color;
+  padding: 6px 14px 8px 10px;
+}
+
+#idle_inhibitor {
+  padding: 8px 14px 8px 8px;
 }
 
 #idle_inhibitor.deactivated {
@@ -50,5 +71,5 @@ window#waybar {
 }
 
 tooltip {
-  background: @bg_color;
+  background: @theme_bg_color;
 }

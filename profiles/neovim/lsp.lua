@@ -9,6 +9,7 @@ local function map(mode, lhs, rhs, opts)
 end
 
 map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
 map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
 map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
