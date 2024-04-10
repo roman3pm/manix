@@ -5,7 +5,7 @@
       profiles.default = {
         id = 0;
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          tree-style-tab
+          sidebery
           bitwarden
           vimium
           ublock-origin
