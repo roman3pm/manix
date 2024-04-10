@@ -1,12 +1,12 @@
-@define-color bg_color rgba(46, 46, 46, 0.7);
+@define-color cc-bg rgba(46, 46, 46, 0.7);
+@define-color noti-bg rgba(48, 48, 48, 0.8);
 
 * {
-  background: transparent;
   border: none;
   border-radius: 0;
   font-family: "Hack Nerd Font";
   font-size: 16px;
-  color: @theme_text_color;
+  color: white;
   min-height: 0;
   margin: 0;
   padding: 0;
@@ -29,15 +29,15 @@
 }
 
 window#waybar {
-  background: @bg_color;
+  background: @cc-bg;
 }
 
 #clock {
-  background: @theme_bg_color;
+  background: @noti-bg;
 }
 
 #mode {
-  background: @warning_color;
+  background: orange;
   color: black;
 }
 
@@ -47,8 +47,8 @@ window#waybar {
 }
 
 #custom-notification.cc-open {
-  background: @theme_bg_color;
-  border-top: 2px solid @theme_fg_color;
+  background: @noti-bg;
+  border-top: 2px solid white;
   padding: 6px 14px 8px 10px;
 }
 
@@ -57,19 +57,20 @@ window#waybar {
 }
 
 #idle_inhibitor.deactivated {
-  color: @theme_unfocused_fg_color;
+  color: rgb(150, 150, 150);
 }
 
 #workspaces button {
+  background: none;
   transition: none;
 }
 
 #workspaces button.focused {
-  background: @theme_bg_color;
-  border-top: 2px solid @theme_fg_color;
+  background: @noti-bg;
+  border-top: 2px solid white;
   padding: 6px 8px 8px;
 }
 
 tooltip {
-  background: @theme_bg_color;
+  background: @noti-bg;
 }
