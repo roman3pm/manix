@@ -79,7 +79,6 @@ in
           startup = [
             { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
             { command = "ssh-add < /dev/null"; }
-            { command = "${pkgs.waybar}/bin/waybar"; }
             { command = "${pkgs.swaynotificationcenter}/bin/swaync"; }
             {
               command = ''
@@ -157,7 +156,6 @@ in
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
             "${modifier}+p" = "exec swaymsg output '${monitor2}' toggle";
-            "${modifier}+w" = "exec ${pkgs.killall}/bin/killall -s SIGUSR1 -r waybar";
 
             "${modifier}+Shift+v" = "mode '${modeSystem}'";
             "${modifier}+Shift+r" = "mode '${modeResize}'";
