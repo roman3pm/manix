@@ -101,8 +101,6 @@ in
 {
   home-manager.users.roz.programs.waybar = {
     enable = true;
-    package = pkgs.stable.waybar;
-    systemd.enable = true;
     style = ./style.css;
     settings = [
       (modules // {
