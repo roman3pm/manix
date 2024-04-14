@@ -7,18 +7,8 @@ in
 {
   home-manager.users.roz = {
     home.packages = with pkgs; [
-      bemenu
-      slurp
-      grim
-      swaylock
-      swayidle
-      swaycwd
       wf-recorder
       wl-clipboard
-      brightnessctl
-      playerctl
-      pamixer
-      polkit_gnome
     ];
     wayland.windowManager.sway =
       let
@@ -166,17 +156,17 @@ in
             "${modifier}+g" = "exec '${lockCmd}'";
             "${modifier}+i" = "exec ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
 
-            "XF86AudioPlay" = "exec playerctl play-pause";
-            "XF86AudioNext" = "exec playerctl next";
-            "XF86AudioPrev" = "exec playerctl previous";
+            "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
+            "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
+            "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
 
-            "XF86AudioMute" = "exec pamixer -t";
-            "XF86AudioRaiseVolume" = "exec pamixer -i 5";
-            "XF86AudioLowerVolume" = "exec pamixer -d 5";
-            "XF86AudioMicMute" = "exec pamixer --default-source -t";
+            "XF86AudioMute" = "exec ${pkgs.pamixer}/bin/pamixer -t";
+            "XF86AudioRaiseVolume" = "exec ${pkgs.pamixer}/bin/pamixer -i 5";
+            "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer -d 5";
+            "XF86AudioMicMute" = "exec ${pkgs.pamixer}/bin/pamixer --default-source -t";
 
-            "XF86MonBrightnessUp" = "exec brightnessctl s +10%";
-            "XF86MonBrightnessDown" = "exec brightnessctl s 10%-";
+            "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s +10%";
+            "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s 10%-";
           };
           modes = {
             "${modeSystem}" = {
