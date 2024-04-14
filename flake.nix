@@ -22,7 +22,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }:
+  outputs = inputs@{ self, ... }:
     let
       system = "x86_64-linux";
       overlays = [
@@ -50,7 +50,7 @@
 
       nixosRoles = import ./roles;
 
-      nixosConfigurations = with nixpkgs.lib;
+      nixosConfigurations = with inputs.nixpkgs.lib;
         let
           hosts = builtins.attrNames (builtins.readDir ./machines);
           mkHost = name:
@@ -60,16 +60,12 @@
               modules = __attrValues self.nixosModules ++ [
                 inputs.chaotic.nixosModules.default
                 inputs.agenix.nixosModules.default
-                inputs.aagl.nixosModules.default
 
                 ./configuration.nix
                 (import (./machines + "/${name}"))
                 {
                   device = name;
-                  nix = {
-                    settings = inputs.aagl.nixConfig;
-                    registry.n.flake = inputs.nixpkgs;
-                  };
+                  nix.registry.n.flake = inputs.nixpkgs;
                   nixpkgs = {
                     overlays = overlays;
                     config.allowUnfree = true;

@@ -3,6 +3,7 @@
     ./hardware-configuration.nix
     inputs.self.nixosRoles.desktop
     inputs.self.nixosProfiles.hdr
+    inputs.self.nixosProfiles.aagl
   ];
 
   boot = {

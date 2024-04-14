@@ -5,7 +5,6 @@ in
 {
   boot = {
     loader = {
-      timeout = 0;
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
@@ -107,12 +106,7 @@ in
     dconf.enable = true;
     ssh.startAgent = true;
     gnupg.agent.enable = true;
-    steam = {
-      enable = true;
-      gamescopeSession.enable = true;
-    };
-    gamescope.args = [ "-O DP-1" ];
-    honkers-railway-launcher.enable = true;
+    steam.enable = true;
   };
 
   services = {
