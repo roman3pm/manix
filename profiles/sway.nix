@@ -84,7 +84,7 @@ in
               command = ''
                 ${pkgs.swayidle}/bin/swayidle -w \
                 timeout 600 '${lockCmd}' \
-                timeout 900 'swaymsg "output * dpms off"' \
+                timeout 600 'swaymsg "output * dpms off"' \
                 resume 'swaymsg "output * dpms on"' \
                 before-sleep '${lockCmd}'
               '';
