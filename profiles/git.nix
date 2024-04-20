@@ -38,7 +38,7 @@
         gui = {
           scrollHeight = 10;
           scrollPastBottom = false;
-          sidePanelWidth = 0.2;
+          sidePanelWidth = 0.15;
           theme = {
             selectedLineBgColor = [ "black" ];
             selectedRangeBgColor = [ "black" ];
