@@ -38,8 +38,8 @@ let
       };
       full-at = 90;
       format = "{icon} {capacity}%";
-      format-charging = "{icon} {capacity}%";
-      format-full = " {capacity}%";
+      format-charging = " {capacity}%";
+      format-full = " {capacity}%";
       format-icons = [ "" "" "" "" "" ];
       format-alt = "{icon} {time}";
     };
