@@ -6,10 +6,6 @@ let
 in
 {
   home-manager.users.roz = {
-    home.packages = with pkgs; [
-      wf-recorder
-      wl-clipboard
-    ];
     wayland.windowManager.sway =
       let
         terminal = ''${pkgs.alacritty}/bin/alacritty --working-directory "''$(${pkgs.swaycwd}/bin/swaycwd)"'';
@@ -49,11 +45,9 @@ in
               bg = "${../wallpapers/1.jpg} fill";
             };
             "${monitor1}" = {
-              mode = "2560x1440@240Hz";
               pos = if config.device == "roz-pc" then "1440 550" else "1440 1480";
             };
             "${monitor2}" = {
-              mode = "2560x1440@144Hz";
               pos = "0 0";
               transform = "90";
             };
@@ -74,8 +68,8 @@ in
             {
               command = ''
                 ${pkgs.swayidle}/bin/swayidle -w \
-                timeout 600 '${lockCmd}' \
-                timeout 600 'swaymsg "output * dpms off"' \
+                timeout 500 '${lockCmd}' \
+                timeout 500 'swaymsg "output * dpms off"' \
                 resume 'swaymsg "output * dpms on"' \
                 before-sleep '${lockCmd}'
               '';

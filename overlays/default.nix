@@ -11,6 +11,4 @@ inputs: system: final: prev: {
     postInstall = old.postInstall + "cp -R etc $out";
   });
 
-  glsl_analyzer = prev.callPackage ./glsl_analyzer { };
-
 }

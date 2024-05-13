@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     inputs.self.nixosRoles.desktop
+    inputs.self.nixosProfiles.ollama
     inputs.self.nixosProfiles.hdr
     inputs.self.nixosProfiles.aagl
   ];

@@ -205,3 +205,29 @@ require("lsp_signature").setup {
     border = "rounded",
   },
 }
+
+require('llm').setup {
+  model = "codellama:code",
+  backend = "ollama",
+  url = "http://localhost:11434/api/generate",
+  tokens_to_clear = { "<EOT>" },
+  request_body = {
+    options = {
+      temperature = 0.2,
+      top_p = 0.95,
+    }
+  },
+  fim = {
+    enabled = true,
+    prefix = "<PRE> ",
+    middle = " <MID>",
+    suffix = " <SUF>",
+  },
+  accept_keymap = "<M-j>",
+  dismiss_keymap = "<M-h>",
+  lsp = {
+    bin_path = llm_ls_bin_path,
+  },
+  context_window = 4096,
+  enable_suggestions_on_startup = false,
+}

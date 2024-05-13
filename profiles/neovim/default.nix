@@ -55,9 +55,11 @@
         cmp-nvim-lsp
         lspkind-nvim
         lsp_signature-nvim
+        llm-nvim
       ];
       extraConfig = ''
         lua << EOF
+        local llm_ls_bin_path = '${pkgs.llm-ls}/bin/llm-ls'
         ${lib.strings.fileContents ./init.lua}
         ${lib.strings.fileContents ./lsp.lua}
         EOF

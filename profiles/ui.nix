@@ -1,22 +1,29 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  themePackage = pkgs.yaru-theme;
+  themeName = "Yaru-blue-dark";
+in
+{
   home-manager.users.roz = {
-    home.packages = with pkgs; [ yaru-theme ];
+    home.packages = [ themePackage ];
+
+    home.pointerCursor = {
+      package = themePackage;
+      name = themeName;
+    };
 
     gtk = {
       enable = true;
-      cursorTheme.name = "Yaru-blue-dark";
-      iconTheme.name = "Yaru-blue-dark";
-      theme.name = "Yaru-blue-dark";
+      theme.name = themeName;
+      iconTheme.name = themeName;
+      cursorTheme.name = themeName;
     };
-
 
     qt = {
       enable = true;
       platformTheme.name = "adwaita";
       style.name = "adwaita-dark";
     };
-
-    home.file.".icons/default".source = "${pkgs.yaru-theme}/share/icons/Yaru-blue-dark";
 
     xdg = {
       enable = true;

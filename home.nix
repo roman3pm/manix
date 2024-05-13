@@ -44,6 +44,7 @@
     nixpkgs-fmt
     lua-language-server
     nodejs-slim
+    llm-ls
     godot_4
 
     via
@@ -60,6 +61,10 @@
     pavucontrol
     libnotify
     (nerdfonts.override { fonts = [ "Hack" ]; })
+    slurp
+    grim
+    wf-recorder
+    wl-clipboard
   ];
 
   home.sessionVariables = {
