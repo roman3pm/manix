@@ -8,7 +8,10 @@
 
   home.username = "roz";
 
-  home.packages = with pkgs; [
+  home.packages = [
+    (pkgs.discord.override { withOpenASAR = true; })
+    (pkgs.nerdfonts.override { fonts = [ "Hack" ]; })
+  ] ++ (with pkgs; [
     gnumake
     git-crypt
     ripgrep
@@ -40,7 +43,7 @@
     cargo
     rust-analyzer
     rustfmt
-    nil
+    nixd
     nixpkgs-fmt
     lua-language-server
     nodejs-slim
@@ -51,7 +54,6 @@
     swappy
     thunderbird
     telegram-desktop
-    (discord.override { withOpenASAR = true; })
     slack
     libreoffice-fresh
 
@@ -60,12 +62,11 @@
 
     pavucontrol
     libnotify
-    (nerdfonts.override { fonts = [ "Hack" ]; })
     slurp
     grim
     wf-recorder
     wl-clipboard
-  ];
+  ]);
 
   home.sessionVariables = {
     EDITOR = "vim";

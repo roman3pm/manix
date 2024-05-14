@@ -27,6 +27,7 @@
   outputs = inputs@{ self, ... }:
     let
       system = "x86_64-linux";
+      lib = inputs.nixpkgs.lib;
       overlays = [
         (import ./overlays inputs system)
         inputs.nur.overlay
@@ -51,11 +52,11 @@
 
       nixosRoles = import ./roles;
 
-      nixosConfigurations = with inputs.nixpkgs.lib;
+      nixosConfigurations =
         let
           hosts = builtins.attrNames (builtins.readDir ./machines);
           mkHost = name:
-            nixosSystem rec {
+            lib.nixosSystem rec {
               inherit system;
               specialArgs = { inherit inputs; };
               modules = __attrValues self.nixosModules ++ [
@@ -68,7 +69,7 @@
                   device = name;
                   nix.registry.n.flake = inputs.nixpkgs;
                   nixpkgs = {
-                    overlays = overlays;
+                    inherit overlays;
                     config.allowUnfree = true;
                   };
                   environment.systemPackages = [ inputs.agenix.packages.${system}.default ];
@@ -86,6 +87,6 @@
               ];
             };
         in
-        genAttrs hosts mkHost;
+        lib.genAttrs hosts mkHost;
     };
 }

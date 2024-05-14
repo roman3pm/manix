@@ -182,21 +182,9 @@ require('lspconfig').lua_ls.setup {
   },
 }
 
-require('lspconfig').nil_ls.setup {
+require('lspconfig').nixd.setup {
   capabilities = capabilities,
   on_attach = on_attach,
-  settings = {
-    ['nil'] = {
-      formatting = {
-        command = { "nixpkgs-fmt" },
-      },
-    },
-    ['nix'] = {
-      flake = {
-        autoArchive = true,
-      },
-    },
-  },
 }
 
 require("lsp_signature").setup {
