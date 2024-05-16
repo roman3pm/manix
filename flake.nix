@@ -80,7 +80,6 @@
                   home-manager = {
                     useGlobalPkgs = true;
                     useUserPackages = true;
-                    users.roz = import ./home.nix;
                     extraSpecialArgs = specialArgs;
                   };
                 }
