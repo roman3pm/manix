@@ -5,7 +5,7 @@
       viAlias = true;
       vimAlias = true;
       plugins = with pkgs.vimPlugins; [
-        suda-vim
+        vim-suda
         fzf-vim
         plenary-nvim
 

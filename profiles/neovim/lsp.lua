@@ -194,7 +194,7 @@ require("lsp_signature").setup {
   },
 }
 
-require('llm').setup {
+--[[require('llm').setup {
   model = "codellama:code",
   backend = "ollama",
   url = "http://localhost:11434/api/generate",
@@ -218,4 +218,4 @@ require('llm').setup {
   },
   context_window = 4096,
   enable_suggestions_on_startup = false,
-}
+}]]
