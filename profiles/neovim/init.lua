@@ -180,7 +180,6 @@ require('nvim-tree').setup {
     highlight_git = true,
     group_empty = true,
     special_files = {},
-    symlink_destination = false,
     indent_markers = {
       enable = true,
     },
@@ -196,11 +195,7 @@ require('nvim-tree').setup {
     enable = true,
   },
   filters = {
-    custom = {
-      "^.git$",
-      "^.bloop$",
-      "^.metals$",
-    },
+    enable = false,
   },
 }
 api.nvim_set_keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', { noremap = true })
