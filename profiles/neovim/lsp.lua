@@ -192,3 +192,4 @@ require('gen').setup {
   init = nil,
   display_mode = "split",
 }
+vim.keymap.set({ 'n', 'v' }, '<leader>]', ':Gen<CR>')
