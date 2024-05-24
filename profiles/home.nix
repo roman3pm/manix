@@ -48,8 +48,8 @@
       nixpkgs-fmt
       lua-language-server
       nodejs-slim
-      llm-ls
-      godot_4
+      pyright
+      nodePackages.typescript-language-server
 
       via
       swappy
@@ -57,6 +57,7 @@
       telegram-desktop
       slack
       libreoffice-fresh
+      godot_4
 
       steam-run
       protontricks

@@ -22,6 +22,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    gen-nvim = {
+      url = "github:David-Kunz/gen.nvim";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, ... }:

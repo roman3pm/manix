@@ -19,6 +19,7 @@
         nvim-tree-lua
         telescope-nvim
         telescope-fzf-native-nvim
+        telescope-ui-select-nvim
         gitsigns-nvim
         (nvim-treesitter.withPlugins (plugins: with plugins; [
           c
@@ -26,6 +27,8 @@
           vim
           vimdoc
           query
+          markdown
+          markdown_inline
           nix
           bash
           cpp
@@ -55,11 +58,10 @@
         cmp-nvim-lsp
         lspkind-nvim
         lsp_signature-nvim
-        llm-nvim
+        gen-nvim
       ];
       extraConfig = ''
         lua << EOF
-        local llm_ls_bin_path = '${pkgs.llm-ls}/bin/llm-ls'
         ${lib.strings.fileContents ./init.lua}
         ${lib.strings.fileContents ./lsp.lua}
         EOF

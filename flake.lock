@@ -317,6 +317,22 @@
         "url": "https://flakehub.com/f/numtide/flake-utils/0.1.%2A.tar.gz"
       }
     },
+    "gen-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714746280,
+        "narHash": "sha256-0AEB6im8Jz5foYzmL6KEGSAYo48g1bkFpjlCSWT6JeE=",
+        "owner": "David-Kunz",
+        "repo": "gen.nvim",
+        "rev": "bd19cf584b5b82123de977b44105e855e61e5f39",
+        "type": "github"
+      },
+      "original": {
+        "owner": "David-Kunz",
+        "repo": "gen.nvim",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -621,6 +637,7 @@
         "aagl": "aagl",
         "agenix": "agenix",
         "chaotic": "chaotic",
+        "gen-nvim": "gen-nvim",
         "home-manager": "home-manager_3",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",

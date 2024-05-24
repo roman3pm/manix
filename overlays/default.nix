@@ -1,4 +1,11 @@
-inputs: system: final: prev: {
+inputs: system: final: prev:
+let
+  gen-nvim = prev.vimUtils.buildVimPlugin {
+    name = "gen-nvim";
+    src = inputs.gen-nvim;
+  };
+in
+{
 
   stable = import inputs.nixpkgs-stable {
     inherit system;
@@ -10,5 +17,9 @@ inputs: system: final: prev: {
   lf = prev.lf.overrideAttrs (old: {
     postInstall = old.postInstall + "cp -R etc $out";
   });
+
+  vimPlugins = prev.vimPlugins // {
+    inherit gen-nvim;
+  };
 
 }
