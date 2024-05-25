@@ -189,6 +189,7 @@ require("lsp_signature").setup {
 }
 
 require('gen').setup {
+  model = "codegemma",
   init = nil,
   display_mode = "split",
 }
