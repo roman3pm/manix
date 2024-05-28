@@ -11,7 +11,6 @@
 
         tokyonight-nvim
         indent-blankline-nvim
-        nvim-autopairs
         lualine-nvim
         tabline-nvim
         nvim-web-devicons
@@ -22,15 +21,7 @@
         telescope-ui-select-nvim
         gitsigns-nvim
         (nvim-treesitter.withPlugins (plugins: with plugins; [
-          c
-          lua
-          vim
-          vimdoc
-          query
-          markdown
-          markdown_inline
           nix
-          bash
           cpp
           make
           cmake
@@ -38,7 +29,6 @@
           go
           rust
           toml
-          python
           javascript
           html
           css
@@ -54,12 +44,12 @@
         cmp-buffer
         cmp-cmdline
         cmp-treesitter
-        cmp-nvim-lua
         cmp-nvim-lsp
         lspkind-nvim
         lsp_signature-nvim
         gen-nvim
       ];
+      extraLuaPackages = ps: [ ps.jsregexp ];
       extraConfig = ''
         lua << EOF
         ${lib.strings.fileContents ./init.lua}
