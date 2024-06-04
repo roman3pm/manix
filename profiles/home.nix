@@ -50,6 +50,7 @@
       nodejs-slim
       pyright
       nodePackages.typescript-language-server
+      llm-ls
 
       via
       swappy

@@ -48,10 +48,12 @@
         lspkind-nvim
         lsp_signature-nvim
         gen-nvim
+        llm-nvim
       ];
       extraLuaPackages = ps: [ ps.jsregexp ];
       extraConfig = ''
         lua << EOF
+        local llm_ls_bin_path = "${pkgs.llm-ls}/bin/llm-ls"
         ${lib.strings.fileContents ./init.lua}
         ${lib.strings.fileContents ./lsp.lua}
         EOF

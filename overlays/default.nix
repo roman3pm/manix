@@ -4,6 +4,10 @@ let
     name = "gen-nvim";
     src = inputs.gen-nvim;
   };
+  llm-nvim = prev.vimUtils.buildVimPlugin {
+    name = "llm-nvim";
+    src = inputs.llm-nvim;
+  };
 in
 {
 
@@ -12,7 +16,7 @@ in
   });
 
   vimPlugins = prev.vimPlugins // {
-    inherit gen-nvim;
+    inherit gen-nvim llm-nvim;
   };
 
 }

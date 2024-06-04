@@ -461,6 +461,22 @@
         "type": "github"
       }
     },
+    "llm-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1717512404,
+        "narHash": "sha256-yeE5pfe76a1mRFWa6TdS5mu9xFoccfnPwMO6lqb70mY=",
+        "owner": "huggingface",
+        "repo": "llm.nvim",
+        "rev": "c16c3285f066b57d66f05c73b130414ee167745f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "huggingface",
+        "repo": "llm.nvim",
+        "type": "github"
+      }
+    },
     "niri": {
       "inputs": {
         "crane": [
@@ -641,6 +657,7 @@
         "chaotic": "chaotic",
         "gen-nvim": "gen-nvim",
         "home-manager": "home-manager_3",
+        "llm-nvim": "llm-nvim",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",
         "nur": "nur"
