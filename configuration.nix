@@ -8,7 +8,7 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
     kernelModules = [ "v4l2loopback" "hid-apple" ];
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback.out

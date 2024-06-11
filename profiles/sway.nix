@@ -66,13 +66,20 @@ in
             { command = "${pkgs.waybar}/bin/waybar"; }
             { command = "${pkgs.swaynotificationcenter}/bin/swaync"; }
             {
-              command = ''
-                ${pkgs.swayidle}/bin/swayidle -w \
-                timeout 500 '${lockCmd}' \
-                timeout 500 'swaymsg "output * dpms off"' \
-                resume 'swaymsg "output * dpms on"' \
-                before-sleep '${lockCmd}'
-              '';
+              command =
+                let
+                  dpmsOffCmd = ''swaymsg "output * dpms off"'';
+                  dpmsOnCmd = ''swaymsg "output * dpms on"'';
+                in
+                ''
+                  ${pkgs.swayidle}/bin/swayidle -w \
+                  timeout 500 '${lockCmd}' \
+                  timeout 510 '${dpmsOffCmd}' \
+                          resume '${dpmsOnCmd}' \
+                  timeout 10 'if pgrep -x swaylock; then ${dpmsOffCmd}; fi' \
+                          resume '${dpmsOnCmd}' \
+                  before-sleep '${lockCmd}'
+                '';
             }
           ];
           input = {

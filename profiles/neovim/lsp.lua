@@ -188,6 +188,7 @@ require("lsp_signature").setup {
 }
 
 require('gen').setup {
+  model = "codestral",
   init = nil,
   display_mode = "split",
 }

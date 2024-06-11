@@ -20,7 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     gen-nvim = {
       url = "github:David-Kunz/gen.nvim";
       flake = false;
@@ -67,7 +66,6 @@
               inherit system;
               specialArgs = { inherit inputs; };
               modules = __attrValues self.nixosModules ++ [
-                inputs.chaotic.nixosModules.default
                 inputs.agenix.nixosModules.default
 
                 ./configuration.nix
