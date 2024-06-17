@@ -132,6 +132,10 @@ require('lspconfig').pyright.setup {
 require('lspconfig').clangd.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  cmd = {
+    "clangd",
+    "--offset-encoding=utf-16",
+  },
 }
 
 require('lspconfig').glsl_analyzer.setup {

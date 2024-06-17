@@ -42,14 +42,8 @@ require("tokyonight").setup {
 vim.o.termguicolors = true
 cmd("colorscheme tokyonight")
 
-local actions = require("telescope.actions")
 require('telescope').setup {
   defaults = {
-    mappings = {
-      i = {
-        ["<esc>"] = actions.close,
-      },
-    },
     path_display = { "smart" },
   },
   extensions = {

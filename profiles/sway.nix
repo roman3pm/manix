@@ -74,9 +74,9 @@ in
                 ''
                   ${pkgs.swayidle}/bin/swayidle -w \
                   timeout 500 '${lockCmd}' \
-                  timeout 510 '${dpmsOffCmd}' \
+                  timeout 505 '${dpmsOffCmd}' \
                           resume '${dpmsOnCmd}' \
-                  timeout 10 'if pgrep -x swaylock; then ${dpmsOffCmd}; fi' \
+                  timeout 5 'if pgrep -x swaylock; then ${dpmsOffCmd}; fi' \
                           resume '${dpmsOnCmd}' \
                   before-sleep '${lockCmd}'
                 '';
