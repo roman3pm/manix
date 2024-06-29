@@ -39,7 +39,6 @@ opt.smartcase = true
 require("tokyonight").setup {
   transparent = true,
 }
-vim.o.termguicolors = true
 cmd("colorscheme tokyonight")
 
 require('telescope').setup {

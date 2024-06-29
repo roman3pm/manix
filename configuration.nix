@@ -63,12 +63,8 @@ in
   };
 
   hardware = {
+    graphics.enable = true;
     bluetooth.enable = true;
-    opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-    };
     steam-hardware.enable = true;
     xpadneo.enable = true;
   };

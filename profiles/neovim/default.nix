@@ -4,6 +4,9 @@
       enable = true;
       viAlias = true;
       vimAlias = true;
+      withNodeJs = false;
+      withRuby = false;
+      withPython3 = false;
       plugins = with pkgs.vimPlugins; [
         vim-suda
         fzf-vim
@@ -20,21 +23,7 @@
         telescope-fzf-native-nvim
         telescope-ui-select-nvim
         gitsigns-nvim
-        (nvim-treesitter.withPlugins (plugins: with plugins; [
-          nix
-          cpp
-          make
-          cmake
-          glsl
-          go
-          rust
-          toml
-          javascript
-          html
-          css
-          json
-          yaml
-        ]))
+        nvim-treesitter.withAllGrammars
 
         nvim-lspconfig
         nvim-cmp
