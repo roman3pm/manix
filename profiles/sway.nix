@@ -10,7 +10,7 @@ in
       let
         terminal = ''${pkgs.alacritty}/bin/alacritty --working-directory "''$(${pkgs.swaycwd}/bin/swaycwd)"'';
         modifier = "Mod4";
-        menu = ''${pkgs.bemenu}/bin/bemenu-run -m all -H 35 --fn 'Hack Nerd Font 12' --no-exec | xargs swaymsg exec --'';
+        menu = ''${pkgs.wofi}/bin/wofi --show run'';
         lockCmd = ''
           ${pkgs.swaylock}/bin/swaylock -f \
           -i ${../wallpapers/1.jpg} \
@@ -34,7 +34,6 @@ in
           export XDG_SESSION_TYPE=wayland
           export SDL_VIDEODRIVER=wayland
           export QT_QPA_PLATFORM=wayland
-          export QT_QPA_PLATFORMTHEME=
           export NIXOS_OZONE_WL=1
           export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
         '';
@@ -75,7 +74,6 @@ in
                   ${pkgs.swayidle}/bin/swayidle -w \
                   timeout 500 '${lockCmd}' \
                   timeout 505 '${dpmsOffCmd}' \
-                          resume '${dpmsOnCmd}' \
                   timeout 5 'if pgrep -x swaylock; then ${dpmsOffCmd}; fi' \
                           resume '${dpmsOnCmd}' \
                   before-sleep '${lockCmd}'
@@ -192,7 +190,6 @@ in
           floating = {
             criteria = [
               { app_id = "Alacritty_floating"; }
-              { app_id = "lutris"; }
               { class = "steam"; }
               { class = "\.exe$"; }
             ];
@@ -200,6 +197,7 @@ in
           assigns = {
             "1" = [
               { app_id = "firefox"; }
+              { app_id = "chromium-browser"; }
             ];
             "3" = [
               { app_id = "org.telegram.desktop"; }
@@ -211,7 +209,6 @@ in
             ];
             "5" = [
               { class = "steam"; }
-              { app_id = "lutris"; }
             ];
           };
           workspaceOutputAssign = [

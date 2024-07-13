@@ -8,7 +8,7 @@
     terminal
     git
     neovim
-    firefox
+    browser
     easyeffects
     obs
     utils

@@ -133,5 +133,7 @@
         shell.program = "${pkgs.fish}/bin/fish";
       };
     };
+
+    home.sessionVariables.TERMINAL = "alacritty";
   };
 }

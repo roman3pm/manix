@@ -23,7 +23,6 @@
       mpv
       htop-vim
       killall
-      neofetch
       hurl
       wget
       unar
@@ -70,13 +69,6 @@
       wf-recorder
       wl-clipboard
     ]);
-
-    home.sessionVariables = {
-      EDITOR = "vim";
-      VISUAL = "vim";
-      BROWSER = "firefox";
-      TERMINAL = "alacritty";
-    };
 
     home.stateVersion = "24.05";
   };
