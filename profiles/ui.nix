@@ -7,16 +7,10 @@ in
   home-manager.users.roz = {
     home.packages = [ themePackage ];
 
-    home.pointerCursor = {
-      package = themePackage;
-      name = themeName;
-    };
-
     gtk = {
       enable = true;
       theme.name = themeName;
       iconTheme.name = themeName;
-      cursorTheme.name = themeName;
     };
 
     dconf = {
@@ -26,6 +20,13 @@ in
           color-scheme = "prefer-dark";
         };
       };
+    };
+
+    home.pointerCursor = {
+      package = themePackage;
+      name = themeName;
+      size = 24;
+      gtk.enable = true;
     };
 
     qt = {
