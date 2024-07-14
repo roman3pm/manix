@@ -4,6 +4,7 @@
     sway
     ui
     waybar
+    wofi
     swaync
     terminal
     git
