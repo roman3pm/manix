@@ -2,7 +2,10 @@
   home-manager.users.roz.programs.wofi = {
     enable = true;
     settings = {
+      mode = "drun";
       width = 500;
+      lines = 12;
+      filter_rate = 20;
     };
     style = ''
       * {
