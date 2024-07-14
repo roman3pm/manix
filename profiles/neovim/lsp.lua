@@ -204,8 +204,10 @@ require('llm').setup {
   url = "http://localhost:11434/api/generate",
   request_body = {
     options = {
-      temperature = 0,
+      temperature = 0.2,
       top_p = 0.9,
+      num_return_sequences = 1,
+      max_length = 100,
     }
   },
   tokens_to_clear = { "<EOT>" },
@@ -217,7 +219,7 @@ require('llm').setup {
   },
   accept_keymap = "<M-j>",
   dismiss_keymap = "<M-h>",
-  context_window = 1024,
+  context_window = 512,
   lsp = {
     bin_path = llm_ls_bin_path,
     version = "0.5.2",
