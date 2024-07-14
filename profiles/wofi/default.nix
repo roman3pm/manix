@@ -11,8 +11,12 @@
         font-size: 16px;
       }
 
-      window {
+      #window {
         background-color: rgba(46, 46, 46, 0.7);
+      }
+
+      #input {
+        background-color: rgba(46, 46, 46, 0.8);
       }
     '';
   };
