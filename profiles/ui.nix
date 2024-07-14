@@ -19,16 +19,22 @@ in
       cursorTheme.name = themeName;
     };
 
+    dconf = {
+      enable = true;
+      settings = {
+        "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+        };
+      };
+    };
+
     qt = {
       enable = true;
-      platformTheme.name = "adwaita";
-      style.name = "adwaita-dark";
+      platformTheme.name = "gtk3";
     };
 
     xdg = {
       enable = true;
-      userDirs.enable = true;
-      mime.enable = true;
       dataFile."applications/mimeapps.list".force = true;
       configFile."mimeapps.list".force = true;
       mimeApps = {
