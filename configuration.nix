@@ -69,15 +69,6 @@ in
     xpadneo.enable = true;
   };
 
-  xdg = {
-    portal = {
-      enable = true;
-      wlr.enable = true;
-      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-      config.common.default = "*";
-    };
-  };
-
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
@@ -90,9 +81,6 @@ in
   time.timeZone = "Europe/Moscow";
 
   security = {
-    pam.services = {
-      swaylock.text = "auth include login";
-    };
     polkit.enable = true;
     rtkit.enable = true;
   };

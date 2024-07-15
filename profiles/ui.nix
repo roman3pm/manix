@@ -36,6 +36,11 @@ in
 
     xdg = {
       enable = true;
+      portal = {
+        enable = true;
+        extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+        config.common.default = "*";
+      };
       dataFile."applications/mimeapps.list".force = true;
       configFile."mimeapps.list".force = true;
       mimeApps = {
@@ -46,4 +51,6 @@ in
       };
     };
   };
+
+  environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
 }
