@@ -4,7 +4,7 @@
     sway
     ui
     waybar
-    wofi
+    fuzzel
     swaync
     terminal
     git

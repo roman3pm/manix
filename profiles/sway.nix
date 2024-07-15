@@ -10,7 +10,7 @@ in
       let
         terminal = ''${pkgs.alacritty}/bin/alacritty --working-directory "''$(${pkgs.swaycwd}/bin/swaycwd)"'';
         modifier = "Mod4";
-        menu = ''${pkgs.wofi}/bin/wofi'';
+        menu = ''${pkgs.fuzzel}/bin/fuzzel'';
         lockCmd = ''
           ${pkgs.swaylock}/bin/swaylock -f \
           -i ${../wallpapers/1.jpg} \
