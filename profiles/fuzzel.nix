@@ -4,6 +4,8 @@
     settings = {
       main = {
         font = "Hack Nerd Font:size=10";
+        width = 46;
+        lines = 8;
         line-height = 22;
       };
       colors = {

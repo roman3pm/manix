@@ -38,7 +38,10 @@ in
       enable = true;
       portal = {
         enable = true;
-        extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-wlr
+          xdg-desktop-portal-gtk
+        ];
         config.common.default = "*";
       };
       dataFile."applications/mimeapps.list".force = true;
