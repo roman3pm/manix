@@ -51,6 +51,11 @@ in
               transform = "90";
             };
           };
+          seat = {
+            "seat0" = {
+              xcursor_theme = "Yaru-blue-dark 32";
+            };
+          };
           fonts = {
             names = [ "Hack Nerd Font" ];
             size = 10.0;

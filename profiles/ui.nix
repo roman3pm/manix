@@ -25,7 +25,7 @@ in
     home.pointerCursor = {
       package = themePackage;
       name = themeName;
-      size = 24;
+      size = 32;
       gtk.enable = true;
     };
 
