@@ -8,7 +8,6 @@ cmd([[set noswapfile]])
 cmd([[set cursorline]])
 cmd([[set splitbelow]])
 cmd([[set splitright]])
-opt.background = "dark"
 opt.mouse = "a"
 opt.clipboard = "unnamedplus"
 
@@ -36,9 +35,7 @@ opt.listchars:append("eol:↴")
 opt.ignorecase = true
 opt.smartcase = true
 
-require("tokyonight").setup {
-  transparent = true,
-}
+require("tokyonight").setup {}
 cmd("colorscheme tokyonight")
 
 require('telescope').setup {
