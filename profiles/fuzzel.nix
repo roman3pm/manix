@@ -4,12 +4,17 @@
     settings = {
       main = {
         font = "Hack Nerd Font:size=10";
-        width = 46;
+        dpi-aware = "no";
+        width = 48;
         lines = 8;
-        line-height = 22;
+        line-height = "35px";
+      };
+      border = {
+        width = 0;
+        radius = 0;
       };
       colors = {
-        background = "2e2e2ed9";
+        background = "2e2e2eb3";
         text = "ffffffff";
         match = "ffffffff";
         selection = "0080ffff";
