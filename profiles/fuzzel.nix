@@ -3,9 +3,9 @@
     enable = true;
     settings = {
       main = {
-        font = "Hack Nerd Font:size=10";
+        font = "Hack Nerd Font:size=12";
         dpi-aware = "no";
-        width = 48;
+        width = 40;
         lines = 8;
         line-height = "35px";
       };
