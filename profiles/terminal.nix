@@ -1,4 +1,13 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  tokyonightTheme = pkgs.fetchFromGitHub {
+    owner = "folke";
+    repo = "tokyonight.nvim";
+    rev = "v4.6.0";
+    sha256 = "evKMF/sCEIoE/OiIBiP7jW+f9Ee3IUTbWSufHOZDNTY=";
+  };
+in
+{
   home-manager.users.roz = {
     programs.nix-index.enable = true;
 
@@ -48,12 +57,7 @@
       enable = true;
       themes = {
         tokyonight = {
-          src = pkgs.fetchFromGitHub {
-            owner = "folke";
-            repo = "tokyonight.nvim";
-            rev = "v4.6.0";
-            sha256 = "evKMF/sCEIoE/OiIBiP7jW+f9Ee3IUTbWSufHOZDNTY=";
-          };
+          src = tokyonightTheme;
           file = "/extras/sublime/tokyonight_night.tmTheme";
         };
       };
@@ -100,47 +104,12 @@
           };
           blink_timeout = 0;
         };
-        colors = {
-          primary = {
-            background = "#1a1b26";
-            foreground = "#c0caf5";
-          };
-          normal = {
-            black = "#15161e";
-            red = "#f7768e";
-            green = "#9ece6a";
-            yellow = "#e0af68";
-            blue = "#7aa2f7";
-            magenta = "#bb9af7";
-            cyan = "#7dcfff";
-            white = "#a9b1d6";
-          };
-          bright = {
-            black = "#414868";
-            red = "#f7768e";
-            green = "#9ece6a";
-            yellow = "#e0af68";
-            blue = "#7aa2f7";
-            magenta = "#bb9af7";
-            cyan = "#7dcfff";
-            white = "#c0caf5";
-          };
-          indexed_colors = [
-            {
-              index = 16;
-              color = "#ff9e64";
-            }
-            {
-              index = 17;
-              color = "#db4b4b";
-            }
-          ];
-        };
         font = {
           normal = { family = "Hack Nerd Font"; };
           size = 12;
         };
         shell.program = "${pkgs.fish}/bin/fish";
+        import = [ "${tokyonightTheme}/extras/alacritty/tokyonight_night.toml" ];
       };
     };
 

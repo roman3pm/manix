@@ -24,10 +24,6 @@
       url = "github:David-Kunz/gen.nvim";
       flake = false;
     };
-    llm-nvim = {
-      url = "github:huggingface/llm.nvim";
-      flake = false;
-    };
   };
 
   outputs = inputs@{ self, ... }:

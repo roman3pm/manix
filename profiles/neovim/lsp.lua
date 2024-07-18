@@ -197,32 +197,3 @@ require('gen').setup {
   display_mode = "split",
 }
 vim.keymap.set({ 'n', 'v' }, '<leader>]', ':Gen<CR>')
-
-require('llm').setup {
-  model = "codellama:code",
-  backend = "ollama",
-  url = "http://localhost:11434/api/generate",
-  request_body = {
-    options = {
-      temperature = 0.2,
-      top_p = 0.9,
-      num_return_sequences = 1,
-      max_length = 100,
-    }
-  },
-  tokens_to_clear = { "<EOT>" },
-  fim = {
-    enabled = true,
-    prefix = "<PRE> ",
-    middle = " <MID>",
-    suffix = " <SUF>",
-  },
-  accept_keymap = "<M-j>",
-  dismiss_keymap = "<M-h>",
-  context_window = 512,
-  lsp = {
-    bin_path = llm_ls_bin_path,
-    version = "0.5.2",
-  },
-  enable_suggestions_on_startup = false,
-}

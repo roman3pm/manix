@@ -36,7 +36,7 @@ opt.ignorecase = true
 opt.smartcase = true
 
 require("tokyonight").setup {}
-cmd("colorscheme tokyonight")
+cmd("colorscheme tokyonight-night")
 
 require('telescope').setup {
   defaults = {
@@ -127,11 +127,7 @@ cmd [[
   set sessionoptions+=tabpages,globals " store tabpages and globals in session
 ]]
 
-require('lualine').setup {
-  options = {
-    theme = 'tokyonight',
-  },
-}
+require('lualine').setup {}
 
 require('nvim-tree').setup {
   sync_root_with_cwd = true,
