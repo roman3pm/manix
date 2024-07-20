@@ -53,7 +53,7 @@ in
           };
           seat = {
             "seat0" = {
-              xcursor_theme = "Yaru-blue-dark 32";
+              xcursor_theme = "Adwaita 32";
             };
           };
           fonts = {

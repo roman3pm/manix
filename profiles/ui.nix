@@ -1,16 +1,11 @@
-{ pkgs, ... }:
-let
-  themePackage = pkgs.yaru-theme;
-  themeName = "Yaru-blue-dark";
-in
-{
+{ pkgs, ... }: {
   home-manager.users.roz = {
-    home.packages = [ themePackage ];
+    home.packages = with pkgs; [ gnome-themes-extra ];
 
     gtk = {
       enable = true;
-      theme.name = themeName;
-      iconTheme.name = themeName;
+      theme.name = "Adwaita-dark";
+      iconTheme.name = "Adwaita";
     };
 
     dconf = {
@@ -23,8 +18,8 @@ in
     };
 
     home.pointerCursor = {
-      package = themePackage;
-      name = themeName;
+      package = pkgs.gnome-themes-extra;
+      name = "Adwaita";
       size = 32;
       gtk.enable = true;
     };
