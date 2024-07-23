@@ -15,7 +15,6 @@
         tokyonight-nvim
         indent-blankline-nvim
         lualine-nvim
-        tabline-nvim
         nvim-web-devicons
         nvim-bqf
         nvim-tree-lua
@@ -34,7 +33,6 @@
         cmp-cmdline
         cmp-treesitter
         cmp-nvim-lsp
-        lspkind-nvim
         lsp_signature-nvim
         gen-nvim
       ];

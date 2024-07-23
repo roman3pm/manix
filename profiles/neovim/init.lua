@@ -15,6 +15,8 @@ opt.number = true
 opt.relativenumber = true
 opt.signcolumn = "yes"
 
+opt.pumheight = 20
+
 opt.expandtab = true
 opt.smarttab = true
 opt.tabstop = 2
@@ -119,15 +121,13 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
-require('tabline').setup {
-  enable = true,
+require('lualine').setup {
+  options = {
+    section_separators = '',
+    component_separators = { left = '│', right = '│' },
+  },
+  extensions = { 'nvim-tree', 'quickfix' },
 }
-cmd [[
-  set guioptions-=e " Use showtabline in gui vim
-  set sessionoptions+=tabpages,globals " store tabpages and globals in session
-]]
-
-require('lualine').setup {}
 
 require('nvim-tree').setup {
   sync_root_with_cwd = true,

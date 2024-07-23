@@ -28,7 +28,6 @@ map("n", "]d", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
 
 local cmp = require('cmp')
 local luasnip = require("luasnip")
-local lspkind = require('lspkind')
 
 cmp.setup({
   preselect = cmp.PreselectMode.None,
@@ -47,7 +46,7 @@ cmp.setup({
         cmp.complete()
       end
     end, { "i", "s" }),
-    ["<C-e>"] = cmp.mapping.abort(),
+    ["<Esc>"] = cmp.mapping.abort(),
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -85,13 +84,6 @@ cmp.setup({
       border = nil,
       scrollbar = '',
     },
-  },
-  formatting = {
-    format = lspkind.cmp_format({
-      mode = 'symbol_text',
-      maxwidth = 80,
-      ellipsis_char = '...',
-    })
   },
 })
 
