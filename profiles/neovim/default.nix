@@ -23,6 +23,7 @@
         telescope-ui-select-nvim
         gitsigns-nvim
         nvim-treesitter.withAllGrammars
+        render-markdown
 
         nvim-lspconfig
         nvim-cmp

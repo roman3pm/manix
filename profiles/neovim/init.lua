@@ -121,6 +121,8 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+require('render-markdown').setup {}
+
 require('lualine').setup {
   options = {
     section_separators = '',
