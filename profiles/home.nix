@@ -39,6 +39,8 @@
       gopls
       golangci-lint
       richgo
+      zig
+      zls
       rustc
       cargo
       rust-analyzer

@@ -40,6 +40,8 @@ opt.smartcase = true
 require("tokyonight").setup {}
 cmd("colorscheme tokyonight-night")
 
+require("nvim-autopairs").setup {}
+
 require('telescope').setup {
   defaults = {
     path_display = { "smart" },
@@ -62,7 +64,6 @@ api.nvim_set_keymap('n', '<leader>fo', [[<Cmd>lua require('telescope.builtin').o
 
 require('gitsigns').setup {
   attach_to_untracked = false,
-  current_line_blame = true,
   preview_config = {
     border = "rounded",
   },

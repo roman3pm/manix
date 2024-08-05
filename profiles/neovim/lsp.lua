@@ -46,7 +46,7 @@ cmp.setup({
         cmp.complete()
       end
     end, { "i", "s" }),
-    ["<Esc>"] = cmp.mapping.abort(),
+    ["<C-e>"] = cmp.mapping.abort(),
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -145,6 +145,11 @@ require('lspconfig').rust_analyzer.setup {
   on_attach = on_attach,
 }
 
+require('lspconfig').zls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 require('lspconfig').tsserver.setup {
   capabilities = capabilities,
   on_attach = on_attach,
@@ -184,7 +189,7 @@ require("lsp_signature").setup {
 }
 
 require('gen').setup {
-  model = "codestral",
+  model = "mistral-nemo",
   init = nil,
   display_mode = "split",
 }
