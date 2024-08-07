@@ -36,6 +36,16 @@ cmp.setup({
       luasnip.lsp_expand(args.body)
     end,
   },
+  window = {
+    completion = {
+      border = 'rounded',
+      scrollbar = '║',
+    },
+    documentation = {
+      border = nil,
+      scrollbar = '',
+    },
+  },
   mapping = cmp.mapping.preset.insert({
     ["<C-u>"] = cmp.mapping.scroll_docs(-4),
     ["<C-d>"] = cmp.mapping.scroll_docs(4),
@@ -68,34 +78,16 @@ cmp.setup({
     end, { "i", "s" }),
   }),
   sources = cmp.config.sources({
+    { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'treesitter' },
     { name = 'path' },
   }, {
     { name = 'buffer' },
   }),
-  window = {
-    completion = {
-      border = 'rounded',
-      scrollbar = '║',
-    },
-    documentation = {
-      border = nil,
-      scrollbar = '',
-    },
-  },
 })
 
-cmp.setup.filetype('gitcommit', {
-  sources = cmp.config.sources({
-    { name = 'git' },
-  }, {
-    { name = 'buffer' },
-  })
-})
-
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' },
@@ -108,7 +100,8 @@ cmp.setup.cmdline(':', {
     { name = 'path' },
   }, {
     { name = 'cmdline' },
-  })
+  }),
+  matching = { disallow_symbol_nonprefix_matching = false }
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -180,17 +173,3 @@ require('lspconfig').nixd.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
-
-require("lsp_signature").setup {
-  bind = true,
-  handler_opts = {
-    border = "rounded",
-  },
-}
-
-require('gen').setup {
-  model = "mistral-nemo",
-  init = nil,
-  display_mode = "split",
-}
-vim.keymap.set({ 'n', 'v' }, '<leader>]', ':Gen<CR>')

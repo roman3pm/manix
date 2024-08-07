@@ -25,6 +25,7 @@
         gitsigns-nvim
         nvim-treesitter.withAllGrammars
         render-markdown
+        gen-nvim
 
         nvim-lspconfig
         nvim-cmp
@@ -33,10 +34,8 @@
         cmp-path
         cmp-buffer
         cmp-cmdline
-        cmp-treesitter
         cmp-nvim-lsp
-        lsp_signature-nvim
-        gen-nvim
+        cmp-nvim-lsp-signature-help
       ];
       extraLuaPackages = ps: [ ps.jsregexp ];
       extraConfig = ''

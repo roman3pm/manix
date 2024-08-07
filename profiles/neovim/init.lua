@@ -29,6 +29,7 @@ api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp,*.rgen,*.rmiss,*.rchit,*.rahit,*.rint,*.rcall",
   command = "set filetype=glsl",
 })
+api.nvim_set_keymap('i', ';;', '<C-o>A;', { noremap = true })
 api.nvim_set_keymap('n', '<CR>', 'o<Esc>', { noremap = true })
 
 opt.list = true
@@ -162,6 +163,13 @@ require('nvim-tree').setup {
 }
 api.nvim_set_keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', { noremap = true })
 api.nvim_set_keymap('n', '<leader>tf', ':NvimTreeFocus<CR>', { noremap = true })
+
+require('gen').setup {
+  model = "codestral",
+  init = nil,
+  display_mode = "split",
+}
+vim.keymap.set({ 'n', 'v' }, '<leader>]', ':Gen<CR>')
 
 local fn = vim.fn
 

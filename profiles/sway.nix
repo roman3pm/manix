@@ -65,10 +65,8 @@ in
           };
           bars = [ ];
           startup = [
-            { command = "ssh-add < /dev/null"; }
+            { command = "${pkgs.openssh}/bin/ssh-add < /dev/null"; }
             { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
-            { command = "${pkgs.waybar}/bin/waybar"; }
-            { command = "${pkgs.swaynotificationcenter}/bin/swaync"; }
             {
               command =
                 let
