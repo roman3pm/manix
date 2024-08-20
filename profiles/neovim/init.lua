@@ -41,7 +41,9 @@ opt.smartcase = true
 require("tokyonight").setup {}
 cmd("colorscheme tokyonight-night")
 
-require("nvim-autopairs").setup {}
+require("nvim-autopairs").setup {
+  fast_wrap = {},
+}
 
 require('telescope').setup {
   defaults = {
@@ -56,7 +58,6 @@ require('telescope').setup {
   },
 }
 require('telescope').load_extension('fzf')
-require("telescope").load_extension("ui-select")
 api.nvim_set_keymap('n', '<leader>ff', [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true })
 api.nvim_set_keymap('n', '<leader>fg', [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true })
 api.nvim_set_keymap('n', '<leader>fb', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true })
@@ -122,8 +123,6 @@ require('nvim-treesitter.configs').setup {
     additional_vim_regex_highlighting = false,
   },
 }
-
-require('render-markdown').setup {}
 
 require('lualine').setup {
   options = {

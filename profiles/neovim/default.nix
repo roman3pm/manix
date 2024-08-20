@@ -8,10 +8,7 @@
       withRuby = false;
       withPython3 = false;
       plugins = with pkgs.vimPlugins; [
-        vim-suda
-        fzf-vim
         plenary-nvim
-
         tokyonight-nvim
         indent-blankline-nvim
         lualine-nvim
@@ -21,11 +18,9 @@
         nvim-autopairs
         telescope-nvim
         telescope-fzf-native-nvim
-        telescope-ui-select-nvim
         gitsigns-nvim
-        nvim-treesitter.withAllGrammars
-        render-markdown
         gen-nvim
+        nvim-treesitter.withAllGrammars
 
         nvim-lspconfig
         nvim-cmp
@@ -45,21 +40,13 @@
         EOF
       '';
     };
+
     xdg = {
-      desktopEntries = {
-        nvim-alacritty = {
-          name = "Neovim";
-          genericName = "Text Editor";
-          exec = "alacritty --title Neovim --class nvim -e nvim %F";
-          icon = "nvim";
-          terminal = false;
-          mimeType = [ "text/plain" ];
-        };
+      configFile = {
+        "nvim/syntax/qf.vim".source = ./qf.vim;
       };
-      mimeApps = {
-        defaultApplications = {
-          "text/plain" = "nvim-alacritty.desktop";
-        };
+      mimeApps.defaultApplications = {
+        "text/plain" = "nvim.desktop";
       };
     };
 

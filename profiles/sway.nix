@@ -44,10 +44,10 @@ in
               bg = "${../wallpapers/1.jpg} fill";
             };
             "${monitor1}" = {
-              pos = if config.device == "roz-pc" then "1440 800" else "1440 1480";
+              pos = "0 0";
             };
             "${monitor2}" = {
-              pos = "0 0";
+              pos = if config.device == "roz-pc" then "2560 0" else "1080 0";
               transform = "90";
             };
           };
