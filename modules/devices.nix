@@ -1,6 +1,7 @@
 { lib, ... }:
 with lib;
-with types; {
+with types;
+{
   options = {
     device = mkOption { type = str; };
   };

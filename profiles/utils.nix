@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home-manager.users.roz = {
     programs.mangohud = {
       enable = true;

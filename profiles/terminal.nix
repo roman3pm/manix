@@ -105,7 +105,9 @@ in
           blink_timeout = 0;
         };
         font = {
-          normal = { family = "Hack Nerd Font"; };
+          normal = {
+            family = "Hack Nerd Font";
+          };
           size = 12;
         };
         shell.program = "${pkgs.fish}/bin/fish";

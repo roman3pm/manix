@@ -1,3 +1,1 @@
-{
-  desktop = ./desktop.nix;
-}
+{ desktop = ./desktop.nix; }

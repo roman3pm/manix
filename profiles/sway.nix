@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   monitor1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
   monitor2 = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-2";
@@ -83,20 +88,24 @@ in
                 '';
             }
           ];
-          input = {
-            "type:keyboard" = {
-              xkb_layout = "us,ru";
-              xkb_options = "grp:lctrl_toggle,ctrl:nocaps${xkbExtraOptions}";
+          input =
+            {
+              "type:keyboard" = {
+                xkb_layout = "us,ru";
+                xkb_options = "grp:lctrl_toggle,ctrl:nocaps${xkbExtraOptions}";
+              };
+              "type:touchpad" = {
+                tap = "enabled";
+              };
+            }
+            // lib.optionalAttrs (config.device == "roz-pc") {
+              "type:pointer" = {
+                accel_profile = "flat";
+                pointer_accel = "0";
+                scroll_method = "on_button_down";
+                scroll_button = "274";
+              };
             };
-            "type:touchpad" = { tap = "enabled"; };
-          } // lib.optionalAttrs (config.device == "roz-pc") {
-            "type:pointer" = {
-              accel_profile = "flat";
-              pointer_accel = "0";
-              scroll_method = "on_button_down";
-              scroll_button = "274";
-            };
-          };
           bindkeysToCode = true;
           keybindings = {
             "${modifier}+d" = "exec ${menu}";
@@ -207,17 +216,22 @@ in
               { app_id = "Slack"; }
               { app_id = "discord"; }
             ];
-            "4" = [
-              { app_id = "thunderbird"; }
-            ];
-            "5" = [
-              { class = "steam"; }
-            ];
+            "4" = [ { app_id = "thunderbird"; } ];
+            "5" = [ { class = "steam"; } ];
           };
           workspaceOutputAssign = [
-            { workspace = "1"; output = monitor1; }
-            { workspace = "2"; output = monitor1; }
-            { workspace = "3"; output = monitor2; }
+            {
+              workspace = "1";
+              output = monitor1;
+            }
+            {
+              workspace = "2";
+              output = monitor1;
+            }
+            {
+              workspace = "3";
+              output = monitor2;
+            }
           ];
         };
         extraConfig = ''

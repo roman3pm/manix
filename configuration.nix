@@ -9,10 +9,11 @@ in
       efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_zen;
-    kernelModules = [ "v4l2loopback" "hid-apple" ];
-    extraModulePackages = with config.boot.kernelPackages; [
-      v4l2loopback.out
+    kernelModules = [
+      "v4l2loopback"
+      "hid-apple"
     ];
+    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
     extraModprobeConfig = ''
       options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
       options hid_apple fnmode=2
@@ -24,7 +25,10 @@ in
   nix = {
     settings = {
       auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
 
@@ -38,7 +42,10 @@ in
     wg-quick.interfaces = {
       wg0 = {
         autostart = false;
-        address = [ "10.9.8.91/16" "fd42:42:42:42::85b/104" ];
+        address = [
+          "10.9.8.91/16"
+          "fd42:42:42:42::85b/104"
+        ];
         dns = [ "10.9.0.1" ];
         privateKeyFile = config.age.secrets."secrets/wg0-privateKey".path;
         peers = [
@@ -57,7 +64,16 @@ in
     groups.plugdev = { };
     users.roz = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "storage" "networkmanager" "input" "video" "audio" "docker" "plugdev" ];
+      extraGroups = [
+        "wheel"
+        "storage"
+        "networkmanager"
+        "input"
+        "video"
+        "audio"
+        "docker"
+        "plugdev"
+      ];
       shell = pkgs.fish;
     };
   };

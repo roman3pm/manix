@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   home-manager.users.roz = {
     programs.neovim = {
       enable = true;

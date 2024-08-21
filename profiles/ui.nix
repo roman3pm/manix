@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home-manager.users.roz = {
     home.packages = with pkgs; [ gnome-themes-extra ];
 
@@ -50,5 +51,8 @@
     };
   };
 
-  environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
+  environment.pathsToLink = [
+    "/share/xdg-desktop-portal"
+    "/share/applications"
+  ];
 }

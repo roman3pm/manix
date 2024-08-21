@@ -1,75 +1,76 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   home-manager.users.roz = {
 
-    imports = [
-      inputs.nix-index-database.hmModules.nix-index
-    ];
+    imports = [ inputs.nix-index-database.hmModules.nix-index ];
 
     programs.home-manager.enable = true;
 
     home.username = "roz";
 
-    home.packages = [
-      (pkgs.discord.override { withOpenASAR = true; })
-      (pkgs.nerdfonts.override { fonts = [ "Hack" ]; })
-    ] ++ (with pkgs; [
-      gnumake
-      git-crypt
-      ripgrep
-      fzf
-      fd
-      jq
-      imv
-      mpv
-      htop-vim
-      killall
-      hurl
-      wget
-      unar
-      unzip
-      p7zip
-      zathura
-      transmission_4
+    home.packages =
+      [
+        (pkgs.discord.override { withOpenASAR = true; })
+        (pkgs.nerdfonts.override { fonts = [ "Hack" ]; })
+      ]
+      ++ (with pkgs; [
+        gnumake
+        git-crypt
+        ripgrep
+        fzf
+        fd
+        jq
+        imv
+        mpv
+        htop-vim
+        killall
+        hurl
+        wget
+        unar
+        unzip
+        p7zip
+        zathura
+        transmission_4
 
-      clang
-      cmake
-      clang-tools
-      glsl_analyzer
-      go
-      gopls
-      golangci-lint
-      richgo
-      zig
-      zls
-      rustc
-      cargo
-      rust-analyzer
-      rustfmt
-      nixd
-      nixpkgs-fmt
-      lua-language-server
-      nodejs-slim
-      pyright
-      nodePackages.typescript-language-server
+        clang
+        cmake
+        clang-tools
+        glsl_analyzer
+        go
+        gopls
+        golangci-lint
+        richgo
+        zig
+        zls
+        rustc
+        cargo
+        rust-analyzer
+        rustfmt
+        nixd
+        nixfmt-rfc-style
+        lua-language-server
+        nodejs-slim
+        pyright
+        nodePackages.typescript-language-server
 
-      via
-      swappy
-      thunderbird
-      telegram-desktop
-      slack
-      libreoffice-fresh
-      godot_4
+        via
+        swappy
+        thunderbird
+        telegram-desktop
+        slack
+        libreoffice-fresh
+        godot_4
 
-      steam-run
-      protontricks
+        steam-run
+        protontricks
 
-      pavucontrol
-      libnotify
-      slurp
-      grim
-      wf-recorder
-      wl-clipboard
-    ]);
+        pavucontrol
+        libnotify
+        slurp
+        grim
+        wf-recorder
+        wl-clipboard
+      ]);
 
     home.stateVersion = "24.05";
   };

@@ -26,7 +26,8 @@
     };
   };
 
-  outputs = inputs@{ self, ... }:
+  outputs =
+    inputs@{ self, ... }:
     let
       system = "x86_64-linux";
       lib = inputs.nixpkgs.lib;
@@ -34,18 +35,31 @@
         (import ./overlays inputs system)
         inputs.nur.overlay
       ];
-      findModules = dir:
-        builtins.concatLists (builtins.attrValues (builtins.mapAttrs
-          (name: type:
-            if type == "regular" then [{
-              name = builtins.elemAt (builtins.match "(.*)\\.nix" name) 0;
-              value = dir + "/${name}";
-            }] else if (builtins.readDir (dir + "/${name}")) ? "default.nix" then [{
-              inherit name;
-              value = dir + "/${name}";
-            }] else findModules (dir + "/${name}"))
-          (builtins.readDir dir)
-        ));
+      findModules =
+        dir:
+        builtins.concatLists (
+          builtins.attrValues (
+            builtins.mapAttrs (
+              name: type:
+              if type == "regular" then
+                [
+                  {
+                    name = builtins.elemAt (builtins.match "(.*)\\.nix" name) 0;
+                    value = dir + "/${name}";
+                  }
+                ]
+              else if (builtins.readDir (dir + "/${name}")) ? "default.nix" then
+                [
+                  {
+                    inherit name;
+                    value = dir + "/${name}";
+                  }
+                ]
+              else
+                findModules (dir + "/${name}")
+            ) (builtins.readDir dir)
+          )
+        );
     in
     {
       nixosModules = builtins.listToAttrs (findModules ./modules);
@@ -57,10 +71,13 @@
       nixosConfigurations =
         let
           hosts = builtins.attrNames (builtins.readDir ./machines);
-          mkHost = name:
+          mkHost =
+            name:
             lib.nixosSystem rec {
               inherit system;
-              specialArgs = { inherit inputs; };
+              specialArgs = {
+                inherit inputs;
+              };
               modules = __attrValues self.nixosModules ++ [
                 inputs.agenix.nixosModules.default
 

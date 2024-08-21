@@ -23,15 +23,18 @@ let
       format = "GPU {temperatureC}°";
       tooltip = false;
     };
-    "temperature#cpu" = {
-      interval = 1;
-      format = "CPU {temperatureC}°";
-      tooltip = false;
-    } // (if config.device == "roz-laptop" then {
-      thermal-zone = 5;
-    } else {
-      hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
-    });
+    "temperature#cpu" =
+      {
+        interval = 1;
+        format = "CPU {temperatureC}°";
+        tooltip = false;
+      }
+      // (
+        if config.device == "roz-laptop" then
+          { thermal-zone = 5; }
+        else
+          { hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input"; }
+      );
     "battery" = {
       states = {
         critical = 15;
@@ -40,7 +43,13 @@ let
       format = "{icon} {capacity}%";
       format-charging = " {capacity}%";
       format-full = " {capacity}%";
-      format-icons = [ "" "" "" "" "" ];
+      format-icons = [
+        ""
+        ""
+        ""
+        ""
+        ""
+      ];
       format-alt = "{icon} {time}";
     };
     "tray" = {
@@ -61,7 +70,11 @@ let
       format-bluetooth = "{icon} {volume}%";
       format-muted = "󰖁 mute";
       format-icons = {
-        default = [ "󰕿" "󰖀" "󰕾" ];
+        default = [
+          "󰕿"
+          "󰖀"
+          "󰕾"
+        ];
       };
       on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
       on-click-right = "${pkgs.easyeffects}/bin/easyeffects";
@@ -104,41 +117,43 @@ in
     systemd.enable = true;
     style = ./style.css;
     settings = [
-      (modules // {
-        position = "top";
-        output = monitor1;
-        modules-left = [
-          "sway/mode"
-          "sway/workspaces"
-        ];
-        modules-center = [
-          "sway/window"
-        ];
-        modules-right = [
-          "temperature#gpu"
-          "temperature#cpu"
-          "battery"
-          "tray"
-          "idle_inhibitor"
-          "pulseaudio"
-          "sway/language"
-          "clock"
-          "custom/notification"
-        ];
-      })
-      (modules // {
-        position = "top";
-        output = monitor2;
-        modules-left = [
-          "sway/workspaces"
-        ];
-        modules-right = [
-          "temperature#gpu"
-          "temperature#cpu"
-          "sway/language"
-          "clock"
-        ];
-      })
+      (
+        modules
+        // {
+          position = "top";
+          output = monitor1;
+          modules-left = [
+            "sway/mode"
+            "sway/workspaces"
+          ];
+          modules-center = [ "sway/window" ];
+          modules-right = [
+            "temperature#gpu"
+            "temperature#cpu"
+            "battery"
+            "tray"
+            "idle_inhibitor"
+            "pulseaudio"
+            "sway/language"
+            "clock"
+            "custom/notification"
+          ];
+        }
+      )
+      (
+        modules
+        // {
+          position = "top";
+          output = monitor2;
+          modules-left = [ "sway/workspaces" ];
+          modules-right = [
+            "temperature#gpu"
+            "temperature#cpu"
+            "sway/language"
+            "clock"
+          ];
+        }
+      )
     ];
   };
 }

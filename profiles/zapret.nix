@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   networking = {
     firewall = {
       extraCommands = ''
