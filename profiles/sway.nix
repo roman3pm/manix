@@ -202,8 +202,6 @@ in
           floating = {
             criteria = [
               { app_id = "Alacritty_floating"; }
-              { class = "steam"; }
-              { class = "\.exe$"; }
             ];
           };
           assigns = {
