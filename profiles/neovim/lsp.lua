@@ -143,7 +143,7 @@ require('lspconfig').zls.setup {
   on_attach = on_attach,
 }
 
-require('lspconfig').tsserver.setup {
+require('lspconfig').ts_ls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }

@@ -4,11 +4,13 @@
   programs.gamescope = {
     args = [
       "--hdr-enabled"
-      "--hdr-sdr-content-nits 250"
+      "--sdr-gamut-wideness 1"
+      "--hdr-sdr-content-nits 200"
       "--hdr-itm-enable"
+      "--hdr-itm-sdr-nits 200"
       "--hdr-itm-target-nits 600"
       "--prefer-output DP-1"
-      "--immediate-flips"
+      "--adaptive-sync"
     ];
     env = {
       DXVK_HDR = "1";

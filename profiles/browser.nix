@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  defaultApplication = "firefox";
+  defaultApplication = "chromium";
 in
 {
   home-manager.users.roz = {

@@ -16,11 +16,12 @@
       colors = {
         background = "2e2e2eb3";
         text = "ffffffff";
+        prompt = "ffffffff";
+        input = "ffffffff";
         match = "ffffffff";
-        selection = "0080ffff";
+        selection = "1a5fb4ff";
         selection-text = "ffffffff";
         selection-match = "ffffffff";
-        border = "ffffff26";
       };
     };
   };
