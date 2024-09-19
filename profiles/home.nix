@@ -23,13 +23,10 @@
         imv
         mpv
         htop-vim
-        killall
-        hurl
         wget
         unar
         unzip
         p7zip
-        zathura
         transmission_4
 
         clang
@@ -53,15 +50,13 @@
         pyright
         nodePackages.typescript-language-server
 
-        via
         swappy
         thunderbird
         telegram-desktop
         slack
         libreoffice-fresh
+        zathura
         godot_4
-
-        steam-run
         protontricks
 
         pavucontrol
