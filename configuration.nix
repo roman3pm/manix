@@ -40,23 +40,22 @@ in
     hostName = config.device;
     networkmanager.enable = true;
     wg-quick.interfaces = {
-      wg0 = {
-        autostart = false;
-        address = [
-          "10.9.8.91/16"
-          "fd42:42:42:42::85b/104"
-        ];
-        dns = [ "10.9.0.1" ];
-        privateKeyFile = config.age.secrets."secrets/wg0-privateKey".path;
-        peers = [
-          {
-            publicKey = crypt.wg0-publicKey;
-            allowedIPs = crypt.wg0-allowedIPs;
-            endpoint = crypt.wg0-endpoint;
-            persistentKeepalive = 25;
-          }
-        ];
-      };
+      wg0 =
+        let
+          listenPort = 51820;
+        in
+        {
+          inherit listenPort;
+          autostart = false;
+          preUp = "${pkgs.nmap}/bin/nping --udp --count 1 --data-length 16 --source-port ${builtins.toString listenPort} --dest-port ${builtins.toString crypt.wg0.port} ${crypt.wg0.host}";
+          address = [
+            "10.9.8.91/16"
+            "fd42:42:42:42::85b/104"
+          ];
+          dns = [ "10.9.0.1" ];
+          privateKeyFile = config.age.secrets."secrets/wg0-privateKey".path;
+          peers = [ crypt.wg0.peer ];
+        };
     };
   };
 

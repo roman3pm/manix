@@ -204,7 +204,6 @@ in
           };
           assigns = {
             "1" = [
-              { app_id = "firefox"; }
               { app_id = "chromium-browser"; }
             ];
             "3" = [

@@ -19,7 +19,6 @@
       url = "github:ezKEa/aagl-gtk-on-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = "github:nix-community/NUR";
     gen-nvim = {
       url = "github:David-Kunz/gen.nvim";
       flake = false;
@@ -33,7 +32,6 @@
       lib = inputs.nixpkgs.lib;
       overlays = [
         (import ./overlays inputs system)
-        inputs.nur.overlay
       ];
       findModules =
         dir:

@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 let
   defaultApplication = "chromium";
 in
@@ -13,19 +12,6 @@ in
         { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy-badger
         { id = "ammjkodgmmoknidbanneddgankgfejfh"; } # 7tv
       ];
-    };
-
-    programs.firefox = {
-      enable = true;
-      profiles.default = {
-        id = 0;
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          bitwarden
-          vimium
-          ublock-origin
-          privacy-badger
-        ];
-      };
     };
 
     xdg.mimeApps.defaultApplications = {
