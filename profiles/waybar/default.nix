@@ -17,12 +17,18 @@ let
       all-outputs = true;
       tooltip = false;
     };
-    "temperature#gpu" = {
-      interval = 1;
-      hwmon-path = "/sys/class/hwmon/hwmon0/temp2_input";
-      format = "GPU {temperatureC}°";
-      tooltip = false;
-    };
+    "temperature#gpu" =
+      {
+        interval = 1;
+        format = "GPU {temperatureC}°";
+        tooltip = false;
+      }
+      // (
+        if config.device == "roz-laptop" then
+          { thermal-zone = 2; }
+        else
+          { hwmon-path = "/sys/class/hwmon/hwmon0/temp2_input"; }
+      );
     "temperature#cpu" =
       {
         interval = 1;

@@ -14,5 +14,6 @@
     easyeffects
     obs
     utils
+    zapret
   ];
 }

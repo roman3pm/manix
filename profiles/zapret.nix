@@ -1,10 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
+let
+  output = if config.device == "roz-laptop" then "wlp2s0" else "enp34s0";
+in
 {
   networking = {
     firewall = {
       extraCommands = ''
-        ${pkgs.iptables}/bin/iptables -t mangle -I POSTROUTING -o enp34s0 -p tcp -m multiport --dports 80,443 -m connbytes --connbytes-dir=original --connbytes-mode=packets --connbytes 1:6 -m mark ! --mark 0x40000000/0x40000000 -j NFQUEUE --queue-num 200 --queue-bypass
-        ${pkgs.iptables}/bin/ip6tables -t mangle -I POSTROUTING -o enp34s0 -p tcp -m multiport --dports 80,443 -m connbytes --connbytes-dir=original --connbytes-mode=packets --connbytes 1:6 -m mark ! --mark 0x40000000/0x40000000 -j NFQUEUE --queue-num 200 --queue-bypass
+        ${pkgs.iptables}/bin/iptables -t mangle -I POSTROUTING -o ${output} -p tcp -m multiport --dports 80,443 -m connbytes --connbytes-dir=original --connbytes-mode=packets --connbytes 1:6 -m mark ! --mark 0x40000000/0x40000000 -j NFQUEUE --queue-num 200 --queue-bypass
+        ${pkgs.iptables}/bin/ip6tables -t mangle -I POSTROUTING -o ${output} -p tcp -m multiport --dports 80,443 -m connbytes --connbytes-dir=original --connbytes-mode=packets --connbytes 1:6 -m mark ! --mark 0x40000000/0x40000000 -j NFQUEUE --queue-num 200 --queue-bypass
       '';
     };
   };
