@@ -4,9 +4,15 @@
     ./hardware-configuration.nix
     inputs.self.nixosRoles.desktop
     inputs.self.nixosProfiles.ollama
-    inputs.self.nixosProfiles.hdr
+    inputs.self.nixosProfiles.steam
     inputs.self.nixosProfiles.aagl
   ];
+
+  devices = {
+    interface = "enp34s0";
+    monitor1 = "DP-1";
+    monitor2 = "DP-2";
+  };
 
   boot = {
     initrd.kernelModules = [ "amdgpu" ];

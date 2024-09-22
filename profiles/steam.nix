@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
-  programs.steam.gamescopeSession.enable = true;
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
   programs.gamescope = {
     args = [
       "--hdr-enabled"

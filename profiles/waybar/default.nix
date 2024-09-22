@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
-  monitor1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
-  monitor2 = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-2";
+  monitor1 = config.devices.monitor1;
+  monitor2 = config.devices.monitor2;
   modules = {
     "sway/mode" = {
       format = "{}";
@@ -24,7 +24,7 @@ let
         tooltip = false;
       }
       // (
-        if config.device == "roz-laptop" then
+        if config.hostName == "roz-laptop" then
           { thermal-zone = 2; }
         else
           { hwmon-path = "/sys/class/hwmon/hwmon0/temp2_input"; }
@@ -36,7 +36,7 @@ let
         tooltip = false;
       }
       // (
-        if config.device == "roz-laptop" then
+        if config.hostName == "roz-laptop" then
           { thermal-zone = 5; }
         else
           { hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input"; }

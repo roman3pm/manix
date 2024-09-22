@@ -37,7 +37,7 @@ in
   };
 
   networking = {
-    hostName = config.device;
+    hostName = config.hostName;
     networkmanager.enable = true;
     wg-quick.interfaces = {
       wg0 =
@@ -80,7 +80,6 @@ in
   hardware = {
     graphics.enable = true;
     bluetooth.enable = true;
-    steam-hardware.enable = true;
     xpadneo.enable = true;
   };
 
@@ -105,7 +104,6 @@ in
     dconf.enable = true;
     ssh.startAgent = true;
     gnupg.agent.enable = true;
-    steam.enable = true;
   };
 
   services = {

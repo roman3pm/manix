@@ -5,9 +5,9 @@
   ...
 }:
 let
-  monitor1 = if config.device == "roz-laptop" then "eDP-1" else "DP-1";
-  monitor2 = if config.device == "roz-laptop" then "HDMI-A-1" else "DP-2";
-  xkbExtraOptions = if config.device == "roz-laptop" then ",altwin:swap_alt_win" else "";
+  monitor1 = config.devices.monitor1;
+  monitor2 = config.devices.monitor2;
+  xkbExtraOptions = if config.hostName == "roz-laptop" then ",altwin:swap_alt_win" else "";
 in
 {
   home-manager.users.roz = {
@@ -52,7 +52,7 @@ in
               pos = "0 0";
             };
             "${monitor2}" = {
-              pos = if config.device == "roz-pc" then "2560 0" else "1080 0";
+              pos = if config.hostName == "roz-pc" then "2560 0" else "1080 0";
               transform = "90";
             };
           };
@@ -98,7 +98,7 @@ in
                 tap = "enabled";
               };
             }
-            // lib.optionalAttrs (config.device == "roz-pc") {
+            // lib.optionalAttrs (config.hostName == "roz-pc") {
               "type:pointer" = {
                 accel_profile = "flat";
                 pointer_accel = "0";

@@ -70,7 +70,7 @@
         let
           hosts = builtins.attrNames (builtins.readDir ./machines);
           mkHost =
-            name:
+            hostName:
             lib.nixosSystem rec {
               inherit system;
               specialArgs = {
@@ -80,9 +80,9 @@
                 inputs.agenix.nixosModules.default
 
                 ./configuration.nix
-                (import (./machines + "/${name}"))
+                (import (./machines + "/${hostName}"))
                 {
-                  device = name;
+                  inherit hostName;
                   nix.registry.n.flake = inputs.nixpkgs;
                   nixpkgs = {
                     inherit overlays;
