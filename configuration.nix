@@ -119,6 +119,7 @@ in
       jack.enable = true;
     };
     mpd.enable = true;
+    udisks2.enable = true;
     printing.enable = true;
   };
 
