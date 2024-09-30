@@ -12,7 +12,7 @@ let
       disable-scroll = false;
     };
     "sway/window" = {
-      format = "{}";
+      format = "{title}";
       max-length = 80;
       all-outputs = true;
       tooltip = false;

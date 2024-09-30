@@ -5,7 +5,6 @@
     inputs.self.nixosRoles.desktop
     inputs.self.nixosProfiles.ollama
     inputs.self.nixosProfiles.steam
-    inputs.self.nixosProfiles.aagl
   ];
 
   devices = {

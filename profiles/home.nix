@@ -27,7 +27,6 @@
         unar
         unzip
         p7zip
-        transmission_4
 
         clang
         cmake
@@ -55,6 +54,7 @@
         telegram-desktop
         slack
         libreoffice-fresh
+        transmission_4-gtk
         zathura
         godot_4
         protontricks
