@@ -63,7 +63,7 @@ let
       spacing = 8;
     };
     "idle_inhibitor" = {
-      format = "{icon}";
+      format = "{icon} ";
       format-icons = {
         activated = "";
         deactivated = "";
@@ -101,7 +101,7 @@ let
       in
       {
         tooltip = false;
-        format = "{icon}";
+        format = "{icon} ";
         format-icons = {
           notification = "";
           none = "";

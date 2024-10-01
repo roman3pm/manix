@@ -18,8 +18,22 @@
 #window,
 #mode,
 #clock,
+#idle_inhibitor,
+#custom-notification,
 #workspaces button {
   padding: 8px;
+}
+
+#custom-notification.cc-open,
+#workspaces button.focused {
+  background: @noti-bg;
+  border-top: 2px solid white;
+  padding: 6px 8px 8px;
+}
+
+#workspaces button {
+  background: none;
+  transition: none;
 }
 
 #window {
@@ -30,7 +44,8 @@ window#waybar {
   background: @cc-bg;
 }
 
-#clock {
+#clock,
+tooltip {
   background: @noti-bg;
 }
 
@@ -39,36 +54,6 @@ window#waybar {
   color: black;
 }
 
-#custom-notification {
-  background: transparent;
-  padding: 8px 12px 8px 10px;
-}
-
-#custom-notification.cc-open {
-  background: @noti-bg;
-  border-top: 2px solid white;
-  padding: 6px 12px 8px 10px;
-}
-
-#idle_inhibitor {
-  padding: 8px 12px 8px 8px;
-}
-
 #idle_inhibitor.deactivated {
   color: rgb(150, 150, 150);
-}
-
-#workspaces button {
-  background: none;
-  transition: none;
-}
-
-#workspaces button.focused {
-  background: @noti-bg;
-  border-top: 2px solid white;
-  padding: 6px 8px 8px;
-}
-
-tooltip {
-  background: @noti-bg;
 }
