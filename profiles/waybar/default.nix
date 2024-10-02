@@ -73,7 +73,7 @@ let
       scroll-step = 5;
       format = "{icon} {volume}%";
       min-length = 6;
-      format-bluetooth = "{icon} {volume}%";
+      format-bluetooth = "{icon} {volume}%";
       format-muted = "󰖁 mute";
       format-icons = {
         default = [
