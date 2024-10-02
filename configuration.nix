@@ -92,6 +92,8 @@ in
 
   time.timeZone = "Europe/Moscow";
 
+  i18n.defaultLocale = "C.UTF-8";
+
   security = {
     polkit.enable = true;
     rtkit.enable = true;

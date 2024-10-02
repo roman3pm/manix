@@ -25,7 +25,7 @@ in
       '';
       shellAbbrs = {
         lg = "lazygit";
-        ll = "LC_COLLATE=C ls -la --group-directories-first";
+        ll = "ls -la --group-directories-first";
         nh = "cd $HOME/projects/manix";
         nfu = "nix flake update";
         nrs = "nixos-rebuild switch --use-remote-sudo --flake '.#'";
