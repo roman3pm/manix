@@ -73,13 +73,13 @@ let
       scroll-step = 5;
       format = "{icon} {volume}%";
       min-length = 6;
-      format-bluetooth = "{icon} {volume}%";
-      format-muted = "󰖁 mute";
+      format-bluetooth = "{icon} {volume}%";
+      format-muted = " mute";
       format-icons = {
         default = [
-          "󰕿"
-          "󰖀"
-          "󰕾"
+          ""
+          ""
+          ""
         ];
       };
       on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
