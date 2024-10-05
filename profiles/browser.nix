@@ -24,6 +24,7 @@ in
           vimium
           ublock-origin
           privacy-badger
+          seventv
         ];
       };
     };
