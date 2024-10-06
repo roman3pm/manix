@@ -16,7 +16,7 @@
         after = [ "network.target" ];
         serviceConfig = {
           Type = "simple";
-          ExecStart = "${pkgs.zapret}/bin/nfqws --daemon --pidfile=/run/nfqws.pid --dpi-desync=fake,split2 --dpi-desync-ttl=1 --dpi-desync-fooling=md5sig --dpi-desync-split-pos=1 --qnum=200";
+          ExecStart = "${pkgs.zapret}/bin/nfqws --daemon --pidfile=/run/nfqws.pid --dpi-desync=split2 --dpi-desync-split-pos=1 --wssize 1:6 --qnum=200";
           ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
           ExecStop = "${pkgs.coreutils}/bin/kill -INT $MAINPID";
           PIDFile = "/run/nfqws.pid";
