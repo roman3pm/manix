@@ -112,6 +112,7 @@ in
       settings.PermitRootLogin = "no";
     };
     dbus.enable = true;
+    v2raya.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
