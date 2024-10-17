@@ -3,19 +3,18 @@ let
   monitor1 = config.devices.monitor1;
   monitor2 = config.devices.monitor2;
   modules = {
-    "sway/mode" = {
+    "hyprland/submap" = {
       format = "{}";
       tooltip = false;
     };
-    "sway/workspaces" = {
+    "hyprland/workspaces" = {
       all-outputs = false;
       disable-scroll = false;
     };
-    "sway/window" = {
+    "hyprland/window" = {
       format = "{title}";
       max-length = 80;
       all-outputs = true;
-      tooltip = false;
     };
     "temperature#gpu" =
       {
@@ -86,9 +85,9 @@ let
       on-click-right = "${pkgs.easyeffects}/bin/easyeffects";
       ignored-sinks = [ "Easy Effects Sink" ];
     };
-    "sway/language" = {
-      format = "{flag}{short}";
-      tooltip = false;
+    "hyprland/language" = {
+      format-en = "🇺🇸en";
+      format-ru = "🇷🇺ru";
     };
     "clock" = {
       interval = 1;
@@ -129,10 +128,10 @@ in
           position = "top";
           output = monitor1;
           modules-left = [
-            "sway/mode"
-            "sway/workspaces"
+            "hyprland/submap"
+            "hyprland/workspaces"
           ];
-          modules-center = [ "sway/window" ];
+          modules-center = [ "hyprland/window" ];
           modules-right = [
             "temperature#gpu"
             "temperature#cpu"
@@ -140,7 +139,7 @@ in
             "tray"
             "idle_inhibitor"
             "pulseaudio"
-            "sway/language"
+            "hyprland/language"
             "clock"
             "custom/notification"
           ];
@@ -151,11 +150,11 @@ in
         // {
           position = "top";
           output = monitor2;
-          modules-left = [ "sway/workspaces" ];
+          modules-left = [ "hyprland/workspaces" ];
           modules-right = [
             "temperature#gpu"
             "temperature#cpu"
-            "sway/language"
+            "hyprland/language"
             "clock"
           ];
         }

@@ -15,4 +15,6 @@ in
     inherit gen-nvim;
   };
 
+  hyprcwd = prev.callPackage ./hyprcwd { };
+
 }

@@ -11,7 +11,7 @@
     home.packages =
       [
         (pkgs.discord.override { withOpenASAR = true; })
-        (pkgs.nerdfonts.override { fonts = [ "Hack" ]; })
+        (pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
       ]
       ++ (with pkgs; [
         gnumake

@@ -2,7 +2,7 @@
 {
   imports = with inputs.self.nixosProfiles; [
     home
-    sway
+    hyprland
     ui
     waybar
     fuzzel

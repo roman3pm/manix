@@ -16,7 +16,7 @@ in
       loginShellInit = ''
         if test -z "$DISPLAY"
           and test "$XDG_VTNR" -eq 1
-          exec sway
+          exec Hyprland
         end
       '';
       shellInit = ''
@@ -43,7 +43,7 @@ in
         prompt_hostname = {
           body = ''
             set -l my_hostname $hostname
-            if string match -rq '/nix/store' "$PATH"
+            if test (math $SHLVL) -gt 1
               set my_hostname "nix-shell"
             end
 
@@ -106,7 +106,7 @@ in
         };
         font = {
           normal = {
-            family = "Hack Nerd Font";
+            family = "DejaVuSansM Nerd Font";
           };
           size = 12;
         };

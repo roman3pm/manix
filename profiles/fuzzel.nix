@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       main = {
-        font = "Hack Nerd Font:size=12";
+        font = "DejaVu Sans Mono:size=12";
         dpi-aware = "no";
         width = 40;
         lines = 8;
