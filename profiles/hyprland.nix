@@ -16,7 +16,7 @@ in
         terminal = ''${pkgs.alacritty}/bin/alacritty --working-directory "''$(${pkgs.hyprcwd}/bin/hyprcwd)"'';
         terminalFloat = "${pkgs.alacritty}/bin/alacritty --class Alacritty_float";
         menu = "${pkgs.fuzzel}/bin/fuzzel";
-        pos2 = if config.hostName == "roz-pc" then "2560x0" else "1080x0";
+        pos2 = if config.hostName == "roz-pc" then "-1440x-800" else "-1440x-1480";
         xkbExtraOptions = if config.hostName == "roz-laptop" then ",altwin:swap_alt_win" else "";
       in
       {
@@ -55,6 +55,9 @@ in
             // lib.optionalAttrs (config.hostName == "roz-pc") {
               accel_profile = "flat";
             };
+          gestures = {
+            workspace_swipe = true;
+          };
           bind =
             [
               "${mod} SHIFT, Q, killactive,"
@@ -154,10 +157,10 @@ in
           dots_center = true;
           outer_color = "rgba(0, 0, 0, 0)";
           inner_color = "rgba(46, 46, 46, 0.4)";
-          font_color = "rgb(255, 255, 255)";
+          font_color = "rgba(255, 255, 255, 0.8)";
           font_family = "DejaVu Serif";
           fade_on_empty = false;
-          placeholder_text = ''<i><span foreground="##ffffff">Input Password...</span></i>'';
+          placeholder_text = ''<i>Input Password...</i>'';
           hide_input = false;
           rounding = -1;
           check_color = "rgb(204, 136, 34)";
@@ -171,8 +174,8 @@ in
         label = [
           {
             monitor = "${monitor1}";
-            text = ''cmd[update:1000] echo "$(date +"%H:%M:%S")"'';
-            color = "rgb(255, 255, 255)";
+            text = ''cmd[update:100] echo "$(date +"%H:%M:%S")"'';
+            color = "rgba(255, 255, 255, 0.8)";
             font_size = 88;
             font_family = "DejaVu Sans Mono";
             position = "0, 100";
@@ -181,11 +184,25 @@ in
           }
           {
             monitor = "${monitor1}";
-            text = ''cmd[update:1000] echo "$(date +"%A, %d %b %Y")"'';
-            color = "rgb(255, 255, 255)";
+            text = ''cmd[update:100] echo "$(date +"%A, %d %b %Y")"'';
+            color = "rgba(255, 255, 255, 0.8)";
             font_size = 24;
             font_family = "DejaVu Sans Mono";
             position = "0, 0";
+            halign = "center";
+            valign = "center";
+          }
+          {
+            monitor = "${monitor1}";
+            text =
+              let
+                grepCmd = "grep -B 1 'main: yes' | grep 'active keymap' | awk '{print tolower(substr($3,1,2))}'";
+              in
+              ''cmd[update:100] echo " $(hyprctl devices | ${grepCmd})"'';
+            color = "rgba(255, 255, 255, 0.8)";
+            font_size = 12;
+            font_family = "DejaVuSansM Nerd Font";
+            position = "0, -250";
             halign = "center";
             valign = "center";
           }
