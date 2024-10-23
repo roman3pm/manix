@@ -3,6 +3,7 @@
   home-manager.users.roz = {
     programs.mangohud = {
       enable = true;
+      enableSessionWide = true;
       settings = {
         no_display = true;
         cpu_temp = true;
