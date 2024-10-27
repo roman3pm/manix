@@ -85,14 +85,16 @@ in
     programs.alacritty = {
       enable = true;
       settings = {
+        general = {
+          import = [ "${tokyonightTheme}/extras/alacritty/tokyonight_night.toml" ];
+        };
         env = {
           TERM = "xterm-256color";
         };
+        terminal = {
+          shell.program = "${pkgs.fish}/bin/fish";
+        };
         window = {
-          dimensions = {
-            columns = 100;
-            lines = 30;
-          };
           padding = {
             x = 8;
             y = 8;
@@ -110,8 +112,6 @@ in
           };
           size = 12;
         };
-        shell.program = "${pkgs.fish}/bin/fish";
-        import = [ "${tokyonightTheme}/extras/alacritty/tokyonight_night.toml" ];
       };
     };
 
