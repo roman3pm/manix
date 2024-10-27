@@ -67,6 +67,9 @@ in
               "${mod}, right, movefocus, r"
               "${mod}, up, movefocus, u"
               "${mod}, down, movefocus, d"
+              "${mod}, tab, layoutmsg, cyclenext"
+              "${mod}, slash, layoutmsg, orientationcycle left top"
+              "${mod}, W, layoutmsg, swapwithmaster master"
 
               "${mod}, L, exec, loginctl lock-session"
               "${mod}, D, exec, ${menu}"
