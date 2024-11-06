@@ -116,6 +116,7 @@ in
           ];
           windowrulev2 = [
             "rounding 10, floating:1"
+            "rounding 0, class:steam"
             "float, class:(Alacritty_float)"
 
             "suppressevent maximize, class:.*"
