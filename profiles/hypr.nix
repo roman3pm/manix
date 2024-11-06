@@ -35,6 +35,11 @@ in
             gaps_out = 0;
             layout = "master";
           };
+          decoration = {
+            blur = {
+              size = 4;
+            };
+          };
           animations = {
             enabled = true;
             bezier = [ "myBezier, 0.05, 0.9, 0.1, 1.05" ];
@@ -68,6 +73,7 @@ in
               "${mod}, up, movefocus, u"
               "${mod}, down, movefocus, d"
               "${mod}, tab, layoutmsg, cyclenext"
+              "${mod} SHIFT, tab, layoutmsg, cycleprev"
               "${mod}, slash, layoutmsg, orientationcycle left top"
               "${mod}, W, layoutmsg, swapwithmaster master"
 
@@ -109,10 +115,17 @@ in
             "${mod}, mouse:273, resizewindow"
           ];
           windowrulev2 = [
+            "rounding 10, floating:1"
             "float, class:(Alacritty_float)"
 
             "suppressevent maximize, class:.*"
             "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+          ];
+          layerrule = [
+            "blur, waybar"
+            "blur, launcher"
+            "ignorealpha 0.5, swaync"
+            "blur, swaync"
           ];
         };
         extraConfig = ''
@@ -125,8 +138,9 @@ in
           bind = , escape, submap, reset
           submap = reset
 
-          bind = ${mod} SHIFT, V, submap, system: [s]uspend [r]eboot [p]oweroff
-          submap = system: [s]uspend [r]eboot [p]oweroff
+          bind = ${mod} SHIFT, V, submap, system: [e]xit [s]uspend [r]eboot [p]oweroff
+          submap = system: [e]xit [s]uspend [r]eboot [p]oweroff
+          binde = , E, exec, hyprctl dispatch exit
           binde = , S, exec, systemctl suspend
           binde = , R, exec, systemctl reboot
           binde = , P, exec, systemctl poweroff
@@ -161,7 +175,7 @@ in
           outer_color = "rgba(0, 0, 0, 0)";
           inner_color = "rgba(46, 46, 46, 0.4)";
           font_color = "rgba(255, 255, 255, 0.8)";
-          font_family = "DejaVu Serif";
+          font_family = "DejaVu Sans";
           fade_on_empty = false;
           placeholder_text = ''<i>Input Password...</i>'';
           hide_input = false;
@@ -224,7 +238,7 @@ in
         listener = [
           {
             timeout = 10;
-            on-timeout = "if pgrep -x hyprlock; then hyprctl dispatch dpms off; fi";
+            on-timeout = "pidof hyprlock && hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
           }
           {

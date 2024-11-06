@@ -27,8 +27,8 @@
 #custom-notification.cc-open,
 #workspaces button.active {
   background: @noti-bg;
-  border-top: 2px solid white;
-  padding: 6px 8px 8px;
+  border-top: 1px solid white;
+  padding: 7px 8px 8px;
 }
 
 #workspaces button {
