@@ -5,16 +5,14 @@
     inputs.self.nixosRoles.desktop
     inputs.self.nixosProfiles.ollama
     inputs.self.nixosProfiles.steam
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
+    inputs.nixos-hardware.nixosModules.common-gpu-amd
   ];
 
   devices = {
     interface = "enp34s0";
     monitor1 = "DP-1";
     monitor2 = "DP-2";
-  };
-
-  boot = {
-    initrd.kernelModules = [ "amdgpu" ];
   };
 
   services.udev.packages = [
