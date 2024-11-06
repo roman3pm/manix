@@ -1,13 +1,9 @@
-{
-  inputs,
-  pkgs,
-  lib,
-  ...
-}:
+{ inputs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
     inputs.self.nixosRoles.desktop
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x1-6th-gen
   ];
 
   devices = {
@@ -15,12 +11,4 @@
     monitor1 = "eDP-1";
     monitor2 = "HDMI-A-1";
   };
-
-  hardware = {
-    graphics.extraPackages = with pkgs; [ intel-media-driver ];
-  };
-
-  services.throttled.enable = true;
-
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }
