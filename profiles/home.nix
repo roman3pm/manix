@@ -52,7 +52,6 @@
         swappy
         thunderbird
         telegram-desktop
-        slack
         teamspeak_client
         libreoffice-fresh
         transmission_4-gtk

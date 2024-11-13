@@ -78,7 +78,6 @@ in
   };
 
   hardware = {
-    graphics.enable = true;
     bluetooth.enable = true;
     xpadneo.enable = true;
   };

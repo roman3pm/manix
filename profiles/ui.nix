@@ -1,12 +1,16 @@
 { pkgs, ... }:
 {
   home-manager.users.roz = {
-    home.packages = with pkgs; [ gnome-themes-extra ];
-
     gtk = {
       enable = true;
-      theme.name = "Adwaita-dark";
-      iconTheme.name = "Adwaita";
+      theme = {
+        package = pkgs.gnome-themes-extra;
+        name = "Adwaita-dark";
+      };
+      iconTheme = {
+        package = pkgs.adwaita-icon-theme;
+        name = "Adwaita";
+      };
     };
 
     dconf = {
@@ -34,10 +38,8 @@
       enable = true;
       portal = {
         enable = true;
-        extraPortals = with pkgs; [
-          xdg-desktop-portal-hyprland
-        ];
-        config.common.default = "*";
+        extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+        configPackages = [ pkgs.hyprland ];
       };
       dataFile."applications/mimeapps.list".force = true;
       configFile."mimeapps.list".force = true;
