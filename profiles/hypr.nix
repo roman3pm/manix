@@ -23,7 +23,7 @@ in
         enable = true;
         settings = {
           monitor = [
-            "${monitor1}, prefered, 0x0, 1, vrr, 2"
+            "${monitor1}, prefered, 0x0, 1"
             "${monitor2}, prefered, ${pos2}, 1, transform, 3"
           ];
           exec-once = [
@@ -34,6 +34,11 @@ in
             gaps_in = 0;
             gaps_out = 0;
             layout = "master";
+          };
+          misc = {
+            disable_hyprland_logo = true;
+            disable_splash_rendering = true;
+            vrr = 2;
           };
           decoration = {
             blur = {
