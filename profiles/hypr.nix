@@ -219,7 +219,7 @@ in
             monitor = "${monitor1}";
             text =
               let
-                grepCmd = "grep -B 1 'main: yes' | grep 'active keymap' | awk '{print tolower(substr($3,1,2))}'";
+                grepCmd = "grep -B 5 'main: yes' | grep 'active keymap' | awk '{print tolower(substr($3,1,2))}'";
               in
               ''cmd[update:100] echo " $(hyprctl devices | ${grepCmd})"'';
             color = "rgba(255, 255, 255, 0.8)";
