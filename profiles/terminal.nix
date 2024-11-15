@@ -53,19 +53,6 @@ in
       };
     };
 
-    programs.bat = {
-      enable = true;
-      themes = {
-        tokyonight = {
-          src = tokyonightTheme;
-          file = "/extras/sublime/tokyonight_night.tmTheme";
-        };
-      };
-      config = {
-        theme = "tokyonight";
-      };
-    };
-
     programs.lf = {
       enable = true;
       settings = {
@@ -73,12 +60,6 @@ in
         icons = true;
         preview = true;
       };
-      previewer.source = pkgs.writeShellScript "pv.sh" ''
-        #!/bin/sh
-        case "$1" in
-            *) bat --color always "$1";;
-        esac
-      '';
     };
     xdg.configFile."lf/icons".source = "${pkgs.lf}/etc/icons.example";
 

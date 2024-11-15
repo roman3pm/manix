@@ -14,22 +14,6 @@
         merge.conflictstyle = "diff3";
         diff.colorMoved = "default";
       };
-      delta = {
-        enable = true;
-        options = {
-          side-by-side = true;
-          syntax-theme = "tokyonight";
-          dark = true;
-          paging = "never";
-          features = "decorations";
-          decorations = {
-            file-style = "omit";
-            hunk-header-decoration-style = "blue box";
-            hunk-header-file-style = "red";
-            hunk-header-style = "file line-number syntax";
-          };
-        };
-      };
     };
 
     programs.lazygit = {
@@ -38,15 +22,10 @@
         gui = {
           scrollHeight = 10;
           scrollPastBottom = false;
-          sidePanelWidth = 0.15;
           theme = {
             selectedLineBgColor = [ "black" ];
             selectedRangeBgColor = [ "black" ];
           };
-        };
-        git.paging = {
-          colorArg = "always";
-          pager = "delta";
         };
       };
     };
