@@ -127,5 +127,13 @@ in
     printing.enable = true;
   };
 
+  services.openvpn.servers = {
+    ds = {
+      autoStart = false;
+      config = ''config /home/roz/.secret/DS.ovpn'';
+      updateResolvConf = true;
+    };
+  };
+
   system.stateVersion = "24.05";
 }
