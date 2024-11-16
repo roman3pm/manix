@@ -49,6 +49,10 @@ tooltip {
   background: @noti-bg;
 }
 
+#battery.critical.discharging {
+  color: red;
+}
+
 #submap {
   background: orange;
   color: black;

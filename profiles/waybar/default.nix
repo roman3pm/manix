@@ -13,7 +13,7 @@ let
     };
     "hyprland/window" = {
       format = "{title}";
-      max-length = 80;
+      max-length = 50;
       all-outputs = true;
     };
     "temperature#gpu" =
@@ -41,6 +41,7 @@ let
           { hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input"; }
       );
     "battery" = {
+      interval = 1;
       states = {
         critical = 15;
       };
