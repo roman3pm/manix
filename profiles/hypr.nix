@@ -61,6 +61,7 @@ in
             {
               kb_layout = "us,ru";
               kb_options = "grp:lctrl_toggle,ctrl:nocaps${xkbExtraOptions}";
+              mouse_refocus = false;
             }
             // lib.optionalAttrs (config.hostName == "roz-pc") {
               accel_profile = "flat";
