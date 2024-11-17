@@ -61,6 +61,8 @@ in
             {
               kb_layout = "us,ru";
               kb_options = "grp:lctrl_toggle,ctrl:nocaps${xkbExtraOptions}";
+              repeat_rate = 50;
+              repeat_delay = 250;
               mouse_refocus = false;
             }
             // lib.optionalAttrs (config.hostName == "roz-pc") {
