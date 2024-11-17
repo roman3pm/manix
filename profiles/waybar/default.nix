@@ -45,7 +45,6 @@ let
       states = {
         critical = 15;
       };
-      full-at = 90;
       format = "{icon} {capacity}%";
       format-charging = " {capacity}%";
       format-full = " {capacity}%";
