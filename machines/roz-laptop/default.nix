@@ -11,4 +11,16 @@
     monitor1 = "eDP-1";
     monitor2 = "HDMI-A-1";
   };
+
+  systemd.services.trackpad-reconnect = {
+    description = "Reconnecting a dead trackpad";
+    wantedBy = [ "suspend.target" ];
+    after = [ "suspend.target" ];
+    script = ''
+      printf none > /sys/bus/serio/devices/serio1/drvctl
+      sleep 1
+      printf reconnect > /sys/bus/serio/devices/serio1/drvctl
+    '';
+    serviceConfig.Type = "oneshot";
+  };
 }
