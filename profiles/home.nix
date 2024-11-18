@@ -52,6 +52,7 @@
         swappy
         thunderbird
         telegram-desktop
+        mattermost-desktop
         teamspeak_client
         libreoffice-fresh
         transmission_4-gtk

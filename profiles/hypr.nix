@@ -33,7 +33,12 @@ in
           general = {
             gaps_in = 0;
             gaps_out = 0;
-            layout = "master";
+            layout = "dwindle";
+          };
+          dwindle = {
+            pseudotile = true;
+            force_split = 2;
+            preserve_split = true;
           };
           misc = {
             disable_hyprland_logo = true;
@@ -74,24 +79,24 @@ in
           bind =
             [
               "${mod} SHIFT, Q, killactive,"
-              "${mod} SHIFT, SPACE, togglefloating"
-              "${mod}, F, fullscreen"
+              "${mod}, SPACE, togglefloating,"
+              "${mod}, F, fullscreen,"
               "${mod}, left, movefocus, l"
               "${mod}, right, movefocus, r"
               "${mod}, up, movefocus, u"
               "${mod}, down, movefocus, d"
-              "${mod}, tab, layoutmsg, cyclenext"
-              "${mod} SHIFT, tab, layoutmsg, cycleprev"
-              "${mod}, slash, layoutmsg, orientationcycle left top"
-              "${mod}, W, layoutmsg, swapwithmaster master"
+              "${mod}, tab, cyclenext,"
+              "${mod}, P, pseudo,"
+              "${mod}, W, layoutmsg, togglesplit"
+              "${mod} SHIFT, W, layoutmsg, swapsplit"
 
               "${mod}, L, exec, loginctl lock-session"
               "${mod}, D, exec, ${menu}"
-              "${mod}, RETURN, exec, ${terminal}"
-              "${mod} SHIFT, RETURN, exec, ${terminalFloat}"
+              "${mod}, E, exec, ${terminal}"
+              "${mod} SHIFT, E, exec, ${terminalFloat}"
               "${mod}, S, exec, ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | ${pkgs.swappy}/bin/swappy -f -"
               "${mod} SHIFT, S, exec, ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - - | wl-copy -t image/png"
-              "${mod}, I, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw"
+              "${mod}, N, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw"
             ]
             ++ (builtins.concatLists (
               builtins.genList (
