@@ -4,6 +4,7 @@
     settings = {
       main = {
         font = "DejaVu Sans Mono:size=12";
+        icon-theme = "Papirus-Dark";
         dpi-aware = "no";
         width = 40;
         lines = 8;

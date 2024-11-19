@@ -8,8 +8,8 @@
         name = "Adwaita-dark";
       };
       iconTheme = {
-        package = pkgs.adwaita-icon-theme;
-        name = "Adwaita";
+        package = pkgs.papirus-icon-theme;
+        name = "Papirus-Dark";
       };
     };
 
