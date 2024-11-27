@@ -8,65 +8,60 @@
 
     home.username = "roz";
 
-    home.packages =
-      [
-        (pkgs.discord.override { withOpenASAR = true; })
-        (pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
-      ]
-      ++ (with pkgs; [
-        gnumake
-        git-crypt
-        ripgrep
-        fzf
-        fd
-        jq
-        imv
-        mpv
-        htop-vim
-        wget
-        unar
-        unzip
-        p7zip
+    home.packages = with pkgs; [
+      gnumake
+      git-crypt
+      ripgrep
+      fzf
+      fd
+      jq
+      imv
+      mpv
+      htop-vim
+      wget
+      unar
+      unzip
+      p7zip
 
-        clang
-        cmake
-        clang-tools
-        glsl_analyzer
-        go
-        gopls
-        golangci-lint
-        richgo
-        zig
-        zls
-        rustc
-        cargo
-        rust-analyzer
-        rustfmt
-        nixd
-        nixfmt-rfc-style
-        lua-language-server
-        nodejs-slim
-        pyright
-        nodePackages.typescript-language-server
+      clang
+      cmake
+      clang-tools
+      glsl_analyzer
+      go
+      gopls
+      golangci-lint
+      richgo
+      zig
+      zls
+      rustc
+      cargo
+      rust-analyzer
+      rustfmt
+      nixd
+      nixfmt-rfc-style
+      lua-language-server
+      nodejs-slim
+      pyright
+      nodePackages.typescript-language-server
 
-        swappy
-        thunderbird
-        telegram-desktop
-        mattermost-desktop
-        teamspeak_client
-        libreoffice-fresh
-        transmission_4-gtk
-        zathura
-        godot_4
-        protontricks
+      swappy
+      thunderbird
+      telegram-desktop
+      mattermost-desktop
+      teamspeak_client
+      libreoffice-fresh
+      transmission_4-gtk
+      zathura
+      godot_4
+      protontricks
 
-        pavucontrol
-        libnotify
-        slurp
-        grim
-        wf-recorder
-        wl-clipboard
-      ]);
+      pavucontrol
+      libnotify
+      slurp
+      grim
+      wf-recorder
+      wl-clipboard
+    ];
 
     home.stateVersion = "24.05";
   };

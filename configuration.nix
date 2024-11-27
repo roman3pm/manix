@@ -8,7 +8,6 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_zen;
     kernelModules = [
       "v4l2loopback"
       "hid-apple"
@@ -88,8 +87,9 @@ in
 
   fonts = {
     enableDefaultPackages = true;
-    packages = with pkgs; [
-      wqy_zenhei
+    packages = [
+      (pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
+      pkgs.wqy_zenhei
     ];
   };
 

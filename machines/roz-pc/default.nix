@@ -15,6 +15,8 @@
     monitor2 = "DP-2";
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
   services.udev.packages = [
     (pkgs.writeTextFile {
       name = "via_udev";
