@@ -1,59 +1,22 @@
 { pkgs, ... }:
 {
   home-manager.users.roz = {
-    gtk = {
-      enable = true;
-      theme = {
-        package = pkgs.gnome-themes-extra;
-        name = "Adwaita-dark";
-      };
-      iconTheme = {
-        package = pkgs.papirus-icon-theme;
-        name = "Papirus-Dark";
-      };
-    };
-
+    home.packages = with pkgs.gnomeExtensions; [ blur-my-shell ];
     dconf = {
       enable = true;
       settings = {
-        "org/gnome/desktop/interface" = {
-          color-scheme = "prefer-dark";
+        "org/gnome/shell" = {
+          disable-user-extensions = false;
+          enabled-extensions = with pkgs.gnomeExtensions; [ blur-my-shell.extensionUuid ];
         };
       };
-    };
-
-    home.pointerCursor = {
-      package = pkgs.gnome-themes-extra;
-      name = "Adwaita";
-      size = 32;
-      gtk.enable = true;
     };
 
     qt = {
       enable = true;
-      platformTheme.name = "gtk3";
+      platformTheme.name = "adwaita";
     };
 
-    xdg = {
-      enable = true;
-      portal = {
-        enable = true;
-        extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-        configPackages = [ pkgs.hyprland ];
-      };
-      dataFile."applications/mimeapps.list".force = true;
-      configFile."mimeapps.list".force = true;
-      mimeApps = {
-        enable = true;
-        defaultApplications = {
-          "application/pdf" = "org.pwmt.zathura.desktop";
-        };
-      };
-    };
+    home.sessionVariables.NIXOS_OZONE_WL = "1";
   };
-
-  environment.pathsToLink = [
-    "/share/xdg-desktop-portal"
-    "/share/applications"
-  ];
 }

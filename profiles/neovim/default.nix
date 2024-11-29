@@ -10,7 +10,7 @@
       withPython3 = false;
       plugins = with pkgs.vimPlugins; [
         plenary-nvim
-        tokyonight-nvim
+        vscode-nvim
         indent-blankline-nvim
         lualine-nvim
         nvim-web-devicons

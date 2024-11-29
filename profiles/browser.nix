@@ -29,14 +29,6 @@ in
       };
     };
 
-    xdg.mimeApps.defaultApplications = {
-      "text/html" = "${defaultApplication}.desktop";
-      "x-scheme-handler/http" = "${defaultApplication}.desktop";
-      "x-scheme-handler/https" = "${defaultApplication}.desktop";
-      "x-scheme-handler/about" = "${defaultApplication}.desktop";
-      "x-scheme-handler/unknown" = "${defaultApplication}.desktop";
-    };
-
     home.sessionVariables.BROWSER = "${defaultApplication}";
   };
 }

@@ -38,8 +38,7 @@ opt.listchars:append("eol:↴")
 opt.ignorecase = true
 opt.smartcase = true
 
-require("tokyonight").setup {}
-cmd("colorscheme tokyonight-night")
+cmd.colorscheme "vscode"
 
 require("nvim-autopairs").setup {
   fast_wrap = {},
@@ -128,6 +127,7 @@ require('lualine').setup {
   options = {
     section_separators = '',
     component_separators = { left = '│', right = '│' },
+    theme = 'vscode',
   },
   extensions = { 'nvim-tree', 'quickfix' },
 }

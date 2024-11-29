@@ -1,24 +1,10 @@
 { pkgs, ... }:
-let
-  tokyonightTheme = pkgs.fetchFromGitHub {
-    owner = "folke";
-    repo = "tokyonight.nvim";
-    rev = "v4.6.0";
-    sha256 = "evKMF/sCEIoE/OiIBiP7jW+f9Ee3IUTbWSufHOZDNTY=";
-  };
-in
 {
   home-manager.users.roz = {
     programs.nix-index.enable = true;
 
     programs.fish = {
       enable = true;
-      loginShellInit = ''
-        if test -z "$DISPLAY"
-          and test "$XDG_VTNR" -eq 1
-          exec Hyprland
-        end
-      '';
       shellInit = ''
         set fish_greeting
         fish_vi_key_bindings
@@ -63,39 +49,6 @@ in
     };
     xdg.configFile."lf/icons".source = "${pkgs.lf}/etc/icons.example";
 
-    programs.alacritty = {
-      enable = true;
-      settings = {
-        general = {
-          import = [ "${tokyonightTheme}/extras/alacritty/tokyonight_night.toml" ];
-        };
-        env = {
-          TERM = "xterm-256color";
-        };
-        terminal = {
-          shell.program = "${pkgs.fish}/bin/fish";
-        };
-        window = {
-          padding = {
-            x = 8;
-            y = 8;
-          };
-        };
-        cursor = {
-          style = {
-            blinking = "Always";
-          };
-          blink_timeout = 0;
-        };
-        font = {
-          normal = {
-            family = "DejaVuSansM Nerd Font";
-          };
-          size = 12;
-        };
-      };
-    };
-
-    home.sessionVariables.TERMINAL = "alacritty";
+    home.sessionVariables.TERMINAL = "kgx";
   };
 }

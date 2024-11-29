@@ -15,8 +15,6 @@
       fzf
       fd
       jq
-      imv
-      mpv
       htop-vim
       wget
       unar
@@ -55,8 +53,6 @@
       godot_4
       protontricks
 
-      pavucontrol
-      libnotify
       slurp
       grim
       wf-recorder
