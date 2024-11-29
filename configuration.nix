@@ -124,8 +124,8 @@ in
       variant = "";
       options = "grp:lctrl_toggle,ctrl:nocaps";
     };
-    displayManager = {
-      gdm.enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager = {
       gnome.enable = true;
       gnome.extraGSettingsOverridePackages = [ pkgs.mutter ];
     };
