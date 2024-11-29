@@ -40,13 +40,13 @@
       lua-language-server
       nodejs-slim
       pyright
-      nodePackages.typescript-language-server
+      typescript-language-server
 
       swappy
       thunderbird
       telegram-desktop
       mattermost-desktop
-      teamspeak_client
+      teamspeak3
       libreoffice-fresh
       transmission_4-gtk
       zathura

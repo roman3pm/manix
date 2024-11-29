@@ -86,6 +86,7 @@
                   nixpkgs = {
                     inherit overlays;
                     config.allowUnfree = true;
+                    config.allowAliases = false;
                   };
                   environment.systemPackages = [ inputs.agenix.packages.${system}.default ];
                 }

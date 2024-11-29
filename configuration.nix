@@ -58,6 +58,14 @@ in
     };
   };
 
+  services.openvpn.servers = {
+    ds = {
+      autoStart = false;
+      config = ''config /home/roz/.secret/DS.ovpn'';
+      updateResolvConf = true;
+    };
+  };
+
   users = {
     groups.plugdev = { };
     users.roz = {
@@ -109,26 +117,18 @@ in
     LC_TIME = "ru_RU.UTF-8";
   };
 
-  security = {
-    polkit.enable = true;
-    rtkit.enable = true;
-  };
-
-  programs = {
-    fish.enable = true;
-    dconf.enable = true;
-    ssh.startAgent = true;
-    gnupg.agent.enable = true;
-  };
-
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  services.xserver.xkb = {
-    layout = "us,ru";
-    variant = "";
-    options = "grp:lctrl_toggle,ctrl:nocaps";
+  services.xserver = {
+    enable = true;
+    xkb = {
+      layout = "us,ru";
+      variant = "";
+      options = "grp:lctrl_toggle,ctrl:nocaps";
+    };
+    displayManager = {
+      gdm.enable = true;
+      gnome.enable = true;
+      gnome.extraGSettingsOverridePackages = [ pkgs.mutter ];
+    };
   };
 
   services = {
@@ -149,12 +149,16 @@ in
     printing.enable = true;
   };
 
-  services.openvpn.servers = {
-    ds = {
-      autoStart = false;
-      config = ''config /home/roz/.secret/DS.ovpn'';
-      updateResolvConf = true;
-    };
+  programs = {
+    fish.enable = true;
+    dconf.enable = true;
+    ssh.startAgent = true;
+    gnupg.agent.enable = true;
+  };
+
+  security = {
+    polkit.enable = true;
+    rtkit.enable = true;
   };
 
   system.stateVersion = "24.05";
