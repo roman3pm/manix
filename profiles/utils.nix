@@ -11,12 +11,13 @@
         cpu_mhz = true;
         ram = true;
         vram = true;
-        gpu_temp = true;
+        gpu_junction_temp = true;
         gpu_power = true;
         gpu_stats = true;
         gpu_core_clock = true;
         engine_version = true;
-        vulkan_driver = true;
+        vkbasalt = true;
+        show_fps_limit = true;
         fps_limit = "240,0";
       };
     };
@@ -26,7 +27,7 @@
       effects = cas
       toggleKey = Home
       enableOnLaunch = True
-      casSharpness = 0.2
+      casSharpness = 0.3
     '';
   };
 }
