@@ -22,10 +22,6 @@
         gui = {
           scrollHeight = 10;
           scrollPastBottom = false;
-          theme = {
-            selectedLineBgColor = [ "black" ];
-            selectedRangeBgColor = [ "black" ];
-          };
         };
       };
     };
