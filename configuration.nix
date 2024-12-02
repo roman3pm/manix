@@ -95,10 +95,11 @@ in
 
   fonts = {
     enableDefaultPackages = true;
-    packages = [
-      (pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
-      pkgs.wqy_zenhei
+    packages = with pkgs; [
+      nerd-fonts.dejavu-sans-mono
+      wqy_zenhei
     ];
+    fontconfig.defaultFonts.monospace = [ "DejaVuSansM Nerd Font Mono" ];
   };
 
   time.timeZone = "Europe/Moscow";

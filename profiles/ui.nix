@@ -35,6 +35,7 @@
           ];
         };
         "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+        "org/gnome/desktop/interface".monospace-font-name = "DejaVuSansM Nerd Font Mono 12";
         "org/gnome/desktop/wm/preferences".resize-with-right-button = true;
         "org/gnome/mutter".experimental-features = [ "variable-refresh-rate" ];
       };
