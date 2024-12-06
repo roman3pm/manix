@@ -22,6 +22,7 @@
         gitsigns-nvim
         gen-nvim
         nvim-treesitter.withAllGrammars
+        rest-nvim
 
         nvim-lspconfig
         nvim-cmp

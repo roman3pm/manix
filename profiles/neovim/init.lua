@@ -163,6 +163,14 @@ require('nvim-tree').setup {
 api.nvim_set_keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', { noremap = true })
 api.nvim_set_keymap('n', '<leader>tf', ':NvimTreeFocus<CR>', { noremap = true })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "json",
+  callback = function(ev)
+    vim.bo[ev.buf].formatprg = "jq"
+  end,
+})
+api.nvim_set_keymap('n', '<leader>rr', ':Rest run<CR>', { noremap = true })
+
 require('gen').setup {
   model = "codestral",
   init = nil,

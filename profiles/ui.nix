@@ -47,7 +47,5 @@
       size = 32;
       gtk.enable = true;
     };
-
-    home.sessionVariables.NIXOS_OZONE_WL = "1";
   };
 }
