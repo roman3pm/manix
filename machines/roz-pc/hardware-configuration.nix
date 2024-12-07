@@ -38,19 +38,11 @@
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/9569bad0-9da7-435e-9400-9bc8e7a30e51";
     fsType = "ext4";
-    options = [
-      "nofail"
-      "users"
-    ];
   };
 
   fileSystems."/hdd" = {
     device = "/dev/disk/by-uuid/63223e48-1b0f-4937-ac2b-37407de1e1ee";
     fsType = "ext4";
-    options = [
-      "nofail"
-      "users"
-    ];
   };
 
   swapDevices = [
