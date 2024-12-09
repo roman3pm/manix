@@ -30,7 +30,7 @@
       lib = inputs.nixpkgs.lib;
       overlays = [
         (import ./overlays inputs system)
-        inputs.nur.overlay
+        inputs.nur.overlays.default
       ];
       findModules =
         dir:

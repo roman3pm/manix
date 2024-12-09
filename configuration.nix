@@ -118,18 +118,21 @@ in
     LC_TIME = "ru_RU.UTF-8";
   };
 
-  services.xserver = {
-    enable = true;
-    xkb = {
-      layout = "us,ru";
-      variant = "";
-      options = "grp:lctrl_toggle,ctrl:nocaps";
+  services = {
+    xserver = {
+      enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager = {
+        gnome.enable = true;
+        gnome.extraGSettingsOverridePackages = [ pkgs.mutter ];
+      };
+      xkb = {
+        layout = "us,ru";
+        variant = "";
+        options = "grp:lctrl_toggle,ctrl:nocaps";
+      };
     };
-    displayManager.gdm.enable = true;
-    desktopManager = {
-      gnome.enable = true;
-      gnome.extraGSettingsOverridePackages = [ pkgs.mutter ];
-    };
+    displayManager.defaultSession = "gnome";
   };
 
   services = {
