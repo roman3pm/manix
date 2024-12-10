@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   home-manager.users.roz = {
     home.packages = with pkgs.gnomeExtensions; [
@@ -12,16 +12,12 @@
         package = pkgs.gnome-themes-extra;
         name = "Adwaita-dark";
       };
-      iconTheme = {
-        package = pkgs.adwaita-icon-theme;
-        name = "Adwaita";
-      };
     };
 
     qt = {
       enable = true;
       platformTheme.name = "adwaita";
-      style.name = "adwaita-dark";
+      style.name = "adwaita";
     };
 
     dconf = {
@@ -35,17 +31,15 @@
           ];
         };
         "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+        "org/gnome/desktop/interface".cursor-size = 32;
         "org/gnome/desktop/interface".monospace-font-name = "DejaVuSansM Nerd Font Mono 12";
         "org/gnome/desktop/wm/preferences".resize-with-right-button = true;
         "org/gnome/mutter".experimental-features = [ "variable-refresh-rate" ];
+        "org/gnome/desktop/peripherals/keyboard" = {
+          repeat-interval = lib.gvariant.mkUint32 15;
+          delay = lib.gvariant.mkUint32 250;
+        };
       };
-    };
-
-    home.pointerCursor = {
-      package = pkgs.gnome-themes-extra;
-      name = "Adwaita";
-      size = 32;
-      gtk.enable = true;
     };
   };
 }

@@ -16,7 +16,6 @@
         nvim-web-devicons
         nvim-bqf
         nvim-tree-lua
-        nvim-autopairs
         telescope-nvim
         telescope-fzf-native-nvim
         gitsigns-nvim

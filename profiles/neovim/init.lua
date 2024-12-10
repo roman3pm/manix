@@ -40,10 +40,6 @@ opt.smartcase = true
 
 cmd.colorscheme "vscode"
 
-require("nvim-autopairs").setup {
-  fast_wrap = {},
-}
-
 require('telescope').setup {
   defaults = {
     path_display = { "smart" },
@@ -188,7 +184,7 @@ function _G.qftf(info)
   else
     items = fn.getloclist(info.winid, { id = info.id, items = 0 }).items
   end
-  local limit = 31
+  local limit = 60
   local fnameFmt1, fnameFmt2 = '%-' .. limit .. 's', '…%.' .. (limit - 1) .. 's'
   local validFmt = '%s │%5d:%-3d│%s %s'
   for i = info.start_idx, info.end_idx do
