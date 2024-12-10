@@ -41,6 +41,7 @@
       nodejs-slim
       pyright
       typescript-language-server
+      kubectl
 
       swappy
       thunderbird
@@ -52,11 +53,6 @@
       zathura
       godot_4
       protontricks
-
-      slurp
-      grim
-      wf-recorder
-      wl-clipboard
     ];
 
     home.stateVersion = "24.05";

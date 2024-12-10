@@ -6,13 +6,7 @@ let
   };
 in
 {
-
-  lf = prev.lf.overrideAttrs (old: {
-    postInstall = old.postInstall + "cp -R etc $out";
-  });
-
   vimPlugins = prev.vimPlugins // {
     inherit gen-nvim;
   };
-
 }

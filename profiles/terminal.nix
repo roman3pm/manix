@@ -1,4 +1,20 @@
 { pkgs, ... }:
+let
+  lfSrc = pkgs.fetchFromGitHub {
+    owner = "gokcehan";
+    repo = "lf";
+    rev = "r33";
+    sparseCheckout = [ "etc" ];
+    hash = "sha256-aKvTf2tqAUbB3plOemvgJJ7qYdGfQoXhsGVE7Y9wuMo=";
+  };
+  k9sSrc = pkgs.fetchFromGitHub {
+    owner = "derailed";
+    repo = "k9s";
+    rev = "v0.32.7";
+    sparseCheckout = [ "skins" ];
+    hash = "sha256-0S6FomP1WVqYl5nP0FcaElgghMcZmE0V8iLhghERF6A=";
+  };
+in
 {
   home-manager.users.roz = {
     programs.nix-index.enable = true;
@@ -47,7 +63,17 @@
         preview = true;
       };
     };
-    xdg.configFile."lf/icons".source = "${pkgs.lf}/etc/icons.example";
+    xdg.configFile."lf/icons".source = "${lfSrc}/etc/icons.example";
+
+    programs.k9s = {
+      enable = true;
+      settings = {
+        k9s.ui.skin = "transparent";
+      };
+      skins = {
+        transparent = "${k9sSrc}/skins/transparent.yaml";
+      };
+    };
 
     home.sessionVariables.TERMINAL = "kgx";
   };
