@@ -63,7 +63,7 @@ in
         preview = true;
       };
     };
-    xdg.configFile."lf/icons".source = "${lfSrc}/etc/icons.example";
+    xdg.configFile."lf/icons".source = "${lfSrc}/etc/icons_colored.example";
 
     programs.k9s = {
       enable = true;
