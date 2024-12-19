@@ -131,6 +131,11 @@ require('lspconfig').glsl_analyzer.setup {
 require('lspconfig').gopls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  settings = {
+    gopls = {
+      buildFlags = { '-tags=integration_test' },
+    },
+  },
 }
 
 require('lspconfig').rust_analyzer.setup {
