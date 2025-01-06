@@ -21,5 +21,8 @@
       ENABLE_GAMESCOPE_WSI = "1";
     };
   };
-  environment.systemPackages = [ pkgs.gamescope-wsi ];
+  environment.systemPackages = with pkgs; [
+    gamescope-wsi
+    protontricks
+  ];
 }

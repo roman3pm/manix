@@ -119,23 +119,6 @@ in
   };
 
   services = {
-    xserver = {
-      enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager = {
-        gnome.enable = true;
-        gnome.extraGSettingsOverridePackages = [ pkgs.mutter ];
-      };
-      xkb = {
-        layout = "us,ru";
-        variant = "";
-        options = "grp:lctrl_toggle,ctrl:nocaps";
-      };
-    };
-    displayManager.defaultSession = "gnome";
-  };
-
-  services = {
     openssh = {
       enable = true;
       settings.PermitRootLogin = "no";

@@ -17,6 +17,15 @@ let
 in
 {
   home-manager.users.roz = {
+    programs.ghostty = {
+      enable = true;
+      settings = {
+        font-family = "DejaVuSansM Nerd Font Mono";
+        font-size = 12;
+        theme = "Adwaita Dark";
+      };
+    };
+
     programs.nix-index.enable = true;
 
     programs.fish = {
@@ -55,6 +64,12 @@ in
       };
     };
 
+    programs.tmux = {
+      enable = true;
+      keyMode = "vi";
+      mouse = true;
+    };
+
     programs.lf = {
       enable = true;
       settings = {
@@ -75,6 +90,16 @@ in
       };
     };
 
-    home.sessionVariables.TERMINAL = "kgx";
+    home.sessionVariables.TERMINAL = "ghostty";
+  };
+
+  xdg = {
+    terminal-exec = {
+      enable = true;
+      settings = {
+        GNOME = [ "com.mitchellh.ghostty.desktop" ];
+        default = [ "com.mitchellh.ghostty.desktop" ];
+      };
+    };
   };
 }

@@ -1,24 +1,27 @@
 { lib, pkgs, ... }:
 {
+  services = {
+    xserver = {
+      enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager = {
+        gnome.enable = true;
+        gnome.extraGSettingsOverridePackages = [ pkgs.mutter ];
+      };
+      xkb = {
+        layout = "us,ru";
+        variant = "";
+        options = "grp:lctrl_toggle,ctrl:nocaps";
+      };
+    };
+    displayManager.defaultSession = "gnome";
+  };
+
   home-manager.users.roz = {
     home.packages = with pkgs.gnomeExtensions; [
       blur-my-shell
       appindicator
     ];
-
-    gtk = {
-      enable = true;
-      theme = {
-        package = pkgs.gnome-themes-extra;
-        name = "Adwaita-dark";
-      };
-    };
-
-    qt = {
-      enable = true;
-      platformTheme.name = "adwaita";
-      style.name = "adwaita";
-    };
 
     dconf = {
       enable = true;
@@ -40,6 +43,19 @@
           delay = lib.gvariant.mkUint32 250;
         };
       };
+    };
+
+    gtk = {
+      enable = true;
+      gtk3.extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
+      };
+    };
+
+    qt = {
+      enable = true;
+      platformTheme.name = "adwaita";
+      style.name = "adwaita";
     };
   };
 }

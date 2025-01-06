@@ -51,9 +51,6 @@
       teamspeak3
       libreoffice-fresh
       transmission_4-gtk
-      zathura
-      godot_4
-      protontricks
     ];
 
     home.stateVersion = "24.05";
