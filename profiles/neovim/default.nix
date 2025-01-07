@@ -30,6 +30,7 @@
         cmp-path
         cmp-buffer
         cmp-cmdline
+        cmp-ai
         cmp-nvim-lsp
         cmp-nvim-lsp-signature-help
       ];

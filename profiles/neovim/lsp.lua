@@ -76,6 +76,16 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
+    ['<C-x>'] = cmp.mapping(
+      cmp.mapping.complete({
+        config = {
+          sources = cmp.config.sources({
+            { name = 'cmp_ai' },
+          }),
+        },
+      }),
+      { 'i' }
+    ),
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp_signature_help' },
@@ -102,6 +112,24 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' },
   }),
   matching = { disallow_symbol_nonprefix_matching = false }
+})
+
+local cmp_ai = require('cmp_ai.config')
+
+cmp_ai:setup({
+  max_lines = 100,
+  provider = 'Ollama',
+  provider_options = {
+    model = 'qwen2.5-coder:1.5b-base-q6_K',
+    prompt = function(lines_before, lines_after)
+      return "<|fim_prefix|>" .. lines_before .. "<|fim_suffix|>" .. lines_after .. "<|fim_middle|>"
+    end,
+  },
+  notify = true,
+  notify_callback = function(msg)
+    vim.notify(msg)
+  end,
+  run_on_every_keystroke = false,
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()

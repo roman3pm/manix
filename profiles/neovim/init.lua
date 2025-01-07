@@ -168,7 +168,7 @@ vim.api.nvim_create_autocmd("FileType", {
 api.nvim_set_keymap('n', '<leader>rr', ':Rest run<CR>', { noremap = true })
 
 require('gen').setup {
-  model = "opencoder",
+  model = "qwen2.5-coder:14b",
   init = nil,
   display_mode = "split",
 }
