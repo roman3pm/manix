@@ -54,10 +54,13 @@ in
         prompt_hostname = {
           body = ''
             set -l my_hostname $hostname
-            if test (math $SHLVL) -gt 1
+            set -l shlvl (math $SHLVL)
+            if test -n "$TMUX"
+              set shlvl (math $shlvl - 1)
+            end
+            if test $shlvl -gt 1
               set my_hostname "nix-shell"
             end
-
             string replace -r "\..*" "" $my_hostname
           '';
         };
@@ -66,6 +69,7 @@ in
 
     programs.tmux = {
       enable = true;
+      terminal = "screen-256color";
       keyMode = "vi";
       mouse = true;
     };
