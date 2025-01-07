@@ -50,9 +50,13 @@ require('telescope').setup {
       override_generic_sorter = true,
       override_file_sorter = true,
     },
+    ["ui-select"] = {
+      require("telescope.themes").get_cursor({ layout_config = { cursor = { height = 0.3 } } })
+    },
   },
 }
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('ui-select')
 api.nvim_set_keymap('n', '<leader>ff', [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true })
 api.nvim_set_keymap('n', '<leader>fg', [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true })
 api.nvim_set_keymap('n', '<leader>fb', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true })
@@ -124,6 +128,11 @@ require('lualine').setup {
     section_separators = '',
     component_separators = { left = '│', right = '│' },
     theme = 'vscode',
+  },
+  sections = {
+    lualine_c = {
+      { 'filename', path = 1 },
+    },
   },
   extensions = { 'nvim-tree', 'quickfix' },
 }

@@ -18,6 +18,7 @@
         nvim-tree-lua
         telescope-nvim
         telescope-fzf-native-nvim
+        telescope-ui-select-nvim
         gitsigns-nvim
         gen-nvim
         nvim-treesitter.withAllGrammars
