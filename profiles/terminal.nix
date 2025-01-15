@@ -22,7 +22,7 @@ in
       settings = {
         font-family = "DejaVuSansM Nerd Font Mono";
         font-size = 12;
-        theme = "Adwaita Dark";
+        theme = "dark:Adwaita Dark,light:Adwaita";
       };
     };
 

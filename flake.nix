@@ -16,6 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nur.url = "github:nix-community/NUR";
     gen-nvim = {
       url = "github:David-Kunz/gen.nvim";
@@ -77,6 +78,7 @@
               };
               modules = __attrValues self.nixosModules ++ [
                 inputs.agenix.nixosModules.default
+                inputs.nix-flatpak.nixosModules.nix-flatpak
 
                 ./configuration.nix
                 (import (./machines + "/${hostName}"))

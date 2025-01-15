@@ -46,13 +46,18 @@
 
       swappy
       thunderbird
-      telegram-desktop
-      mattermost-desktop
-      teamspeak3
       libreoffice-fresh
-      transmission_4-gtk
     ];
 
     home.stateVersion = "24.05";
+  };
+
+  services.flatpak = {
+    enable = true;
+    packages = [
+      "org.telegram.desktop"
+      "com.mattermost.Desktop"
+      "com.transmissionbt.Transmission"
+    ];
   };
 }
