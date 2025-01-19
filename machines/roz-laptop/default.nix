@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -11,6 +11,4 @@
     monitor1 = "eDP-1";
     monitor2 = "HDMI-A-1";
   };
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 }
