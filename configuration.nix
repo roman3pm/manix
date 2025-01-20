@@ -49,8 +49,8 @@ in
           autostart = false;
           preUp = "${pkgs.nmap}/bin/nping --udp --count 1 --data-length 16 --source-port ${builtins.toString listenPort} --dest-port ${builtins.toString crypt.wg0.port} ${crypt.wg0.host}";
           address = [
-            "10.9.8.91/16"
-            "fd42:42:42:42::85b/104"
+            "10.9.40.123/16"
+            "fd42:42:42:42::287b/104"
           ];
           dns = [ "10.9.0.1" ];
           privateKeyFile = config.age.secrets."secrets/wg0-privateKey".path;
