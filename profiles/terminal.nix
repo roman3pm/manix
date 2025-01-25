@@ -69,8 +69,9 @@ in
 
     programs.tmux = {
       enable = true;
+      baseIndex = 1;
       escapeTime = 0;
-      historyLimit = 10000;
+      historyLimit = 1000000;
       keyMode = "vi";
       mouse = true;
       terminal = "screen-256color";
