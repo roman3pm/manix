@@ -173,7 +173,7 @@ vim.api.nvim_create_autocmd("FileType", {
 api.nvim_set_keymap('n', '<leader>rr', ':Rest run<CR>', { noremap = true })
 
 require('gen').setup {
-  model = "qwen2.5-coder:14b",
+  model = "qwen2.5-coder",
   init = nil,
   display_mode = "split",
 }

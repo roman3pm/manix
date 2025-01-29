@@ -120,7 +120,7 @@ cmp_ai:setup({
   max_lines = 100,
   provider = 'Ollama',
   provider_options = {
-    model = 'qwen2.5-coder:1.5b-base-q6_K',
+    model = 'qwen2.5-coder:7b-base-q6_K',
     prompt = function(lines_before, lines_after)
       return "<|fim_prefix|>" .. lines_before .. "<|fim_suffix|>" .. lines_after .. "<|fim_middle|>"
     end,
