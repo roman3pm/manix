@@ -1,12 +1,10 @@
-{ inputs, pkgs, ... }:
+{ inputs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
     inputs.self.nixosRoles.desktop
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x1-6th-gen
   ];
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   devices = {
     interface = "wlp2s0";
