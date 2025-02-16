@@ -76,11 +76,10 @@
               specialArgs = {
                 inherit inputs;
               };
-              modules = __attrValues self.nixosModules ++ [
+              modules = builtins.attrValues self.nixosModules ++ [
                 inputs.agenix.nixosModules.default
                 inputs.nix-flatpak.nixosModules.nix-flatpak
 
-                ./configuration.nix
                 (import (./machines + "/${hostName}"))
                 {
                   inherit hostName;

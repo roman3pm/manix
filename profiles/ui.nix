@@ -17,6 +17,15 @@
     displayManager.defaultSession = "gnome";
   };
 
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      nerd-fonts.dejavu-sans-mono
+      wqy_zenhei
+    ];
+    fontconfig.defaultFonts.monospace = [ "DejaVuSansM Nerd Font Mono" ];
+  };
+
   home-manager.users.roz = {
     dconf = {
       enable = true;

@@ -1,14 +1,25 @@
 { inputs, ... }:
 {
   imports = with inputs.self.nixosProfiles; [
-    home
-    ui
-    terminal
-    git
-    neovim
+    age
+    boot
     browser
+    docker
     easyeffects
+    flatpak
+    git
+    hardware
+    home
+    locale
+    neovim
+    networking
     obs
+    programs
+    settings
+    system
+    terminal
+    ui
+    users
     utils
   ];
 }
