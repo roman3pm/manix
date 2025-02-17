@@ -3,8 +3,6 @@
   imports = [
     ./hardware-configuration.nix
     inputs.self.nixosRoles.desktop
-    inputs.self.nixosProfiles.ollama
-    inputs.self.nixosProfiles.steam
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-gpu-amd
   ];

@@ -2,7 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    inputs.self.nixosRoles.desktop
+    inputs.self.nixosRoles.laptop
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x1-6th-gen
   ];
 

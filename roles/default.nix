@@ -1,1 +1,4 @@
-{ desktop = ./desktop.nix; }
+{
+  desktop = ./desktop.nix;
+  laptop = ./base.nix;
+}
