@@ -1,8 +1,6 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   home-manager.users.roz = {
-
-    imports = [ inputs.nix-index-database.hmModules.nix-index ];
 
     programs.home-manager.enable = true;
 

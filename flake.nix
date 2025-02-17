@@ -78,6 +78,7 @@
               };
               modules = builtins.attrValues self.nixosModules ++ [
                 inputs.agenix.nixosModules.default
+                inputs.nix-index-database.nixosModules.nix-index
                 inputs.nix-flatpak.nixosModules.nix-flatpak
 
                 (import (./machines + "/${hostName}"))

@@ -26,8 +26,6 @@ in
       };
     };
 
-    programs.nix-index.enable = true;
-
     programs.fish = {
       enable = true;
       shellInit = ''
