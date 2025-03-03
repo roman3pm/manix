@@ -44,7 +44,7 @@
       kubectl
 
       swappy
-      thunderbird
+      thunderbird-latest
       libreoffice-fresh
     ];
 

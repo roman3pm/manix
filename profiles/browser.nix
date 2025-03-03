@@ -18,8 +18,7 @@ in
     programs.firefox = {
       enable = true;
       profiles.default = {
-        id = 0;
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           bitwarden
           vimium
           ublock-origin

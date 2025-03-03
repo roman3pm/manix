@@ -36,6 +36,7 @@ in
         lg = "lazygit";
         ll = "ls -la --group-directories-first";
         nh = "cd $HOME/projects/manix";
+        nd = "nix develop -c $SHELL";
         nfu = "nix flake update";
         nrs = "nixos-rebuild switch --use-remote-sudo --flake '.#'";
         ngc = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
