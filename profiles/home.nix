@@ -43,7 +43,9 @@
       typescript-language-server
       kubectl
 
-      swappy
+      satty
+      telegram-desktop
+      mattermost-desktop
       thunderbird-latest
       libreoffice-fresh
     ];

@@ -27,17 +27,31 @@
   };
 
   home-manager.users.roz = {
+    home.packages = with pkgs.gnomeExtensions; [ dash-to-dock ];
     dconf = {
       enable = true;
       settings = {
-        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
-        "org/gnome/desktop/interface".cursor-size = 32;
-        "org/gnome/desktop/interface".monospace-font-name = "DejaVuSansM Nerd Font Mono 12";
+        "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+          cursor-size = 32;
+          monospace-font-name = "DejaVuSansM Nerd Font Mono 12";
+        };
         "org/gnome/desktop/wm/preferences".resize-with-right-button = true;
         "org/gnome/mutter".experimental-features = [ "variable-refresh-rate" ];
         "org/gnome/desktop/peripherals/keyboard" = {
           repeat-interval = lib.gvariant.mkUint32 15;
           delay = lib.gvariant.mkUint32 250;
+        };
+
+        "org/gnome/shell" = {
+          disable-user-extensions = false;
+          enabled-extensions = with pkgs.gnomeExtensions; [ dash-to-dock.extensionUuid ];
+        };
+        "org/gnome/shell/extensions/dash-to-dock" = {
+          intellihide = false;
+          show-trash = false;
+          show-mounts = false;
+          running-indicator-style = "DOTS";
         };
       };
     };
