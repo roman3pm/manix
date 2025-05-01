@@ -39,8 +39,13 @@
       nixfmt-rfc-style
       lua-language-server
       nodejs-slim
-      pyright
       typescript-language-server
+      (python3.withPackages (
+        python-pkgs: with python-pkgs; [
+          python-lsp-server
+          python-lsp-ruff
+        ]
+      ))
       kubectl
 
       satty

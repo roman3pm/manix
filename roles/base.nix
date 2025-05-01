@@ -6,7 +6,6 @@
     browser
     docker
     easyeffects
-    flatpak
     git
     hardware
     home

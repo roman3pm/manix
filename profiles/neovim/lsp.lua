@@ -137,9 +137,16 @@ local on_attach = function(client, bufnr)
   client.server_capabilities.semanticTokensProvider = nil
 end
 
-require('lspconfig').pyright.setup {
+require('lspconfig').pylsp.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  settings = {
+    pylsp = {
+      plugins = {
+        ruff = { enabled = true },
+      },
+    },
+  },
 }
 
 require('lspconfig').clangd.setup {
