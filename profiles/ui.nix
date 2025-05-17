@@ -10,7 +10,6 @@
       };
       xkb = {
         layout = "us,ru";
-        variant = "";
         options = "grp:lctrl_toggle,ctrl:nocaps";
       };
     };
@@ -35,9 +34,13 @@
           color-scheme = "prefer-dark";
           cursor-size = 32;
           monospace-font-name = "DejaVuSansM Nerd Font Mono 12";
+          locate-pointer = false;
         };
         "org/gnome/desktop/wm/preferences".resize-with-right-button = true;
-        "org/gnome/mutter".experimental-features = [ "variable-refresh-rate" ];
+        "org/gnome/mutter" = {
+          experimental-features = [ "variable-refresh-rate" ];
+          locate-pointer-key = "";
+        };
         "org/gnome/desktop/peripherals/keyboard" = {
           repeat-interval = lib.gvariant.mkUint32 15;
           delay = lib.gvariant.mkUint32 250;
