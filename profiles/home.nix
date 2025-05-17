@@ -27,6 +27,7 @@
       glsl_analyzer
       go
       gopls
+      delve
       golangci-lint
       richgo
       zig
