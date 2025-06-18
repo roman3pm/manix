@@ -1,19 +1,22 @@
 { lib, pkgs, ... }:
 {
   services = {
-    xserver = {
-      enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager = {
-        gnome.enable = true;
-        gnome.extraGSettingsOverridePackages = [ pkgs.mutter ];
+    displayManager = {
+      gdm.enable = true;
+      defaultSession = "gnome";
+    };
+    desktopManager = {
+      gnome = {
+        enable = true;
+        extraGSettingsOverridePackages = [ pkgs.mutter ];
       };
+    };
+    xserver = {
       xkb = {
         layout = "us,ru";
         options = "grp:lctrl_toggle,ctrl:nocaps";
       };
     };
-    displayManager.defaultSession = "gnome";
   };
 
   fonts = {

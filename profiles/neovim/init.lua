@@ -175,7 +175,7 @@ api.nvim_set_keymap('n', '<leader>rr', ':Rest run<CR>', { noremap = true })
 require('gen').setup {
   model = "qwen2.5-coder",
   init = nil,
-  display_mode = "split",
+  display_mode = "vertical-split",
 }
 vim.keymap.set({ 'n', 'v' }, '<leader>]', ':Gen<CR>')
 

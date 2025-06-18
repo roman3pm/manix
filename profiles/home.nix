@@ -20,6 +20,7 @@
       unzip
       p7zip
       wl-clipboard
+      ffmpeg
 
       clang
       cmake
@@ -49,8 +50,9 @@
       ))
       kubectl
 
-      satty
+      swappy
       telegram-desktop
+      vesktop
       mattermost-desktop
       thunderbird-latest
       libreoffice-fresh

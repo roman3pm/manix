@@ -34,7 +34,7 @@ in
       '';
       shellAbbrs = {
         lg = "lazygit";
-        ll = "ls -la --group-directories-first";
+        ll = "ls -lah --group-directories-first";
         nh = "cd $HOME/projects/manix";
         nd = "nix develop -c $SHELL";
         nfu = "nix flake update";

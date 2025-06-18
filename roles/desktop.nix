@@ -6,5 +6,6 @@
     ollama
     steam
     utils
+    zapret
   ];
 }
