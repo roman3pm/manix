@@ -4,6 +4,9 @@
   modulesPath,
   ...
 }:
+let
+  broadcom_sta = config.boot.kernelPackages.callPackage ./broadcom_sta.nix { };
+in
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
@@ -19,7 +22,7 @@
     "kvm-amd"
     "wl"
   ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+  boot.extraModulePackages = [ broadcom_sta ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/a2809e77-c25a-4e67-9f3a-fc755636f183";
