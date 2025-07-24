@@ -38,6 +38,9 @@ opt.listchars:append("eol:↴")
 opt.ignorecase = true
 opt.smartcase = true
 
+require('vscode').setup {
+  transparent = true,
+}
 cmd.colorscheme "vscode"
 
 require('telescope').setup {

@@ -38,7 +38,7 @@ in
         nh = "cd $HOME/projects/manix";
         nd = "nix develop -c $SHELL";
         nfu = "nix flake update";
-        nrs = "nixos-rebuild switch --use-remote-sudo --flake '.#'";
+        nrs = "nixos-rebuild switch --sudo --flake '.#'";
         ngc = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
         ssc = "sudo systemctl";
         scu = "systemctl --user";
@@ -74,6 +74,7 @@ in
       keyMode = "vi";
       mouse = true;
       terminal = "screen-256color";
+      shell = "${pkgs.fish}/bin/fish";
     };
 
     programs.lf = {
