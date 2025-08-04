@@ -38,7 +38,7 @@
       rust-analyzer
       rustfmt
       nixd
-      nixfmt-rfc-style
+      nixfmt
       lua-language-server
       nodejs-slim
       typescript-language-server
