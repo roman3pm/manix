@@ -22,10 +22,10 @@
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
-      nerd-fonts.dejavu-sans-mono
+      nerd-fonts.adwaita-mono
       wqy_zenhei
     ];
-    fontconfig.defaultFonts.monospace = [ "DejaVuSansM Nerd Font Mono" ];
+    fontconfig.defaultFonts.monospace = [ "AdwaitaMono Nerd Font Mono" ];
   };
 
   home-manager.users.roz = {
@@ -36,7 +36,7 @@
         "org/gnome/desktop/interface" = {
           color-scheme = "prefer-dark";
           cursor-size = 32;
-          monospace-font-name = "DejaVuSansM Nerd Font Mono 12";
+          monospace-font-name = "AdwaitaMono Nerd Font Mono 12";
           locate-pointer = false;
         };
         "org/gnome/desktop/wm/preferences".resize-with-right-button = true;

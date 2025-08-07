@@ -20,7 +20,7 @@ in
     programs.ghostty = {
       enable = true;
       settings = {
-        font-family = "DejaVuSansM Nerd Font Mono";
+        font-family = "AdwaitaMono Nerd Font Mono";
         font-size = 12;
         theme = "dark:Adwaita Dark,light:Adwaita";
       };
