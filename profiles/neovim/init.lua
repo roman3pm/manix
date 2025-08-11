@@ -29,8 +29,6 @@ api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp,*.rgen,*.rmiss,*.rchit,*.rahit,*.rint,*.rcall",
   command = "set filetype=glsl",
 })
-api.nvim_set_keymap('i', ';;', '<C-o>A;', { noremap = true })
-api.nvim_set_keymap('n', '<CR>', 'o<Esc>', { noremap = true })
 
 opt.list = true
 opt.listchars:append("eol:↴")
