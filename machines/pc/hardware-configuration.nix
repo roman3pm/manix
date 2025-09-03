@@ -22,7 +22,7 @@ in
     "kvm-amd"
     "wl"
   ];
-  boot.extraModulePackages = [ broadcom_sta ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/a2809e77-c25a-4e67-9f3a-fc755636f183";

@@ -81,8 +81,10 @@
                   nix.registry.n.flake = inputs.nixpkgs;
                   nixpkgs = {
                     inherit overlays;
-                    config.allowUnfree = true;
-                    config.allowAliases = false;
+                    config = {
+                      allowUnfree = true;
+                      permittedInsecurePackages = [ "broadcom-sta-6.30.223.271-57-6.16.3" ];
+                    };
                   };
                   environment.systemPackages = [ inputs.agenix.packages.${system}.default ];
                 }

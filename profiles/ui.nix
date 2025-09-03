@@ -48,7 +48,6 @@
           repeat-interval = lib.gvariant.mkUint32 15;
           delay = lib.gvariant.mkUint32 250;
         };
-
         "org/gnome/shell" = {
           disable-user-extensions = false;
           enabled-extensions = with pkgs.gnomeExtensions; [ dash-to-dock.extensionUuid ];
