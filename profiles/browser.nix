@@ -6,13 +6,7 @@ in
   home-manager.users.roz = {
     programs.chromium = {
       enable = true;
-      extensions = [
-        { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
-        { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # vimium
-        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock-origin
-        { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy-badger
-        { id = "ammjkodgmmoknidbanneddgankgfejfh"; } # 7tv
-      ];
+      extensions = [ ];
     };
 
     programs.firefox = {

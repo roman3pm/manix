@@ -11,12 +11,18 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    agenix.url = "github:ryantm/agenix";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     nur.url = "github:nix-community/NUR";
+    nixpkgs-mattermost.url = "github:nixos/nixpkgs/2631b0b7abcea6e640ce31cd78ea58910d31e650";
+    lf = {
+      url = "github:gokcehan/lf";
+      flake = false;
+    };
+    k9s = {
+      url = "github:derailed/k9s";
+      flake = false;
+    };
   };
 
   outputs =
@@ -83,7 +89,7 @@
                     inherit overlays;
                     config = {
                       allowUnfree = true;
-                      permittedInsecurePackages = [ "broadcom-sta-6.30.223.271-57-6.16.3" ];
+                      permittedInsecurePackages = [ "broadcom-sta-6.30.223.271-57-6.16.7" ];
                     };
                   };
                   environment.systemPackages = [ inputs.agenix.packages.${system}.default ];

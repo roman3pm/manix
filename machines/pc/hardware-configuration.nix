@@ -4,9 +4,6 @@
   modulesPath,
   ...
 }:
-let
-  broadcom_sta = config.boot.kernelPackages.callPackage ./broadcom_sta.nix { };
-in
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 

@@ -1,20 +1,4 @@
-{ pkgs, ... }:
-let
-  lfSrc = pkgs.fetchFromGitHub {
-    owner = "gokcehan";
-    repo = "lf";
-    rev = "r33";
-    sparseCheckout = [ "etc" ];
-    hash = "sha256-aKvTf2tqAUbB3plOemvgJJ7qYdGfQoXhsGVE7Y9wuMo=";
-  };
-  k9sSrc = pkgs.fetchFromGitHub {
-    owner = "derailed";
-    repo = "k9s";
-    rev = "v0.32.7";
-    sparseCheckout = [ "skins" ];
-    hash = "sha256-0S6FomP1WVqYl5nP0FcaElgghMcZmE0V8iLhghERF6A=";
-  };
-in
+{ pkgs, inputs, ... }:
 {
   home-manager.users.roz = {
     programs.ghostty = {
@@ -85,7 +69,7 @@ in
         preview = true;
       };
     };
-    xdg.configFile."lf/icons".source = "${lfSrc}/etc/icons_colored.example";
+    xdg.configFile."lf/icons".source = "${inputs.lf}/etc/icons_colored.example";
 
     programs.k9s = {
       enable = true;
@@ -93,7 +77,7 @@ in
         k9s.ui.skin = "transparent";
       };
       skins = {
-        transparent = "${k9sSrc}/skins/transparent.yaml";
+        transparent = "${inputs.k9s}/skins/transparent.yaml";
       };
     };
 
