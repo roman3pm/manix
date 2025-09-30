@@ -132,94 +132,73 @@ cmp_ai:setup({
   run_on_every_keystroke = false,
 })
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local on_attach = function(client, bufnr)
-  client.server_capabilities.semanticTokensProvider = nil
-end
-
-require('lspconfig').pylsp.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    pylsp = {
-      plugins = {
-        ruff = { enabled = true },
+local servers = { 'pylsp', 'clangd', 'glsl_analyzer', 'gopls', 'rust_analyzer', 'zls', 'ts_ls', 'lua_ls', 'nixd' }
+local server_overrides = {
+  pylsp = {
+    settings = {
+      pylsp = {
+        plugins = {
+          ruff = { enabled = true },
+        },
       },
     },
   },
-}
-
-require('lspconfig').clangd.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  cmd = {
-    "clangd",
-    "--offset-encoding=utf-16",
-  },
-}
-
-require('lspconfig').glsl_analyzer.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-require('lspconfig').gopls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    gopls = {
-      buildFlags = { '-tags=integration_test' },
+  clangd = {
+    cmd = {
+      "clangd",
+      "--offset-encoding=utf-16",
     },
   },
-}
-
-require('lspconfig').rust_analyzer.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-require('lspconfig').zls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-require('lspconfig').ts_ls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-require('lspconfig').lua_ls.setup {
-  on_init = function(client)
-    if client.workspace_folders then
-      local path = client.workspace_folders[1].name
-      if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
-        return
+  gopls = {
+    settings = {
+      gopls = {
+        buildFlags = { '-tags=integration_test' },
+      },
+    },
+  },
+  lua_ls = {
+    on_init = function(client)
+      if client.workspace_folders then
+        local path = client.workspace_folders[1].name
+        if
+            path ~= vim.fn.stdpath('config')
+            and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+        then
+          return
+        end
       end
-    end
 
-    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-      runtime = {
-        version = 'LuaJIT'
-      },
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME
+      client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+        runtime = {
+          version = 'LuaJIT',
+          path = {
+            'lua/?.lua',
+            'lua/?/init.lua',
+          },
+        },
+        workspace = {
+          checkThirdParty = false,
+          library = {
+            vim.env.VIMRUNTIME
+          }
         }
-      }
-    })
-  end,
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    Lua = {}
+      })
+    end,
+    settings = {
+      Lua = {}
+    },
   },
 }
-
-require('lspconfig').nixd.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
+for _, server_name in ipairs(servers) do
+  local base_config = {
+    on_attach = function(client, bufnr)
+      client.server_capabilities.semanticTokensProvider = nil
+    end,
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+  }
+  vim.lsp.config(server_name, vim.tbl_deep_extend('force', base_config, server_overrides[server_name] or {}))
+  vim.lsp.enable(server_name)
+end
 
 local dap = require("dap")
 dap.adapters.delve = function(callback, config)
