@@ -5,6 +5,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+    initrd.systemd.enable = true;
     plymouth.enable = true;
     consoleLogLevel = 3;
     initrd.verbose = false;

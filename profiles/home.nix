@@ -19,7 +19,6 @@
       unar
       unzip
       p7zip
-      wl-clipboard
       ffmpeg
 
       clang
