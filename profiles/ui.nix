@@ -53,7 +53,10 @@
           enabled-extensions = with pkgs.gnomeExtensions; [ dash-to-dock.extensionUuid ];
         };
         "org/gnome/shell/extensions/dash-to-dock" = {
+          hotkeys-overlay = false;
           running-indicator-style = "DOTS";
+          custom-background-color = true;
+          background-color = "rgb(46,46,50)";
         };
       };
     };

@@ -7,6 +7,7 @@
     home.username = "roz";
 
     home.packages = with pkgs; [
+      wl-clipboard
       gnumake
       git-crypt
       inetutils
