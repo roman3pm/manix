@@ -13,6 +13,7 @@
         "audio"
         "docker"
         "plugdev"
+        "libvirtd"
       ];
       shell = pkgs.fish;
     };

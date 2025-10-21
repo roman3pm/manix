@@ -18,7 +18,7 @@
         engine_version = true;
         vkbasalt = true;
         show_fps_limit = true;
-        fps_limit = "240,0";
+        fps_limit = "237,0";
       };
     };
 

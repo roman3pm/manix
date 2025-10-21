@@ -2,9 +2,11 @@
   home-manager.users.roz = {
     programs.git = {
       enable = true;
-      userName = "Roman Zakirzyanov";
-      userEmail = "roman3pm@yandex.ru";
-      extraConfig = {
+      settings = {
+        user = {
+          name = "Roman Zakirzyanov";
+          email = "roman3pm@yandex.ru";
+        };
         push.default = "current";
         pull.ff = "only";
         core = {

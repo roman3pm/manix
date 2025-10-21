@@ -4,7 +4,6 @@
     age
     boot
     browser
-    docker
     easyeffects
     git
     hardware
@@ -13,10 +12,13 @@
     neovim
     networking
     programs
+    security
+    services
     settings
     system
     terminal
     ui
     users
+    virtualisation
   ];
 }

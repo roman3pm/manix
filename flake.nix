@@ -89,7 +89,6 @@
                     inherit overlays;
                     config = {
                       allowUnfree = true;
-                      permittedInsecurePackages = [ "broadcom-sta-6.30.223.271-57-6.16.7" ];
                     };
                   };
                   environment.systemPackages = [ inputs.agenix.packages.${system}.default ];

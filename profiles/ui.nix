@@ -53,9 +53,6 @@
           enabled-extensions = with pkgs.gnomeExtensions; [ dash-to-dock.extensionUuid ];
         };
         "org/gnome/shell/extensions/dash-to-dock" = {
-          intellihide = false;
-          show-trash = false;
-          show-mounts = false;
           running-indicator-style = "DOTS";
         };
       };
